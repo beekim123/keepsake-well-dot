@@ -1,0 +1,107 @@
+{
+  "format": "resource-pack/1",
+  "files": [
+    {
+      "id": "content.cards",
+      "source": "content/data/cards.json",
+      "path": "data/cards.json",
+      "hash": "8c7d697d70cdbc564dca8780f18ddcc2df5268c31b402fd4545811983dbd74bf"
+    },
+    {
+      "id": "content.registry",
+      "source": "content/registry.json",
+      "path": "data/registry.json",
+      "hash": "06ceed950e5f0c1251a5238a2170ce57275a2e515cfa6ce405bd28b7bb83fd61"
+    },
+    {
+      "id": "content.ui",
+      "source": "content/data/ui.json",
+      "path": "data/ui.json",
+      "hash": "be6582faa9f1e74ebc47bbfdaa8664cee59c99d4916f74fd36f4b644ef30b5c1"
+    },
+    {
+      "id": "board.title",
+      "source": "resources/art/export/board/title.png",
+      "path": "resources/art/board/title.png",
+      "hash": "d4c0aa2523aa0262807916d98b8137361a0826982380a5cbbd4b50377c2b4c8e"
+    },
+    {
+      "id": "char.asui",
+      "source": "resources/art/export/char/asui.png",
+      "path": "resources/art/char/asui.png",
+      "hash": "461ef214cb3b61420b70d8cdaf7b77d3991af0919b73d9120cd2024f094d4c01"
+    },
+    {
+      "id": "manifest.art",
+      "source": "resources/art/export/manifest.json",
+      "path": "resources/art/manifest.json",
+      "hash": "92ba8c86f8114c2ce2c2393d4ba586772a6be3aac6a834ddaeaa7cd834fc6af7"
+    },
+    {
+      "id": "ui.panel.default",
+      "source": "resources/art/export/ui/panel-default.png",
+      "path": "resources/art/ui/panel-default.png",
+      "hash": "7f0909647983769fb875f08a95fca6647193d6f1e3aa138df2c791a9d5b21d52"
+    },
+    {
+      "id": "manifest.audio",
+      "source": "resources/audio/export/manifest.json",
+      "path": "resources/audio/manifest.json",
+      "hash": "4f5ba9b1950e7a59ec16c65d6409eddad6bf3ae9e47fd3ae57500dfe39383eda"
+    },
+    {
+      "id": "music.title",
+      "source": "resources/audio/export/music_title.wav",
+      "path": "resources/audio/music_title.wav",
+      "hash": "258b04437c451e394db2796934bd301095472393781f433cad04e4c36f9dda45"
+    },
+    {
+      "id": "sfx.card_play_attack",
+      "source": "resources/audio/export/sfx_card_play_attack.wav",
+      "path": "resources/audio/sfx_card_play_attack.wav",
+      "hash": "1fae81c22d020b5a7e904573034819540dfd02abce1104c22a7c015e232589b2"
+    },
+    {
+      "id": "sfx.ui_click",
+      "source": "resources/audio/export/sfx_ui_click.wav",
+      "path": "resources/audio/sfx_ui_click.wav",
+      "hash": "e8ebe23cf73f4ae5e29e55a19ecde6e82529771ea1fa1b62628d2a5b63cd8685"
+    },
+    {
+      "id": "font.fusion_pixel_12px.licenses_ark_pixel_ofl_txt",
+      "source": "third_party/fonts/fusion-pixel-12px/LICENSES/ark-pixel/OFL.txt",
+      "path": "resources/fonts/fusion-pixel-12px/LICENSES/ark-pixel/OFL.txt",
+      "hash": "3ab41567e68e3988ba1ef16dd2644eca95ca5648ea12e7d46e6287fc0bbe5aee"
+    },
+    {
+      "id": "font.fusion_pixel_12px.licenses_cubic_11_ofl_txt",
+      "source": "third_party/fonts/fusion-pixel-12px/LICENSES/cubic-11/OFL.txt",
+      "path": "resources/fonts/fusion-pixel-12px/LICENSES/cubic-11/OFL.txt",
+      "hash": "2b6e5938e5cffa0b9e183bd05f8c363e174e7ebed1a0556e2855fd1707fa2188"
+    },
+    {
+      "id": "font.fusion_pixel_12px.licenses_galmuri_license_txt",
+      "source": "third_party/fonts/fusion-pixel-12px/LICENSES/galmuri/LICENSE.txt",
+      "path": "resources/fonts/fusion-pixel-12px/LICENSES/galmuri/LICENSE.txt",
+      "hash": "86a3ee9495f942f0243f18c103da9faca27adb88142613edb8bb852e56c892c1"
+    },
+    {
+      "id": "font.fusion_pixel_12px.ofl_txt",
+      "source": "third_party/fonts/fusion-pixel-12px/OFL.txt",
+      "path": "resources/fonts/fusion-pixel-12px/OFL.txt",
+      "hash": "bc518cf64b8032c07690f33cc270c35c179255a6ac8efa7c165ebae7e8f76a63"
+    },
+    {
+      "id": "font.fusion_pixel_12px.upstream_readme_md",
+      "source": "third_party/fonts/fusion-pixel-12px/UPSTREAM-README.md",
+      "path": "resources/fonts/fusion-pixel-12px/UPSTREAM-README.md",
+      "hash": "2e5863f7e394de7052c80424cbdebacdaa2b12ff8e94bda41124d66d1e2e356d"
+    },
+    {
+      "id": "font.fusion_pixel_12px.fusion_pixel_12px_proportional_zh_hans_otf_woff2",
+      "source": "third_party/fonts/fusion-pixel-12px/fusion-pixel-12px-proportional-zh_hans.otf.woff2",
+      "path": "resources/fonts/fusion-pixel-12px/fusion-pixel-12px-proportional-zh_hans.otf.woff2",
+      "hash": "0ebd99e6f1e9b650a793a3f759c1c3dfa99f0c5b6502e78569b48ddb43767e40"
+    }
+  ]
+}

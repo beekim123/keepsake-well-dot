@@ -1,0 +1,75 @@
+{
+  "format": "art-manifest/1",
+  "assets": [
+    {
+      "id": "board.title",
+      "file": "board/title.png",
+      "size": [
+        640,
+        360
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "d4c0aa2523aa0262807916d98b8137361a0826982380a5cbbd4b50377c2b4c8e"
+    },
+    {
+      "id": "char.asui",
+      "file": "char/asui.png",
+      "size": [
+        48,
+        64
+      ],
+      "frames": 4,
+      "anchor": [
+        24,
+        60
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            2,
+            0,
+            0,
+            3,
+            3
+          ]
+        }
+      },
+      "hash": "461ef214cb3b61420b70d8cdaf7b77d3991af0919b73d9120cd2024f094d4c01"
+    },
+    {
+      "id": "ui.panel.default",
+      "file": "ui/panel-default.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "hash": "7f0909647983769fb875f08a95fca6647193d6f1e3aa138df2c791a9d5b21d52"
+    }
+  ]
+}

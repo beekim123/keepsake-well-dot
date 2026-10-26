@@ -8,3 +8,9 @@ build/
 godot/.godot/
 .env
 .env.*
+
+# Local editor binaries / temporary outputs; authored resources stay tracked.
+Godot_v*/
+godot*.exe
+*.sync-*
+artifacts/screenshots/*.tmp.png

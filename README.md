@@ -8,7 +8,7 @@
 
 ## 当前状态
 
-尚未开工，只有设计文档。从 [docs/README.md](docs/README.md) 开始读；开发规则见 [AGENTS.md](AGENTS.md)。
+D0 地基已完成：可运行标题与守绳手账预览，资源管线与基础测试通过。**完整战斗、远征与归还尚未接通，不能作为可玩 Demo 验收。** 当前证据见 [D0 验证](docs/plan/d0-verification.md)，继续从 [设计文档](docs/README.md) 与 [任务池](docs/plan/backlog.md) 查看 D1 工作。
 
 ## 目录
 
@@ -25,7 +25,7 @@
 
 详细规则见 [docs/tech/repository-layout.md](docs/tech/repository-layout.md)。
 
-## 运行（开发开始后补全）
+## 运行与检查（D0）
 
 需要 Node.js 22.13+ 和 Godot 4.7.2。
 
@@ -34,3 +34,12 @@ npm ci
 npm run sync
 npm run dev
 ```
+
+Node 工具不依赖第三方包。若 PATH 不是 Godot 4.7.2，请设置 `GODOT_BIN` 指向正确可执行文件，或把 macOS `Godot.app` 放在仓库根目录（不提交）。工具会验证真实版本，不静默使用旧版。也可以用 Godot 4.7.2 直接打开 `godot/project.godot`，资源副本已经生成。
+
+```sh
+npm run check
+npm run art:sheet
+```
+
+D0 的 `npm run sim` 只报告基础烟测，不含完整远征或胜率。首次点击才解锁音频；云端无音频设备的截图不代表实际听感通过。

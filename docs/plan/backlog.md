@@ -8,21 +8,21 @@
 
 ## D0 · 地基
 
-- [ ] 目录骨架、`.gitignore`、`README.md` 补运行方式
-- [ ] `package.json` 脚本（见 architecture 第 1 节）
-- [ ] 拷贝 Fusion Pixel 12px 字体和全部许可证到 `third_party/fonts/`，写 `third_party/README.md`
-- [ ] `resources/art/palette.json`（44 色）
-- [ ] `resources/art/lib/png.mjs`、`pixel.mjs`
-- [ ] `tools/resources/art.mjs`：build / verify / sheet
-- [ ] 素材：`char.asui` 待机（字符画）、`ui.panel.default`（程序）
-- [ ] `resources/audio/synth.ts` + `tools/resources/audio-pack.ts` + `audio:check`
-- [ ] 音效 `sfx.ui_click`、`sfx.card_play_attack`；8 秒测试旋律
-- [ ] `content/registry.json`、最小 `cards.json`、`tools/qa/content-check`
-- [ ] `tools/resources/sync-godot.mjs`（含 `--verify`）
-- [ ] Godot 工程设置、AssetCatalog、AudioService、SaveService 空壳
-- [ ] 标题画面
-- [ ] 无界面测试框架 + `tools/godot/cli.mjs`
-- [ ] D0 验收
+- [x] 目录骨架、`.gitignore`、`README.md` 补运行方式
+- [x] `package.json` 脚本（见 architecture 第 1 节）
+- [x] 拷贝 Fusion Pixel 12px 字体和全部许可证到 `third_party/fonts/`，写 `third_party/README.md`
+- [x] `resources/art/palette.json`（44 色）
+- [x] `resources/art/lib/png.mjs`、`pixel.mjs`
+- [x] `tools/resources/art.mjs`：build / verify / sheet
+- [x] 素材：`char.asui` 待机（字符画）、`ui.panel.default`（程序）
+- [x] `resources/audio/synth.ts` + `tools/resources/audio-pack.ts` + `audio:check`
+- [x] 音效 `sfx.ui_click`、`sfx.card_play_attack`；8 秒测试旋律
+- [x] `content/registry.json`、最小 `cards.json`、`tools/qa/content-check`
+- [x] `tools/resources/sync-godot.mjs`（含 `--verify`）
+- [x] Godot 工程设置、AssetCatalog、AudioService、SaveService 空壳
+- [x] 标题画面
+- [x] 无界面测试框架 + `tools/godot/cli.mjs`
+- [x] D0 验收
 
 ## D1 · 规则可玩
 

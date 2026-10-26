@@ -1,0 +1,27 @@
+{
+  "name": "keepsake-well",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Keepsake Well D0 foundation; the full expedition is not yet implemented.",
+  "engines": { "node": ">=22.13.0" },
+  "scripts": {
+    "art:build": "node tools/resources/art.mjs build",
+    "art:verify": "node tools/resources/art.mjs verify",
+    "art:sheet": "node tools/resources/art.mjs sheet",
+    "audio:build": "node --experimental-strip-types tools/resources/audio-pack.ts build",
+    "audio:check": "node --experimental-strip-types tools/resources/audio-pack.ts check",
+    "content:check": "node tools/qa/content-check.mjs",
+    "sync": "node tools/resources/sync-godot.mjs",
+    "sync:verify": "node tools/resources/sync-godot.mjs --verify",
+    "dev": "node tools/godot/cli.mjs dev",
+    "godot:version": "node tools/godot/cli.mjs version",
+    "godot:import": "node tools/godot/cli.mjs import",
+    "godot:test": "node tools/godot/cli.mjs test",
+    "sim": "node tools/godot/cli.mjs sim",
+    "shots": "node tools/godot/cli.mjs shots",
+    "test": "node --test tests/*.mjs",
+    "build": "npm run art:build && npm run audio:build && npm run content:check && npm run sync",
+    "check": "npm test && npm run art:verify && npm run audio:check && npm run content:check && npm run sync:verify && npm run godot:test && npm run sim -- --quick"
+  }
+}

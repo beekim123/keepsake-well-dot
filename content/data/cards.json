@@ -1,0 +1,46 @@
+[
+  {
+    "id": "card.knock",
+    "name": "敲",
+    "type": "attack",
+    "cost": 1,
+    "target": "enemy",
+    "starterCount": 4,
+    "ops": [{ "op": "damage", "amount": 6 }],
+    "text": "造成 6 点伤害",
+    "art": "ui.panel.default"
+  },
+  {
+    "id": "card.brace",
+    "name": "挡",
+    "type": "guard",
+    "cost": 1,
+    "target": "self",
+    "starterCount": 4,
+    "ops": [{ "op": "gain_guard", "amount": 5 }],
+    "text": "获得 5 点守护",
+    "art": "ui.panel.default"
+  },
+  {
+    "id": "card.rope_lasso",
+    "name": "甩绳",
+    "type": "attack",
+    "cost": 2,
+    "target": "all_enemies",
+    "starterCount": 1,
+    "ops": [{ "op": "damage_all", "amount": 4 }],
+    "text": "对所有敌人造成 4 点伤害",
+    "art": "ui.panel.default"
+  },
+  {
+    "id": "card.tug",
+    "name": "拽一把",
+    "type": "special",
+    "cost": 1,
+    "target": "self",
+    "starterCount": 1,
+    "ops": [{ "op": "draw", "amount": 2 }],
+    "text": "抽 2 张牌",
+    "art": "ui.panel.default"
+  }
+]

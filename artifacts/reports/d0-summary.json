@@ -1,0 +1,38 @@
+{
+  "stage": "D0",
+  "status": "passed",
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "node_tests": {
+    "passed": 58,
+    "failed": 0
+  },
+  "godot_tests": {
+    "passed": 45,
+    "failed": 0
+  },
+  "simulation": {
+    "scope": "foundation smoke only",
+    "cases": 4,
+    "passed": 4,
+    "full_expedition_implemented": false
+  },
+  "art_assets": 3,
+  "audio_cues": 3,
+  "managed_resource_files": 17,
+  "native_capture": "visible Godot window; 640x360 source plus exact3x nearest presentation",
+  "manual_ui": [
+    "title button opens notebook",
+    "Escape returns to title",
+    "window closes via desktop Alt+F4 with exit0"
+  ],
+  "limitations": [
+    "D1 gameplay not implemented",
+    "native cloud ALSA device absent; final screenshot run explicitly uses Dummy audio",
+    "llvmpipe VSync-mode warning remains environmental",
+    "listening and macOS runtime not yet verified"
+  ],
+  "screenshots": [
+    "artifacts/screenshots/d0-title-3x.png",
+    "artifacts/screenshots/d0-notebook-3x.png"
+  ]
+}
