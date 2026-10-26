@@ -12,6 +12,8 @@ const ROOT=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const artRoot=path.join(ROOT,'resources/art');
 const palette=JSON.parse(await readFile(path.join(artRoot,'palette.json'),'utf8'));
 const character=JSON.parse(await readFile(path.join(artRoot,'source/char/asui.json'),'utf8'));
+// Contract IDs, not a magic asset count: retained D0 art plus D1 readability pack.
+const requiredArtIds=["board.sock_lair", "board.sock_swamp", "board.title", "boss.sock_snake", "card.frame_l.attack", "card.frame_l.guard", "card.frame_l.special", "card.frame_s.attack", "card.frame_s.guard", "card.frame_s.special", "cardart.attack_stub", "cardart.guard_stub", "cardart.special_stub", "char.asui", "char.ma_ye", "elite.hungry_drawer", "enemy.clothespin", "enemy.lint_bug", "enemy.lonely_sock", "enemy.soap_bubble", "enemy.sock_kid", "enemy.stinky_insole", "enemy.wet_sock", "intent.attack", "intent.buff", "intent.guard", "intent.idle", "intent.special", "intent.summon", "ui.panel.default", "ui.target_rope"];
 const baseMeta={id:'ui.panel.test',size:[16,16],frames:1,anchor:[0,0],animations:{},nineSlice:[4,4,4,4]};
 
 async function temp(fn){const directory=await mkdtemp(path.join(tmpdir(),'keepsake-art-'));try{await fn(directory);}finally{await rm(directory,{recursive:true,force:true});}}
@@ -83,9 +85,11 @@ test('build/rebuild is byte-identical; verify is read-only; sheet output is exac
  const exportRoot=path.join(directory,'export'),contentRoot=path.join(directory,'content');await mkdir(contentRoot);
  const first=await build({artRoot,exportRoot}),before=await readFile(path.join(exportRoot,'manifest.json'));
  const second=await build({artRoot,exportRoot});assert.deepEqual(first.manifest,second.manifest);
+ assert.deepEqual(first.manifest.assets.map(asset=>asset.id).sort(),requiredArtIds);
+ assert.deepEqual(first.rendered.map(asset=>asset.meta.id).sort(),requiredArtIds);
  for(const [i,asset]of first.rendered.entries())assert.deepEqual(asset.png,second.rendered[i].png);
- const result=await verify({artRoot,exportRoot,contentRoot});assert.equal(result.assets,3);assert.deepEqual(await readFile(path.join(exportRoot,'manifest.json')),before);
- const filenames=await sheets({artRoot,exportRoot});assert.equal(filenames.length,3);
+ const result=await verify({artRoot,exportRoot,contentRoot});assert.equal(result.assets,requiredArtIds.length);assert.deepEqual(await readFile(path.join(exportRoot,'manifest.json')),before);
+ const filenames=await sheets({artRoot,exportRoot});assert.deepEqual(filenames.map(filename=>path.basename(filename,'.png')).sort(),requiredArtIds);
  for(const filename of filenames){const image=decodePNG(await readFile(filename));assert.equal(image.width%3,0);assert.equal(image.height%3,0);assertPalettePixels(image,palette);assert.ok((await readFile(filename)).length<2_000_000);
   for(let y=0;y<image.height;y+=3)for(let x=0;x<image.width;x+=3){const pixel=image.data.slice((y*image.width+x)*4,(y*image.width+x)*4+4);for(let yy=0;yy<3;yy++)for(let xx=0;xx<3;xx++)assert.deepEqual(image.data.slice(((y+yy)*image.width+x+xx)*4,((y+yy)*image.width+x+xx)*4+4),pixel);}
  }
@@ -104,6 +108,7 @@ test('verify rejects edited pixels, dimensions, palette, alpha, hashes, manifest
 }));
 test('content art references resolve recursively, with missing assets rejected and unused warnings',async()=>temp(async directory=>{
  const {manifest}=await renderAssets({artRoot});await writeFile(path.join(directory,'cards.json'),JSON.stringify([{nested:{art:'ui.panel.default'}}]));
- const good=await checkReferences(manifest,directory);assert.deepEqual(good.used,['ui.panel.default']);assert.equal(good.warnings.length,2);
+ const good=await checkReferences(manifest,directory);assert.deepEqual(good.used,['ui.panel.default']);assert.equal(good.warnings.length,requiredArtIds.length-good.used.length);
+ for(const id of requiredArtIds.filter(id=>!good.used.includes(id)))assert.ok(good.warnings.some(warning=>warning.includes(id)),`unused warning for ${id}`);
  await writeFile(path.join(directory,'cards.json'),JSON.stringify([{art:'enemy.missing'}]));await assert.rejects(checkReferences(manifest,directory),/Missing content art reference/);
 }));

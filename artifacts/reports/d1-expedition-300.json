@@ -1,0 +1,337 @@
+{
+  "actual_battle_attempts": 1101,
+  "boss_retries": 0,
+  "boss_retry_probe": {
+    "policies": {
+      "defensive": {
+        "actual_battle_attempts": 75,
+        "actual_turns": 2018,
+        "baseline_win_rate": 0.62,
+        "baseline_wins": 31,
+        "conditional_first_retry_win_rate": 0.684210526315789,
+        "conditional_second_retry_win_rate": 1.0,
+        "cumulative_success_with_one_retry": 0.88,
+        "cumulative_success_with_two_retries": 1.0,
+        "first_retry_attempts": 19,
+        "first_retry_wins": 13,
+        "samples": 50,
+        "second_retry_attempts": 6,
+        "second_retry_wins": 6
+      },
+      "random_legal": {
+        "actual_battle_attempts": 150,
+        "actual_turns": 1286,
+        "baseline_win_rate": 0.0,
+        "baseline_wins": 0,
+        "conditional_first_retry_win_rate": 0.0,
+        "conditional_second_retry_win_rate": 0.02,
+        "cumulative_success_with_one_retry": 0.0,
+        "cumulative_success_with_two_retries": 0.02,
+        "first_retry_attempts": 50,
+        "first_retry_wins": 0,
+        "samples": 50,
+        "second_retry_attempts": 50,
+        "second_retry_wins": 1
+      }
+    },
+    "scope": "Controlled standalone boss battles with untouched ten-card starter deck, full HP, no relics/keepsakes/services; not additional expeditions. Retry occurs only after a real defeat.",
+    "seeds": {
+      "start": 800000,
+      "step": 97
+    }
+  },
+  "campaigns_completed": 150,
+  "elapsed_seconds": 28.503,
+  "encounters": {
+    "boss.sock_snake": {
+      "attempts": 300,
+      "average_hp_loss": 8.24666666666667,
+      "average_turns": 10.2166666666667,
+      "hp_loss": 2474,
+      "turns": 3065,
+      "win_rate": 1.0,
+      "wins": 300
+    },
+    "elite.hungry_drawer": {
+      "attempts": 300,
+      "average_hp_loss": 2.40333333333333,
+      "average_turns": 4.42333333333333,
+      "hp_loss": 721,
+      "turns": 1327,
+      "win_rate": 1.0,
+      "wins": 300
+    },
+    "enc.t1_a": {
+      "attempts": 84,
+      "average_hp_loss": 0.0,
+      "average_turns": 1.41666666666667,
+      "hp_loss": 0,
+      "turns": 119,
+      "win_rate": 1.0,
+      "wins": 84
+    },
+    "enc.t1_b": {
+      "attempts": 66,
+      "average_hp_loss": 1.3030303030303,
+      "average_turns": 1.98484848484848,
+      "hp_loss": 86,
+      "turns": 131,
+      "win_rate": 1.0,
+      "wins": 66
+    },
+    "enc.t2_a": {
+      "attempts": 26,
+      "average_hp_loss": 0.461538461538462,
+      "average_turns": 1.84615384615385,
+      "hp_loss": 12,
+      "turns": 48,
+      "win_rate": 1.0,
+      "wins": 26
+    },
+    "enc.t2_b": {
+      "attempts": 33,
+      "average_hp_loss": 0.0,
+      "average_turns": 1.72727272727273,
+      "hp_loss": 0,
+      "turns": 57,
+      "win_rate": 1.0,
+      "wins": 33
+    },
+    "enc.t2_c": {
+      "attempts": 29,
+      "average_hp_loss": 0.931034482758621,
+      "average_turns": 2.06896551724138,
+      "hp_loss": 27,
+      "turns": 60,
+      "win_rate": 1.0,
+      "wins": 29
+    },
+    "enc.t2_d": {
+      "attempts": 27,
+      "average_hp_loss": 2.11111111111111,
+      "average_turns": 2.07407407407407,
+      "hp_loss": 57,
+      "turns": 56,
+      "win_rate": 1.0,
+      "wins": 27
+    },
+    "enc.t3_a": {
+      "attempts": 27,
+      "average_hp_loss": 0.407407407407407,
+      "average_turns": 2.48148148148148,
+      "hp_loss": 11,
+      "turns": 67,
+      "win_rate": 1.0,
+      "wins": 27
+    },
+    "enc.t3_b": {
+      "attempts": 37,
+      "average_hp_loss": 0.432432432432432,
+      "average_turns": 2.16216216216216,
+      "hp_loss": 16,
+      "turns": 80,
+      "win_rate": 1.0,
+      "wins": 37
+    },
+    "enc.t3_c": {
+      "attempts": 22,
+      "average_hp_loss": 1.22727272727273,
+      "average_turns": 2.54545454545455,
+      "hp_loss": 27,
+      "turns": 56,
+      "win_rate": 1.0,
+      "wins": 22
+    },
+    "enc.tutorial": {
+      "attempts": 150,
+      "average_hp_loss": 0.0,
+      "average_turns": 1.38666666666667,
+      "hp_loss": 0,
+      "turns": 208,
+      "win_rate": 1.0,
+      "wins": 150
+    }
+  },
+  "errors": [],
+  "full_simulation_implemented": true,
+  "nodes": 2100,
+  "relic_note": "Observational ownership association, not causal effect; randomized and biased reward strategies share the same defensive battle policy.",
+  "relics": {
+    "relic.birthday_candle": {
+      "boss_attempts": 63,
+      "boss_attempts_when_absent": 237,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 63,
+      "observed_win_rate_difference": 0.0
+    },
+    "relic.bookmark": {
+      "boss_attempts": 45,
+      "boss_attempts_when_absent": 255,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 45,
+      "observed_win_rate_difference": 0.0
+    },
+    "relic.crooked_compass": {
+      "boss_attempts": 61,
+      "boss_attempts_when_absent": 239,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 61,
+      "observed_win_rate_difference": 0.0
+    },
+    "relic.empty_frame": {
+      "boss_attempts": 34,
+      "boss_attempts_when_absent": 266,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 34,
+      "observed_win_rate_difference": 0.0
+    },
+    "relic.flat_ball": {
+      "boss_attempts": 77,
+      "boss_attempts_when_absent": 223,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 77,
+      "observed_win_rate_difference": 0.0
+    },
+    "relic.half_biscuit": {
+      "boss_attempts": 52,
+      "boss_attempts_when_absent": 248,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 52,
+      "observed_win_rate_difference": 0.0
+    },
+    "relic.leaky_balloon": {
+      "boss_attempts": 81,
+      "boss_attempts_when_absent": 219,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 81,
+      "observed_win_rate_difference": 0.0
+    },
+    "relic.lone_glove": {
+      "boss_attempts": 101,
+      "boss_attempts_when_absent": 199,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 101,
+      "observed_win_rate_difference": 0.0
+    },
+    "relic.lost_kite": {
+      "boss_attempts": 87,
+      "boss_attempts_when_absent": 213,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 87,
+      "observed_win_rate_difference": 0.0
+    },
+    "relic.odd_button": {
+      "boss_attempts": 50,
+      "boss_attempts_when_absent": 250,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 50,
+      "observed_win_rate_difference": 0.0
+    },
+    "relic.offkey_harmonica": {
+      "boss_attempts": 80,
+      "boss_attempts_when_absent": 220,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 80,
+      "observed_win_rate_difference": 0.0
+    },
+    "relic.open_ink": {
+      "boss_attempts": 49,
+      "boss_attempts_when_absent": 251,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 49,
+      "observed_win_rate_difference": 0.0
+    },
+    "relic.shedding_brush": {
+      "boss_attempts": 61,
+      "boss_attempts_when_absent": 239,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 61,
+      "observed_win_rate_difference": 0.0
+    },
+    "relic.spyglass": {
+      "boss_attempts": 51,
+      "boss_attempts_when_absent": 249,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 51,
+      "observed_win_rate_difference": 0.0
+    },
+    "relic.tangled_earbuds": {
+      "boss_attempts": 57,
+      "boss_attempts_when_absent": 243,
+      "boss_win_rate_when_absent": 1.0,
+      "boss_win_rate_when_owned": 1.0,
+      "boss_wins": 57,
+      "observed_win_rate_difference": 0.0
+    }
+  },
+  "seed_protocol": {
+    "battle_policy": "defensive legal-action heuristic",
+    "commission_policy": "take up to two; prioritize stars then hearts",
+    "retry_policy": "up to two assisted retries after actual defeat",
+    "same_seed_schedule_per_reward_strategy": true,
+    "trip_seed_start": 10000,
+    "trip_seed_step": 7919
+  },
+  "stage": "d1-expedition",
+  "strategies": {
+    "biased_rewards": {
+      "average_battles_per_trip": 3.72,
+      "battles": 558,
+      "boss_attempts": 150,
+      "boss_first_attempt_win_rate": 1.0,
+      "boss_first_attempts": 150,
+      "boss_first_wins": 150,
+      "boss_win_rate": 1.0,
+      "boss_wins": 150,
+      "elite_attempts": 150,
+      "elite_win_rate": 1.0,
+      "elite_wins": 150,
+      "estimated_seconds_per_trip": 229.053333333333,
+      "nodes": 1050,
+      "normal_attempts": 258,
+      "normal_win_rate": 1.0,
+      "normal_wins": 258,
+      "retries": 0,
+      "trips": 150,
+      "turns": 2326
+    },
+    "random_rewards": {
+      "average_battles_per_trip": 3.62,
+      "battles": 543,
+      "boss_attempts": 150,
+      "boss_first_attempt_win_rate": 1.0,
+      "boss_first_attempts": 150,
+      "boss_first_wins": 150,
+      "boss_win_rate": 1.0,
+      "boss_wins": 150,
+      "elite_attempts": 150,
+      "elite_win_rate": 1.0,
+      "elite_wins": 150,
+      "estimated_seconds_per_trip": 262.226666666667,
+      "nodes": 1050,
+      "normal_attempts": 243,
+      "normal_win_rate": 1.0,
+      "normal_wins": 243,
+      "retries": 0,
+      "trips": 150,
+      "turns": 2948
+    }
+  },
+  "timing_note": "Formula estimate from actual turns × 8.0 sec + actual visited nodes × 15.0 sec; excludes story reading, reward choice and UI interaction; not observed human playtime.",
+  "trips": 300,
+  "turns": 5274
+}

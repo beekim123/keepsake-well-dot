@@ -1,0 +1,104 @@
+{
+  "engine": "4.7.2.stable.official.ed1daf0bf",
+  "renderer": "Compatibility / llvmpipe",
+  "audio": "Dummy; not listened",
+  "captured_utc": "2026-10-26T04:24:00Z",
+  "exit_code": 0,
+  "engine_errors": 0,
+  "warnings": [
+    "VSync adjustment unsupported by graphics driver"
+  ],
+  "scope": "Visible native game viewport; legal first-trip campaign and explicitly named four-enemy/eight-card fixture. Does not establish manual full-demo completion.",
+  "shots": [
+    {
+      "file": "artifacts/screenshots/d1-battle-preview.png",
+      "sha256": "1270c1012f0d4274c7918cb6525866eaeb4d1c1c9abe4b316e643da272b1a966",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-battle.png",
+      "sha256": "4a485269a853fa119bd385d8b56eb6a313be7274b86fccf4e4d3c95c6cf8978d",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-commissions.png",
+      "sha256": "6e9d308c7b25d77a0ab9206dc3cc0ed2afb63334003e547016a0685bce80cfaf",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-fixture-four-enemies-eight-cards.png",
+      "sha256": "72d5a6349ab67ebbcf32806233235ae8ffdb326215b3f0dad1e9c968435561ca",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-hut-returned.png",
+      "sha256": "45c5cf062ff6fdb5b77febfce481d93d8b3f7dea3cf0785f98dab135f05a5280",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-hut.png",
+      "sha256": "52274cc16be556684b42edb2804b1e80ef9e2006459e2fde5b56452a71e389c6",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-intro.png",
+      "sha256": "802ad4b89877c83ea24f669df289a00dabc282170fccbc800f46e39b447fb0de",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-node.png",
+      "sha256": "a01f3b3e9e3495f30e3aab831b1aff479476813a2b7da9fe76ed63af0eeb012b",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-notebook.png",
+      "sha256": "481c4ed5e13c5ad7bfb5f3a2412f532e6db581bbcfe299b16d6926c1ae3b833d",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-path.png",
+      "sha256": "cfe0f1cc247dd842a0d35522affb4c7194cd259dad74f4d12222c3e0780896cd",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-prepare.png",
+      "sha256": "6da515621057249b3e13e87649a4b487c65c4c307aca9ac435ba6f1c17a3c02c",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-reveal.png",
+      "sha256": "2fb9132cfc66bc545c24626b8a2c15e5974a92820c1f25b6dc72aadf06d08dd0",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-reward.png",
+      "sha256": "97c330c3121a2bdefc7404aa43c663363efa58dc1ed4af1a10c0aca14aa25688",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story.png",
+      "sha256": "4353a7a4eef3729ce2da51bb1d5da3d5804b2a8f4e62fe111529df72e338628a",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-title.png",
+      "sha256": "6f6b163e94a63d0e3d9f0ceff0ff57d9e12ef015fe4236430dd4e0bedc3ea472",
+      "width": 640,
+      "height": 360
+    }
+  ]
+}

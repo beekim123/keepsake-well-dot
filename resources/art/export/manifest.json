@@ -2,6 +2,36 @@
   "format": "art-manifest/1",
   "assets": [
     {
+      "id": "board.sock_lair",
+      "file": "board/sock_lair.png",
+      "size": [
+        640,
+        360
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "4f0a7b952d5a9c24ff75c25b2e0135526b0a0f92cdc6c137ca561884a483fa48"
+    },
+    {
+      "id": "board.sock_swamp",
+      "file": "board/sock_swamp.png",
+      "size": [
+        640,
+        360
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "7b137c336baa8fcc8c40783b663147712d36eb75de8b7ac31c9d09117027c861"
+    },
+    {
       "id": "board.title",
       "file": "board/title.png",
       "size": [
@@ -15,6 +45,171 @@
       ],
       "animations": {},
       "hash": "d4c0aa2523aa0262807916d98b8137361a0826982380a5cbbd4b50377c2b4c8e"
+    },
+    {
+      "id": "boss.sock_snake",
+      "file": "boss/sock_snake.png",
+      "size": [
+        160,
+        120
+      ],
+      "frames": 4,
+      "anchor": [
+        80,
+        118
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            3,
+            3
+          ]
+        }
+      },
+      "hash": "eb2e2c26eaf7e79cbceb80d0fe17f10b7e70a47e748b8d140aeecae5b5cfa299"
+    },
+    {
+      "id": "card.frame_l.attack",
+      "file": "card/frame-l-attack.png",
+      "size": [
+        112,
+        152
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "ef0d3d4c52c848c73916cfbb970052ab16582d35152b279e8b39a46bcb0d3bad"
+    },
+    {
+      "id": "card.frame_l.guard",
+      "file": "card/frame-l-guard.png",
+      "size": [
+        112,
+        152
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "ac80f340127c023587a32080b00cb05029e7d0b16c9bf8a6439ce7a36043ad6e"
+    },
+    {
+      "id": "card.frame_l.special",
+      "file": "card/frame-l-special.png",
+      "size": [
+        112,
+        152
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "f8b7e1ac760941b579e67ab53dfa81e3992fdcfc50c7111e69ed63871c95cdea"
+    },
+    {
+      "id": "card.frame_s.attack",
+      "file": "card/frame-s-attack.png",
+      "size": [
+        56,
+        76
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "ee69cd4554e5111c0c37102be9da7028d4788ade9ae3a4380d909b444f0b86c1"
+    },
+    {
+      "id": "card.frame_s.guard",
+      "file": "card/frame-s-guard.png",
+      "size": [
+        56,
+        76
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "7f38b762ff47bed41763d18a232dbe7bf45786f38926f4b370c9557683b8fea9"
+    },
+    {
+      "id": "card.frame_s.special",
+      "file": "card/frame-s-special.png",
+      "size": [
+        56,
+        76
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "850b0946606cd558b55786b573bf74b5a53d07e76127fd508eef34f6184b1dc0"
+    },
+    {
+      "id": "cardart.attack_stub",
+      "file": "cardart/attack-stub.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "d267b680b0e59032d0030e742925ff701c23387984c4d4983e7a9a59da1b6cc1"
+    },
+    {
+      "id": "cardart.guard_stub",
+      "file": "cardart/guard-stub.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "effacadfa422fbde21520d7b9ed7dea05c450fc598e7c28ede06e942b64aa181"
+    },
+    {
+      "id": "cardart.special_stub",
+      "file": "cardart/special-stub.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "b97eb3c25313119a3ddbd8a4dd0394f9c605fa5fce2d40a493fdd62ec61ad1fc"
     },
     {
       "id": "char.asui",
@@ -51,6 +246,366 @@
       "hash": "461ef214cb3b61420b70d8cdaf7b77d3991af0919b73d9120cd2024f094d4c01"
     },
     {
+      "id": "char.ma_ye",
+      "file": "char/ma_ye.png",
+      "size": [
+        48,
+        96
+      ],
+      "frames": 4,
+      "anchor": [
+        24,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            3,
+            3
+          ]
+        }
+      },
+      "hash": "88e46eaa6424e4e57ccfad26542809466bb82c9655a37ea2d6af119f5cae451f"
+    },
+    {
+      "id": "elite.hungry_drawer",
+      "file": "elite/hungry_drawer.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 4,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            3,
+            3
+          ]
+        }
+      },
+      "hash": "d638f9cf00f593a825fd85df588ddd36b2603cced2b0570aeeb9787a67554cd6"
+    },
+    {
+      "id": "enemy.clothespin",
+      "file": "enemy/clothespin.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 4,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            3,
+            3
+          ]
+        }
+      },
+      "hash": "3f9255ab4e96a8e703bb8e6413e7a748bd13293840c5820980e0cbab9b14f5b9"
+    },
+    {
+      "id": "enemy.lint_bug",
+      "file": "enemy/lint_bug.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 4,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            3,
+            3
+          ]
+        }
+      },
+      "hash": "d1136fab4cbb66575bf590d3860be35b43e9298def20f033f0514d74ab46db3c"
+    },
+    {
+      "id": "enemy.lonely_sock",
+      "file": "enemy/lonely_sock.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 4,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            3,
+            3
+          ]
+        }
+      },
+      "hash": "3d2b2406f3def748ac9497aa93f5a85063b74d454f7d073ed95f85d2008db8a1"
+    },
+    {
+      "id": "enemy.soap_bubble",
+      "file": "enemy/soap_bubble.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 4,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            3,
+            3
+          ]
+        }
+      },
+      "hash": "65cc3581751e3e7d1e0ae0de4099e01b9d2253cb4bc6e0aa9847f64b79e4aaa1"
+    },
+    {
+      "id": "enemy.sock_kid",
+      "file": "enemy/sock_kid.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 4,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            3,
+            3
+          ]
+        }
+      },
+      "hash": "2c542a33b19f206c7e4fb250e5ab75bcc135408f85326e5c8128fc118faec73e"
+    },
+    {
+      "id": "enemy.stinky_insole",
+      "file": "enemy/stinky_insole.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 4,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            3,
+            3
+          ]
+        }
+      },
+      "hash": "c411dabf75394d5d687350f8462d0ef881fdc9cf19aff5f7d0cf241de5f3b3c2"
+    },
+    {
+      "id": "enemy.wet_sock",
+      "file": "enemy/wet_sock.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 4,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            2,
+            3,
+            3
+          ]
+        }
+      },
+      "hash": "4b8ec46fc1079267af7491ef1bb00d20a7655c4a32e7485a7c7d64e2928522bc"
+    },
+    {
+      "id": "intent.attack",
+      "file": "intent/attack.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        8,
+        8
+      ],
+      "animations": {},
+      "hash": "cd9d840233c6015803bee03ffbf982c6fc3b8b87b38887412104b0b8af6ae548"
+    },
+    {
+      "id": "intent.buff",
+      "file": "intent/buff.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        8,
+        8
+      ],
+      "animations": {},
+      "hash": "52d7bbe31053eb2799516e41c4509832118561d46d58be8ae291079ab11970f1"
+    },
+    {
+      "id": "intent.guard",
+      "file": "intent/guard.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        8,
+        8
+      ],
+      "animations": {},
+      "hash": "2a5aae993f447463b3482e9d989b40a62717a34a0827f33602605f24d104d523"
+    },
+    {
+      "id": "intent.idle",
+      "file": "intent/idle.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        8,
+        8
+      ],
+      "animations": {},
+      "hash": "156b9e23d5c823fda97f3dafcb0f9760933d27edca4e7b9ba978d06acf8aa790"
+    },
+    {
+      "id": "intent.special",
+      "file": "intent/special.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        8,
+        8
+      ],
+      "animations": {},
+      "hash": "c9ac62eb67202b64d7f322190019a6264d10e20eec7df8bb518c9faa043536f1"
+    },
+    {
+      "id": "intent.summon",
+      "file": "intent/summon.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        8,
+        8
+      ],
+      "animations": {},
+      "hash": "dc540c3c6f8e730f154e88aa81408af234c6980434a2ab28ce384de3175059f5"
+    },
+    {
       "id": "ui.panel.default",
       "file": "ui/panel-default.png",
       "size": [
@@ -70,6 +625,21 @@
         4
       ],
       "hash": "7f0909647983769fb875f08a95fca6647193d6f1e3aa138df2c791a9d5b21d52"
+    },
+    {
+      "id": "ui.target_rope",
+      "file": "ui/target-rope.png",
+      "size": [
+        4,
+        4
+      ],
+      "frames": 1,
+      "anchor": [
+        2,
+        2
+      ],
+      "animations": {},
+      "hash": "897d83676941adc9ac0bac9a6ddb92e7aa1fde370ae9b68bb942d12ab66a66dd"
     }
   ]
 }

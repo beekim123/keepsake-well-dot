@@ -34,6 +34,22 @@ func reload_content() -> bool:
 			_entries[key] = entry
 	return true
 
+func definitions() -> Dictionary:
+	# Return parsed data only; pure rules never know the filesystem.
+	return _tables.duplicate(true)
+
+func has_entry(key: String) -> bool:
+	return _entries.has(key)
+
+func format_text(key: String, values: Dictionary = {}) -> String:
+	# JSON parses whole numbers as floats; presentation should still say 40/40.
+	var display: Dictionary = values.duplicate()
+	for token: Variant in display:
+		var value: Variant = display[token]
+		if value is float and is_finite(value) and value == floor(value):
+			display[token] = int(value)
+	return text(key).format(display)
+
 func text(key: String) -> String:
 	var entry: Dictionary = _entries.get(key, {})
 	if not entry.has("text"):

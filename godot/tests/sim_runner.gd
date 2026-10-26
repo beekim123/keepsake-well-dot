@@ -1,19 +1,28 @@
 extends SceneTree
-## D0 deliberately does not fabricate a battle bot, win rate, or expedition duration.
-
-const Rules = preload("res://scripts/core/damage_rules.gd")
+## Adapter only: the same seven-node simulator is shared with standalone expedition QA.
+const Simulation = preload("res://tests/expedition/simulation.gd")
 
 func _initialize() -> void:
-	var cases: Array[Dictionary] = [
-		{"hp": 12, "guard": 4, "damage": 6, "expected_hp": 10, "expected_guard": 0},
-		{"hp": 12, "guard": 8, "damage": 6, "expected_hp": 12, "expected_guard": 2},
-		{"hp": 3, "guard": 0, "damage": 99, "expected_hp": 0, "expected_guard": 0},
-		{"hp": 12, "guard": 4, "damage": 0, "expected_hp": 12, "expected_guard": 4}
-	]
-	var passed: int = 0
-	for scenario: Dictionary in cases:
-		var result: Dictionary = Rules.apply_damage({"hp": scenario["hp"], "guard": scenario["guard"]}, scenario["damage"])
-		if result["state"]["hp"] == scenario["expected_hp"] and result["state"]["guard"] == scenario["expected_guard"]:
-			passed += 1
-	print(JSON.stringify({"stage": "foundation-smoke", "cases": cases.size(), "passed": passed, "full_simulation_implemented": false, "note": "Full expedition simulation, win rates, and duration measurements begin in D1; no balance claim is made."}))
-	quit(0 if passed == cases.size() else 1)
+	_run.call_deferred()
+
+func _run() -> void:
+	await process_frame
+	var catalog: Node = root.get_node("ContentCatalog")
+	if not catalog.valid:
+		printerr("ERROR: simulation requires valid synchronized ContentCatalog definitions")
+		quit(1)
+		return
+	var count: int = 300
+	for arg: String in OS.get_cmdline_user_args():
+		if arg == "--quick":
+			count = 50
+		elif arg.begins_with("--count=") and arg.trim_prefix("--count=").is_valid_int() and int(arg.trim_prefix("--count=")) > 0:
+			count = int(arg.trim_prefix("--count="))
+		else:
+			printerr("ERROR: unknown or invalid simulation argument: " + arg)
+			quit(1)
+			return
+	var result: Dictionary = Simulation.new().run(catalog.definitions(), count)
+	result["format"] = "d1-simulation/1"
+	print("D1_SIM_RESULT: " + JSON.stringify(result))
+	quit(0 if result.get("completed", false) and result.get("errors", ["missing"]).is_empty() and int(result.get("trips", 0)) == count else 1)

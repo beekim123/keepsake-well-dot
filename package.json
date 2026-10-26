@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "description": "Keepsake Well D0 foundation; the full expedition is not yet implemented.",
+  "description": "Keepsake Well D1 graybox: playable card battles, seven-node expeditions and keepsake returns.",
   "engines": { "node": ">=22.13.0" },
   "scripts": {
     "art:build": "node tools/resources/art.mjs build",
@@ -18,10 +18,11 @@
     "godot:version": "node tools/godot/cli.mjs version",
     "godot:import": "node tools/godot/cli.mjs import",
     "godot:test": "node tools/godot/cli.mjs test",
+    "godot:audio": "node godot/tests/audio/run.mjs",
     "sim": "node tools/godot/cli.mjs sim",
     "shots": "node tools/godot/cli.mjs shots",
     "test": "node --test tests/*.mjs",
     "build": "npm run art:build && npm run audio:build && npm run content:check && npm run sync",
-    "check": "npm test && npm run art:verify && npm run audio:check && npm run content:check && npm run sync:verify && npm run godot:test && npm run sim -- --quick"
+    "check": "npm test && npm run art:verify && npm run audio:check && npm run content:check && npm run sync:verify && npm run godot:test && npm run godot:audio && npm run sim -- --quick"
   }
 }

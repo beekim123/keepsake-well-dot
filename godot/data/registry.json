@@ -1,7 +1,66 @@
 {
   "format": "content/1",
+  "stage": "D1",
   "files": [
-    { "id": "cards", "file": "data/cards.json", "target": "cards.json" },
-    { "id": "ui", "file": "data/ui.json", "target": "ui.json" }
+    {
+      "id": "cards",
+      "file": "data/cards.json",
+      "target": "cards.json"
+    },
+    {
+      "id": "relics",
+      "file": "data/relics.json",
+      "target": "relics.json"
+    },
+    {
+      "id": "keepsakes",
+      "file": "data/keepsakes.json",
+      "target": "keepsakes.json"
+    },
+    {
+      "id": "enemies",
+      "file": "data/enemies.json",
+      "target": "enemies.json"
+    },
+    {
+      "id": "encounters",
+      "file": "data/encounters.json",
+      "target": "encounters.json"
+    },
+    {
+      "id": "events",
+      "file": "data/events.json",
+      "target": "events.json"
+    },
+    {
+      "id": "path",
+      "file": "data/path.json",
+      "target": "path.json"
+    },
+    {
+      "id": "meta",
+      "file": "data/meta.json",
+      "target": "meta.json"
+    },
+    {
+      "id": "balance",
+      "file": "data/balance.json",
+      "target": "balance.json"
+    },
+    {
+      "id": "ui",
+      "file": "data/ui.json",
+      "target": "ui.json"
+    },
+    {
+      "id": "pages",
+      "file": "story/pages.json",
+      "target": "story/pages.json"
+    },
+    {
+      "id": "banter",
+      "file": "story/banter.json",
+      "target": "story/banter.json"
+    }
   ]
 }

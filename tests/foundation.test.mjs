@@ -7,7 +7,7 @@ import { createHash } from 'node:crypto';
 import { ROOT, relativePath, safePath, sha256, jsonBytes } from '../tools/lib/paths.mjs';
 import { checkContent } from '../tools/qa/content-check.mjs';
 import { buildPlan, syncGodot } from '../tools/resources/sync-godot.mjs';
-import { assertGodotVersion, selectGodot, verifyGodot, commandArguments, commandEnvironment, validateOutput } from '../tools/godot/cli.mjs';
+import { assertGodotVersion, selectGodot, verifyGodot, commandArguments, commandEnvironment, simulationCount, validateOutput } from '../tools/godot/cli.mjs';
 
 function fixture(t) {
   const root = mkdtempSync(path.join(tmpdir(), 'keepsake-foundation-'));
@@ -15,7 +15,7 @@ function fixture(t) {
   const write = (file, bytes) => { mkdirSync(path.dirname(path.join(root, file)), { recursive: true }); writeFileSync(path.join(root, file), bytes); };
   const json = (file, value) => write(file, jsonBytes(value));
   const read = file => JSON.parse(readFileSync(path.join(root, file), 'utf8'));
-  for (const file of ['registry.json', 'data/cards.json', 'data/ui.json']) write(`content/${file}`, readFileSync(path.join(ROOT, 'content', file)));
+  for (const file of ['registry.json', 'data/cards.json', 'data/ui.json']) write(`content/${file}`, readFileSync(path.join(ROOT, 'tests/fixtures/d0/content', file)));
   for (const [kind, id, name] of [['art', 'ui.panel.default', 'ui/panel.png'], ['audio', 'sfx.ui_click', 'click.wav']]) {
     const bytes = Buffer.from(`${kind} byte-fixture; format correctness is tested by its independent pipeline`);
     write(`resources/${kind}/export/${name}`, bytes);
@@ -181,7 +181,7 @@ test('symlinked sources and destinations are rejected', t => {
   const cards = path.join(f.root, 'content/data/cards.json');
   rmSync(cards); symlinkSync(path.join(ROOT, 'content/data/cards.json'), cards);
   assert.throws(() => syncGodot(f.root), /Symlink/);
-  rmSync(cards); f.write('content/data/cards.json', readFileSync(path.join(ROOT, 'content/data/cards.json')));
+  rmSync(cards); f.write('content/data/cards.json', readFileSync(path.join(ROOT, 'tests/fixtures/d0/content/data/cards.json')));
   symlinkSync(path.join(f.root, 'content/data'), path.join(f.root, 'godot/data'));
   assert.throws(() => syncGodot(f.root), /Symlink/);
 });
@@ -235,6 +235,9 @@ test('QA uses ignored local XDG storage rather than modifying the real player pr
   const f = fixture(t);
   const qa = commandEnvironment(f.root, 'test', { HOME: '/example-home', OTHER: 'kept' });
   const dev = commandEnvironment(f.root, 'dev', {});
+  assert.equal(qa.HOME, path.join(f.root, '.local/godot-qa/home'));
+  assert.equal(commandEnvironment(f.root, 'version', { HOME: '/unwritable-global-default' }).HOME, qa.HOME);
+  assert.equal(commandEnvironment(f.root, 'dev', { HOME: '/player-home' }).HOME, '/player-home');
   assert.equal(qa.XDG_DATA_HOME, path.join(f.root, '.local/godot-qa/data'));
   assert.notEqual(dev.XDG_DATA_HOME, qa.XDG_DATA_HOME);
   assert.equal(qa.OTHER, 'kept');
@@ -242,12 +245,100 @@ test('QA uses ignored local XDG storage rather than modifying the real player pr
   assert.equal(commandEnvironment(f.root, 'test', { XDG_DATA_HOME: '/unwritable-global-default' }).XDG_DATA_HOME, qa.XDG_DATA_HOME);
 });
 
-test('wrapper rejects zero-exit engine errors and absent or failing completion reports', () => {
-  const result = { status: 0, stdout: '', stderr: '' };
-  assert.throws(() => validateOutput('import', { ...result, stderr: 'ERROR: broken import' }), /despite exit 0/);
-  assert.throws(() => validateOutput('test', result), /no completion report/);
-  assert.throws(() => validateOutput('test', { ...result, stdout: 'D0_TEST_RESULT: {"failed":1,"passed":4}' }), /contains failures/);
-  validateOutput('test', { ...result, stdout: 'D0_TEST_RESULT: {"failed":0,"passed":45}' });
-  validateOutput('sim', { ...result, stdout: '{"stage":"foundation-smoke","full_simulation_implemented":false,"cases":4,"passed":4}' });
-  assert.throws(() => validateOutput('sim', { ...result, stdout: '{"stage":"full-game","full_simulation_implemented":true,"cases":300,"passed":300}' }), /claims unimplemented/);
+function testReport() {
+  const suites = Object.fromEntries(['audio', 'foundation', 'battle', 'expedition', 'view'].map(name => [name, { passed: 10, failed: 0 }]));
+  return { format: 'd1-tests/1', stage: 'd1-integrated', passed: 50, failed: 0, suites };
+}
+
+function simReport(count = 50) {
+  const strategies = {};
+  let battles = 0, turns = 0, nodes = 0;
+  for (const name of ['random_rewards', 'biased_rewards']) {
+    const trips = Math.floor(count / 2) + (name === 'random_rewards' ? count % 2 : 0);
+    strategies[name] = { trips, battles: trips * 3, turns: trips * 12, nodes: trips * 7, retries: 0, boss_first_attempts: trips, boss_first_wins: trips, boss_first_attempt_win_rate: trips ? 1 : 0, estimated_seconds_per_trip: trips ? 201 : 0, average_battles_per_trip: trips ? 3 : 0 };
+    for (const category of ['normal', 'elite', 'boss']) Object.assign(strategies[name], { [`${category}_attempts`]: trips, [`${category}_wins`]: trips, [`${category}_win_rate`]: trips ? 1 : 0 });
+    battles += trips * 3; turns += trips * 12; nodes += trips * 7;
+  }
+  const samples = Math.max(1, Math.floor(count / 6));
+  const probe = { samples, actual_battle_attempts: samples, actual_turns: samples * 10, baseline_win_rate: 1, cumulative_success_with_one_retry: 1, cumulative_success_with_two_retries: 1 };
+  return {
+    format: 'd1-simulation/1', stage: 'd1-expedition', full_simulation_implemented: true, completed: true, requested_trips: count, trips: count, errors: [], strategies,
+    actual_battle_attempts: battles, turns, nodes, campaigns_completed: Math.floor(count / 2), boss_retries: 0,
+    encounters: { 'enc.test': { attempts: battles, wins: battles, turns, hp_loss: count, win_rate: 1, average_turns: 4, average_hp_loss: 1 / 3 } },
+    boss_retry_probe: { policies: { defensive: { ...probe }, random_legal: { ...probe } } },
+    relics: {}, timing_note: 'Formula estimate, not observed human playtime.', relic_note: 'Observational, not causal.', elapsed_seconds: 1,
+  };
+}
+const output = (prefix, report) => ({ status: 0, stdout: `${prefix}: ${JSON.stringify(report)}\n`, stderr: '' });
+
+test('version probe receives the same isolated environment before any Godot launch', t => {
+  const f = fixture(t), env = commandEnvironment(f.root, 'version', { HOME: '/real-player' });
+  let options;
+  verifyGodot('godot', (_binary, _args, value) => { options = value; return { status: 0, stdout: '4.7.2.stable.official', stderr: '' }; }, env);
+  assert.equal(options.env, env);
+  assert.equal(options.env.HOME, path.join(f.root, '.local/godot-qa/home'));
+  assert.throws(() => verifyGodot('godot', () => ({ status: 0, stdout: '4.7.2.stable.official', stderr: 'ERROR: broken startup' }), env), /despite exit 0/);
+});
+
+test('simulation count matches the requested preset and rejects malformed inputs', () => {
+  assert.equal(simulationCount(), 300);
+  assert.equal(simulationCount(['--quick']), 50);
+  assert.equal(simulationCount(['--count=7']), 7);
+  assert.equal(simulationCount(['--quick', '--count=3']), 3);
+  assert.equal(simulationCount(['--count=3', '--quick']), 50);
+  for (const arg of ['--count=0', '--count=-1', '--count=abc', '--count=1.5', '--count=9007199254740992', '--invented']) assert.throws(() => simulationCount([arg]), /invalid|safe integer/);
+});
+
+test('wrapper rejects zero-exit engine/script/assertion errors, even indented or ANSI-colored', () => {
+  for (const error of ['ERROR: broken import', '  SCRIPT ERROR: bad call', '\u001b[31mERROR: bad font\u001b[0m', 'USER ERROR: bad resource', 'FATAL: stopped', 'FAIL suite: missing effect']) {
+    assert.throws(() => validateOutput('import', { status: 0, stdout: '', stderr: error }), /despite exit 0/);
+    assert.throws(() => validateOutput('test', { ...output('D1_TEST_RESULT', testReport()), stderr: error }), /despite exit 0/);
+  }
+  assert.throws(() => validateOutput('test', { status: 1, stdout: '', stderr: '' }), /exited 1/);
+  assert.throws(() => validateOutput('test', { status: null, signal: 'SIGTERM', stdout: '' }), /SIGTERM/);
+  assert.throws(() => validateOutput('test', { error: new Error('spawn failed') }), /spawn failed/);
+});
+
+test('wrapper rejects zero-exit ObjectDB and RID shutdown leaks without rejecting ordinary warnings', () => {
+  for (const warning of [
+    'WARNING: 2 ObjectDB instances were leaked at exit (run with `--verbose` for details).',
+    '  WARNING: ObjectDB instances leaked at exit.',
+    'WARNING: 2 resources still in use at exit.',
+    'WARNING: 3 RIDs of type CanvasItem were leaked.',
+    'Leaked instance: AudioStreamPlaybackWAV:123',
+    'WARNING: 2 unclaimed string names at exit.',
+  ]) assert.throws(() => validateOutput('test', { ...output('D1_TEST_RESULT', testReport()), stderr: warning }), /leaked live engine resources/);
+  validateOutput('import', { status: 0, stdout: '', stderr: 'WARNING: benign tool notice' });
+});
+
+test('wrapper requires exactly one valid D1 test report with all completed suites and matching counts', () => {
+  validateOutput('test', output('D1_TEST_RESULT', testReport()));
+  for (const mutate of [
+    r => { r.format = 'd0-tests/1'; }, r => { r.stage = 'foundation'; }, r => { r.failed = 1; }, r => { r.passed = 0; }, r => { r.passed = '40'; },
+    r => { delete r.suites.audio; }, r => { delete r.suites.battle; }, r => { r.suites.extra = { passed: 1, failed: 0 }; }, r => { r.suites.view.passed = 0; }, r => { r.suites.expedition.failed = 1; },
+    r => { r.suites.foundation.passed = 1.5; }, r => { r.suites.battle = null; }, r => { r.passed += 1; },
+  ]) { const report = testReport(); mutate(report); assert.throws(() => validateOutput('test', output('D1_TEST_RESULT', report))); }
+  assert.throws(() => validateOutput('test', output('D0_TEST_RESULT', { passed: 45, failed: 0 })), /no completion report/);
+  assert.throws(() => validateOutput('test', { status: 0, stdout: 'D1_TEST_RESULT: {bad', stderr: '' }), /invalid JSON/);
+  assert.throws(() => validateOutput('test', output('D1_TEST_RESULT', null)), /object/);
+  const duplicated = output('D1_TEST_RESULT', testReport()); duplicated.stdout += duplicated.stdout;
+  assert.throws(() => validateOutput('test', duplicated), /multiple completion reports/);
+});
+
+test('wrapper validates actual D1 simulation completion, requested trips and gameplay totals', () => {
+  validateOutput('sim', output('D1_SIM_RESULT', simReport()), ['--quick']);
+  validateOutput('sim', output('D1_SIM_RESULT', simReport(300)));
+  validateOutput('sim', output('D1_SIM_RESULT', simReport(1)), ['--count=1']);
+  for (const mutate of [
+    r => { r.stage = 'foundation-smoke'; }, r => { r.full_simulation_implemented = false; }, r => { r.completed = false; }, r => { r.errors.push('failed battle'); },
+    r => { delete r.errors; }, r => { r.trips -= 1; }, r => { r.requested_trips = 300; }, r => { r.trips = '50'; }, r => { delete r.strategies.biased_rewards; },
+    r => { r.strategies.random_rewards.trips = 0; }, r => { r.strategies.random_rewards.battles = 0; }, r => { r.strategies.random_rewards.boss_wins = 100; },
+    r => { r.strategies.random_rewards.boss_win_rate = 2; }, r => { r.strategies.random_rewards.estimated_seconds_per_trip = null; }, r => { r.actual_battle_attempts += 1; },
+    r => { r.turns += 1; }, r => { r.nodes += 1; }, r => { r.encounters = {}; }, r => { r.encounters['enc.test'].attempts -= 1; }, r => { delete r.boss_retry_probe; },
+    r => { r.boss_retry_probe.policies.random_legal.samples = 0; }, r => { r.timing_note = ''; }, r => { r.relic_note = ''; }, r => { r.elapsed_seconds = -1; },
+  ]) { const report = simReport(); mutate(report); assert.throws(() => validateOutput('sim', output('D1_SIM_RESULT', report), ['--quick'])); }
+  assert.throws(() => validateOutput('sim', { status: 0, stdout: '{"stage":"foundation-smoke","cases":4,"passed":4}', stderr: '' }), /no completion report/);
+  assert.throws(() => validateOutput('sim', output('D1_SIM_RESULT', simReport())), /every requested expedition/);
+  const duplicated = output('D1_SIM_RESULT', simReport()); duplicated.stdout += duplicated.stdout;
+  assert.throws(() => validateOutput('sim', duplicated, ['--quick']), /multiple completion reports/);
 });

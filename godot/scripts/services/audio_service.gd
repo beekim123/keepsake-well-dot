@@ -20,9 +20,16 @@ var _crossfade: Tween
 var _unlocked: bool = false
 var _focused: bool = true
 var _user_muted: bool = false
+var _audio_driver: String = ""
+var _physical_playback_enabled: bool = true
 var valid: bool = false
 
 func _ready() -> void:
+	_audio_driver = AudioServer.get_driver_name()
+	# Dummy has no audible output. Starting its players can retain playback/WAV
+	# references until after ObjectDB shutdown in Godot 4.7.2, even after stop().
+	# Use the actual backend, not headless/display flags: real backends still play.
+	_physical_playback_enabled = _audio_driver != "Dummy"
 	_ensure_bus("Music", -8.0)
 	_ensure_bus("SFX", -4.0)
 	_ensure_bus("UI", -4.0)
@@ -69,6 +76,10 @@ func play(id: String) -> bool:
 	var stream: AudioStream = _stream(id)
 	if stream == null:
 		return false
+	# A successful cue request means it was accepted and its WAV loaded, not
+	# that sound was heard. Keep validation active on the non-audible backend.
+	if not _physical_playback_enabled:
+		return true
 	var player: AudioStreamPlayer = _sfx_players[_next_sfx]
 	_next_sfx = (_next_sfx + 1) % SFX_VOICE_COUNT
 	player.stop()
@@ -89,6 +100,9 @@ func play_music(id: String, fade_seconds: float = 0.35) -> bool:
 	var stream: AudioStream = _stream(id)
 	if stream == null:
 		return false
+	if not _physical_playback_enabled:
+		_music_id = id
+		return true
 	if _crossfade != null and _crossfade.is_valid():
 		_crossfade.kill()
 	var previous: AudioStreamPlayer = _music_players[_music_slot]
@@ -141,7 +155,7 @@ func set_focused(focused: bool) -> void:
 	_update_master_mute()
 
 func diagnostics() -> Dictionary:
-	return {"sfx_voices": _sfx_players.size(), "music_voices": _music_players.size(), "unlocked": _unlocked, "focused": _focused, "music": _music_id, "pending_music": _pending_music, "cue_count": _assets.size()}
+	return {"sfx_voices": _sfx_players.size(), "music_voices": _music_players.size(), "unlocked": _unlocked, "focused": _focused, "music": _music_id, "pending_music": _pending_music, "cue_count": _assets.size(), "audio_driver": _audio_driver, "physical_playback_enabled": _physical_playback_enabled, "loaded_streams": _streams.size()}
 
 func has_cue(id: String) -> bool:
 	return _assets.has(id)

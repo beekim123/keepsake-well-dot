@@ -1,7 +1,12 @@
 extends SceneTree
-## Self-contained headless D0 tests. Any failed assertion exits nonzero.
+## Integrated D1 QA: retained foundation coverage plus real battle, expedition and UI suites.
+## Each suite must complete and report nonzero coverage; the CLI also rejects engine errors.
 
 const Rules = preload("res://scripts/core/damage_rules.gd")
+const AudioSuite = preload("res://tests/audio/audio_suite.gd")
+const BattleSuite = preload("res://tests/battle/battle_suite.gd")
+const ExpeditionSuite = preload("res://tests/expedition/test_suite.gd")
+const ViewSuite = preload("res://tests/view/view_suite.gd")
 const FONT_PATH: String = "res://resources/fonts/fusion-pixel-12px/fusion-pixel-12px-proportional-zh_hans.otf.woff2"
 var _passed: int = 0
 var _failed: int = 0
@@ -16,11 +21,25 @@ func _run() -> void:
 	_test_save_service()
 	_test_audio_service()
 	_test_font_coverage()
-	await _test_title_flow()
+	var definitions: Dictionary = root.get_node("ContentCatalog").definitions()
+	var suites: Dictionary = {
+		"foundation": {"passed": _passed, "failed": _failed},
+		"audio": AudioSuite.new().run_suite(self),
+		"battle": BattleSuite.new().run(definitions),
+		"expedition": ExpeditionSuite.new().run(definitions),
+		"view": await ViewSuite.new().run_suite(self)
+	}
+	for name: String in ["audio", "battle", "expedition", "view"]:
+		var result: Dictionary = suites[name]
+		_passed += int(result.get("passed", 0))
+		_failed += int(result.get("failed", 1))
+		if int(result.get("passed", 0)) <= 0:
+			_failed += 1
+			printerr("FAIL " + name + " suite did not execute assertions")
 	root.get_node("AudioService").stop_all()
 	# Let the audio mixer release stopped playback before the engine exits.
 	await create_timer(0.15).timeout
-	print("D0_TEST_RESULT: " + JSON.stringify({"passed": _passed, "failed": _failed, "scope": "foundation only; D1 battle and expedition tests not implemented"}))
+	print("D1_TEST_RESULT: " + JSON.stringify({"format": "d1-tests/1", "stage": "d1-integrated", "passed": _passed, "failed": _failed, "suites": suites, "scope": "foundation services, backend-aware audio, pure battle/replay, seven-node expedition, actual app/save flows; not visual or human-playtime acceptance"}))
 	quit(0 if _failed == 0 else 1)
 
 func _check(condition: bool, label: String) -> void:
@@ -58,11 +77,19 @@ func _test_catalogs() -> void:
 	var panel: StyleBoxTexture = art.nine_slice("ui.panel.default")
 	_check(panel.texture != null and panel.get_texture_margin(SIDE_LEFT) == 4.0, "nine-slice panel consumes manifest margins")
 	_check(content.text("ui.game_title") == "拾遗井", "title string loaded from content")
-	_check(content.table("cards").size() == 4, "D0 has four starter card definitions, not a full D1 content claim")
+	var definitions: Dictionary = content.definitions()
+	var required: Array = ["cards", "relics", "keepsakes", "enemies", "encounters", "events", "path", "meta", "balance", "pages", "banter", "ui"]
+	for name: String in required:
+		_check(definitions.has(name) and not definitions.get(name, []).is_empty(), "D1 synchronized definitions include " + name)
+	_check(content.table("cards").size() == 24, "D1 contains four starter definitions, fourteen rewards and six replica variants")
+	_check(content.table("relics").size() == 15 and content.table("keepsakes").size() == 3, "D1 contains fifteen relics and three commissioned keepsakes")
+	var original_title: String = content.text("ui.game_title")
+	definitions["ui"].clear()
+	_check(content.text("ui.game_title") == original_title and not content.table("ui").is_empty(), "injected definitions cannot mutate catalog source")
 
 func _test_save_service() -> void:
 	var saves: Node = root.get_node("SaveService")
-	var path: String = "user://d0-test-save.json"
+	var path: String = "user://foundation-test-save.json"
 	if FileAccess.file_exists(path):
 		DirAccess.remove_absolute(ProjectSettings.globalize_path(path))
 	var result: Dictionary = saves.load_state(path)
@@ -134,31 +161,3 @@ func _check_glyphs(value: Variant, font: FontFile, missing: Dictionary) -> void:
 			if codepoint > 32 and not font.has_char(codepoint):
 				missing[String.chr(codepoint)] = true
 
-func _test_title_flow() -> void:
-	var scene: PackedScene = load("res://scenes/main.tscn") as PackedScene
-	_check(scene != null, "main scene can load")
-	if scene == null:
-		return
-	var title: Control = scene.instantiate() as Control
-	root.add_child(title)
-	await process_frame
-	_check(title.get_node("TitlePanel").visible and not title.get_node("NotebookPanel").visible, "launch shows title, not fictional playable expedition")
-	var button: Button = title.get_node("TitlePanel/ui_new_game") as Button
-	var back: Button = title.get_node("NotebookPanel/ui_back") as Button
-	button.pressed.emit()
-	_check(title.get_node("NotebookPanel").visible and not title.get_node("TitlePanel").visible, "start opens notebook preview")
-	back.pressed.emit()
-	_check(title.get_node("TitlePanel").visible and not title.get_node("NotebookPanel").visible, "back returns to title")
-	for iteration: int in range(5):
-		button.pressed.emit()
-		back.pressed.emit()
-	_check(title.get_node("TitlePanel").visible, "repeated open/close remains usable")
-	button.pressed.emit()
-	var escape: InputEventKey = InputEventKey.new()
-	escape.keycode = KEY_ESCAPE
-	escape.pressed = true
-	title._unhandled_key_input(escape)
-	_check(title.get_node("TitlePanel").visible, "Escape safely closes notebook")
-	_check(title.theme.default_font.antialiasing == TextServer.FONT_ANTIALIASING_NONE and title.theme.default_font.hinting == TextServer.HINTING_NONE, "UI font disables antialiasing and hinting")
-	title.queue_free()
-	await process_frame
