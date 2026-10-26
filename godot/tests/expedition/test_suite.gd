@@ -19,6 +19,8 @@ func run(definitions: Dictionary) -> Dictionary:
 	_test_campaign()
 	_test_drift_and_failure()
 	_test_all_event_outcomes()
+	_test_path_hint_identity()
+	_test_aunt_event_eligibility()
 	return {"passed": passed, "failed": failed}
 
 func check(condition: bool, label: String) -> void:
@@ -409,3 +411,116 @@ func _test_all_event_outcomes() -> void:
 		run["acquired_segments"][data[2]] = 2
 		rules.choose_node(run, data[1])
 		check(run["wishes"][data[2]] and run["hp"] == 20 + int(data[3]), "visible conditional wish choice completes with promised heal")
+
+func _test_path_hint_identity() -> void:
+	var orderings: Dictionary = {}
+	var seen_events: Dictionary = {}
+	var special: Dictionary = rules.definitions["path"][0]["special_hints"]
+	for seed_value: int in range(64):
+		var meta: Dictionary = _meta()
+		meta["runs_started"] = 1
+		var run_state: Dictionary = rules.start_run(meta, ["keepsake.mianmian", "keepsake.letter"], seed_value)["run"]
+		for row: Array in run_state["path"]:
+			for node: Dictionary in row:
+				if node["type"] != "event": continue
+				var event: Dictionary = rules.node_rules.events_by_id[node["id"]]
+				var expected: String = str(special.get(node["id"], event["name"]))
+				seen_events[node["id"]] = true
+				check(node["hint"] == expected, "event sign hint belongs to its actual event, including ordinary paths")
+				if node["wish_ids"].is_empty(): continue
+				var id: String = node["wish_ids"][0]
+				var segment: int = int(node["segment"])
+				if segment == 3: orderings[id] = true
+				run_state["phase"] = "path"
+				run_state["segment"] = segment
+				run_state["keepsakes"] = [id]
+				run_state["acquired_segments"][id] = segment - 1
+				run_state["wish_missed"][id] = false
+				var before: Dictionary = run_state.duplicate(true)
+				for visible: Dictionary in rules.path_choices(run_state):
+					if visible["id"] == node["id"]:
+						check(visible["hint"] == expected and id in visible["heart_ids"], "both wish-order variants display the actual heart event hint")
+				check(run_state == before, "hint presentation preserves route state and RNG")
+				# A missed wish loses its heart, never its event identity or hint.
+				run_state["wish_missed"][id] = true
+				for visible: Dictionary in rules.path_choices(run_state):
+					if visible["id"] == node["id"]:
+						check(visible["hint"] == expected and visible["heart_ids"].is_empty(), "non-heart fallback keeps the same truthful event hint")
+				# Simulate a previously saved type-wide hint without touching a file.
+				node["hint"] = special["event.echo_mailbox"] if node["id"] != "event.echo_mailbox" else rules.node_rules.events_by_id["event.lonely_bench"]["name"]
+				before = run_state.duplicate(true)
+				for visible: Dictionary in rules.path_choices(run_state):
+					if visible["id"] == node["id"]: check(visible["hint"] == expected, "legacy saved hint corrected in read-only path view")
+				check(run_state == before, "legacy hint correction does not rewrite active save data")
+	check(orderings.has("keepsake.mianmian") and orderings.has("keepsake.letter"), "hint regression covers both 2-to-3 and 4-to-5 wish orderings")
+	check(seen_events.size() >= 5, "generated hint regression includes ordinary non-heart events")
+	# Exercise every content fallback directly, independent of route eligibility.
+	# In particular, the save-once aunt event need not be rolled by these seeds.
+	for event: Dictionary in rules.definitions["events"]:
+		var run_state: Dictionary = rules.start_run(_meta(), ["keepsake.mianmian", "keepsake.letter"], 4242)["run"]
+		run_state["phase"] = "path"
+		run_state["segment"] = 3
+		run_state["path"][2][0] = {"id": event["id"], "type": "event", "segment": 3, "hint": special["event.echo_mailbox"], "star_ids": [], "wish_ids": [], "heart_ids": []}
+		var before: Dictionary = run_state.duplicate(true)
+		var visible: Dictionary = rules.path_choices(run_state)[0]
+		check(visible["hint"] == str(special.get(event["id"], event["name"])), "all six event definitions use their own explicit-or-name hint")
+		check(visible["heart_ids"].is_empty() and run_state == before, "ordinary fallback corrects only display, never save bytes")
+
+func _test_aunt_event_eligibility() -> void:
+	var numeric_json: Array = JSON.parse_string("[2,3]")
+	check(numeric_json[0] is float, "eligibility regression uses actual JSON-loaded numeric values")
+	check(not rules.path_rules._run_number_allowed(1, numeric_json), "aunt event excludes run one")
+	check(rules.path_rules._run_number_allowed(2, numeric_json), "aunt event allows JSON run two")
+	check(rules.path_rules._run_number_allowed(3, numeric_json), "aunt event allows JSON run three")
+	check(not rules.path_rules._run_number_allowed(4, numeric_json), "aunt event excludes run four")
+	var integer_tables: Dictionary = rules.definitions.duplicate(true)
+	for event: Dictionary in integer_tables["events"]:
+		if event["id"] == "event.aunt_mark": event["run_numbers"] = [2, 3]
+	var integer_rules: RefCounted = RunRules.new(integer_tables)
+	var appeared: Dictionary = {1: false, 2: false, 3: false, 4: false}
+	var repeated_after_save: int = 0
+	for number: int in range(1, 5):
+		for seed_value: int in range(32):
+			var meta: Dictionary = _meta()
+			meta["runs_started"] = number - 1
+			var int_meta: Dictionary = meta.duplicate(true)
+			var previously_excluded_meta: Dictionary = meta.duplicate(true)
+			previously_excluded_meta["once_events"]["event.aunt_mark"] = true
+			var run_state: Dictionary = rules.start_run(meta, ["keepsake.mianmian", "keepsake.letter"], seed_value)["run"]
+			var int_run: Dictionary = integer_rules.start_run(int_meta, ["keepsake.mianmian", "keepsake.letter"], seed_value)["run"]
+			check(run_state["path"] == int_run["path"] and run_state["rng_states"] == int_run["rng_states"], "JSON and integer eligibility use the identical random draw protocol")
+			var previously_excluded_run: Dictionary = rules.start_run(previously_excluded_meta, ["keepsake.mianmian", "keepsake.letter"], seed_value)["run"]
+			var same_topology: bool = true
+			for row_index: int in range(run_state["path"].size()):
+				for node_index: int in range(run_state["path"][row_index].size()):
+					for key: String in ["type", "segment", "tier", "star_ids", "wish_ids"]:
+						if run_state["path"][row_index][node_index][key] != previously_excluded_run["path"][row_index][node_index][key]: same_topology = false
+			check(same_topology, "restored event eligibility preserves seeded topology and mission placement")
+			if number in [1, 4]:
+				check(run_state["path"] == previously_excluded_run["path"] and run_state["rng_states"] == previously_excluded_run["rng_states"], "out-of-window routes preserve all seeded outputs")
+			else:
+				check(int(run_state["rng_states"]["route"]["draws"]) == int(previously_excluded_run["rng_states"]["route"]["draws"]) + 1, "eligible unseen aunt adds only its one shuffle draw")
+			var found: int = 0
+			var all_events: Dictionary = {}
+			var event_count: int = 0
+			for row: Array in run_state["path"]:
+				for node: Dictionary in row:
+					if node["type"] == "event":
+						event_count += 1
+						all_events[node["id"]] = true
+					if node["id"] == "event.aunt_mark": found += 1
+			check(event_count == all_events.size() and found <= 1, "restored aunt eligibility never duplicates an event within a route")
+			if number in [1, 4]: check(found == 0, "aunt generation respects excluded run window")
+			if found > 0:
+				appeared[number] = true
+				check(meta["once_events"].get("event.aunt_mark", false), "offered aunt event records the save-once marker")
+				var next_meta: Dictionary = JSON.parse_string(JSON.stringify(meta))
+				# Keep the next generation inside the eligible window to verify
+				# the persisted once marker, rather than merely passing run four.
+				next_meta["runs_started"] = 2
+				var next_run: Dictionary = rules.start_run(next_meta, ["keepsake.mianmian", "keepsake.letter"], seed_value + 1000)["run"]
+				for row: Array in next_run["path"]:
+					for node: Dictionary in row:
+						if node["id"] == "event.aunt_mark": repeated_after_save += 1
+	check(appeared[2] and appeared[3] and not appeared[1] and not appeared[4], "aunt event is reachable on seeded run two and three, never one or four")
+	check(repeated_after_save == 0, "JSON-restored save-once aunt event cannot recur")

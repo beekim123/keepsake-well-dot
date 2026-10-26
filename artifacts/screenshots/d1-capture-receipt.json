@@ -1,0 +1,136 @@
+{
+	"boss_defeated": true,
+	"campaign_captures": [
+		"d1-title",
+		"d1-story-intro-page-01",
+		"d1-intro",
+		"d1-story-intro-page-02",
+		"d1-story-intro-page-03",
+		"d1-story-intro-page-04",
+		"d1-notebook",
+		"d1-hut",
+		"d1-commissions",
+		"d1-prepare",
+		"d1-path",
+		"d1-battle",
+		"d1-battle-preview",
+		"d1-defeat-actual-tutorial",
+		"d1-retry-actual-tutorial",
+		"d1-battle-enc-tutorial",
+		"d1-reward-trip-1-segment-1",
+		"d1-path-trip-1-segment-2",
+		"d1-node-event-soap_tub",
+		"d1-path-trip-1-segment-3",
+		"d1-node-event-echo_mailbox",
+		"d1-path-trip-1-segment-4",
+		"d1-battle-elite-hungry_drawer",
+		"d1-keepsake-keepsake-ring",
+		"d1-reward-trip-1-segment-4",
+		"d1-path-trip-1-segment-5",
+		"d1-node-event-lonely_bench",
+		"d1-path-trip-1-segment-6",
+		"d1-node-campfire",
+		"d1-wish-keepsake-ring",
+		"d1-path-trip-1-segment-7",
+		"d1-battle-boss-sock_snake",
+		"d1-boss-warning-2",
+		"d1-boss-warning-1",
+		"d1-story-boss_knot-page-01",
+		"d1-story-back_up-page-01",
+		"d1-story-return-ring-page-01",
+		"d1-story-return-ring-page-02",
+		"d1-story-return-ring-page-03",
+		"d1-story-return-ring-page-04",
+		"d1-hut-after-trip-1",
+		"d1-commissions-trip-2",
+		"d1-prepare-trip-2",
+		"d1-departure-choice-trip-2",
+		"d1-path-trip-2-segment-1",
+		"d1-battle-enc-t1_b",
+		"d1-reward-trip-2-segment-1",
+		"d1-path-trip-2-segment-2",
+		"d1-keepsake-keepsake-letter",
+		"d1-path-trip-2-segment-3",
+		"d1-wish-keepsake-letter",
+		"d1-path-trip-2-segment-4",
+		"d1-keepsake-keepsake-mianmian",
+		"d1-reward-trip-2-segment-4",
+		"d1-path-trip-2-segment-5",
+		"d1-wish-keepsake-mianmian",
+		"d1-path-trip-2-segment-6",
+		"d1-path-trip-2-segment-7",
+		"d1-story-return-letter-page-01",
+		"d1-story-return-letter-page-02",
+		"d1-story-return-letter-page-03",
+		"d1-story-return-letter-page-04",
+		"d1-story-return-mianmian-page-01",
+		"d1-story-return-mianmian-page-02",
+		"d1-story-return-mianmian-page-03",
+		"d1-story-return-mianmian-page-04",
+		"d1-story-ending-page-01",
+		"d1-story-ending-page-02",
+		"d1-story-ending-page-03",
+		"d1-story-ending-page-04",
+		"d1-hut-after-trip-2",
+		"d1-notebook-locked-next-layer"
+	],
+	"commands": 117,
+	"elapsed_seconds": 15.946,
+	"ending_seen": true,
+	"fixture_captures": [
+		"d1-fixture-four-enemies-eight-cards"
+	],
+	"intentional_test_inputs": [
+		"tutorial ended turns without defense, then used actual assisted retry"
+	],
+	"node_types": [
+		"event",
+		"campfire"
+	],
+	"ok": true,
+	"replica_cards": [
+		"card.vow_plus",
+		"card.deliver_plus",
+		"card.whisper_plus"
+	],
+	"returned": [
+		"keepsake.ring",
+		"keepsake.letter",
+		"keepsake.mianmian"
+	],
+	"seed_sequence": [
+		147,
+		148
+	],
+	"stage": "actual-legal-campaign",
+	"stories": [
+		{
+			"id": "story.boss_knot"
+		},
+		{
+			"id": "story.back_up"
+		},
+		{
+			"card_id": "card.vow_plus",
+			"id": "story.return.ring",
+			"keepsake_id": "keepsake.ring",
+			"wish": true
+		},
+		{
+			"card_id": "card.deliver_plus",
+			"id": "story.return.letter",
+			"keepsake_id": "keepsake.letter",
+			"wish": true
+		},
+		{
+			"card_id": "card.whisper_plus",
+			"id": "story.return.mianmian",
+			"keepsake_id": "keepsake.mianmian",
+			"wish": true
+		},
+		{
+			"id": "story.ending"
+		}
+	],
+	"trips": 2
+}

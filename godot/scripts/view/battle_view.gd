@@ -99,8 +99,9 @@ func _build() -> void:
 		var stats: Label = UI.paragraph(button, _enemy_stat(enemy), Rect2(8, 154, width - 16, 34), UI.BLUE)
 		stats.add_theme_constant_override("line_spacing", 0)
 		_enemy_values.append(stats)
-		if _forecast.get("next_intents", []).size() > index:
-			button.tooltip_text += "\n" + t("next_intent", {"text": _intent_text(_forecast["next_intents"][index])})
+		for next_intent: Dictionary in _forecast.get("next_intents", []):
+			if int(next_intent.get("enemy", -1)) == index:
+				button.tooltip_text += "\n" + t("next_intent", {"text": _intent_text(next_intent)})
 	var rule_texts: Array[String] = []
 	for enemy: Dictionary in enemies:
 		var definition: Dictionary = ContentCatalog.entry(str(enemy.get("id", "")))

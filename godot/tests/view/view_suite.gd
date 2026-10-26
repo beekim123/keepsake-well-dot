@@ -131,9 +131,11 @@ func run_suite(scene_tree: SceneTree) -> Dictionary:
 	await _test_text_layout()
 	await _test_picker_and_layout()
 	await _test_pointer_drag()
+	await _test_spyglass_dead_slot()
 	await _test_pickup()
 	await _test_reward_replacement()
 	await _test_trade()
+	await _test_capture_campaign()
 	app.queue_free()
 	await _frames()
 	_remove("user://view-integration.json")
@@ -475,4 +477,32 @@ func _test_pointer_drag() -> void:
 	_check(commands.size() == 1 and commands[0].get("target_index", -1) == 0, "actual pointer press-motion-release submits one targeted legal command")
 	view.queue_free()
 	app.show()
+	await _frames()
+
+func _test_capture_campaign() -> void:
+	var driver: RefCounted = load("res://scripts/debug/debug_session.gd").new()
+	var result: Dictionary = await driver.play_campaign(app)
+	_check(result.get("ok", false) and result.get("returned", []).size() == 3 and result.get("boss_defeated", false) and result.get("ending_seen", false), "capture driver reaches genuine three-return boss ending using legal commands")
+	_check(int(result.get("trips", 0)) == 2, "capture campaign completes actual second-trip double commission")
+	var captured: Array = result.get("campaign_captures", [])
+	var all_return_pages: bool = true
+	for id: String in ["ring", "mianmian", "letter"]:
+		for page: int in range(1, 5):
+			all_return_pages = all_return_pages and ("d1-story-return-" + id + "-page-%02d" % page) in captured
+	_check(all_return_pages, "capture driver visits every real conditional return page including three wish pages")
+	_check("d1-story-ending-page-04" in captured and "d1-defeat-actual-tutorial" in captured and "d1-retry-actual-tutorial" in captured, "capture plan includes genuine ending and intentional legal-input defeat/retry")
+
+func _test_spyglass_dead_slot() -> void:
+	var fixture: Dictionary = {"hp": 40, "max_hp": 40, "deck": ["card.big_hammer", "card.big_hammer", "card.big_hammer", "card.big_hammer"], "relics": ["relic.spyglass"], "keepsakes": []}
+	var state: Dictionary = app.battle_rules.start({"id": "debug.spyglass", "enemies": ["enemy.wet_sock", "enemy.clothespin", "enemy.stinky_insole"]}, fixture, 18)["state"]
+	app.battle_rules.play_card(state, 0, 0)
+	var view: Control = load("res://scripts/view/battle_view.gd").new()
+	view.theme = app.theme
+	view.configure(app.battle_rules, state, func(_command: Dictionary) -> void: pass, func(_kind: String) -> void: pass, func() -> void: pass)
+	tree.root.add_child(view)
+	await _frames()
+	var forecast: Dictionary = app.battle_rules.forecast(state)
+	var next: Dictionary = forecast["next_intents"][0]
+	_check(int(next["enemy"]) == 1 and view._enemy_buttons[1].tooltip_text.contains(view.t("next_intent", {"text": view._intent_text(next)})), "spyglass next intent follows stable enemy slot after an earlier enemy is defeated")
+	view.queue_free()
 	await _frames()

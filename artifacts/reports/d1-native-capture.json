@@ -1,48 +1,25 @@
 {
   "engine": "4.7.2.stable.official.ed1daf0bf",
-  "renderer": "Compatibility / llvmpipe",
+  "captured_utc": "2026-10-26T05:09:20Z",
   "audio": "Dummy; not listened",
-  "captured_utc": "2026-10-26T04:24:00Z",
   "exit_code": 0,
   "engine_errors": 0,
+  "resource_leaks": 0,
   "warnings": [
-    "VSync adjustment unsupported by graphics driver"
+    "llvmpipe VSync adjustment unsupported"
   ],
-  "scope": "Visible native game viewport; legal first-trip campaign and explicitly named four-enemy/eight-card fixture. Does not establish manual full-demo completion.",
+  "scope": "Visible native viewport capture of legal two-trip campaign with deliberate actual tutorial defeat/retry. Stress fixture explicitly named. Normal manual save SHA256 unchanged. Automated capture duration is not player time.",
+  "receipt": "artifacts/screenshots/d1-capture-receipt.json",
   "shots": [
     {
-      "file": "artifacts/screenshots/d1-battle-preview.png",
-      "sha256": "1270c1012f0d4274c7918cb6525866eaeb4d1c1c9abe4b316e643da272b1a966",
+      "file": "artifacts/screenshots/d1-title.png",
+      "sha256": "6f6b163e94a63d0e3d9f0ceff0ff57d9e12ef015fe4236430dd4e0bedc3ea472",
       "width": 640,
       "height": 360
     },
     {
-      "file": "artifacts/screenshots/d1-battle.png",
-      "sha256": "4a485269a853fa119bd385d8b56eb6a313be7274b86fccf4e4d3c95c6cf8978d",
-      "width": 640,
-      "height": 360
-    },
-    {
-      "file": "artifacts/screenshots/d1-commissions.png",
-      "sha256": "6e9d308c7b25d77a0ab9206dc3cc0ed2afb63334003e547016a0685bce80cfaf",
-      "width": 640,
-      "height": 360
-    },
-    {
-      "file": "artifacts/screenshots/d1-fixture-four-enemies-eight-cards.png",
-      "sha256": "72d5a6349ab67ebbcf32806233235ae8ffdb326215b3f0dad1e9c968435561ca",
-      "width": 640,
-      "height": 360
-    },
-    {
-      "file": "artifacts/screenshots/d1-hut-returned.png",
-      "sha256": "45c5cf062ff6fdb5b77febfce481d93d8b3f7dea3cf0785f98dab135f05a5280",
-      "width": 640,
-      "height": 360
-    },
-    {
-      "file": "artifacts/screenshots/d1-hut.png",
-      "sha256": "52274cc16be556684b42edb2804b1e80ef9e2006459e2fde5b56452a71e389c6",
+      "file": "artifacts/screenshots/d1-story-intro-page-01.png",
+      "sha256": "802ad4b89877c83ea24f669df289a00dabc282170fccbc800f46e39b447fb0de",
       "width": 640,
       "height": 360
     },
@@ -53,8 +30,20 @@
       "height": 360
     },
     {
-      "file": "artifacts/screenshots/d1-node.png",
-      "sha256": "a01f3b3e9e3495f30e3aab831b1aff479476813a2b7da9fe76ed63af0eeb012b",
+      "file": "artifacts/screenshots/d1-story-intro-page-02.png",
+      "sha256": "fd37505cc208977054f1120d510627a77510406136a5cac76193fc51b509a522",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-intro-page-03.png",
+      "sha256": "1e2a1a27da81e6749c624b6e6287e2fe3642e6acbcbe3a7ffd12d5d96594f0aa",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-intro-page-04.png",
+      "sha256": "e8e005472132a08d33a9ee5b0ab378bbfd2a9c9288436c2d6c37205c744ba22a",
       "width": 640,
       "height": 360
     },
@@ -65,8 +54,14 @@
       "height": 360
     },
     {
-      "file": "artifacts/screenshots/d1-path.png",
-      "sha256": "cfe0f1cc247dd842a0d35522affb4c7194cd259dad74f4d12222c3e0780896cd",
+      "file": "artifacts/screenshots/d1-hut.png",
+      "sha256": "52274cc16be556684b42edb2804b1e80ef9e2006459e2fde5b56452a71e389c6",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-commissions.png",
+      "sha256": "6e9d308c7b25d77a0ab9206dc3cc0ed2afb63334003e547016a0685bce80cfaf",
       "width": 640,
       "height": 360
     },
@@ -77,26 +72,380 @@
       "height": 360
     },
     {
-      "file": "artifacts/screenshots/d1-reveal.png",
-      "sha256": "2fb9132cfc66bc545c24626b8a2c15e5974a92820c1f25b6dc72aadf06d08dd0",
+      "file": "artifacts/screenshots/d1-path.png",
+      "sha256": "cfe0f1cc247dd842a0d35522affb4c7194cd259dad74f4d12222c3e0780896cd",
       "width": 640,
       "height": 360
     },
     {
-      "file": "artifacts/screenshots/d1-reward.png",
+      "file": "artifacts/screenshots/d1-battle.png",
+      "sha256": "4a485269a853fa119bd385d8b56eb6a313be7274b86fccf4e4d3c95c6cf8978d",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-battle-preview.png",
+      "sha256": "1270c1012f0d4274c7918cb6525866eaeb4d1c1c9abe4b316e643da272b1a966",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-defeat-actual-tutorial.png",
+      "sha256": "b55abfca4464c441bdde89fdbdc8397abb55c28c6e3711050ab5361bfca05797",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-retry-actual-tutorial.png",
+      "sha256": "eea85aa0ba35cb035095d1a11aa33d40edfb1db3d895ce351e9619ea8675630f",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-battle-enc-tutorial.png",
+      "sha256": "eea85aa0ba35cb035095d1a11aa33d40edfb1db3d895ce351e9619ea8675630f",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-reward-trip-1-segment-1.png",
       "sha256": "97c330c3121a2bdefc7404aa43c663363efa58dc1ed4af1a10c0aca14aa25688",
       "width": 640,
       "height": 360
     },
     {
-      "file": "artifacts/screenshots/d1-story.png",
+      "file": "artifacts/screenshots/d1-path-trip-1-segment-2.png",
+      "sha256": "96f085123806ee1c03ac8c20dc7b2f9a82043ccdd2e83a34fba4f7fe9b0d20da",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-node-event-soap_tub.png",
+      "sha256": "a01f3b3e9e3495f30e3aab831b1aff479476813a2b7da9fe76ed63af0eeb012b",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-path-trip-1-segment-3.png",
+      "sha256": "c68b7c6a7919b4da954aa35bdb550ee31acfb17bde0e2daf26c8f99c6e6bc7f1",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-node-event-echo_mailbox.png",
+      "sha256": "7c830e8fcd3b37103047b2fb6217fc935b5630ff7c7661b36bb0aa4a3a6b2f5a",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-path-trip-1-segment-4.png",
+      "sha256": "e4eca069db817f0e8cb5c8623e3fd0b9f20028b948c915e43a0b21dfced4de11",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-battle-elite-hungry_drawer.png",
+      "sha256": "9c430af61f80c4a02e6ce97d33746322a198ae9c61b6e0323a8eadbc8774556f",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-keepsake-keepsake-ring.png",
+      "sha256": "2fb9132cfc66bc545c24626b8a2c15e5974a92820c1f25b6dc72aadf06d08dd0",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-reward-trip-1-segment-4.png",
+      "sha256": "2be495e2dcb1f93b9053262e3be72f7b0dde2b4e1269087805bdba3abf0c1af9",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-path-trip-1-segment-5.png",
+      "sha256": "7db79bace2b2e4b016e3ee88b4fd610ce5b7f67db9923c7709f4771cbd22906f",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-node-event-lonely_bench.png",
+      "sha256": "5b7afdeb8f6f780dcd58459f53f3884025d75fa576dd2db769c85b16950b02f0",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-path-trip-1-segment-6.png",
+      "sha256": "2f2711a678118cc27818e423eeb416aa4a74febba3a5fae4205014938562423b",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-node-campfire.png",
+      "sha256": "f660b004a7a3106991208564288e83add62f6a9d21c4fc3cd689f99e3f4ea375",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-wish-keepsake-ring.png",
+      "sha256": "8c9c83de0a893e5f8196ea050050f7f630e986aea0bd3bebe19c06f5efd092ce",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-path-trip-1-segment-7.png",
+      "sha256": "3af850311207c099b194dae819e57737f950d89002916353b9b45c66fb908679",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-battle-boss-sock_snake.png",
+      "sha256": "8a66aecd154c3af658cc0361e3026f3f271c75df67eede1e3caf252ded65fb25",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-boss-warning-2.png",
+      "sha256": "fc34630bb8dd9a5d5cac291d8c43251745ec6e011caeb6a057dda1422a373ef3",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-boss-warning-1.png",
+      "sha256": "0d7384a7f551beac961ca6fbd27cfed0b6eb3102f7c4870c1b3fe2c1e51bff6c",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-boss_knot-page-01.png",
       "sha256": "4353a7a4eef3729ce2da51bb1d5da3d5804b2a8f4e62fe111529df72e338628a",
       "width": 640,
       "height": 360
     },
     {
-      "file": "artifacts/screenshots/d1-title.png",
-      "sha256": "6f6b163e94a63d0e3d9f0ceff0ff57d9e12ef015fe4236430dd4e0bedc3ea472",
+      "file": "artifacts/screenshots/d1-story-back_up-page-01.png",
+      "sha256": "559a6e19a6403e2d80999c20556d70c296ec89f018988bf8e46c4077a997d10f",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-return-ring-page-01.png",
+      "sha256": "4f0f0e7306407b7fb6743a23595187616395a3813de0feb403f45e706acab947",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-return-ring-page-02.png",
+      "sha256": "80f26d85a523a1f1dfbccc0581d65b31b1bb2bdb5fbd0a664007d7e93873aae1",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-return-ring-page-03.png",
+      "sha256": "e5a7530e768bdebb4bf4bab4374d7160d6f674e7ca4e4eab8de2595d20461c50",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-return-ring-page-04.png",
+      "sha256": "b2e728e019cff7b06f7d0c3e67733a44dd0a8a027e60fc90db695de2f798814c",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-hut-after-trip-1.png",
+      "sha256": "45c5cf062ff6fdb5b77febfce481d93d8b3f7dea3cf0785f98dab135f05a5280",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-commissions-trip-2.png",
+      "sha256": "4fd1509e279366808f0cdeda2714a4b1deb5df5ea135426a8203943f32f8f36f",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-prepare-trip-2.png",
+      "sha256": "4da0d09c6c9fdf01c2abb8bd05ed3d8c8c892f294e0700f46f05c03f02c61f25",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-departure-choice-trip-2.png",
+      "sha256": "2dbbb99de88a7ea5f89af441bbc64339fbf7dec6693955cf2f0cd58b88edf2e9",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-path-trip-2-segment-1.png",
+      "sha256": "7f6beff75b052ac2315c5996ff6d64e956e4b4dee588691fa4cbc5d85102c774",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-battle-enc-t1_b.png",
+      "sha256": "ff9f14bceb707253982cd84cd9cf0e8b1dcc4cfea792100b4e2e6a11efc6946c",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-reward-trip-2-segment-1.png",
+      "sha256": "667db40135db46b75810697114ac8b166a01bbc7cf0eeeea76493e8f7e259fdf",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-path-trip-2-segment-2.png",
+      "sha256": "a28d4def222818bd645f63acd29668a69b7e1322cb4c21901d038e788df8f069",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-keepsake-keepsake-letter.png",
+      "sha256": "16575c363dbd2ae646720b89bf67e86b5b198c1248794d963bf117ff2576ca60",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-path-trip-2-segment-3.png",
+      "sha256": "88a40588bece7a3024a2329d0773989a5468d53c096d8e8b2dadcbd77b4a7df2",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-wish-keepsake-letter.png",
+      "sha256": "5b42c1da5ecd35843dc95a13f537a61ffad43faa35faf44c6495571a38fc8aad",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-path-trip-2-segment-4.png",
+      "sha256": "2a32b9d3498ba0169c687bd22be56d2e0503c820f9a9f1c37f109470fc09640f",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-keepsake-keepsake-mianmian.png",
+      "sha256": "34509bea770a4550beb1745bbb41c7a11071707490e0dced6c71ebafe094a991",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-reward-trip-2-segment-4.png",
+      "sha256": "d1516d1dc59a2d47e6b8853ed15fe7bfeb06c2bd2454bd2611d5a65949aa1d28",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-path-trip-2-segment-5.png",
+      "sha256": "f0c103ed482423ad40ce7dc0141b19f708136e6b297381059ba06458f6adfa3f",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-wish-keepsake-mianmian.png",
+      "sha256": "e3121970c6fc4f728fafd2505610083a79b58d99feefa9f5ab6984a2c7ebc8b2",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-path-trip-2-segment-6.png",
+      "sha256": "aabe218e0be371dee136d60107fd685f9a37297c5fd0e051f41bfbfd426f6633",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-path-trip-2-segment-7.png",
+      "sha256": "1ddb6ac674b37a2db0dadbf2d985a945e4f8354714e4245c59bddb196f82cccc",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-return-letter-page-01.png",
+      "sha256": "c138d586fe0c74a757343f4f482428de3932fb1b2f2a3e3ef541b7134b9d4d1d",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-return-letter-page-02.png",
+      "sha256": "b4d7087aac4a894de4c73293ba1c862238f98501fdf12c5db59a969fbd89baf9",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-return-letter-page-03.png",
+      "sha256": "58da0dd660aa679638e6ca6e8e309d4856145ac5767adb9be84288138aefc40f",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-return-letter-page-04.png",
+      "sha256": "574085e5510b182b2dfa9d0ef8f44e70973625e2b6a80e36107831cf2ddf596b",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-return-mianmian-page-01.png",
+      "sha256": "8492c15e7f6494b6180840762b5c480e4e460e51a8c534d51d20e2529e90877d",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-return-mianmian-page-02.png",
+      "sha256": "8ae60fd28f9b8efded8a5a81766c13a64d2b3f317453d70a9383760ef1bf15d6",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-return-mianmian-page-03.png",
+      "sha256": "b5894aeed9218fcbe60d010c3d6e10d73136e2be6ad6a0d7f2f392bf7c987cfa",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-return-mianmian-page-04.png",
+      "sha256": "d33ca2376f074d13f23513e8d30664ee42bba6b8aa746ba8980e886a92fc86ac",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-ending-page-01.png",
+      "sha256": "ad52839388bab185c8b9ffdb7bd51f65fc8148b2e5e49d562f5e4bb8efb258db",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-ending-page-02.png",
+      "sha256": "56777b50a561a9092e78b5d467065b665c13ae98dc5b25f64d98c7debd6ea673",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-ending-page-03.png",
+      "sha256": "6e7e78f02437e1a965043ac2ef9ac2b7e23735bcff0013529c05cb05d6d23ac1",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-story-ending-page-04.png",
+      "sha256": "7c41206eeae7976f0ebb923b8fd8140514eed15899d98a6f0efc81ff17aac164",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-hut-after-trip-2.png",
+      "sha256": "049cdbae56953a85262f216d787d4516a53fd720c70669b040c514bca4b6070e",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-notebook-locked-next-layer.png",
+      "sha256": "ec9a953c18ce99cbcc831fa578768395a3f612d3ae78f964b22a233ef88a3a17",
+      "width": 640,
+      "height": 360
+    },
+    {
+      "file": "artifacts/screenshots/d1-fixture-four-enemies-eight-cards.png",
+      "sha256": "d0d397cd5885af478dba3c16bcfa9991122b84d31ffd01daf80858a91efeda9c",
       "width": 640,
       "height": 360
     }

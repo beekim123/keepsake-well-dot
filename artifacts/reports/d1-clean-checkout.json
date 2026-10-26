@@ -1,0 +1,21 @@
+{
+  "commit": "2ae563d78dd775331bd98d94f4ff84c8e5dfa914",
+  "method": "Extract git archive of the verified published commit into a new empty directory; no existing Godot import cache or user save; run npm run check with exact Godot4.7.2.",
+  "date_utc": "2026-10-26",
+  "exit_code": 0,
+  "node_tests": 136,
+  "node_failures": 0,
+  "godot_tests": 3815,
+  "godot_failures": 0,
+  "quick_simulation": {
+    "requested_trips": 50,
+    "trips": 50,
+    "completed": true,
+    "actual_battle_attempts": 179,
+    "errors": []
+  },
+  "limits": [
+    "Linux headless clean checkout, not macOS exported clean-device acceptance.",
+    "Not a real audio listening test or human enjoyment evaluation."
+  ]
+}

@@ -4,6 +4,7 @@ const RNG = preload("res://scripts/core/rng.gd")
 var definitions: Dictionary
 var config: Dictionary
 var keepsakes: Dictionary = {}
+var events_by_id: Dictionary = {}
 
 func _init(tables: Dictionary = {}) -> void:
 	definitions = tables
@@ -11,6 +12,8 @@ func _init(tables: Dictionary = {}) -> void:
 	config = paths[0] if paths is Array and not paths.is_empty() else paths if paths is Dictionary else {}
 	for item: Dictionary in tables.get("keepsakes", []):
 		keepsakes[item["id"]] = item
+	for item: Dictionary in tables.get("events", []):
+		events_by_id[item["id"]] = item
 
 func generate(run: Dictionary, meta: Dictionary) -> Array:
 	var rng: RefCounted = RNG.new(run["rng_states"]["route"])
@@ -80,7 +83,7 @@ func generate(run: Dictionary, meta: Dictionary) -> Array:
 	var event_pool: Array = []
 	for event: Dictionary in definitions.get("events", []):
 		if event["id"] in reserved_events: continue
-		if event.get("once_per_save", false) and (meta.get("once_events", {}).has(event["id"]) or not int(run["number"]) in event.get("run_numbers", [2, 3])): continue
+		if event.get("once_per_save", false) and (meta.get("once_events", {}).has(event["id"]) or not _run_number_allowed(int(run["number"]), event.get("run_numbers", [2, 3]))): continue
 		event_pool.append(event["id"])
 	rng.shuffle(event_pool)
 	for row: Array in path:
@@ -96,8 +99,9 @@ func generate(run: Dictionary, meta: Dictionary) -> Array:
 				_: node["id"] = node["type"]
 			var hints: Array = config.get("hints", {}).get(node["type"], [node["type"]])
 			node["hint"] = hints[rng.range_int(0, hints.size() - 1)]
-			if node["id"] == "event.echo_mailbox": node["hint"] = config.get("special_hints", {}).get("event.echo_mailbox", node["hint"])
-			if node["type"] == "elite" and not node["star_ids"].is_empty(): node["hint"] = config.get("special_hints", {}).get("elite_keepsake", node["hint"])
+			# Keep the existing hint draw above: presentation fixes must not reroll
+			# routes or affect any later route-random choice. Resolve the final ID.
+			node["hint"] = _visible_hint(node)
 	run["rng_states"]["route"] = rng.snapshot()
 	return path
 
@@ -124,8 +128,33 @@ func choices(run: Dictionary) -> Array:
 	if run.get("phase", "") != "path": return []
 	var row: Array = run["path"][int(run["segment"]) - 1].duplicate(true)
 	for node: Dictionary in row:
+		# Correct legacy snapshots in this read-only view, not in the saved run.
+		node["hint"] = _visible_hint(node)
 		node["heart_ids"] = []
 		for id: String in node["wish_ids"]:
 			if id in run["keepsakes"] and not run["wishes"].get(id, false) and not run["wish_missed"].get(id, false) and int(run["acquired_segments"].get(id, 99)) < int(run["segment"]):
 				node["heart_ids"].append(id)
 	return row
+
+func _visible_hint(node: Dictionary) -> String:
+	var original: String = str(node.get("hint", ""))
+	var special: Dictionary = config.get("special_hints", {})
+	if node.get("type", "") == "event":
+		var id: String = str(node.get("id", ""))
+		if special.has(id): return str(special[id])
+		var event: Dictionary = events_by_id.get(id, {})
+		# A type-wide random phrase can describe a different event entirely.
+		# Existing event names are concise, localized and always truthful when
+		# content has not supplied a dedicated hint (including non-heart paths).
+		return str(event.get("path_hint", event.get("name", original)))
+	if node.get("type", "") == "elite" and not node.get("star_ids", []).is_empty():
+		return str(special.get("elite_keepsake", original))
+	return original
+
+func _run_number_allowed(number: int, allowed_numbers: Array) -> bool:
+	# JSON numbers become floats, while newly created run counters are ints.
+	# Array.has()/`in` is type-sensitive, so compare numeric values explicitly.
+	for allowed: Variant in allowed_numbers:
+		if (allowed is int or allowed is float) and float(allowed) == float(number):
+			return true
+	return false
