@@ -3,8 +3,10 @@ extends RefCounted
 ## Fixed cycles plus live swallow/boss phase intent; no hidden global randomness.
 static func raw_intent(rules: RefCounted, state: Dictionary, slot: int, offset: int = 0) -> Dictionary:
 	var enemy: Dictionary = state["enemies"][slot]
-	if int(enemy["hp"]) <= 0:
+	if not rules.enemy_alive(state, slot):
 		return {"type": "defeated", "amount": 0}
+	if offset == 0 and enemy.has("intent_override"):
+		return enemy["intent_override"].duplicate(true)
 	var definition: Dictionary = rules.definition("enemies", enemy["id"])
 	var mechanics: Dictionary = definition.get("mechanics", {})
 	var phase_due: bool = bool(enemy.get("phase_triggered", false)) and not bool(enemy.get("phase_done", false)) and int(state["turn"]) + offset >= int(enemy.get("phase_first_response_turn", 999999)) + int(mechanics.get("phase_warning_turns", 2)) - 1
@@ -28,6 +30,12 @@ static func execute(rules: RefCounted, state: Dictionary, slot: int, events: Arr
 	var enemy: Dictionary = state["enemies"][slot]
 	var intent: Dictionary = raw_intent(rules, state, slot)
 	events.append({"type": "enemy_action", "enemy": slot, "intent": intent.duplicate(true)})
+	if intent.has("shake_off"):
+		rules.shake_off(state, slot, str(intent["shake_off"]), events)
+	if intent.get("eat_binds_to_guard", false):
+		var eaten: int = int(enemy["binds"])
+		enemy["binds"] = 0
+		rules.enemy_guard(state, slot, eaten, events)
 	match str(intent.get("type", "idle")):
 		"attack":
 			rules.enemy_attack(state, slot, intent, events)
@@ -47,6 +55,8 @@ static func execute(rules: RefCounted, state: Dictionary, slot: int, events: Arr
 			var minions: Array = rules.minion_slots(state, str(intent.get("enemy_id", definition.get("mechanics", {}).get("summon_enemy_id", "enemy.sock_kid"))))
 			if not minions.is_empty():
 				var consumed: int = minions[0]
+				rules.untie(state, consumed)
+				state["enemies"][consumed]["departed"] = "scattered"
 				state["enemies"][consumed]["hp"] = 0
 				state["enemies"][consumed]["guard"] = 0
 				var actual: int = mini(int(intent.get("heal", 0)), int(enemy["max_hp"]) - int(enemy["hp"]))
@@ -57,6 +67,7 @@ static func execute(rules: RefCounted, state: Dictionary, slot: int, events: Arr
 	else:
 		enemy["cycle_index"] += 1
 	enemy["idle_override"] = false
+	enemy.erase("intent_override")
 
 static func turn_start(rules: RefCounted, state: Dictionary, events: Array) -> void:
 	for slot: int in rules.living_slots(state):

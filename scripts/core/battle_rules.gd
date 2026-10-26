@@ -50,7 +50,7 @@ func living_slots(state: Dictionary) -> Array[int]:
 	return State.living_slots(state)
 
 func enemy_alive(state: Dictionary, slot: int) -> bool:
-	return slot >= 0 and slot < state["enemies"].size() and int(state["enemies"][slot]["hp"]) > 0
+	return slot >= 0 and slot < state["enemies"].size() and int(state["enemies"][slot]["hp"]) > 0 and str(state["enemies"][slot].get("departed", "")).is_empty()
 
 func find_card(cards: Array, uid: Variant) -> int:
 	return State.find_card(cards, uid)
@@ -172,6 +172,7 @@ func resolve_card(state: Dictionary, hand_index: int, target_index: int, choices
 	state["resolution_depth"] += 1
 	state["battle_flags"]["cards_played"] += 1
 	state["turn_flags"]["cards_played"] += 1
+	if is_tie_card(card): state["turn_flags"]["ties_played"] += 1
 	if card.get("type", "") == "special":
 		state["turn_flags"]["special_played"] += 1
 	var uses: Dictionary = state["battle_flags"]["uses"]
@@ -180,7 +181,7 @@ func resolve_card(state: Dictionary, hand_index: int, target_index: int, choices
 	events.append({"type": "card_played", "id": instance["id"], "uid": instance["uid"], "target": target_index, "cost": cost, "free": free, "card_number": card_number})
 	var context: Dictionary = {"source": instance["id"], "target": target_index, "choices": choices.duplicate(true), "multiplier": modifiers["multiplier"], "is_attack_card": card.get("type", "") == "attack", "card_type": card.get("type", ""), "card_number": card_number}
 	for repeat: int in range(int(modifiers["repeats"])):
-		apply_ops(state, card.get("ops", []), context, events)
+		apply_ops(state, card.get("fallback_ops", []) if card.get("target", "") == "two_enemies" and living_slots(state).size() == 1 else card.get("ops", []), context, events)
 		if state["status"] == "defeat":
 			break
 	# Restore outer card's sequence for hooks: nested deliver counts as another play,
@@ -190,15 +191,27 @@ func resolve_card(state: Dictionary, hand_index: int, target_index: int, choices
 		_trigger_card_hooks(state, context, events)
 	state["discard"].append(instance)
 	state["resolution_depth"] -= 1
+	check_pairs(state, events)
 
 func _trigger_card_hooks(state: Dictionary, context: Dictionary, events: Array) -> void:
 	# Generic trigger reads the immutable card-number context, not nested final count.
 	Hooks.trigger(self, state, "card_played", context, events)
 
+func is_tie_card(card: Dictionary) -> bool:
+	for op: Dictionary in card.get("ops", []):
+		if op.get("op", "") in ["tie", "tie_leftmost"]: return true
+	return false
+
 func card_cost(state: Dictionary, card: Dictionary) -> int:
-	if card.get("type", "") == "special" and has_item(state, "keepsakes", "keepsake.letter") and int(state["turn_flags"].get("special_played", 0)) < int(param("keepsakes", "keepsake.letter", "free_special_cards", 1)):
-		return 0
+	if is_tie_card(card) and int(state["turn_flags"].get("ties_played", 0)) == 0 and item_rule(state, "first_tie_free", false): return 0
 	return maxi(0, int(card.get("cost", 0)))
+
+func item_rule(state: Dictionary, key: String, fallback: Variant) -> Variant:
+	var value: Variant = fallback
+	for item: Variant in state.get("relics", []):
+		var data: Dictionary = definition("relics", item_id(item)).get("rules", {})
+		if data.has(key): value = data[key]
+	return value
 
 func end_turn(state: Dictionary, keep_index: int = -1) -> Array:
 	if state.get("status", "") != "player":
@@ -210,16 +223,8 @@ func end_turn(state: Dictionary, keep_index: int = -1) -> Array:
 	if keep_index >= 0 and not has_item(state, "relics", "relic.bookmark"):
 		return _invalid("no_bookmark")
 	var events: Array = []
-	var keep_uid: String = str(state["hand"][keep_index]["uid"]) if keep_index >= 0 else ""
 	Hooks.trigger(self, state, "turn_end", {}, events)
-	var kept: Array = []
-	for card: Dictionary in state["hand"]:
-		if str(card["uid"]) == keep_uid:
-			kept.append(card)
-		else:
-			state["discard"].append(card)
-	state["hand"] = kept
-	events.append({"type": "turn_end", "turn": state["turn"], "kept_uid": keep_uid})
+	events.append({"type": "turn_end", "turn": state["turn"], "kept_uid": ""})
 	var tutorial: Dictionary = _tutorial_data(state)
 	if not tutorial.is_empty() and int(state["turn"]) == 1:
 		var prompt: Dictionary = tutorial_status(state)
@@ -237,38 +242,31 @@ func end_turn(state: Dictionary, keep_index: int = -1) -> Array:
 func _begin_turn(state: Dictionary, events: Array) -> void:
 	state["status"] = "player"
 	state["turn"] += 1
-	state["turn_flags"] = {"cards_played": 0, "attack_played": false, "special_played": 0, "first_attacker": -1}
+	state["turn_flags"] = {"cards_played": 0, "attack_played": false, "special_played": 0, "first_attacker": -1, "shakes_used": 0, "extra_shakes": 0, "ties_played": 0, "bind_multiplier": 1, "pair_threshold": 0.0}
 	state["guard_multiplier"] = 1
 	state["retaliate"] = 0
-	var retained: int = 0
-	if has_item(state, "relics", "relic.leaky_balloon"):
-		retained = int(floor(float(state["player"]["guard"]) * float(param("relics", "relic.leaky_balloon", "retention", 0.5))))
-	state["player"]["guard"] = retained
+	state["player"]["guard"] = 0
 	state["energy"] = limit("energy_per_turn", 3) + int(state["next_turn_energy"])
 	var tutorial: Dictionary = _tutorial_data(state)
 	if not tutorial.is_empty():
 		state["energy"] = int(tutorial["player"]["energy"])
 	state["next_turn_energy"] = 0
-	events.append({"type": "turn_start", "turn": state["turn"], "energy": state["energy"], "guard": retained})
-	# The event's promised start guard survives the first scheduled guard clear.
+	events.append({"type": "turn_start", "turn": state["turn"], "energy": state["energy"], "guard": 0})
 	if state["turn"] == 1:
-		gain_guard(state, int(state["modifiers"].get("start_guard", 0)), events, "next_battle")
+		for slot: int in living_slots(state):
+			bind_enemy(state, slot, int(state["modifiers"].get("bind_all_start", 0)), events, "next_battle")
 	Hooks.trigger(self, state, "turn_start", {}, events)
-	var draw_count: int = limit("draw_per_turn", 4) - int(state["next_draw_penalty"])
+	var refill: int = maxi(int(item_rule(state, "hand_size", limit("hand_size", 5))), int(state.get("next_turn_refill", 0)))
+	var draw_count: int = maxi(0, refill - int(state["next_draw_penalty"]) - state["hand"].size())
+	state["next_turn_refill"] = 0
 	state["next_draw_penalty"] = 0
-	if has_item(state, "relics", "relic.open_ink"):
-		for op: Dictionary in definition("relics", "relic.open_ink").get("ops", []):
-			if op.get("op", "") == "draw":
-				draw_count += int(op.get("amount", 0))
-	if state["turn"] == 1 and has_item(state, "relics", "relic.crooked_compass"):
-		draw_count += int(param("relics", "relic.crooked_compass", "draw", 3))
 	if not tutorial.is_empty():
 		draw_count = Tutorial.prepare_draw(state, tutorial, draw_count)
 	draw(state, maxi(0, draw_count), events)
 	if not tutorial.is_empty():
 		Tutorial.after_draw(state, tutorial)
 	if state["turn"] == 1:
-		Hooks.after_first_draw(self, state, events)
+		pass
 
 func _enemy_phase(state: Dictionary, events: Array) -> void:
 	if state["status"] == "defeat" or bool(state["battle_flags"].get("victory_pending", false)):
@@ -283,6 +281,7 @@ func _enemy_phase(state: Dictionary, events: Array) -> void:
 			Enemies.execute(self, state, slot, events)
 	if state["status"] != "defeat" and not living_slots(state).is_empty():
 		Enemies.turn_end(self, state, events)
+	if state["status"] != "defeat": check_pairs(state, events)
 	if state["status"] != "defeat":
 		state["status"] = "player"
 
@@ -316,12 +315,9 @@ func random_index(state: Dictionary, size: int) -> int:
 func apply_ops(state: Dictionary, operations: Array, context: Dictionary, events: Array) -> void:
 	Effects.resolve(self, state, operations, context, events)
 
-func gain_guard(state: Dictionary, amount: int, events: Array, source: String = "player") -> void:
-	var actual: int = maxi(0, amount) * int(state["guard_multiplier"])
-	if actual == 0:
-		return
-	state["player"]["guard"] += actual
-	events.append({"type": "guard", "target": "player", "amount": actual, "source": source})
+func gain_guard(state: Dictionary, _amount: int, _events: Array, _source: String = "player") -> void:
+	# Compatibility API only; player armor no longer exists.
+	state["player"]["guard"] = 0
 
 func heal(state: Dictionary, amount: int, events: Array, source: String = "player") -> void:
 	var actual: int = maxi(0, mini(amount, int(state["player"]["max_hp"]) - int(state["player"]["hp"])))
@@ -339,16 +335,26 @@ func damage_enemy(state: Dictionary, slot: int, amount: int, context: Dictionary
 		return
 	var enemy: Dictionary = state["enemies"][slot]
 	var actual: int = maxi(0, amount)
-	if bool(context.get("is_attack_card", false)) and int(enemy["guard"]) > 0 and has_item(state, "relics", "relic.shedding_brush"):
-		actual += int(param("relics", "relic.shedding_brush", "damage", 3))
-		events.append({"type": "relic_proc", "id": "relic.shedding_brush", "enemy": slot})
+	if bool(context.get("is_attack_card", false)) and not bool(context.get("linked", false)):
+		if int(enemy.get("binds", 0)) > 0: actual += int(item_rule(state, "bound_attack_bonus", 0))
+		if living_slots(state).size() == 1: actual += int(item_rule(state, "lone_attack_bonus", 0))
+	var partner: int = partner_slot(state, slot)
 	var result: Dictionary = Damage.apply_damage(enemy, actual)
 	enemy["hp"] = result["state"]["hp"]
 	enemy["guard"] = result["state"]["guard"]
 	var event: Dictionary = result["events"][0]
 	event.merge({"target": slot, "source": context.get("source", "player")})
 	events.append(event)
+	if partner >= 0 and not bool(context.get("linked", false)) and str(context.get("source", "")).begins_with("card."):
+		var linked: Dictionary = context.duplicate(true)
+		linked["linked"] = true
+		var ratio: float = 1.0 if bool(context.get("link_full", false)) else float(_balance.get("link_ratio", 0.5))
+		damage_enemy(state, partner, int(floor(int(event.get("hp_damage", 0)) * ratio)), linked, events)
 	if int(enemy["hp"]) == 0:
+		enemy["departed"] = "scattered"
+		untie(state, slot)
+		if partner >= 0:
+			damage_enemy(state, partner, int(item_rule(state, "scattered_partner_damage", 0)), {"source": "scattered_partner", "linked": true}, events)
 		events.append({"type": "enemy_defeated", "enemy": slot, "id": enemy["id"]})
 		Hooks.trigger(self, state, "enemy_defeated", {"target": slot}, events)
 		if living_slots(state).is_empty():
@@ -362,45 +368,47 @@ func damage_enemy(state: Dictionary, slot: int, amount: int, context: Dictionary
 
 func enemy_attack(state: Dictionary, slot: int, intent: Dictionary, events: Array) -> void:
 	var enemy: Dictionary = state["enemies"][slot]
-	var reduction: int = int(enemy["weaken"])
-	if int(state["turn_flags"].get("first_attacker", -1)) == -1:
-		state["turn_flags"]["first_attacker"] = slot
-		if has_item(state, "keepsakes", "keepsake.mianmian"):
-			reduction += int(param("keepsakes", "keepsake.mianmian", "reduction", 3))
-			events.append({"type": "keepsake_proc", "id": "keepsake.mianmian", "enemy": slot})
 	var canceled: bool = bool(enemy.get("first_attack_pending", false))
 	enemy["first_attack_pending"] = false
-	enemy["weaken"] = 0
-	Hooks.trigger(self, state, "incoming_attack", {"target": slot}, events)
+	var total_damage: int = 0
+	var total_blocked: int = 0
 	for hit: int in range(int(intent.get("times", 1))):
-		if state["status"] == "defeat" or not enemy_alive(state, slot):
-			break
-		var amount: int = 0 if canceled else maxi(0, int(intent.get("amount", 0)) - reduction)
-		var guard_before: int = int(state["player"]["guard"])
-		var hp_before: int = int(state["player"]["hp"])
-		var result: Dictionary = Damage.apply_damage(state["player"], amount)
-		state["player"] = result["state"]
-		var guard_after_damage: int = int(state["player"]["guard"])
-		var event: Dictionary = result["events"][0]
-		event.merge({"target": "player", "source": slot, "hit": hit, "canceled": canceled})
+		if state["status"] == "defeat" or not enemy_alive(state, slot): break
+		var amount: int = 0 if canceled else attack_amount(state, slot, intent)
+		var available: int = maxi(0, int(enemy["binds"]) - int(intent.get("ignore_binds", 0)))
+		var blocked: int = mini(amount, available)
+		enemy["binds"] -= blocked
+		var damage: int = amount - blocked
+		total_damage += damage
+		total_blocked += blocked
+		var before: int = int(state["player"]["hp"])
+		state["player"]["guard"] = 0
+		state["player"]["hp"] = maxi(0, before - damage)
+		var event: Dictionary = {"type": "damage", "target": "player", "source": slot, "hit": hit, "amount": amount, "blocked": blocked, "hp_damage": mini(before, damage), "canceled": canceled}
 		events.append(event)
 		if int(state["player"]["hp"]) <= 0:
 			if bool(state["spare_rope_available"]) and not bool(state["spare_rope_used"]):
 				state["spare_rope_used"] = true
 				state["player"]["hp"] = mini(int(state["player"]["max_hp"]), limit("spare_rope_hp", 1))
-				# Rope prevents lethal loss; it is not a death followed by healing.
-				event["hp_damage"] = maxi(0, hp_before - int(state["player"]["hp"]))
+				event["hp_damage"] = maxi(0, before - int(state["player"]["hp"]))
 				event["prevented_lethal"] = true
-				gain_guard(state, limit("spare_rope_guard", 10), events, "spare_rope")
+				for other: int in living_slots(state): bind_enemy(state, other, limit("spare_rope_binds", 5), events, "spare_rope")
 				events.append({"type": "spare_rope"})
 			else:
 				state["status"] = "defeat"
 				events.append({"type": "defeat"})
 				return
-		if guard_before > 0 and guard_after_damage == 0:
-			Hooks.trigger(self, state, "guard_broken", {"target": slot}, events)
-		if int(state["retaliate"]) > 0 and enemy_alive(state, slot):
-			damage_enemy(state, slot, int(state["retaliate"]), {"source": "retaliate", "is_attack_card": false}, events)
+	if total_damage == 0 and total_blocked > 0 and int(enemy.get("recoil", 0)) > 0:
+		damage_enemy(state, slot, int(enemy["recoil"]), {"source": "recoil"}, events)
+	enemy["recoil"] = 0
+
+func attack_amount(state: Dictionary, slot: int, intent: Dictionary) -> int:
+	var amount: int = int(intent.get("amount", 0))
+	var partner: int = partner_slot(state, slot)
+	var mechanics: Dictionary = definition("enemies", state["enemies"][slot]["id"]).get("mechanics", {})
+	if partner >= 0 and state["enemies"][partner].get("pair_tag", "") == mechanics.get("tied_attack_tag", "__none"):
+		amount -= int(mechanics.get("tied_attack_reduction", 0))
+	return maxi(0, amount)
 
 func spawn_enemy(state: Dictionary, enemy_id: String, events: Array) -> int:
 	if living_slots(state).size() >= limit("enemy_limit", 4):
@@ -414,12 +422,12 @@ func spawn_enemy(state: Dictionary, enemy_id: String, events: Array) -> int:
 	if not tutorial.is_empty() and tutorial["enemy"]["enemy_id"] == enemy_id:
 		hp = int(tutorial["enemy"]["hp"])
 	state["next_uid"] += 1
-	var enemy: Dictionary = {"uid": "enemy_%d" % state["next_uid"], "id": enemy_id, "hp": hp, "max_hp": hp, "guard": 0, "cycle_index": 0, "guard_cycles": 0, "weaken": 0, "idle_override": false, "intent": {}, "phase_triggered": false, "phase_done": false, "first_attack_pending": bool(state["modifiers"].get("cancel_first_attack", state["modifiers"].get("first_attack_immune", false)))}
+	var enemy: Dictionary = {"uid": "enemy_%d" % state["next_uid"], "id": enemy_id, "hp": hp, "max_hp": hp, "guard": 0, "binds": 0, "tie": "", "departed": "", "pair_tag": data.get("pair_tag", ""), "pair_threshold": data.get("pair_threshold", _balance.get("pair_threshold", 0.5)), "cycle_index": 0, "guard_cycles": 0, "weaken": 0, "idle_override": false, "intent": {}, "phase_triggered": false, "phase_done": false, "first_attack_pending": bool(state["modifiers"].get("cancel_first_attack", state["modifiers"].get("first_attack_immune", false)))}
 	if not tutorial.is_empty() and tutorial["enemy"]["enemy_id"] == enemy_id:
 		enemy["tutorial_intents"] = tutorial["enemy"]["intents"].duplicate(true)
 	var slot: int = state["enemies"].size()
 	for index: int in range(state["enemies"].size()):
-		if int(state["enemies"][index]["hp"]) == 0:
+		if not enemy_alive(state, index):
 			slot = index
 			break
 	if slot == state["enemies"].size():
@@ -474,9 +482,12 @@ func _validate_card(state: Dictionary, hand_index: int, target_index: int, choic
 		return "card_use_limit"
 	if not free and card_cost(state, card) > int(state["energy"]):
 		return "insufficient_energy"
-	if card.get("target", "self") == "enemy":
+	if card.get("target", "self") in ["enemy", "two_enemies"]:
 		if not enemy_alive(state, target_index):
 			return "invalid_target"
+		if card.get("target", "") == "two_enemies" and living_slots(state).size() > 1:
+			var second: int = int(choices.get("second_target", -1))
+			if second == target_index or not enemy_alive(state, second): return "invalid_second_target"
 	elif target_index != -1:
 		return "unexpected_target"
 	for op: Dictionary in card.get("ops", []):
@@ -507,9 +518,8 @@ func legal_actions(state: Dictionary) -> Array:
 			result.append(action)
 	if tutorial_status(state)["can_end_turn"]:
 		result.append({"type": "end_turn", "keep_index": -1})
-	if tutorial_status(state)["can_end_turn"] and has_item(state, "relics", "relic.bookmark"):
-		for index: int in range(state["hand"].size()):
-			result.append({"type": "end_turn", "keep_index": index})
+	if str(state.get("tutorial", {}).get("locked_uid", "")).is_empty() and int(state["turn_flags"].get("shakes_used", 0)) < limit("shakes_per_turn", 1) + int(state["turn_flags"].get("extra_shakes", 0)):
+		for index: int in range(state["hand"].size()): result.append({"type": "shake_card", "hand_index": index})
 	return result
 
 func _card_actions(state: Dictionary, index: int, free: bool, excluded: Array) -> Array:
@@ -525,7 +535,7 @@ func _card_actions(state: Dictionary, index: int, free: bool, excluded: Array) -
 	if card.has("uses_per_battle") and int(state["battle_flags"]["uses"].get(instance["id"], 0)) >= int(card["uses_per_battle"]):
 		return []
 	var targets: Array = [-1]
-	if card.get("target", "self") == "enemy":
+	if card.get("target", "self") in ["enemy", "two_enemies"]:
 		targets = living_slots(state)
 	var choice_sets: Array = [{}]
 	for op: Dictionary in card.get("ops", []):
@@ -545,7 +555,11 @@ func _card_actions(state: Dictionary, index: int, free: bool, excluded: Array) -
 	var result: Array = []
 	for target: int in targets:
 		for choice: Dictionary in choice_sets:
-			result.append({"type": "play_card", "hand_index": index, "target_index": target, "choices": choice})
+			if card.get("target", "") == "two_enemies" and targets.size() > 1:
+				for second: int in targets:
+					if second != target: result.append({"type": "play_card", "hand_index": index, "target_index": target, "choices": {"second_target": second}})
+			else:
+				result.append({"type": "play_card", "hand_index": index, "target_index": target, "choices": choice})
 	return result
 
 func preview(state: Dictionary, hand_index: int, target_index: int = -1, choices: Dictionary = {}) -> Dictionary:
@@ -569,8 +583,8 @@ func forecast(state: Dictionary) -> Dictionary:
 		Hooks.trigger(self, next, "turn_end", {}, events)
 		for intent: Dictionary in current:
 			if intent.get("type", "") == "attack":
-				predicted_damage += int(intent.get("amount", 0)) * int(intent.get("times", 1))
-		predicted_damage = maxi(0, predicted_damage - int(next["player"]["guard"]))
+				predicted_damage += int(intent.get("net_total", int(intent.get("amount", 0)) * int(intent.get("times", 1))))
+		predicted_damage = maxi(0, predicted_damage)
 		_enemy_phase(next, events)
 		_finalize(next, events)
 	var incoming: int = 0
@@ -599,15 +613,21 @@ func _intent_views(state: Dictionary) -> Array:
 		intent["enemy"] = slot
 		intent["id"] = state["enemies"][slot]["id"]
 		if intent.get("type", "") == "attack":
-			var reduction: int = int(state["enemies"][slot]["weaken"])
-			if first_attacker == -1:
-				first_attacker = slot
-				if has_item(state, "keepsakes", "keepsake.mianmian"):
-					reduction += int(param("keepsakes", "keepsake.mianmian", "reduction", 3))
-			intent["raw_amount"] = int(intent.get("amount", 0))
-			intent["amount"] = 0 if bool(state["enemies"][slot]["first_attack_pending"]) else maxi(0, int(intent.get("amount", 0)) - reduction)
+			intent["raw_amount"] = attack_amount(state, slot, intent)
 			intent["times"] = int(intent.get("times", 1))
 			intent["canceled"] = bool(state["enemies"][slot]["first_attack_pending"])
+			var remaining: int = int(state["enemies"][slot]["binds"])
+			var hits: Array = []
+			var net_total: int = 0
+			for hit: int in range(intent["times"]):
+				var raw: int = 0 if intent["canceled"] else int(intent["raw_amount"])
+				var blocked: int = mini(raw, maxi(0, remaining - int(intent.get("ignore_binds", 0))))
+				remaining -= blocked
+				hits.append(raw - blocked)
+				net_total += raw - blocked
+			intent["amount"] = hits[0] if not hits.is_empty() else 0
+			intent["hit_amounts"] = hits
+			intent["net_total"] = net_total
 		result.append(intent)
 	return result
 
@@ -633,3 +653,93 @@ func _refresh_intents(state: Dictionary, events: Array) -> void:
 	for index: int in range(state["enemies"].size()):
 		if not enemy_alive(state, index):
 			state["enemies"][index]["intent"] = {"type": "defeated", "amount": 0}
+
+func bind_enemy(state: Dictionary, slot: int, amount: int, events: Array, source: String = "player") -> void:
+	if not enemy_alive(state, slot) or amount <= 0: return
+	var enemy: Dictionary = state["enemies"][slot]
+	var total: int = (amount + int(state.get("bind_bonus", 0))) * int(state["turn_flags"].get("bind_multiplier", 1))
+	var actual: int = mini(limit("bind_cap", 12) - int(enemy["binds"]), total)
+	enemy["binds"] += actual
+	events.append({"type": "bind", "enemy": slot, "amount": actual, "binds": enemy["binds"], "source": source})
+	Hooks.trigger(self, state, "bind_applied", {"target": slot, "amount": actual}, events)
+
+func partner_slot(state: Dictionary, slot: int) -> int:
+	if slot < 0 or slot >= state["enemies"].size(): return -1
+	var uid: String = str(state["enemies"][slot].get("tie", ""))
+	if uid.is_empty(): return -1
+	for other: int in living_slots(state):
+		if state["enemies"][other]["uid"] == uid: return other
+	return -1
+
+func untie(state: Dictionary, slot: int) -> void:
+	var uid: String = str(state["enemies"][slot]["uid"])
+	for enemy: Dictionary in state["enemies"]:
+		if enemy.get("tie", "") == uid: enemy["tie"] = ""
+	state["enemies"][slot]["tie"] = ""
+
+func tie_enemies(state: Dictionary, first: int, second: int, events: Array, any_pair: bool = false) -> void:
+	if first == second or not enemy_alive(state, first) or not enemy_alive(state, second): return
+	untie(state, first)
+	untie(state, second)
+	state["enemies"][first]["tie"] = state["enemies"][second]["uid"]
+	state["enemies"][second]["tie"] = state["enemies"][first]["uid"]
+	state["enemies"][first]["tie_any_pair"] = any_pair
+	state["enemies"][second]["tie_any_pair"] = any_pair
+	var context: Dictionary = {"target": first, "second_target": second, "choices": {"second_target": second}}
+	events.append({"type": "tie_made", "target": first, "second_target": second})
+	Hooks.trigger(self, state, "tie_made", context, events)
+
+func wilted(enemy: Dictionary, threshold: float = 0.0) -> bool:
+	var ratio: float = threshold if threshold > 0.0 else float(enemy.get("pair_threshold", 0.5))
+	return int(enemy["hp"]) <= int(ceil(int(enemy["max_hp"]) * ratio))
+
+func check_pairs(state: Dictionary, events: Array, threshold: float = 0.0) -> void:
+	if state["status"] == "defeat": return
+	var override: float = maxf(threshold, float(state["turn_flags"].get("pair_threshold", 0.0)))
+	for first: int in living_slots(state):
+		if not enemy_alive(state, first): continue
+		var second: int = partner_slot(state, first)
+		if second < 0 or second < first: continue
+		var a: Dictionary = state["enemies"][first]
+		var b: Dictionary = state["enemies"][second]
+		var peaceful: bool = false
+		for pair: Array in [[a, b], [b, a]]:
+			var mechanics: Dictionary = definition("enemies", pair[0]["id"]).get("mechanics", {})
+			if mechanics.has("peace_pair_tag") and pair[1].get("pair_tag", "") == mechanics["peace_pair_tag"] and wilted(pair[0], float(mechanics.get("peace_threshold", 0.3))): peaceful = true
+		var same: bool = not str(a.get("pair_tag", "")).is_empty() and a.get("pair_tag", "") == b.get("pair_tag", "")
+		if not peaceful and not ((same or bool(a.get("tie_any_pair", false))) and wilted(a, override) and wilted(b, override)): continue
+		a["departed"] = "paired"
+		b["departed"] = "paired"
+		untie(state, first)
+		untie(state, second)
+		state["battle_flags"]["pairs"] += 1
+		events.append({"type": "pair_formed", "enemies": [first, second], "pairs": state["battle_flags"]["pairs"], "peaceful": peaceful})
+		Hooks.trigger(self, state, "pair_formed", {"target": first, "second_target": second, "pair_number": state["battle_flags"]["pairs"]}, events)
+		if peaceful:
+			state["battle_flags"]["peaceful"] = true
+			for enemy: Dictionary in state["enemies"]:
+				if int(enemy["hp"]) > 0: enemy["departed"] = "paired"
+	if living_slots(state).is_empty(): state["battle_flags"]["victory_pending"] = true
+
+func shake_card(state: Dictionary, hand_index: int) -> Array:
+	if state.get("status", "") != "player": return _invalid("not_player_turn")
+	if not str(state.get("tutorial", {}).get("locked_uid", "")).is_empty(): return _invalid("tutorial_locked")
+	if hand_index < 0 or hand_index >= state["hand"].size(): return _invalid("invalid_hand_index")
+	if int(state["turn_flags"].get("shakes_used", 0)) >= limit("shakes_per_turn", 1) + int(state["turn_flags"].get("extra_shakes", 0)): return _invalid("no_shakes_left")
+	var card: Dictionary = state["hand"].pop_at(hand_index)
+	state["discard"].append(card)
+	state["turn_flags"]["shakes_used"] += 1
+	var events: Array = [{"type": "shake_card", "card": card.duplicate(true)}]
+	draw(state, 1, events)
+	Hooks.trigger(self, state, "shake_card", {"shake_number": state["turn_flags"]["shakes_used"]}, events)
+	return events
+
+func shake_off(state: Dictionary, slot: int, mode: String, events: Array) -> int:
+	var enemy: Dictionary = state["enemies"][slot]
+	var amount: int = int(enemy["binds"])
+	if mode == "half": amount = int(floor(amount * 0.5))
+	if item_rule(state, "shake_off_half", false): amount = mini(amount, int(floor(int(enemy["binds"]) * 0.5)))
+	enemy["binds"] -= amount
+	events.append({"type": "enemy_shake_off", "enemy": slot, "amount": amount})
+	Hooks.trigger(self, state, "enemy_shake_off", {"target": slot, "amount": amount}, events)
+	return amount
