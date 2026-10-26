@@ -1,0 +1,86 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/view/remedy/town_scene.gd" id="1"]
+
+[node name="TownScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1")
+
+[node name="Background" type="TextureRect" parent="."]
+offset_right = 640.0
+offset_bottom = 360.0
+mouse_filter = 2
+expand_mode = 1
+
+[node name="Asui" type="Sprite2D" parent="."]
+position = Vector2(220, 322)
+centered = false
+
+[node name="CommissionBoard" type="Button" parent="."]
+offset_left = 24.0
+offset_top = 122.0
+offset_right = 168.0
+offset_bottom = 286.0
+mouse_default_cursor_shape = 2
+focus_mode = 0
+
+[node name="Tag" type="Button" parent="CommissionBoard"]
+offset_left = 32.0
+offset_right = 112.0
+offset_bottom = 26.0
+mouse_filter = 2
+focus_mode = 0
+
+[node name="MemoryBook" type="Button" parent="."]
+offset_left = 302.0
+offset_top = 174.0
+offset_right = 408.0
+offset_bottom = 278.0
+mouse_default_cursor_shape = 2
+focus_mode = 0
+
+[node name="Tag" type="Button" parent="MemoryBook"]
+offset_left = 12.0
+offset_right = 94.0
+offset_bottom = 26.0
+mouse_filter = 2
+focus_mode = 0
+
+[node name="Well" type="Button" parent="."]
+offset_left = 438.0
+offset_top = 152.0
+offset_right = 626.0
+offset_bottom = 320.0
+mouse_default_cursor_shape = 2
+focus_mode = 0
+
+[node name="Tag" type="Button" parent="Well"]
+offset_left = 60.0
+offset_right = 142.0
+offset_bottom = 26.0
+mouse_filter = 2
+focus_mode = 0
+
+[node name="TitleButton" type="Button" parent="."]
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 76.0
+offset_bottom = 38.0
+text = "标题"
+mouse_default_cursor_shape = 2
+focus_mode = 0
+
+[node name="SettingsButton" type="Button" parent="."]
+offset_left = 564.0
+offset_top = 12.0
+offset_right = 628.0
+offset_bottom = 38.0
+text = "设置"
+mouse_default_cursor_shape = 2
+focus_mode = 0

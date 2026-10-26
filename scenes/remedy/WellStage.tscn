@@ -1,0 +1,52 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/view/remedy/well_stage.gd" id="1"]
+
+[node name="WellStage" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1")
+
+[node name="Far" type="Sprite2D" parent="."]
+centered = false
+
+[node name="Mid" type="Sprite2D" parent="."]
+centered = false
+
+[node name="Embers" type="Node2D" parent="."]
+
+[node name="WarmMote" type="Sprite2D" parent="Embers"]
+position = Vector2(282, 124)
+modulate = Color(1, 1, 1, 0.45)
+
+[node name="WarmMote2" type="Sprite2D" parent="Embers"]
+position = Vector2(465, 93)
+modulate = Color(1, 1, 1, 0.25)
+
+[node name="Asui" type="Sprite2D" parent="."]
+position = Vector2(220, 322)
+centered = false
+
+[node name="Aunt" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(340, 316)
+centered = false
+
+[node name="RopeGlow" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(566, 190)
+scale = Vector2(1.18, 1.04)
+modulate = Color(1.6, 1.2, 0.3, 0.5)
+centered = false
+
+[node name="Maye" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(566, 190)
+centered = false
+
+[node name="WellLip" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(442, 263)
+centered = false
+
+[node name="Near" type="Sprite2D" parent="."]
+centered = false

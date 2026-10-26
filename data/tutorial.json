@@ -1,0 +1,131 @@
+[
+  {
+    "id": "tutorial.wet_sock",
+    "encounter_id": "enc.tutorial",
+    "enemy": {
+      "enemy_id": "enemy.wet_sock",
+      "hp": 20,
+      "intents": [
+        {
+          "type": "attack",
+          "amount": 5,
+          "name": "扑"
+        },
+        {
+          "type": "attack",
+          "amount": 5,
+          "name": "扑"
+        },
+        {
+          "type": "guard",
+          "amount": 4,
+          "name": "拧干自己"
+        }
+      ]
+    },
+    "player": {
+      "hp": 40,
+      "energy": 3
+    },
+    "deck": [
+      "card.knock",
+      "card.knock",
+      "card.knock",
+      "card.knock",
+      "card.brace",
+      "card.brace",
+      "card.brace",
+      "card.brace",
+      "card.rope_lasso",
+      "card.tug"
+    ],
+    "turns": [
+      {
+        "hand": [
+          "card.knock",
+          "card.knock"
+        ],
+        "force_first": true,
+        "end_requires_empty": true,
+        "prompt": "attack",
+        "after_first_prompt": "attack_again",
+        "empty_prompt": "end_turn"
+      },
+      {
+        "hand": [
+          "card.brace",
+          "card.knock",
+          "card.brace"
+        ],
+        "force_first": true,
+        "end_requires_empty": false,
+        "prompt": "shield",
+        "after_first_prompt": "shield_done"
+      },
+      {
+        "hand": [
+          "card.knock",
+          "card.rope_lasso",
+          "card.tug",
+          "card.brace"
+        ],
+        "force_first": false,
+        "end_requires_empty": false,
+        "prompt": "free"
+      }
+    ],
+    "after_script_prompt": "free",
+    "victory_prompt": "victory",
+    "defeat_prompt": "defeat",
+    "enemy_prompt": "incoming",
+    "prompts": {
+      "attack": {
+        "text": "把这张牌拖到袜子身上。",
+        "guide": "drag_enemy",
+        "speaker": "npc.maye"
+      },
+      "attack_again": {
+        "text": "对，往它身上敲！",
+        "guide": "drag_enemy",
+        "speaker": "npc.maye",
+        "banter_id": "banter.tutorial_attack"
+      },
+      "end_turn": {
+        "text": "没牌了，点这里。",
+        "guide": "end_turn",
+        "speaker": "npc.maye"
+      },
+      "incoming": {
+        "text": "头上那数字，是它要打你多少。",
+        "guide": "enemy",
+        "speaker": "npc.maye"
+      },
+      "shield": {
+        "text": "把「挡」拖到场上。",
+        "guide": "drag_board",
+        "speaker": "npc.maye"
+      },
+      "shield_done": {
+        "text": "先挡着，挡不住的才扣血。",
+        "guide": "none",
+        "speaker": "npc.maye",
+        "banter_id": "banter.tutorial_guard"
+      },
+      "free": {
+        "text": "这回，试着自己出牌吧。",
+        "guide": "none",
+        "speaker": "npc.maye"
+      },
+      "victory": {
+        "text": "漂亮！",
+        "guide": "none",
+        "speaker": "npc.maye"
+      },
+      "defeat": {
+        "text": "再试一次，我拉着你呢。",
+        "guide": "none",
+        "speaker": "npc.maye"
+      }
+    }
+  }
+]

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "keepsake.ring",
+    "name": "婚戒",
+    "owner": "npc.mai_aunt",
+    "owner_name": "麦婶",
+    "commission_text": "去年揉面时戒指落进面团，那炉面包给了过路人。你替我找找。",
+    "art": "keepsake.ring",
+    "portrait": "ui.panel.default",
+    "text": "每回合开始获得 3 点护盾",
+    "trigger": "turn_start",
+    "ops": [
+      {
+        "op": "gain_guard",
+        "amount": 3
+      }
+    ],
+    "wish": {
+      "name": "想暖一暖",
+      "text": "带它在篝火边休息一次",
+      "type": "campfire_rest"
+    },
+    "replica_card_id": "card.vow",
+    "replica_plus_card_id": "card.vow_plus",
+    "return_story_id": "story.return.ring",
+    "get_line": "别怕，有我在呢。"
+  },
+  {
+    "id": "keepsake.mianmian",
+    "name": "布偶兔棉棉",
+    "owner": "npc.douding",
+    "owner_name": "豆丁",
+    "commission_text": "棉棉真的会说话！你找到它就知道啦。",
+    "art": "keepsake.mianmian",
+    "portrait": "ui.panel.default",
+    "text": "每回合第一个攻击你的敌人伤害 -3",
+    "trigger": "incoming_attack",
+    "hook": "mianmian",
+    "params": {
+      "reduction": 3
+    },
+    "ops": [],
+    "wish": {
+      "name": "想交个朋友",
+      "text": "在孤袜的长椅，让棉棉陪它坐会儿",
+      "type": "event_choice",
+      "event_id": "event.lonely_bench",
+      "choice_id": "mianmian"
+    },
+    "replica_card_id": "card.whisper",
+    "replica_plus_card_id": "card.whisper_plus",
+    "return_story_id": "story.return.mianmian",
+    "get_line": "豆丁在等我喔！"
+  },
+  {
+    "id": "keepsake.letter",
+    "name": "没寄出的信",
+    "owner": "npc.xinbo",
+    "owner_name": "信伯",
+    "commission_text": "四十年前写给搬走的童年朋友，没敢寄，后来扔进井里。收件人，我还记着。",
+    "art": "keepsake.letter",
+    "portrait": "ui.panel.default",
+    "text": "每回合打出的第一张特殊牌不花能量",
+    "trigger": "card_played",
+    "hook": "letter",
+    "params": {
+      "free_special_cards": 1
+    },
+    "ops": [],
+    "wish": {
+      "name": "想被读一次",
+      "text": "在回声邮筒，把信读出来",
+      "type": "event_choice",
+      "event_id": "event.echo_mailbox",
+      "choice_id": "read_letter"
+    },
+    "replica_card_id": "card.deliver",
+    "replica_plus_card_id": "card.deliver_plus",
+    "return_story_id": "story.return.letter",
+    "get_line": "此信……尚待投递。"
+  }
+]

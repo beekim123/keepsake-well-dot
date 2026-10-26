@@ -1,0 +1,223 @@
+[
+  {
+    "id": "enemy.wet_sock",
+    "name": "湿袜子",
+    "hp": 12,
+    "art": "enemy.wet_sock",
+    "kind": "normal",
+    "intents": [
+      {
+        "type": "attack",
+        "amount": 5,
+        "name": "扑"
+      },
+      {
+        "type": "attack",
+        "amount": 5,
+        "name": "扑"
+      },
+      {
+        "type": "guard",
+        "amount": 4,
+        "name": "拧干自己"
+      }
+    ]
+  },
+  {
+    "id": "enemy.lonely_sock",
+    "name": "孤袜",
+    "hp": 18,
+    "art": "enemy.lonely_sock",
+    "kind": "normal",
+    "intents": [
+      {
+        "type": "attack",
+        "amount": 7,
+        "name": "扑"
+      },
+      {
+        "type": "guard",
+        "amount": 6,
+        "name": "叹气"
+      }
+    ]
+  },
+  {
+    "id": "enemy.lint_bug",
+    "name": "毛球虫",
+    "hp": 7,
+    "art": "enemy.lint_bug",
+    "kind": "normal",
+    "intents": [
+      {
+        "type": "attack",
+        "amount": 3,
+        "name": "滚"
+      },
+      {
+        "type": "attack",
+        "amount": 3,
+        "name": "滚"
+      },
+      {
+        "type": "guard",
+        "amount": 4,
+        "name": "滚成团"
+      }
+    ]
+  },
+  {
+    "id": "enemy.stinky_insole",
+    "name": "臭鞋垫",
+    "hp": 20,
+    "art": "enemy.stinky_insole",
+    "kind": "normal",
+    "intents": [
+      {
+        "type": "attack",
+        "amount": 4,
+        "name": "熏",
+        "draw_penalty": 1
+      },
+      {
+        "type": "attack",
+        "amount": 8,
+        "name": "拍"
+      }
+    ]
+  },
+  {
+    "id": "enemy.clothespin",
+    "name": "晾衣夹",
+    "hp": 10,
+    "art": "enemy.clothespin",
+    "kind": "normal",
+    "intents": [
+      {
+        "type": "attack",
+        "amount": 4,
+        "name": "夹"
+      },
+      {
+        "type": "attack",
+        "amount": 4,
+        "name": "夹"
+      },
+      {
+        "type": "attack",
+        "amount": 8,
+        "name": "夹紧"
+      }
+    ]
+  },
+  {
+    "id": "enemy.soap_bubble",
+    "name": "肥皂泡",
+    "hp": 6,
+    "art": "enemy.soap_bubble",
+    "kind": "normal",
+    "intents": [
+      {
+        "type": "guard_all",
+        "amount": 3,
+        "name": "泡泡罩"
+      },
+      {
+        "type": "attack",
+        "amount": 2,
+        "name": "碰"
+      }
+    ]
+  },
+  {
+    "id": "enemy.sock_kid",
+    "name": "小袜子",
+    "hp": 4,
+    "art": "enemy.sock_kid",
+    "kind": "minion",
+    "intents": [
+      {
+        "type": "attack",
+        "amount": 3,
+        "name": "扑"
+      }
+    ]
+  },
+  {
+    "id": "elite.hungry_drawer",
+    "name": "饿抽屉",
+    "hp": 40,
+    "art": "elite.hungry_drawer",
+    "kind": "elite",
+    "intents": [
+      {
+        "type": "guard",
+        "amount": 6,
+        "name": "嚼",
+        "growth": 2
+      },
+      {
+        "type": "attack",
+        "amount": 9,
+        "name": "吞"
+      },
+      {
+        "type": "attack",
+        "amount": 4,
+        "name": "打嗝",
+        "times": 2
+      }
+    ],
+    "rule_name": "越嚼越硬",
+    "rule_text": "每次嚼获得的护盾比上次多 2 点；趁它没嚼的时候猛打。",
+    "intro": [
+      "……（嚼嚼嚼）",
+      "它吃了什么亮晶晶的？"
+    ]
+  },
+  {
+    "id": "boss.sock_snake",
+    "name": "千袜蛇",
+    "hp": 70,
+    "art": "boss.sock_snake",
+    "kind": "boss",
+    "intents": [
+      {
+        "type": "attack",
+        "amount": 8,
+        "name": "甩尾"
+      },
+      {
+        "type": "attack",
+        "amount": 5,
+        "name": "缠绕",
+        "guard": 5
+      },
+      {
+        "type": "consume_minion",
+        "name": "吞袜",
+        "enemy_id": "enemy.sock_kid",
+        "heal": 6,
+        "fallback_damage": 10
+      }
+    ],
+    "title": "第九百九十九只",
+    "rule_name": "凑对",
+    "rule_text": "每回合分裂出 1 条小袜子，最多 3 条；每条使千袜蛇回合开始获得 3 点护盾。",
+    "intro": [
+      "九百九十八……借我一只袜子？",
+      "不借！"
+    ],
+    "mechanics": {
+      "summon_enemy_id": "enemy.sock_kid",
+      "summon_per_turn": 1,
+      "max_minions": 3,
+      "guard_per_minion": 3,
+      "full_board_guard": 3,
+      "phase_hp_below": 35,
+      "phase_damage": 16,
+      "phase_warning_turns": 2
+    },
+    "first_victory_story_id": "story.boss_knot"
+  }
+]

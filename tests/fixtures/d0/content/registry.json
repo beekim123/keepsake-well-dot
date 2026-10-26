@@ -1,7 +1,0 @@
-{
-  "format": "content/1",
-  "files": [
-    { "id": "cards", "file": "data/cards.json", "target": "cards.json" },
-    { "id": "ui", "file": "data/ui.json", "target": "ui.json" }
-  ]
-}

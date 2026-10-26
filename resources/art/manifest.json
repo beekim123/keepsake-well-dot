@@ -1,0 +1,5916 @@
+{
+  "format": "art-manifest/1",
+  "assets": [
+    {
+      "id": "big.asui",
+      "file": "big/asui.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 2,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 2,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      "hash": "49b73292ff247eb5892d87f9f6a9ee371b26a7fd0cde89023ff8d83f58c6cda4"
+    },
+    {
+      "id": "big.douding",
+      "file": "big/douding.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 2,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 2,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      "hash": "40324d0706d7f92b6373ea07233d3006ebb8687f9e1312ab472b2e4814573e26"
+    },
+    {
+      "id": "big.douding.memory",
+      "file": "big/douding/memory.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 2,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 2,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      "hash": "3970a543d133f8b3f9869cd9f436e0773a358e1ffca2822ca5e001407ab6aecb"
+    },
+    {
+      "id": "big.he_qing.memory",
+      "file": "big/he_qing/memory.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 2,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 2,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      "hash": "5f99623f687c360b0cff414ea19bb522c326563f721819233b2239d9ee550517"
+    },
+    {
+      "id": "big.hungry_drawer",
+      "file": "big/hungry_drawer.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 2,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 2,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "hash": "c1ac193fe8f2a37484d02919b695929392fce41115e707fd8da748c1e2b8d80f"
+    },
+    {
+      "id": "big.laundry_granny",
+      "file": "big/laundry_granny.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 2,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 2,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      "hash": "4695a5ce2abad4e732879041c787d0515f4fb3096b7e6e426c5948fe1e77692f"
+    },
+    {
+      "id": "big.ma_ye",
+      "file": "big/ma_ye.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 2,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 2,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      "hash": "7669c8ebb4604e827138717e598e4487c7bb215ffe63251b37c578d4cc71f108"
+    },
+    {
+      "id": "big.mai_aunt",
+      "file": "big/mai_aunt.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 2,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 2,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      "hash": "849e265cf7843141ee0a72a70a5a8a8eadca7f07411452efee93f1da07c66ba6"
+    },
+    {
+      "id": "big.mai_aunt_young.memory",
+      "file": "big/mai_aunt_young/memory.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 2,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 2,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      "hash": "be26d44212038469bfdf3465919dfa59554f8a6a46934df86bb1852ead411775"
+    },
+    {
+      "id": "big.mai_uncle",
+      "file": "big/mai_uncle.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 2,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 2,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      "hash": "1539d512bd588c760a8624fbba3b82c79fc56e84d3f81291564fe036795e9fe6"
+    },
+    {
+      "id": "big.mai_uncle_young.memory",
+      "file": "big/mai_uncle_young/memory.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 2,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 2,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      "hash": "ee5f072ccd1c62e14579716444a6b25319aa18110f0bedbfed139e4a490cbe45"
+    },
+    {
+      "id": "big.sock_snake",
+      "file": "big/sock_snake.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 2,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 2,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            1,
+            0
+          ]
+        }
+      },
+      "hash": "2acaa8fd1194b89cbfc2361984459fe8ea01bdda3309e2a27c0737b4fec233c1"
+    },
+    {
+      "id": "big.xin_bo",
+      "file": "big/xin_bo.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 2,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 2,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      "hash": "7ff7de1f1fd0f72667dd020a3457211b010fdb46c4fc18832e3165d3ef149fc8"
+    },
+    {
+      "id": "big.xin_bo_young.memory",
+      "file": "big/xin_bo_young/memory.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 2,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 2,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0
+          ]
+        }
+      },
+      "hash": "4b8859b35dba2215eb7f023227a88e0657de5f1f9ccc4b4a103de1ed175ef02c"
+    },
+    {
+      "id": "board.r2_sock_swamp_far",
+      "file": "board/r2_sock_swamp_far.png",
+      "size": [
+        640,
+        360
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "71cf25a49b6d604b9fb6e4e05aeb8ff295252bf08f03e7c4db8b9db7e4814759"
+    },
+    {
+      "id": "board.r2_sock_swamp_mid",
+      "file": "board/r2_sock_swamp_mid.png",
+      "size": [
+        640,
+        360
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "df94d64ac9aaef3a006bc1e966dbfb8c6dbee02690179a2805c0892fdbc69dff"
+    },
+    {
+      "id": "board.r2_sock_swamp_near",
+      "file": "board/r2_sock_swamp_near.png",
+      "size": [
+        640,
+        360
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "8ad985c979cf6571ee6d3e884c0f22a1747078360acb8fc1fc4632b9e65d06c1"
+    },
+    {
+      "id": "board.r3_simple_campfire",
+      "file": "board/r3_simple_campfire.png",
+      "size": [
+        640,
+        360
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "2e0de19c58da05d1455917ca2b375d1fffc99a3a88e91ec4200c232e1dd11429"
+    },
+    {
+      "id": "board.r3_simple_route",
+      "file": "board/r3_simple_route.png",
+      "size": [
+        640,
+        360
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "56f5dc2a5ed4b36863be727baa1c1aa7c92969a11c8af1857f2c97a5753221f3"
+    },
+    {
+      "id": "board.r3_simple_soap_tub",
+      "file": "board/r3_simple_soap_tub.png",
+      "size": [
+        640,
+        360
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "74b170769e558ca10c69f65003c2203cda03fd32927ab80b28fa85aadab1053a"
+    },
+    {
+      "id": "board.r3_simple_town",
+      "file": "board/r3_simple_town.png",
+      "size": [
+        640,
+        360
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "c7909aa289ff68619e80f520046cf46b0f91b1ea6461120a4f22d8f03c52e8cb"
+    },
+    {
+      "id": "board.sock_lair",
+      "file": "board/sock_lair.png",
+      "size": [
+        640,
+        360
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "8ad96c44438c8f2e24c7a60ffcf791bd0e26ef6017152d1099f2514eca7f415f"
+    },
+    {
+      "id": "board.sock_swamp",
+      "file": "board/sock_swamp.png",
+      "size": [
+        640,
+        360
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "74ce29fa4bcc32ff0104828c418f814a23db11ea01384828879d03687772aca0"
+    },
+    {
+      "id": "board.title",
+      "file": "board/title.png",
+      "size": [
+        640,
+        360
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "d4c0aa2523aa0262807916d98b8137361a0826982380a5cbbd4b50377c2b4c8e"
+    },
+    {
+      "id": "boss.r3_simple_sock_snake",
+      "file": "boss/r3_simple_sock_snake.png",
+      "size": [
+        128,
+        96
+      ],
+      "frames": 1,
+      "anchor": [
+        64,
+        96
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "f1bbd4ed45385b107c74c845ad1587cef3831dd9b9bca04473ee5f3bc6b96cf2"
+    },
+    {
+      "id": "boss.sock_snake",
+      "file": "boss/sock_snake.png",
+      "size": [
+        160,
+        120
+      ],
+      "frames": 22,
+      "anchor": [
+        80,
+        118
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            2,
+            0,
+            0,
+            3,
+            3
+          ]
+        },
+        "attack": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hurt": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        },
+        "defeat": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "cast": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hit": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        },
+        "summon": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            0
+          ]
+        }
+      },
+      "hash": "a0a16044f613551968c1798ed7e87beab02df5f06b9b371bd8c7eb5007c60b18"
+    },
+    {
+      "id": "cardart.big_hammer",
+      "file": "cardart/big_hammer.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "a32b32357afb0729ea13dc76149b0910b784315d4603e8e2faa3dac7967f3d92"
+    },
+    {
+      "id": "cardart.blanket",
+      "file": "cardart/blanket.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "9916a6b995f2274cbbd6f415de0a3f3cba2acbd13619d55252bd302e1789cb1d"
+    },
+    {
+      "id": "cardart.brace",
+      "file": "cardart/brace.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "71adc2de47590907b32c07b03f5a78b69be565d8c0ace77a88f45d52bdd10615"
+    },
+    {
+      "id": "cardart.clothesline",
+      "file": "cardart/clothesline.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "16a3bae855304a5fc3a8e3da7568f91dd1f14cdb26b523a45f0dc24e2886802d"
+    },
+    {
+      "id": "cardart.curl_up",
+      "file": "cardart/curl_up.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "b8e782dc17a1c2cd5786e5cc6bbb6eee1bb09a5ab65f5b7f938111d88f029732"
+    },
+    {
+      "id": "cardart.deep_breath",
+      "file": "cardart/deep_breath.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "cdb3df3239bbe7e2d35efcd7eca3ec4fe7afc8a02abfd03355a3efa444efcf3d"
+    },
+    {
+      "id": "cardart.deliver",
+      "file": "cardart/deliver.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "4178faf0cae80535cfe6bc92b4b2e1d06f044a5f596474cdb6e8bc1dd048f305"
+    },
+    {
+      "id": "cardart.double_tap",
+      "file": "cardart/double_tap.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "e7cad3034a6e9440f61abbf72f900f10ae856db714c66cbd018ba2b16add6ed2"
+    },
+    {
+      "id": "cardart.dust_off",
+      "file": "cardart/dust_off.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "6c419022dc2788e7b2a398dcde881eb844ef29e5bbea0aaf0d4649374fa98189"
+    },
+    {
+      "id": "cardart.knock",
+      "file": "cardart/knock.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "6e840207b778db70b520247efa73b5d87cd02ff4ff9c26508bb7166b2055e852"
+    },
+    {
+      "id": "cardart.knot",
+      "file": "cardart/knot.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "f13e59b128638755f3e51d33647d0f61ddcb3b32a12ab639d1072b8506ca8f29"
+    },
+    {
+      "id": "cardart.pick_up",
+      "file": "cardart/pick_up.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "9dbc45fd12de90e0f94ac341bdaac66ac869eaec37e3fafc04962ce936f44c21"
+    },
+    {
+      "id": "cardart.pocket",
+      "file": "cardart/pocket.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "1d57ae9811c4148e99ac190d170dc0350797b72844b77aa6be38bc545db860dc"
+    },
+    {
+      "id": "cardart.push_back",
+      "file": "cardart/push_back.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "3952ef4fea73288635d523eb12c18a3893e2e48aa2cee77ebf047f5c3041aad1"
+    },
+    {
+      "id": "cardart.r2_brace",
+      "file": "cardart/r2_brace.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "4819d39a4c665c95f0fc905c5e39ff5c39b0df41561e13f39063fccaa95a6ac5"
+    },
+    {
+      "id": "cardart.r2_knock",
+      "file": "cardart/r2_knock.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "041609127e80dfbe0c25b5233f8d974d92611ef3efa44cf9daeb8f6ec40c4cc5"
+    },
+    {
+      "id": "cardart.r2_rope_lasso",
+      "file": "cardart/r2_rope_lasso.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "3d84b824193c1742ed04f5022c0217147c0b201c8bc9962068e6dc2e9df47868"
+    },
+    {
+      "id": "cardart.r2_tug",
+      "file": "cardart/r2_tug.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "1df3f481fdebb176fbfdc0e0794807f6ee1d51b9c310d8f9268c658a2d16753b"
+    },
+    {
+      "id": "cardart.r3_v2_big_hammer",
+      "file": "cardart/r3_v2_big_hammer.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "b75555ef9faafc433ae244efd3bf95b6621a05fabe7462804c40fa3dd9b6c5e1"
+    },
+    {
+      "id": "cardart.r3_v2_blanket",
+      "file": "cardart/r3_v2_blanket.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "87e2beff669b8d2c82f2fbb7e359ddf5b16d77df6f31f7700b3def98873fd103"
+    },
+    {
+      "id": "cardart.r3_v2_brace",
+      "file": "cardart/r3_v2_brace.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "87561365e7b406c49afaea8e1bc2855eed8a52452e74aec9f5967fdcd73da0ad"
+    },
+    {
+      "id": "cardart.r3_v2_clothesline",
+      "file": "cardart/r3_v2_clothesline.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "8c7e43ebf3c295a293c063a5182ad77eca7ea57457761cba847904dd69e3eee6"
+    },
+    {
+      "id": "cardart.r3_v2_curl_up",
+      "file": "cardart/r3_v2_curl_up.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "0e88f2cfdc430553c82b783942d2627d789b216f6844c625a8b51eebf83182d0"
+    },
+    {
+      "id": "cardart.r3_v2_deep_breath",
+      "file": "cardart/r3_v2_deep_breath.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "ee836d777c828c0d87c14646e566919903ed945e7a3e799f9af29f4d2adfb946"
+    },
+    {
+      "id": "cardart.r3_v2_deliver",
+      "file": "cardart/r3_v2_deliver.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "5ee70d84c376e6a8c57eb4fa63b962679075b7367ba09e1ff2171d7a603f51cc"
+    },
+    {
+      "id": "cardart.r3_v2_double_tap",
+      "file": "cardart/r3_v2_double_tap.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "e7f7dc70070688f82da6bb5185dd9889ce49c05d64fa4674da4c782e0ab0ea0d"
+    },
+    {
+      "id": "cardart.r3_v2_dust_off",
+      "file": "cardart/r3_v2_dust_off.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "ac4cf3ce56a39d32e5f988cf06d2fba7f13a4fe5aef799c3fbd58cf032acb355"
+    },
+    {
+      "id": "cardart.r3_v2_knock",
+      "file": "cardart/r3_v2_knock.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "1f5cc08af9cbe5a9eea84bbe9df87a0cecd64714bd7e7c90c1f04e5cf0ff571f"
+    },
+    {
+      "id": "cardart.r3_v2_knot",
+      "file": "cardart/r3_v2_knot.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "8310c0a7bafc91905b55fdf1475f01e3d5473c0eebcb4f26193b33232fdbd0df"
+    },
+    {
+      "id": "cardart.r3_v2_pick_up",
+      "file": "cardart/r3_v2_pick_up.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "79f1dc3ebf113f1d702b7b6f6d905988e02ea56fcb71e3c405158767d13b4aac"
+    },
+    {
+      "id": "cardart.r3_v2_pocket",
+      "file": "cardart/r3_v2_pocket.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "dfdc2a41df1be8a9aaf40bfd52b1efab2d56f14ae31570649c981d25f11b7233"
+    },
+    {
+      "id": "cardart.r3_v2_push_back",
+      "file": "cardart/r3_v2_push_back.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "69ec228129f246e9736e0dd223d8b1bfdca20e979303b26a098a92857715b535"
+    },
+    {
+      "id": "cardart.r3_v2_rope_lasso",
+      "file": "cardart/r3_v2_rope_lasso.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "62bc6790b2db87849c72f05d34c6a1b2c405be080c36df92e9777c9f2d452058"
+    },
+    {
+      "id": "cardart.r3_v2_shake_rope",
+      "file": "cardart/r3_v2_shake_rope.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "13f85aef6c59e5063b35296fa6557f2171348b9b2dcf5423cf815e89f31876be"
+    },
+    {
+      "id": "cardart.r3_v2_tug",
+      "file": "cardart/r3_v2_tug.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "7c7979054fc19fd8db8ee34d929454e7dc6012fa736ab9bc7161e1d052a3817c"
+    },
+    {
+      "id": "cardart.r3_v2_vow",
+      "file": "cardart/r3_v2_vow.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "ab3e15cc12c44d46e77376b44be6f63d513b5a0e14311131721503556d3094d7"
+    },
+    {
+      "id": "cardart.r3_v2_whisper",
+      "file": "cardart/r3_v2_whisper.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "0632befb7ccd9c35e7e3be0678102ee3f99bb59ee7c692ae10ef1bd6d10b4640"
+    },
+    {
+      "id": "cardart.r3_v2_wring",
+      "file": "cardart/r3_v2_wring.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "92b5d0eb60dc6a6adb4ef7256181ed349805acbae7666976812dc032320cb3f7"
+    },
+    {
+      "id": "cardart.r3_v2_yank",
+      "file": "cardart/r3_v2_yank.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "83457adbd6b8b916a15ea167a7678fae272f6c8f5fac3d61826163f10d6fbf9a"
+    },
+    {
+      "id": "cardart.rope_lasso",
+      "file": "cardart/rope_lasso.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "01c89d4700f807ec95509acddfc4e80e0f998b2f4cd1bfd0e7fd66a406f3c8ae"
+    },
+    {
+      "id": "cardart.shake_rope",
+      "file": "cardart/shake_rope.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "8263c6f81fe614c0d548ec79a1ccbe6313e9890ef4a06e519dc6737ae22b3c4c"
+    },
+    {
+      "id": "cardart.tug",
+      "file": "cardart/tug.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "6c40af787b41f5b2b6a57e5268d6ca86a91053b2287c72b8e0ba5ecb5503a86b"
+    },
+    {
+      "id": "cardart.vow",
+      "file": "cardart/vow.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "e7a39f94caecdc1cac543d3829595c81c2fd0be7dae1df7903dfea5357a138b9"
+    },
+    {
+      "id": "cardart.whisper",
+      "file": "cardart/whisper.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "80ad09fd5fb12cb4453eefd21f916e4fddeee2a2fa180dabf0358954b7073497"
+    },
+    {
+      "id": "cardart.wring",
+      "file": "cardart/wring.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "900a4f59607af1aa46be83f155e644d14256030ed5517c9d9d57f0c0b2d20c88"
+    },
+    {
+      "id": "cardart.yank",
+      "file": "cardart/yank.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "a2c911876fe40bcde96ebcd8db605d4f4420e0493011ca01d668d0e4ceb06553"
+    },
+    {
+      "id": "char.asui",
+      "file": "char/asui.png",
+      "size": [
+        48,
+        64
+      ],
+      "frames": 14,
+      "anchor": [
+        24,
+        60
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            2,
+            0,
+            0,
+            3,
+            3
+          ]
+        },
+        "play": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hurt": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        },
+        "win": {
+          "fps": 7,
+          "loop": false,
+          "frames": [
+            10,
+            11,
+            12,
+            12,
+            13,
+            0
+          ]
+        },
+        "cast": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "attack": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hit": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        }
+      },
+      "hash": "09b493710637b12f2f820f5673f6d43f22d65cd6f136debe51e6c396999652cf"
+    },
+    {
+      "id": "char.ma_ye",
+      "file": "char/ma_ye.png",
+      "size": [
+        48,
+        96
+      ],
+      "frames": 12,
+      "anchor": [
+        24,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            2,
+            0,
+            0,
+            3,
+            3
+          ]
+        },
+        "talk": {
+          "fps": 8,
+          "loop": true,
+          "frames": [
+            4,
+            5
+          ]
+        },
+        "tug": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            0
+          ]
+        }
+      },
+      "hash": "c5067dda3f471e59b6ebdb008827b30173bf7e7b36479b6338b3b85a28fb2727"
+    },
+    {
+      "id": "char.r2_asui",
+      "file": "char/r2_asui.png",
+      "size": [
+        64,
+        80
+      ],
+      "frames": 1,
+      "anchor": [
+        32,
+        80
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        },
+        "attack": {
+          "fps": 1,
+          "loop": false,
+          "frames": [
+            0
+          ]
+        },
+        "hurt": {
+          "fps": 1,
+          "loop": false,
+          "frames": [
+            0
+          ]
+        },
+        "guard": {
+          "fps": 1,
+          "loop": false,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "fa84dcbdf748a1a42941cfbb85dc607b480ad1bc18969cfdc61391c368c4ee9e"
+    },
+    {
+      "id": "char.r2_ma_ye",
+      "file": "char/r2_ma_ye.png",
+      "size": [
+        32,
+        112
+      ],
+      "frames": 1,
+      "anchor": [
+        16,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        },
+        "talk": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "92a231f45189f96d516a26206e90d28396d0e790fc1cf8c734691287b7359dcc"
+    },
+    {
+      "id": "char.r3_simple_asui",
+      "file": "char/r3_simple_asui.png",
+      "size": [
+        64,
+        80
+      ],
+      "frames": 1,
+      "anchor": [
+        32,
+        80
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "4c1f5467c7293a038ad586b0846204bcf50e74bb71db9fc6549da0bd169eca70"
+    },
+    {
+      "id": "char.r3_simple_ma_ye",
+      "file": "char/r3_simple_ma_ye.png",
+      "size": [
+        32,
+        128
+      ],
+      "frames": 1,
+      "anchor": [
+        16,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "f50fefe978906117efcd3b4cfbd8044c68dbe53fe7aa2848091dd6f2b308a6ea"
+    },
+    {
+      "id": "char.r3_simple_mai_aunt",
+      "file": "char/r3_simple_mai_aunt.png",
+      "size": [
+        48,
+        64
+      ],
+      "frames": 1,
+      "anchor": [
+        24,
+        64
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "e920c1995d18836fdc131a8817e5966f6ffa50d1bcea0f00c0b651e4614e5d9e"
+    },
+    {
+      "id": "decor.bubbles",
+      "file": "decor/bubbles.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 12,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            3
+          ]
+        },
+        "click": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "poke": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "secret": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ]
+        }
+      },
+      "hash": "c884c8dc42fe0bf139e61daa7c0561e8a0109894e5983d835a81ec1f839dfd7e"
+    },
+    {
+      "id": "decor.bubbles.small",
+      "file": "decor/bubbles/small.png",
+      "size": [
+        24,
+        16
+      ],
+      "frames": 12,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            3
+          ]
+        },
+        "click": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "poke": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "secret": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ]
+        }
+      },
+      "hash": "333ea4160ec635d166a566a73bc2e2a31f044cbc868fe2749855cbec9b10e1e7"
+    },
+    {
+      "id": "decor.clothesline",
+      "file": "decor/clothesline.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 12,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            3
+          ]
+        },
+        "click": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "poke": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "secret": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ]
+        }
+      },
+      "hash": "771a25ff79bc3c67140db14ef5bb56d57dca9e5e984d46b5649d194a7931a90c"
+    },
+    {
+      "id": "decor.clothesline.small",
+      "file": "decor/clothesline/small.png",
+      "size": [
+        24,
+        16
+      ],
+      "frames": 12,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            3
+          ]
+        },
+        "click": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "poke": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "secret": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ]
+        }
+      },
+      "hash": "7f269eacd591b8f64d76db2002c7d614af9e75687b8ff3ddd01ec891fde94c37"
+    },
+    {
+      "id": "decor.frog",
+      "file": "decor/frog.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 12,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            3
+          ]
+        },
+        "click": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "poke": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "secret": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ]
+        }
+      },
+      "hash": "5091bddc02497ee957a279c35b7ddcdec019dc46c43aceaae2f08676e3e8e7d1"
+    },
+    {
+      "id": "decor.frog.small",
+      "file": "decor/frog/small.png",
+      "size": [
+        24,
+        16
+      ],
+      "frames": 12,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            3
+          ]
+        },
+        "click": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "poke": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "secret": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ]
+        }
+      },
+      "hash": "997fb519c3782d6578002818ca137ca8c0cd87852ba5626c62c72893044d20ff"
+    },
+    {
+      "id": "decor.reeds",
+      "file": "decor/reeds.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 12,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            3
+          ]
+        },
+        "click": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "poke": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "secret": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ]
+        }
+      },
+      "hash": "5e36a37333f456908c027209b04d464365a176c45a1933bc45da58a00182a4a5"
+    },
+    {
+      "id": "decor.reeds.small",
+      "file": "decor/reeds/small.png",
+      "size": [
+        24,
+        16
+      ],
+      "frames": 12,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            3
+          ]
+        },
+        "click": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "poke": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "secret": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ]
+        }
+      },
+      "hash": "50394aa5c643b69e47fde9d86108d0258f25054d880c63b73d421da415db2b4a"
+    },
+    {
+      "id": "decor.socks",
+      "file": "decor/socks.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 12,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            3
+          ]
+        },
+        "click": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "poke": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "secret": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ]
+        }
+      },
+      "hash": "7f6953cb675619d5cac0a871e2f1995658617512adb866dd5558d6999787e0ae"
+    },
+    {
+      "id": "decor.socks.small",
+      "file": "decor/socks/small.png",
+      "size": [
+        24,
+        16
+      ],
+      "frames": 12,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            3
+          ]
+        },
+        "click": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "poke": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "secret": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ]
+        }
+      },
+      "hash": "a46babb6ed5be571db8d26b0078453a93bc26463289a5e1292ba5ce532410a76"
+    },
+    {
+      "id": "decor.yarn",
+      "file": "decor/yarn.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 12,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            3
+          ]
+        },
+        "click": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "poke": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "secret": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ]
+        }
+      },
+      "hash": "424178555498c07bb9da70ad6297fe432f259eda9b1d0f3c4e6dfb6bb2cc8931"
+    },
+    {
+      "id": "decor.yarn.small",
+      "file": "decor/yarn/small.png",
+      "size": [
+        24,
+        16
+      ],
+      "frames": 12,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            2,
+            3
+          ]
+        },
+        "click": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "poke": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "secret": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            10,
+            11,
+            0
+          ]
+        }
+      },
+      "hash": "d465b427de04e98b1c19c920c4b67c4f63d98fd45efff85cffe46507c5c0a056"
+    },
+    {
+      "id": "elite.hungry_drawer",
+      "file": "elite/hungry_drawer.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 16,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            2,
+            0,
+            0,
+            3,
+            3
+          ]
+        },
+        "attack": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hurt": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        },
+        "defeat": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "cast": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hit": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        }
+      },
+      "hash": "5addb13104aa222bea2415ec074ebce3d063be7a23bf88cbda268c35283c1310"
+    },
+    {
+      "id": "elite.r3_simple_hungry_drawer",
+      "file": "elite/r3_simple_hungry_drawer.png",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "anchor": [
+        48,
+        96
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "399b590c11c8d345c0f25d30526badfdbf0de202995cccf9cc0ac187475fbaa7"
+    },
+    {
+      "id": "enemy.clothespin",
+      "file": "enemy/clothespin.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 16,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            2,
+            0,
+            0,
+            3,
+            3
+          ]
+        },
+        "attack": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hurt": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        },
+        "defeat": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "cast": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hit": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        }
+      },
+      "hash": "159f27d5a0869815b2c78a1b431c853a505256e6bc6632ec849557a374f2a058"
+    },
+    {
+      "id": "enemy.lint_bug",
+      "file": "enemy/lint_bug.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 16,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            2,
+            0,
+            0,
+            3,
+            3
+          ]
+        },
+        "attack": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hurt": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        },
+        "defeat": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "cast": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hit": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        }
+      },
+      "hash": "49a8fb01e28ace00d61d3e88b0e53b613e9d745f2d46b0b576c3aca35de9f005"
+    },
+    {
+      "id": "enemy.lonely_sock",
+      "file": "enemy/lonely_sock.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 16,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            2,
+            0,
+            0,
+            3,
+            3
+          ]
+        },
+        "attack": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hurt": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        },
+        "defeat": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "cast": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hit": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        }
+      },
+      "hash": "88edf48f285963149c402f62627aef24e8b9756a571a5439a42b2b35e042f02f"
+    },
+    {
+      "id": "enemy.r2_wet_sock",
+      "file": "enemy/r2_wet_sock.png",
+      "size": [
+        64,
+        64
+      ],
+      "frames": 1,
+      "anchor": [
+        32,
+        64
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        },
+        "attack": {
+          "fps": 1,
+          "loop": false,
+          "frames": [
+            0
+          ]
+        },
+        "hurt": {
+          "fps": 1,
+          "loop": false,
+          "frames": [
+            0
+          ]
+        },
+        "guard": {
+          "fps": 1,
+          "loop": false,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "13b9f8a944e1de09549e4474abd6e85bb69f177e65735fb2153e5a2d2e358ca3"
+    },
+    {
+      "id": "enemy.r3_simple_clothespin",
+      "file": "enemy/r3_simple_clothespin.png",
+      "size": [
+        64,
+        64
+      ],
+      "frames": 1,
+      "anchor": [
+        32,
+        64
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "5e1f86e23ed27f59d9320850a5726242b727476e5cf22d50fec74d793d2231c4"
+    },
+    {
+      "id": "enemy.r3_simple_lint_bug",
+      "file": "enemy/r3_simple_lint_bug.png",
+      "size": [
+        64,
+        64
+      ],
+      "frames": 1,
+      "anchor": [
+        32,
+        64
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "bf98f2d61db2ca09175a9ba21ed344a6cb195b966b3c9e0970e1019d92b9d792"
+    },
+    {
+      "id": "enemy.r3_simple_lonely_sock",
+      "file": "enemy/r3_simple_lonely_sock.png",
+      "size": [
+        64,
+        64
+      ],
+      "frames": 1,
+      "anchor": [
+        32,
+        64
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "6dd47b103acb7e9c1681c3bb9c47f50c6a49660426988e651f8ed431351472a1"
+    },
+    {
+      "id": "enemy.r3_simple_soap_bubble",
+      "file": "enemy/r3_simple_soap_bubble.png",
+      "size": [
+        64,
+        64
+      ],
+      "frames": 1,
+      "anchor": [
+        32,
+        64
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "a1f78bba59db89e40bf6378c2fb0e6295a150851e37ab2d364be8586db10c0f6"
+    },
+    {
+      "id": "enemy.r3_simple_sock_kid",
+      "file": "enemy/r3_simple_sock_kid.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 1,
+      "anchor": [
+        24,
+        48
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "fc527b3ab082ac105a97310bad0b3c64b7ef71656807d51544cf0b36a3ac6309"
+    },
+    {
+      "id": "enemy.r3_simple_stinky_insole",
+      "file": "enemy/r3_simple_stinky_insole.png",
+      "size": [
+        64,
+        64
+      ],
+      "frames": 1,
+      "anchor": [
+        32,
+        64
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "6c39b8896e53f862a9f786250bda5f5a7b73036f6746e8d6f9cc0aa967496a40"
+    },
+    {
+      "id": "enemy.r3_simple_wet_sock",
+      "file": "enemy/r3_simple_wet_sock.png",
+      "size": [
+        64,
+        64
+      ],
+      "frames": 1,
+      "anchor": [
+        32,
+        64
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "55aaea560c160309bea982f50314b75e6474157887cd1e9a630c3940d5d3f7cf"
+    },
+    {
+      "id": "enemy.soap_bubble",
+      "file": "enemy/soap_bubble.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 16,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            2,
+            0,
+            0,
+            3,
+            3
+          ]
+        },
+        "attack": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hurt": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        },
+        "defeat": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "cast": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hit": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        }
+      },
+      "hash": "b1644b02fc4d3db9d9a2577ea62f7db50d9b5bcaf75e0553e3e7d7231e0fb0c2"
+    },
+    {
+      "id": "enemy.sock_kid",
+      "file": "enemy/sock_kid.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 16,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            2,
+            0,
+            0,
+            3,
+            3
+          ]
+        },
+        "attack": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hurt": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        },
+        "defeat": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "cast": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hit": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        }
+      },
+      "hash": "18ef635640ed65b0d22516a1372e10aac9daf34efd77cebf9049f282ef39bf5a"
+    },
+    {
+      "id": "enemy.stinky_insole",
+      "file": "enemy/stinky_insole.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 16,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            2,
+            0,
+            0,
+            3,
+            3
+          ]
+        },
+        "attack": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hurt": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        },
+        "defeat": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "cast": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hit": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        }
+      },
+      "hash": "51ded850d28341d528ebc636b9905cabd25bdc4c4ae8876a57e4d24cfffff280"
+    },
+    {
+      "id": "enemy.wet_sock",
+      "file": "enemy/wet_sock.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 16,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            2,
+            0,
+            0,
+            3,
+            3
+          ]
+        },
+        "attack": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hurt": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        },
+        "defeat": {
+          "fps": 8,
+          "loop": false,
+          "frames": [
+            10,
+            11,
+            12,
+            13,
+            14,
+            15
+          ]
+        },
+        "cast": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            4,
+            4,
+            5,
+            6,
+            7,
+            0
+          ]
+        },
+        "hit": {
+          "fps": 10,
+          "loop": false,
+          "frames": [
+            8,
+            9,
+            0
+          ]
+        }
+      },
+      "hash": "513632ee4478d003c0248fa8850f4eccf5968858425dd0df0feffafc81c80e06"
+    },
+    {
+      "id": "event.bench",
+      "file": "event/bench.png",
+      "size": [
+        160,
+        90
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "18abccc38acdc391112aea9e64627daa364c2eb0c84c244920b50937e8b6c733"
+    },
+    {
+      "id": "event.mailbox",
+      "file": "event/mailbox.png",
+      "size": [
+        160,
+        90
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "429fd67812cc1c2fc149605c7fc8f85fd3b3b7f7669b46e78e1b4142dd6b07d9"
+    },
+    {
+      "id": "event.shaft",
+      "file": "event/shaft.png",
+      "size": [
+        160,
+        90
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "059b3ec31c06d9c3a257b14fbdaa48c1f3a1df0b5e246404e712cf55df504820"
+    },
+    {
+      "id": "event.trade",
+      "file": "event/trade.png",
+      "size": [
+        160,
+        90
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "1be890fe2830a4ea13bf3788a6820665dd6269646aad085c9f1238415069bd02"
+    },
+    {
+      "id": "fx.r2_particle",
+      "file": "fx/r2_particle.png",
+      "size": [
+        8,
+        8
+      ],
+      "frames": 5,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "spark": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        },
+        "dust": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            1
+          ]
+        },
+        "shine": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            2
+          ]
+        },
+        "water": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            3
+          ]
+        },
+        "halo": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            4
+          ]
+        },
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "d02effbeb69e1700b0a60c0508e4764976f0230b82a417e557f11b155276c33f"
+    },
+    {
+      "id": "fx.r2_rope_strip",
+      "file": "fx/r2_rope_strip.png",
+      "size": [
+        32,
+        6
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "6892ebd4b917193e24e9815caf920b3f4390a4a96ff372597b3ad70f7157a7b6"
+    },
+    {
+      "id": "fx.r2_shield_bubble",
+      "file": "fx/r2_shield_bubble.png",
+      "size": [
+        72,
+        88
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "ada36db8a7e3cd2f1b1ca1c5c963bbebfba30fccfc8bc843d03d6376bfa0dbf9"
+    },
+    {
+      "id": "fx.r2_tap_ring",
+      "file": "fx/r2_tap_ring.png",
+      "size": [
+        32,
+        32
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "8f1564699f48fe54825189d8f9f49eefd12f496feeda3a1718be09a64ab4999b"
+    },
+    {
+      "id": "intent.r2_attack",
+      "file": "intent/r2_attack.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "dcfbfc84c4306b92119f61c7923f88b14d7f1dc17e2ac274208f9230aa1981ec"
+    },
+    {
+      "id": "intent.r2_guard",
+      "file": "intent/r2_guard.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "f462704ac5245a99120dba74e9d090d4b43cd66a8c3cb563ce78c6076d247947"
+    },
+    {
+      "id": "intent.r2_idle",
+      "file": "intent/r2_idle.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "e966a5aa3f5f497a0abd451f8160cf8b9c11274c2717ca3edaa7f3b7ed0c3859"
+    },
+    {
+      "id": "intent.r2_special",
+      "file": "intent/r2_special.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "aa5cdceb2f7b1b849f1746bbef18d8471bd8cba919ea466858497896eaf39284"
+    },
+    {
+      "id": "keepsake.letter",
+      "file": "keepsake/letter.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "9377e7025d63f45a66521ae55efad98d12639df935df59dae9e5f22862317b31"
+    },
+    {
+      "id": "keepsake.mianmian",
+      "file": "keepsake/mianmian.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 4,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            2,
+            3,
+            0
+          ]
+        }
+      },
+      "hash": "2ecbba3bc66d332e64d5d88829697368c950a30060d246887c1b7d5898c941a2"
+    },
+    {
+      "id": "keepsake.mianmian_large",
+      "file": "keepsake/mianmian_large.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 4,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            2,
+            3,
+            0
+          ]
+        },
+        "talk": {
+          "fps": 6,
+          "loop": true,
+          "frames": [
+            1,
+            2
+          ]
+        }
+      },
+      "hash": "d210cf580e4df092d2e4cc78bf18e5cf5dc438ca08995fc93ecb745e728e9980"
+    },
+    {
+      "id": "keepsake.r3_simple_letter",
+      "file": "keepsake/r3_simple_letter.png",
+      "size": [
+        32,
+        32
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "8b48fa5a0e16da546305a3edcafb01efce482be0ff95a07636e358ec4dfea823"
+    },
+    {
+      "id": "keepsake.r3_simple_mianmian",
+      "file": "keepsake/r3_simple_mianmian.png",
+      "size": [
+        32,
+        32
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "928afc4a9277f5669a764eef3bcb418ca504b16b440b5eb83806e2237588bc4a"
+    },
+    {
+      "id": "keepsake.r3_simple_ring",
+      "file": "keepsake/r3_simple_ring.png",
+      "size": [
+        32,
+        32
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "f43ed6f2ff3a1d76dae7c94275bbef8dfebc1f4b3441bd42ad41b394cc1a8747"
+    },
+    {
+      "id": "keepsake.ring",
+      "file": "keepsake/ring.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "0df31e5527535c272ce64a4a6411fdf8c14a7aadfd05cdf91e84a1b5b77d895d"
+    },
+    {
+      "id": "path.back",
+      "file": "path/back.png",
+      "size": [
+        96,
+        128
+      ],
+      "frames": 6,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        },
+        "flip": {
+          "fps": 15,
+          "loop": false,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      },
+      "hash": "63699f014fc0873fee5303e0455acd9212e8454a18a97d693f58f0e99ef25101"
+    },
+    {
+      "id": "portrait.asui",
+      "file": "portrait/asui.png",
+      "size": [
+        32,
+        32
+      ],
+      "frames": 4,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "normal": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        },
+        "happy": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            1
+          ]
+        },
+        "surprised": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            2
+          ]
+        },
+        "sad": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            3
+          ]
+        }
+      },
+      "hash": "2fb69e9184275aeb4e14a5a2d8dd52a567178c54a376fd4028da5590539a9193"
+    },
+    {
+      "id": "portrait.douding",
+      "file": "portrait/douding.png",
+      "size": [
+        32,
+        32
+      ],
+      "frames": 4,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "normal": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        },
+        "happy": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            1
+          ]
+        },
+        "surprised": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            2
+          ]
+        },
+        "sad": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            3
+          ]
+        }
+      },
+      "hash": "b10d889501be70b3f274e7131ee35b79460cbdee8e68ec4f7a352c9e000fda83"
+    },
+    {
+      "id": "portrait.laundry_granny",
+      "file": "portrait/laundry_granny.png",
+      "size": [
+        32,
+        32
+      ],
+      "frames": 4,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "normal": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        },
+        "happy": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            1
+          ]
+        },
+        "surprised": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            2
+          ]
+        },
+        "sad": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            3
+          ]
+        }
+      },
+      "hash": "f58f8cd940253beac23296422a1819f5bae15d7e39edfe680f39f4c614dfc722"
+    },
+    {
+      "id": "portrait.ma_ye",
+      "file": "portrait/ma_ye.png",
+      "size": [
+        32,
+        32
+      ],
+      "frames": 4,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "normal": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        },
+        "happy": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            1
+          ]
+        },
+        "surprised": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            2
+          ]
+        },
+        "sad": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            3
+          ]
+        }
+      },
+      "hash": "30b7773aff2f28ec745b914ab6b0ea19e12ce9ea084f87bfc56b06895ab505ae"
+    },
+    {
+      "id": "portrait.mai_aunt",
+      "file": "portrait/mai_aunt.png",
+      "size": [
+        32,
+        32
+      ],
+      "frames": 4,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "normal": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        },
+        "happy": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            1
+          ]
+        },
+        "surprised": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            2
+          ]
+        },
+        "sad": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            3
+          ]
+        }
+      },
+      "hash": "b8a7ac3645bb33476cb88d3228021bec8fb2b1f1bf254784e95fe3a932c61012"
+    },
+    {
+      "id": "portrait.mai_uncle",
+      "file": "portrait/mai_uncle.png",
+      "size": [
+        32,
+        32
+      ],
+      "frames": 4,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "normal": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        },
+        "happy": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            1
+          ]
+        },
+        "surprised": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            2
+          ]
+        },
+        "sad": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            3
+          ]
+        }
+      },
+      "hash": "8a14b2ae4f763ceee538ed0f19b2263a431c89efe18df76315f8e02b20983389"
+    },
+    {
+      "id": "portrait.xin_bo",
+      "file": "portrait/xin_bo.png",
+      "size": [
+        32,
+        32
+      ],
+      "frames": 4,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "normal": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        },
+        "happy": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            1
+          ]
+        },
+        "surprised": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            2
+          ]
+        },
+        "sad": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            3
+          ]
+        }
+      },
+      "hash": "1fb5e96195aa97d697b1064ab945b294d646cdf4eabbe3802d536f5e780abf78"
+    },
+    {
+      "id": "prop.fire",
+      "file": "prop/fire.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 4,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 6,
+          "loop": true,
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      },
+      "hash": "db1b7e3764469dc6e90451bec05af9183d3f39d9022615ef7caa28de041217c4"
+    },
+    {
+      "id": "prop.letter_stamp",
+      "file": "prop/letter_stamp.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "ed0c25a0cd4770cc0625b2a960bff9672b7d1acd1a6d0f0994aeafa71e61f50c"
+    },
+    {
+      "id": "prop.letter_words",
+      "file": "prop/letter_words.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 4,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      },
+      "hash": "778ac1222fecdd4c22979027a357363a88962881c0993be11028d8c42da7ae9c"
+    },
+    {
+      "id": "prop.mianmian_scarf",
+      "file": "prop/mianmian_scarf.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 4,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            0,
+            1,
+            0,
+            2,
+            3,
+            0
+          ]
+        }
+      },
+      "hash": "2c6b8bdfe388e55b93973c16d92b93eab06609e9137b659c12d067852cdf6ec9"
+    },
+    {
+      "id": "prop.moving_truck.memory",
+      "file": "prop/moving_truck/memory.png",
+      "size": [
+        128,
+        72
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "ee1fb306a3f13ae377b2c83eb220d94c1807f9a326b52e1541c1dd59a2e59f8f"
+    },
+    {
+      "id": "prop.return_knot",
+      "file": "prop/return_knot.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "cd3a283e265f732ec9ad584664a5a5d6d54fa63906a9b998cca84b1521486c8b"
+    },
+    {
+      "id": "prop.ring_glow",
+      "file": "prop/ring_glow.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 4,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "sparkle": {
+          "fps": 6,
+          "loop": true,
+          "frames": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            0,
+            1,
+            2,
+            3
+          ]
+        }
+      },
+      "hash": "cf3a514093f188b3e4a2603b846a6b2c41488c9f9a503225c48d00aedcf925f2"
+    },
+    {
+      "id": "prop.round_bread",
+      "file": "prop/round_bread.png",
+      "size": [
+        48,
+        32
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "b66c147d8a36588a45413079bcf1b53b71ec536db56c244d41468ef68af4bcc3"
+    },
+    {
+      "id": "prop.steam",
+      "file": "prop/steam.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 4,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 4,
+          "loop": true,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            2,
+            1
+          ]
+        }
+      },
+      "hash": "23c23e7cc097a10aedc0894352679ecd7c2e19d80d9a36e76ab1beed1ae0c298"
+    },
+    {
+      "id": "prop.suitcase",
+      "file": "prop/suitcase.png",
+      "size": [
+        32,
+        32
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "3cef0ff784d384e24318ca2652a86fe12d36941937161ef97283dd6468d6499d"
+    },
+    {
+      "id": "prop.worn_shoes",
+      "file": "prop/worn_shoes.png",
+      "size": [
+        48,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "439abcd2b248cecc5a1a59d9292075e8167773d9ccfefc2db7b46790b6902522"
+    },
+    {
+      "id": "relic.birthday_candle",
+      "file": "relic/birthday_candle.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "fdfa236a51e995be0749550b6511ace138af484067242864876b14ffb1df449a"
+    },
+    {
+      "id": "relic.bookmark",
+      "file": "relic/bookmark.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "797f5bd963f36697c599fee61e95e07365b49f7c32d9e6fd06315ce84689d2b4"
+    },
+    {
+      "id": "relic.crooked_compass",
+      "file": "relic/crooked_compass.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "a3482a4f2b50f7b5fcbecbe0cfb9d63c1569113d6752b941c669b065821b2b22"
+    },
+    {
+      "id": "relic.empty_frame",
+      "file": "relic/empty_frame.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "d0b8fc59631f91ed4067955488473fcd9690da0356c19491e165a0d2fb90b1ac"
+    },
+    {
+      "id": "relic.flat_ball",
+      "file": "relic/flat_ball.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "5732524000095c9a05d3cff0adef7b028486c71875c38b96ccf6242c5281a7b8"
+    },
+    {
+      "id": "relic.half_biscuit",
+      "file": "relic/half_biscuit.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "31c9c9f741cf17bb4e31fca459e8e5a11582ba89ef9f4b531397de3df3cacd7c"
+    },
+    {
+      "id": "relic.leaky_balloon",
+      "file": "relic/leaky_balloon.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "0388621b56107f32b23084904f53869bb9c9ce00788ed6a6f96f0fd9882e8fc9"
+    },
+    {
+      "id": "relic.lone_glove",
+      "file": "relic/lone_glove.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "6c90b6f6f661e0699643db2deb9b10dcb67a534bbb1e7d631ba6ed1c0c1b3c37"
+    },
+    {
+      "id": "relic.lost_kite",
+      "file": "relic/lost_kite.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "7dad1d8d01ed0f74ac42468ce4ad1341b05ebb20c4811c215301a7563e4b88c8"
+    },
+    {
+      "id": "relic.odd_button",
+      "file": "relic/odd_button.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "cc3d42e07b40d7a97de25f6e0a5cdce2066b35a59e957abe3a5ee0779f6f4311"
+    },
+    {
+      "id": "relic.offkey_harmonica",
+      "file": "relic/offkey_harmonica.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "022bf1f081c3e134b9f12f7f5efdfb2c7cd39e1c217a778187b3ebd31b77f239"
+    },
+    {
+      "id": "relic.open_ink",
+      "file": "relic/open_ink.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "c5e4e8154f2db50959eb83eb4029ed758af49dcade1aa07f12aab7dc9d480239"
+    },
+    {
+      "id": "relic.r3_simple_birthday_candle",
+      "file": "relic/r3_simple_birthday_candle.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "a83dd7f2a960e9746e1217615a426dc8ca774671aaa0f8e06e8b6b3ce6889d07"
+    },
+    {
+      "id": "relic.r3_simple_bookmark",
+      "file": "relic/r3_simple_bookmark.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "001fc36d84d32614a8cdd2da99cc606018c32a837dfc0994c8ae35af3fc8d0da"
+    },
+    {
+      "id": "relic.r3_simple_crooked_compass",
+      "file": "relic/r3_simple_crooked_compass.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "b1ea13fa5623aff7c1910eaec54ecdd6e470a803a9cb7c3925af01c8a66c1a4e"
+    },
+    {
+      "id": "relic.r3_simple_empty_frame",
+      "file": "relic/r3_simple_empty_frame.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "57632c4d07264e20fc66b0885fdba61481b7f1526faa965caf901bfc43582af8"
+    },
+    {
+      "id": "relic.r3_simple_flat_ball",
+      "file": "relic/r3_simple_flat_ball.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "01a0ef44d8422dacd9bacef1f17086cde880dc8f2c86a0cd8e5fad7ee7494563"
+    },
+    {
+      "id": "relic.r3_simple_half_biscuit",
+      "file": "relic/r3_simple_half_biscuit.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "a0a9ffef6bb9f7475df859a034c9a8c29a97c0f008a1ec0b2e861b77d8a3b2b6"
+    },
+    {
+      "id": "relic.r3_simple_leaky_balloon",
+      "file": "relic/r3_simple_leaky_balloon.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "649d34c5625f40aa0542d690b7bd85c76de396b1c1c7f2b81d35d99430a7b9e4"
+    },
+    {
+      "id": "relic.r3_simple_lone_glove",
+      "file": "relic/r3_simple_lone_glove.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "ae9e9aff50a78e8cd8b0109c97938588db13e8b93059a2bef23806f54656cd57"
+    },
+    {
+      "id": "relic.r3_simple_lost_kite",
+      "file": "relic/r3_simple_lost_kite.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "293e7cfd5f90e8e8c3a8a573c30b5268bea38700677ac2a222d371a0629877fd"
+    },
+    {
+      "id": "relic.r3_simple_odd_button",
+      "file": "relic/r3_simple_odd_button.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "379d0ca7001790daa959cf4bc33f26d68a3297d49a0b3346e69e9c8cf27a6e4e"
+    },
+    {
+      "id": "relic.r3_simple_offkey_harmonica",
+      "file": "relic/r3_simple_offkey_harmonica.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "854aaf56e8c531b2afa3c3eddbd8b6a762b33e581200c17ab2d4d804092fba55"
+    },
+    {
+      "id": "relic.r3_simple_open_ink",
+      "file": "relic/r3_simple_open_ink.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "dbfd2f9d8188a70550670f5aca16c8b4edef1f5cea4efb7254feddf4103cb8e4"
+    },
+    {
+      "id": "relic.r3_simple_shedding_brush",
+      "file": "relic/r3_simple_shedding_brush.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "06b9fe867044a1d2f78a579bbf5d8894563df2377fb3a45ae3be1bd96095c688"
+    },
+    {
+      "id": "relic.r3_simple_spyglass",
+      "file": "relic/r3_simple_spyglass.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "ab3ccad601a1bcd5147e78d87c956f3d950dfb53fc782ccff3f769b774864512"
+    },
+    {
+      "id": "relic.r3_simple_tangled_earbuds",
+      "file": "relic/r3_simple_tangled_earbuds.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "50063174f71f2250b09bbd6467ffc23d59f147a6bc6fbc2fc28a68732a26658e"
+    },
+    {
+      "id": "relic.shedding_brush",
+      "file": "relic/shedding_brush.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "82546617d3e00f75040dd870b8c146eb65db3f3f7b998e179a3232f8e7e1e05e"
+    },
+    {
+      "id": "relic.spyglass",
+      "file": "relic/spyglass.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "b89f827b3f5605ab4adb21b0d1323a62ba6ec891e57def48337f3b9198c6a0bb"
+    },
+    {
+      "id": "relic.tangled_earbuds",
+      "file": "relic/tangled_earbuds.png",
+      "size": [
+        24,
+        24
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "ed33924f789bfedc7a8afa094b29305fae010c5f3b82ec545d894c2949514a8d"
+    },
+    {
+      "id": "still.bakery_door",
+      "file": "still/bakery_door.png",
+      "size": [
+        320,
+        180
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "2404bc9072aae0cde8ef2c41cd201a73ffd5632fea28d11aeb6e476b87cf0c0f"
+    },
+    {
+      "id": "still.bakery_door.memory",
+      "file": "still/bakery_door/memory.png",
+      "size": [
+        320,
+        180
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "b5fe3ff67460576f696eacbada12641b4583e18aad7b9c4cf466d491562fa1a5"
+    },
+    {
+      "id": "still.hut_night",
+      "file": "still/hut_night.png",
+      "size": [
+        320,
+        180
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "d2ad6ac4c4ceb8cdc33d13c88a5fcc0a211465a3fe714f3d0066f8646a50aff7"
+    },
+    {
+      "id": "still.post_office",
+      "file": "still/post_office.png",
+      "size": [
+        320,
+        180
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "21ab6566690e9f8051c476d5a172a8252b04b758018dc148459de950aa783dae"
+    },
+    {
+      "id": "still.post_office.memory",
+      "file": "still/post_office/memory.png",
+      "size": [
+        320,
+        180
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "3212237d6e950c0f6759e05b73f6772c0e5e461d3d52c5ec78430eb05b70f572"
+    },
+    {
+      "id": "still.rope_hut",
+      "file": "still/rope_hut.png",
+      "size": [
+        320,
+        180
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "39b23d4bebf561766fc5b5a14ce9bd15008e128ec287de3889ed77d2226980ad"
+    },
+    {
+      "id": "still.sock_swamp",
+      "file": "still/sock_swamp.png",
+      "size": [
+        320,
+        180
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "1d50af7949a75a5914dc968f927706c9c02d5a28b0bd7d16d2cfa7d7d8480109"
+    },
+    {
+      "id": "still.town",
+      "file": "still/town.png",
+      "size": [
+        320,
+        180
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "1613d6c3b110e3596b9ce0cef751f985b4d0dfd26633565f51cabec32b894739"
+    },
+    {
+      "id": "still.town.memory",
+      "file": "still/town/memory.png",
+      "size": [
+        320,
+        180
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "3e80975795551c88e34a25305261e7a8d4ab127d7059efe5a894109fb323f371"
+    },
+    {
+      "id": "still.well",
+      "file": "still/well.png",
+      "size": [
+        320,
+        180
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "b4b41ff1f010df6c83efacb2bc921379875d22981f2c2efd0f0c5d1b5226ac57"
+    },
+    {
+      "id": "still.well_night",
+      "file": "still/well_night.png",
+      "size": [
+        320,
+        180
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "edbba1eff0a81cd42a3ff761ca28010c01ff104f784850c930e8d48e9c1d0e91"
+    },
+    {
+      "id": "still.well.memory",
+      "file": "still/well/memory.png",
+      "size": [
+        320,
+        180
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "20ce730dedc07f9c3cabf844f93356a0c9e93e35b3251441bb3686b803cd4dc9"
+    },
+    {
+      "id": "ui.button.disabled",
+      "file": "ui/button/disabled.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "hash": "81ba6fc6ff6068f65fb3aae70fbd63a3d5eecbe85408dd8b5d0d4d01da3d37d9"
+    },
+    {
+      "id": "ui.button.hover",
+      "file": "ui/button/hover.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "hash": "afe36f39fbf83c707efdafc72c613141643a510942e51ce268f83e3df9f4e13d"
+    },
+    {
+      "id": "ui.button.normal",
+      "file": "ui/button/normal.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "hash": "0a7d4ae4ac321a98ad0412f5d54b20c3cc27585bad1965236f20819c1361e256"
+    },
+    {
+      "id": "ui.button.pressed",
+      "file": "ui/button/pressed.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "hash": "9beda0d8fef494c561f0c8415695a50e706e0461e13cc5975b046ea18ca46778"
+    },
+    {
+      "id": "ui.commission_board",
+      "file": "ui/commission_board.png",
+      "size": [
+        96,
+        80
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "f54871cf37ecc97368f83def1b9fdc4b3bdece2ac7717ff41e4cccedfc0e0b79"
+    },
+    {
+      "id": "ui.icon.lock",
+      "file": "ui/icon/lock.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        8,
+        8
+      ],
+      "animations": {},
+      "hash": "d1afe8fdfa3a010b8bf81cec6fc24f278f970e4d8328014fe7eb2f7e8efc9d8b"
+    },
+    {
+      "id": "ui.icon.r2_deck",
+      "file": "ui/icon/r2_deck.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "5645616e561419641dcdee676f51eee15366ac23ca4a451296db21c0986003ab"
+    },
+    {
+      "id": "ui.icon.r2_energy",
+      "file": "ui/icon/r2_energy.png",
+      "size": [
+        40,
+        40
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "2634afdae5b47abbf8881e96d5ffe9d6c435848fdbea1b54d96db73394787a5e"
+    },
+    {
+      "id": "ui.icon.r2_energy_empty",
+      "file": "ui/icon/r2_energy_empty.png",
+      "size": [
+        40,
+        40
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "ca8dd01b80998d0b254bef9de2b5145ce5bc3c40a27e3c6cf8bb21df2ae6a83c"
+    },
+    {
+      "id": "ui.icon.r2_guard",
+      "file": "ui/icon/r2_guard.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "f462704ac5245a99120dba74e9d090d4b43cd66a8c3cb563ce78c6076d247947"
+    },
+    {
+      "id": "ui.icon.r2_pause",
+      "file": "ui/icon/r2_pause.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "044e6f91e610aa866a841a6837c456445921661eef4df465ec477ad7e1d99e79"
+    },
+    {
+      "id": "ui.panel.bubble",
+      "file": "ui/panel/bubble.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "hash": "42f80702fe7c34ba4362af42c5ab2c4c8e91945f60d8d003fcb1b1ff1c37f9ef"
+    },
+    {
+      "id": "ui.panel.default",
+      "file": "ui/panel/default.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "hash": "c2c43e5c6c2789cafc57bca0c5b4f410c0efd5d66ab673749bbbe168ffb378e5"
+    },
+    {
+      "id": "ui.panel.paper",
+      "file": "ui/panel/paper.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "hash": "473e89aca31155ab3b8a0eff83acc2999f16b8d01b0bf04b8b5407cb0173a7d8"
+    },
+    {
+      "id": "ui.panel.wood",
+      "file": "ui/panel/wood.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        4,
+        4,
+        4,
+        4
+      ],
+      "hash": "0a7d4ae4ac321a98ad0412f5d54b20c3cc27585bad1965236f20819c1361e256"
+    },
+    {
+      "id": "ui.r2_banner",
+      "file": "ui/r2_banner.png",
+      "size": [
+        240,
+        36
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        10,
+        6,
+        10,
+        6
+      ],
+      "hash": "1ad3c46aa16b05b37845813a306902f8fe437bdf5cff793e03cd32be43d61362"
+    },
+    {
+      "id": "ui.r2_button",
+      "file": "ui/r2_button.png",
+      "size": [
+        84,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "hash": "6b7dee86b8a425aa40e7f4cd051f7f4b4d3486b4338264543686e0514a16e2e6"
+    },
+    {
+      "id": "ui.r2_button_disabled",
+      "file": "ui/r2_button_disabled.png",
+      "size": [
+        84,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "hash": "694ca08d36d85487afb2ee7c2c1d2352b66e32bfa3be879cf487983723ffa3a1"
+    },
+    {
+      "id": "ui.r2_button_hover",
+      "file": "ui/r2_button_hover.png",
+      "size": [
+        84,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "hash": "22c21970cc5b79122d69d588a1be9fdf17b8489894635987713b10fa4aca4912"
+    },
+    {
+      "id": "ui.r2_button_pressed",
+      "file": "ui/r2_button_pressed.png",
+      "size": [
+        84,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        6,
+        6,
+        6,
+        6
+      ],
+      "hash": "04da485d88fadd66fa88fa2b8a8cbd5c3f20de6ab8ac753aa3b93d3d3516f7a0"
+    },
+    {
+      "id": "ui.r2_card_attack",
+      "file": "ui/r2_card_attack.png",
+      "size": [
+        56,
+        76
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        4,
+        22,
+        4,
+        16
+      ],
+      "hash": "0970c4e2b12b9c8bb3d09cf737df55df1342c67012ed4b43affccce73283e885"
+    },
+    {
+      "id": "ui.r2_card_guard",
+      "file": "ui/r2_card_guard.png",
+      "size": [
+        56,
+        76
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        4,
+        22,
+        4,
+        16
+      ],
+      "hash": "545bdfa5a79aecaf07b7a44a81138c11705b3ae6681f6366ee4872702849e2af"
+    },
+    {
+      "id": "ui.r2_card_special",
+      "file": "ui/r2_card_special.png",
+      "size": [
+        56,
+        76
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        4,
+        22,
+        4,
+        16
+      ],
+      "hash": "112437646bdea06644a5b8c4aca3ef54fbb5fea1e66314d3932b680e2f417320"
+    },
+    {
+      "id": "ui.r2_dialogue",
+      "file": "ui/r2_dialogue.png",
+      "size": [
+        172,
+        42
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        18,
+        10,
+        14,
+        10
+      ],
+      "hash": "838837af2e353d408e877427e95a95d6b2abba24b7d88ed133c4081191023472"
+    },
+    {
+      "id": "ui.r2_energy_frame",
+      "file": "ui/r2_energy_frame.png",
+      "size": [
+        36,
+        36
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "338b9d34e9fd965e255015369715dae24fc259acba40932ee17ab1e592623d23"
+    },
+    {
+      "id": "ui.r2_hp_fill",
+      "file": "ui/r2_hp_fill.png",
+      "size": [
+        72,
+        6
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "22e02a3dc7fa599ab5c4104852cea6ff57a8995764f3fa9349d444d82efcb0a3"
+    },
+    {
+      "id": "ui.r2_hp_frame",
+      "file": "ui/r2_hp_frame.png",
+      "size": [
+        76,
+        10
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        5,
+        2,
+        5,
+        2
+      ],
+      "hash": "ff5c4742459408722cc541bd4a47da23cab40c40ca96c4ace61f5e3dcd6e2f42"
+    },
+    {
+      "id": "ui.r2_hp_ghost",
+      "file": "ui/r2_hp_ghost.png",
+      "size": [
+        72,
+        6
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "6ff44fb884dda8896f52719c16dfa36c97bbdefa38fae570e8b5e4d14cb98482"
+    },
+    {
+      "id": "ui.r2_hp_loss",
+      "file": "ui/r2_hp_loss.png",
+      "size": [
+        72,
+        6
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "3df5c4560ca1a41946be6396fd93b765697a4274b089209ce77b82146a330cdf"
+    },
+    {
+      "id": "ui.r2_panel",
+      "file": "ui/r2_panel.png",
+      "size": [
+        128,
+        80
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        12,
+        10,
+        12,
+        10
+      ],
+      "hash": "a04d05541a688da0d6ae3d700afbed70beebe366c4218086350f6c435401b14a"
+    },
+    {
+      "id": "ui.r2_pointer",
+      "file": "ui/r2_pointer.png",
+      "size": [
+        20,
+        26
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "28e1bfff3988fe2fcd888acb14f4bb42c8babf02178804682628f5ebd53d2b14"
+    },
+    {
+      "id": "ui.r2_slider_grabber",
+      "file": "ui/r2_slider_grabber.png",
+      "size": [
+        12,
+        14
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "d4971576c641100a2064d7a775c6df66a981c9ddf209e834892724b4a683eba1"
+    },
+    {
+      "id": "ui.r2_station",
+      "file": "ui/r2_station.png",
+      "size": [
+        132,
+        20
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        8,
+        4,
+        8,
+        4
+      ],
+      "hash": "9f693efc340812fda1400dc958b521bb08ef8013a5ebcc347944c2d460b04ef1"
+    },
+    {
+      "id": "ui.r3_simple_button",
+      "file": "ui/r3_simple_button.png",
+      "size": [
+        84,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        12,
+        8,
+        12,
+        8
+      ],
+      "hash": "0778f45f997d768f59d62a10d8e21160f0160442a2f560b2ffb7a50a7cd96444"
+    },
+    {
+      "id": "ui.r3_simple_button_disabled",
+      "file": "ui/r3_simple_button_disabled.png",
+      "size": [
+        84,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        12,
+        8,
+        12,
+        8
+      ],
+      "hash": "42b4f86ae89e31c85a09e5871a12a6d2c0c00a26ab5470e1a8cc25e1e48e4edb"
+    },
+    {
+      "id": "ui.r3_simple_button_hover",
+      "file": "ui/r3_simple_button_hover.png",
+      "size": [
+        84,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        12,
+        8,
+        12,
+        8
+      ],
+      "hash": "528660b6823d05752845b54e4a87c06293a55efd4f008417ae26d9c21631f812"
+    },
+    {
+      "id": "ui.r3_simple_button_pressed",
+      "file": "ui/r3_simple_button_pressed.png",
+      "size": [
+        84,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        12,
+        8,
+        12,
+        8
+      ],
+      "hash": "53cbb1cbd7b1a9e03a00d6b2a616bcad18756ebd214e79ec3d2709b9a5ec4292"
+    },
+    {
+      "id": "ui.r3_simple_dialogue",
+      "file": "ui/r3_simple_dialogue.png",
+      "size": [
+        172,
+        42
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        18,
+        8,
+        18,
+        12
+      ],
+      "hash": "bcc411e480312973c2400330e6fb0c6265516c9d3c604f259d56b032452d5f41"
+    },
+    {
+      "id": "ui.r3_simple_icon_attack",
+      "file": "ui/r3_simple_icon_attack.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "75035bfc2f53591394e4c72961baae8ae86d204a0451f9230ef3a37957b06d92"
+    },
+    {
+      "id": "ui.r3_simple_icon_energy",
+      "file": "ui/r3_simple_icon_energy.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "75ddb3fe36b8effb5fcc87a8fd30a069ed2db1c1382d914beb899f4db798a3f9"
+    },
+    {
+      "id": "ui.r3_simple_icon_guard",
+      "file": "ui/r3_simple_icon_guard.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "0d1ee8bc246f70abd80bc2e4b4f32f9b1cfcf17a8e5457e977a62747bb174541"
+    },
+    {
+      "id": "ui.r3_simple_icon_heart",
+      "file": "ui/r3_simple_icon_heart.png",
+      "size": [
+        16,
+        16
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "cbf3bd955a10735e9693a013b5f6cd1bbc3f64ef5bdb376bff045d9463493ecd"
+    },
+    {
+      "id": "ui.r3_simple_panel",
+      "file": "ui/r3_simple_panel.png",
+      "size": [
+        96,
+        72
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        23,
+        20,
+        22,
+        17
+      ],
+      "hash": "4694b871bb01173aedf36552f446f0cb4a144fbf166d59aa6296221e0cd13753"
+    },
+    {
+      "id": "ui.r3_simple_station",
+      "file": "ui/r3_simple_station.png",
+      "size": [
+        84,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "nineSlice": [
+        13,
+        8,
+        13,
+        8
+      ],
+      "hash": "73bbf168f15cb899c91828f1fff5ef691fe3a5c30552947323631acf25c57059"
+    },
+    {
+      "id": "ui.r3_v2_card",
+      "file": "ui/r3_v2_card.png",
+      "size": [
+        56,
+        76
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "74d60844fd76bb44e40d45f784d40d4316b2a0a1d2f25faed5633cb9d34c9dac"
+    }
+  ]
+}

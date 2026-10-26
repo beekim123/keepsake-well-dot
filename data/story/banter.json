@@ -1,0 +1,569 @@
+[
+  {
+    "id": "banter.tutorial_intent",
+    "event": "turn_start",
+    "speaker": "npc.maye",
+    "lines": [
+      "头上那数字，是它要打你多少。"
+    ],
+    "once": "save",
+    "chance": 1,
+    "priority": true,
+    "when": {
+      "encounter_id": "enc.tutorial",
+      "turn": 1
+    }
+  },
+  {
+    "id": "banter.tutorial_attack",
+    "event": "card_played",
+    "speaker": "npc.maye",
+    "lines": [
+      "对，往它身上敲！"
+    ],
+    "once": "save",
+    "chance": 1,
+    "priority": true,
+    "when": {
+      "encounter_id": "enc.tutorial",
+      "card_type": "attack"
+    }
+  },
+  {
+    "id": "banter.tutorial_guard",
+    "event": "card_played",
+    "speaker": "npc.maye",
+    "lines": [
+      "先挡着，挡不住的才扣血。"
+    ],
+    "once": "save",
+    "chance": 1,
+    "priority": true,
+    "when": {
+      "encounter_id": "enc.tutorial",
+      "card_type": "guard"
+    }
+  },
+  {
+    "id": "banter.tutorial_end",
+    "event": "tutorial_end_turn",
+    "speaker": "npc.maye",
+    "lines": [
+      "准备好，就点「结束回合」。"
+    ],
+    "once": "save",
+    "chance": 1,
+    "priority": true
+  },
+  {
+    "id": "banter.tutorial_reward",
+    "event": "reward_open",
+    "speaker": "npc.maye",
+    "lines": [
+      "宝物拿着就生效，挑一件。"
+    ],
+    "once": "save",
+    "chance": 1,
+    "priority": true
+  },
+  {
+    "id": "banter.tutorial_path",
+    "event": "path_open",
+    "speaker": "npc.maye",
+    "lines": [
+      "两条挑一条，星星是你要找的。"
+    ],
+    "once": "save",
+    "chance": 1,
+    "priority": true
+  },
+  {
+    "id": "banter.hub_first",
+    "event": "hub_enter",
+    "speaker": "npc.maye",
+    "lines": [
+      "我是麻爷。记着：借来的，要还。"
+    ],
+    "once": "save",
+    "chance": 1,
+    "priority": true,
+    "when": {
+      "first_visit": true
+    }
+  },
+  {
+    "id": "banter.maye_idle",
+    "event": "idle",
+    "speaker": "npc.maye",
+    "lines": [
+      "想当年禾青出牌，可没这么慢。"
+    ],
+    "once": "none",
+    "chance": 0.5,
+    "priority": false
+  },
+  {
+    "id": "banter.maye_low",
+    "event": "player_low_hp",
+    "speaker": "npc.maye",
+    "lines": [
+      "喂喂，要不要先拉你上去？"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false
+  },
+  {
+    "id": "banter.maye_hit",
+    "event": "big_hit",
+    "speaker": "npc.maye",
+    "lines": [
+      "好家伙，井口都听见了！"
+    ],
+    "once": "battle",
+    "chance": 0.7,
+    "priority": false
+  },
+  {
+    "id": "banter.maye_summon",
+    "event": "boss_summon",
+    "speaker": "npc.maye",
+    "lines": [
+      "小袜子越多越硬，先收拾小的！"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": true
+  },
+  {
+    "id": "banter.maye_defeat",
+    "event": "defeat",
+    "speaker": "npc.maye",
+    "lines": [
+      "这回别光顾着打大的。"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "minions_at_least": 2
+    }
+  },
+  {
+    "id": "banter.maye_return",
+    "event": "hub_enter",
+    "speaker": "npc.maye",
+    "lines": [
+      "泥洗干净没？再下去一趟？"
+    ],
+    "once": "run",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "last_end": "pull_home"
+    }
+  },
+  {
+    "id": "banter.maye_boss_win",
+    "event": "hub_enter",
+    "speaker": "npc.maye",
+    "lines": [
+      "想当年……你比想当年强。"
+    ],
+    "once": "run",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "last_end": "boss_victory"
+    }
+  },
+  {
+    "id": "banter.maye_keepsake",
+    "event": "keepsake_get",
+    "speaker": "npc.maye",
+    "lines": [
+      "有主的东西，记得还。"
+    ],
+    "once": "run",
+    "chance": 1,
+    "priority": false
+  },
+  {
+    "id": "banter.first_return",
+    "event": "return_complete",
+    "speaker": "npc.maye",
+    "lines": [
+      "东西还回去了，故事留下了。"
+    ],
+    "once": "save",
+    "chance": 1,
+    "priority": true
+  },
+  {
+    "id": "banter.knot_hover",
+    "event": "knot_hover",
+    "speaker": "npc.maye",
+    "lines": [
+      "……先放着。"
+    ],
+    "once": "none",
+    "chance": 1,
+    "priority": false
+  },
+  {
+    "id": "banter.asui_start",
+    "event": "battle_start",
+    "speaker": "char.asui",
+    "lines": [
+      "来吧！",
+      "袜子……怎么都是单只的？"
+    ],
+    "once": "battle",
+    "chance": 0.6,
+    "priority": false
+  },
+  {
+    "id": "banter.asui_block",
+    "event": "perfect_block",
+    "speaker": "char.asui",
+    "lines": [
+      "一下都没挨着！"
+    ],
+    "once": "battle",
+    "chance": 0.6,
+    "priority": false
+  },
+  {
+    "id": "banter.asui_low",
+    "event": "player_low_hp",
+    "speaker": "char.asui",
+    "lines": [
+      "还、还撑得住！"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false
+  },
+  {
+    "id": "banter.asui_keepsake",
+    "event": "keepsake_get",
+    "speaker": "char.asui",
+    "lines": [
+      "找到了！"
+    ],
+    "once": "run",
+    "chance": 1,
+    "priority": false
+  },
+  {
+    "id": "banter.asui_win",
+    "event": "victory",
+    "speaker": "char.asui",
+    "lines": [
+      "收工！",
+      "下一个！"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false
+  },
+  {
+    "id": "banter.mianmian_start",
+    "event": "battle_start",
+    "speaker": "keepsake.mianmian",
+    "lines": [
+      "它要打你喔！很痛的那种喔！"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "keepsake_id": "keepsake.mianmian"
+    }
+  },
+  {
+    "id": "banter.mianmian_proc",
+    "event": "keepsake_proc",
+    "speaker": "keepsake.mianmian",
+    "lines": [
+      "我先喊出来了喔！"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "keepsake_id": "keepsake.mianmian"
+    }
+  },
+  {
+    "id": "banter.mianmian_enemy",
+    "event": "enemy_defeated",
+    "speaker": "keepsake.mianmian",
+    "lines": [
+      "豆丁会说你好厉害喔。"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "keepsake_id": "keepsake.mianmian"
+    }
+  },
+  {
+    "id": "banter.mianmian_wish",
+    "event": "wish_done",
+    "speaker": "keepsake.mianmian",
+    "lines": [
+      "我交到朋友了喔！"
+    ],
+    "once": "save",
+    "chance": 1,
+    "priority": true,
+    "when": {
+      "keepsake_id": "keepsake.mianmian"
+    }
+  },
+  {
+    "id": "banter.ring_proc",
+    "event": "keepsake_proc",
+    "speaker": "keepsake.ring",
+    "lines": [
+      "别怕，有我在呢。"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "keepsake_id": "keepsake.ring"
+    }
+  },
+  {
+    "id": "banter.ring_wish",
+    "event": "wish_done",
+    "speaker": "keepsake.ring",
+    "lines": [
+      "……真暖和，像揉面的屋子。"
+    ],
+    "once": "save",
+    "chance": 1,
+    "priority": true,
+    "when": {
+      "keepsake_id": "keepsake.ring"
+    }
+  },
+  {
+    "id": "banter.letter_proc",
+    "event": "keepsake_proc",
+    "speaker": "keepsake.letter",
+    "lines": [
+      "此信免邮资。"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "keepsake_id": "keepsake.letter"
+    }
+  },
+  {
+    "id": "banter.letter_wish",
+    "event": "wish_done",
+    "speaker": "keepsake.letter",
+    "lines": [
+      "终于……有人读到我了。"
+    ],
+    "once": "save",
+    "chance": 1,
+    "priority": true,
+    "when": {
+      "keepsake_id": "keepsake.letter"
+    }
+  },
+  {
+    "id": "banter.wet_start",
+    "event": "battle_start",
+    "speaker": "enemy.wet_sock",
+    "lines": [
+      "（滴答……滴答……）"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "enemy_id": "enemy.wet_sock"
+    }
+  },
+  {
+    "id": "banter.lonely_end",
+    "event": "enemy_defeated",
+    "speaker": "enemy.lonely_sock",
+    "lines": [
+      "……它会来找我吗……"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "enemy_id": "enemy.lonely_sock"
+    }
+  },
+  {
+    "id": "banter.insole_attack",
+    "event": "enemy_intent",
+    "speaker": "enemy.stinky_insole",
+    "lines": [
+      "闻闻！"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "enemy_id": "enemy.stinky_insole",
+      "intent_name": "熏"
+    }
+  },
+  {
+    "id": "banter.bubble_pop",
+    "event": "enemy_defeated",
+    "speaker": "enemy.soap_bubble",
+    "lines": [
+      "啵。"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "enemy_id": "enemy.soap_bubble"
+    }
+  },
+  {
+    "id": "banter.drawer_swallow",
+    "event": "enemy_intent",
+    "speaker": "elite.hungry_drawer",
+    "lines": [
+      "……（嚼）"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "enemy_id": "elite.hungry_drawer",
+      "intent_name": "吞"
+    }
+  },
+  {
+    "id": "banter.drawer_end",
+    "event": "enemy_defeated",
+    "speaker": "elite.hungry_drawer",
+    "lines": [
+      "嗝——这个硌牙。"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "enemy_id": "elite.hungry_drawer"
+    }
+  },
+  {
+    "id": "banter.snake_summon",
+    "event": "boss_summon",
+    "speaker": "boss.sock_snake",
+    "lines": [
+      "九百九十九！……又差一只。"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false
+  },
+  {
+    "id": "banter.snake_swallow",
+    "event": "enemy_intent",
+    "speaker": "boss.sock_snake",
+    "lines": [
+      "不够，还是不够。"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "enemy_id": "boss.sock_snake",
+      "intent_name": "吞袜"
+    }
+  },
+  {
+    "id": "banter.snake_phase",
+    "event": "boss_phase",
+    "speaker": "boss.sock_snake",
+    "lines": [
+      "我要把你，也编进来！"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": true
+  },
+  {
+    "id": "banter.snake_end",
+    "event": "enemy_defeated",
+    "speaker": "boss.sock_snake",
+    "lines": [
+      "原来……我缺的不是另一只。"
+    ],
+    "once": "battle",
+    "chance": 1,
+    "priority": true,
+    "when": {
+      "enemy_id": "boss.sock_snake"
+    }
+  },
+  {
+    "id": "banter.retry",
+    "event": "retry",
+    "speaker": "npc.maye",
+    "lines": [
+      "抓稳，这回咱们换个开头。"
+    ],
+    "once": "none",
+    "chance": 1,
+    "priority": true
+  },
+  {
+    "id": "banter.spare_rope",
+    "event": "spare_rope",
+    "speaker": "npc.maye",
+    "lines": [
+      "抓紧了！"
+    ],
+    "once": "run",
+    "chance": 1,
+    "priority": true
+  },
+  {
+    "id": "banter.reeds_secret",
+    "event": "table_secret",
+    "speaker": "npc.maye",
+    "lines": [
+      "……嗯？"
+    ],
+    "once": "save",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "decoration_id": "table.sock_marsh.reeds"
+    }
+  },
+  {
+    "id": "banter.yarn_secret",
+    "event": "table_secret",
+    "speaker": "npc.maye",
+    "lines": [
+      "别拿我跟它比！"
+    ],
+    "once": "none",
+    "chance": 1,
+    "priority": false,
+    "when": {
+      "decoration_id": "table.snake_nest.yarn"
+    }
+  }
+]

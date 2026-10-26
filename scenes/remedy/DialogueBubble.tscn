@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/view/remedy/dialogue_bubble.gd" id="1"]
+[ext_resource type="FontFile" path="res://resources/fonts/fusion-pixel-12px/fusion-pixel-12px-proportional-zh_hans.otf.woff2" id="2"]
+
+[node name="DialogueBubble" type="Control"]
+custom_minimum_size = Vector2(172,42)
+offset_right = 172.0
+offset_bottom = 42.0
+mouse_filter = 0
+script = ExtResource("1")
+
+[node name="Paper" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Text" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 5.0
+offset_right = -7.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2")
+theme_override_colors/font_color = Color(0.106,0.086,0.133,1)
+theme_override_colors/font_shadow_color = Color(0,0,0,0)
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 12
+vertical_alignment = 1
+autowrap_mode = 3
+mouse_filter = 2

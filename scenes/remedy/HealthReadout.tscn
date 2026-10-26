@@ -1,0 +1,73 @@
+[gd_scene load_steps=3 format=3]
+[ext_resource type="Script" path="res://scripts/view/remedy/health_readout.gd" id="1"]
+[ext_resource type="FontFile" path="res://resources/fonts/fusion-pixel-12px/fusion-pixel-12px-proportional-zh_hans.otf.woff2" id="2"]
+[node name="HealthReadout" type="Control"]
+mouse_filter = 2
+script = ExtResource("1")
+[node name="Frame" type="NinePatchRect" parent="."]
+mouse_filter = 2
+patch_margin_left = 2
+patch_margin_top = 2
+patch_margin_right = 2
+patch_margin_bottom = 2
+[node name="GhostClip" type="Control" parent="."]
+clip_contents = true
+mouse_filter = 2
+[node name="Texture" type="TextureRect" parent="GhostClip"]
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+[node name="FillClip" type="Control" parent="."]
+clip_contents = true
+mouse_filter = 2
+[node name="Texture" type="TextureRect" parent="FillClip"]
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+[node name="LossClip" type="Control" parent="."]
+clip_contents = true
+mouse_filter = 2
+[node name="Texture" type="TextureRect" parent="LossClip"]
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 0
+[node name="Values" type="Label" parent="."]
+offset_top = -5.0
+offset_right = 72.0
+offset_bottom = 12.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(1,0.98,0.94,1)
+theme_override_colors/font_outline_color = Color(0.106,0.086,0.133,1)
+theme_override_constants/outline_size = 2
+horizontal_alignment = 1
+[node name="Prediction" type="Label" parent="."]
+offset_left = 76.0
+offset_top = -5.0
+offset_right = 142.0
+offset_bottom = 12.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_outline_color = Color(0.106,0.086,0.133,1)
+theme_override_constants/outline_size = 2
+[node name="GuardIcon" type="TextureRect" parent="."]
+offset_left = -30.0
+offset_top = -5.0
+offset_right = -14.0
+offset_bottom = 11.0
+mouse_filter = 2
+expand_mode = 1
+stretch_mode = 5
+[node name="GuardValue" type="Label" parent="."]
+offset_left = -15.0
+offset_top = -5.0
+offset_right = -1.0
+offset_bottom = 12.0
+mouse_filter = 2
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 12
+theme_override_colors/font_color = Color(0.49,0.816,0.8,1)
+theme_override_colors/font_outline_color = Color(0.106,0.086,0.133,1)
+theme_override_constants/outline_size = 2

@@ -1,0 +1,683 @@
+[
+  {
+    "id": "story.intro",
+    "pages": [
+      {
+        "layers": [
+          {
+            "art": "still.town",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "prop.steam",
+            "x": 45,
+            "y": 29
+          }
+        ],
+        "speaker": "narrator",
+        "text": "枣花镇的人丢了东西，从来不急着找。",
+        "expression": "normal"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.rope_hut",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.ma_ye",
+            "x": 26,
+            "y": 66
+          }
+        ],
+        "speaker": "narrator",
+        "text": "因为镇上有守绳人。",
+        "expression": "normal"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.well.memory",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.he_qing.memory",
+            "x": 136,
+            "y": 26
+          }
+        ],
+        "speaker": "narrator",
+        "text": "三年前，守绳人禾青下井，去找一样她自己丢的东西，再没上来。",
+        "expression": "normal"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.well",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.asui",
+            "x": 86,
+            "y": 64
+          },
+          {
+            "art": "big.ma_ye",
+            "x": 192,
+            "y": 24
+          }
+        ],
+        "speaker": "npc.maye",
+        "text": "……哟，新来的？手这么小，抓得稳吗？",
+        "expression": "normal"
+      }
+    ],
+    "when": {
+      "intro_seen": false
+    }
+  },
+  {
+    "id": "story.back_up",
+    "pages": [
+      {
+        "layers": [
+          {
+            "art": "still.well_night",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.asui",
+            "x": 110,
+            "y": 68
+          },
+          {
+            "art": "big.ma_ye",
+            "x": 212,
+            "y": 28
+          }
+        ],
+        "speaker": "narrator",
+        "text": "「上来喽——」麻爷把绳子一圈圈收好。",
+        "expression": "normal"
+      }
+    ]
+  },
+  {
+    "id": "story.pulled_home",
+    "pages": [
+      {
+        "layers": [
+          {
+            "art": "still.well",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.asui",
+            "x": 94,
+            "y": 72
+          },
+          {
+            "art": "big.ma_ye",
+            "x": 210,
+            "y": 24
+          }
+        ],
+        "speaker": "npc.maye",
+        "text": "下回别逞强。东西我替你捎上来了。",
+        "expression": "normal"
+      }
+    ]
+  },
+  {
+    "id": "story.return.ring",
+    "pages": [
+      {
+        "layers": [
+          {
+            "art": "still.bakery_door",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.mai_aunt",
+            "x": 176,
+            "y": 58
+          },
+          {
+            "art": "big.asui",
+            "x": 54,
+            "y": 70
+          },
+          {
+            "art": "prop.ring_glow",
+            "x": 139,
+            "y": 100
+          }
+        ],
+        "speaker": "npc.mai_aunt",
+        "text": "就是它……就是它！",
+        "expression": "happy"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.bakery_door.memory",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.mai_uncle_young.memory",
+            "x": 74,
+            "y": 56
+          },
+          {
+            "art": "big.mai_aunt_young.memory",
+            "x": 180,
+            "y": 58
+          },
+          {
+            "art": "prop.round_bread",
+            "x": 140,
+            "y": 112
+          }
+        ],
+        "speaker": "npc.mai_uncle",
+        "text": "二十年前，麦叔把戒指藏进圆面包，红着脸说：「你……你先咬一口。」",
+        "tone": "memory",
+        "expression": "happy"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.bakery_door",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "prop.fire",
+            "x": 78,
+            "y": 106
+          },
+          {
+            "art": "prop.ring_glow",
+            "x": 146,
+            "y": 86
+          },
+          {
+            "art": "big.mai_aunt",
+            "x": 204,
+            "y": 58
+          }
+        ],
+        "speaker": "npc.mai_aunt",
+        "text": "它还记得炉子的温度啊。",
+        "when": {
+          "wish": "keepsake.ring"
+        },
+        "expression": "happy"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.bakery_door",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.mai_uncle",
+            "x": 96,
+            "y": 58
+          },
+          {
+            "art": "big.mai_aunt",
+            "x": 200,
+            "y": 58
+          },
+          {
+            "art": "prop.worn_shoes",
+            "x": 118,
+            "y": 151
+          }
+        ],
+        "speaker": "npc.mai_aunt",
+        "text": "你啊……找了一整年？",
+        "caption": "麦叔从门后探头，鞋底磨穿了。",
+        "expression": "happy"
+      }
+    ],
+    "end": {
+      "stamp": "card.vow",
+      "stamp_plus": "card.vow_plus",
+      "keepsake_id": "keepsake.ring"
+    }
+  },
+  {
+    "id": "story.return.mianmian",
+    "pages": [
+      {
+        "layers": [
+          {
+            "art": "still.town",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.douding",
+            "x": 116,
+            "y": 64
+          },
+          {
+            "art": "keepsake.mianmian_large",
+            "x": 143,
+            "y": 115
+          },
+          {
+            "art": "big.asui",
+            "x": 218,
+            "y": 65
+          }
+        ],
+        "speaker": "narrator",
+        "text": "豆丁紧紧抱住棉棉。「喔。」只有阿穗听见了。",
+        "expression": "happy"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.town.memory",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "prop.moving_truck.memory",
+            "x": 88,
+            "y": 78
+          },
+          {
+            "art": "big.douding.memory",
+            "x": 126,
+            "y": 32
+          },
+          {
+            "art": "keepsake.mianmian_large",
+            "x": 80,
+            "y": 130
+          }
+        ],
+        "speaker": "narrator",
+        "text": "那天风很大。棉棉从搬家车上滑下去，豆丁还睡着。",
+        "tone": "memory",
+        "expression": "happy"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.town",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.douding",
+            "x": 104,
+            "y": 62
+          },
+          {
+            "art": "prop.mianmian_scarf",
+            "x": 140,
+            "y": 104
+          }
+        ],
+        "speaker": "keepsake.mianmian",
+        "text": "它说想跟着我喔。",
+        "when": {
+          "wish": "keepsake.mianmian"
+        },
+        "caption": "棉棉围着一条袜子围巾。",
+        "expression": "happy"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.town",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.douding",
+            "x": 72,
+            "y": 64
+          },
+          {
+            "art": "keepsake.mianmian_large",
+            "x": 105,
+            "y": 96
+          },
+          {
+            "art": "big.mai_aunt",
+            "x": 174,
+            "y": 56
+          },
+          {
+            "art": "big.asui",
+            "x": 232,
+            "y": 70
+          }
+        ],
+        "speaker": "narrator",
+        "text": "「我就说棉棉会说话！」大人们在笑，阿穗没有笑。",
+        "expression": "happy"
+      }
+    ],
+    "end": {
+      "stamp": "card.whisper",
+      "stamp_plus": "card.whisper_plus",
+      "keepsake_id": "keepsake.mianmian"
+    }
+  },
+  {
+    "id": "story.return.letter",
+    "pages": [
+      {
+        "layers": [
+          {
+            "art": "still.post_office",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.xin_bo",
+            "x": 130,
+            "y": 52
+          },
+          {
+            "art": "prop.letter_stamp",
+            "x": 141,
+            "y": 111
+          }
+        ],
+        "speaker": "narrator",
+        "text": "信伯戴上老花镜，看清信封上自己的字。他半天没说话。",
+        "expression": "sad"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.post_office.memory",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "prop.moving_truck.memory",
+            "x": 164,
+            "y": 76
+          },
+          {
+            "art": "big.xin_bo_young.memory",
+            "x": 104,
+            "y": 56
+          },
+          {
+            "art": "prop.suitcase",
+            "x": 153,
+            "y": 127
+          }
+        ],
+        "speaker": "narrator",
+        "text": "「到了就写信啊！」四十年前，少年背着行李上了车。谁也没写。",
+        "tone": "memory",
+        "expression": "sad"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.well",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.xin_bo",
+            "x": 68,
+            "y": 60
+          },
+          {
+            "art": "prop.letter_words",
+            "x": 194,
+            "y": 38
+          }
+        ],
+        "speaker": "npc.xinbo",
+        "text": "……它们自己去送了。",
+        "when": {
+          "wish": "keepsake.letter"
+        },
+        "caption": "井口飘起发光的字，往镇外飞去。",
+        "expression": "sad"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.post_office",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.xin_bo",
+            "x": 130,
+            "y": 52
+          },
+          {
+            "art": "prop.letter_stamp",
+            "x": 137,
+            "y": 115
+          }
+        ],
+        "speaker": "npc.xinbo",
+        "text": "送了一辈子信，这一封，该我自己送了。",
+        "caption": "他把旧信装进新信封，贴上邮票。",
+        "expression": "sad"
+      }
+    ],
+    "end": {
+      "stamp": "card.deliver",
+      "stamp_plus": "card.deliver_plus",
+      "keepsake_id": "keepsake.letter"
+    }
+  },
+  {
+    "id": "story.ending",
+    "pages": [
+      {
+        "layers": [
+          {
+            "art": "still.hut_night",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "prop.return_knot",
+            "x": 169,
+            "y": 115
+          },
+          {
+            "art": "keepsake.ring",
+            "x": 154,
+            "y": 42
+          },
+          {
+            "art": "keepsake.letter",
+            "x": 208,
+            "y": 42
+          },
+          {
+            "art": "keepsake.mianmian",
+            "x": 262,
+            "y": 42
+          }
+        ],
+        "speaker": "narrator",
+        "text": "小屋的夜里，三个纪念画框映着灯。桌上，那是一个很特别的结。",
+        "expression": "sad"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.hut_night",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "prop.return_knot",
+            "x": 136,
+            "y": 84
+          }
+        ],
+        "speaker": "npc.maye",
+        "text": "这是「回头结」。禾青打的。",
+        "expression": "sad"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.hut_night",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.ma_ye",
+            "x": 112,
+            "y": 52
+          }
+        ],
+        "speaker": "npc.maye",
+        "text": "只有打算回来的人，才打这个结。",
+        "expression": "sad"
+      },
+      {
+        "layers": [
+          {
+            "art": "still.well_night",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.asui",
+            "x": 110,
+            "y": 62
+          },
+          {
+            "art": "prop.return_knot",
+            "x": 142,
+            "y": 118
+          }
+        ],
+        "speaker": "char.asui",
+        "text": "姑姑，我会找到你的。",
+        "caption": "第二层 · 伞林（尚未开放）——未完待续",
+        "expression": "sad"
+      }
+    ],
+    "when": {
+      "all_keepsakes_returned": true,
+      "boss_defeated": true
+    },
+    "end": {
+      "demo_complete": true
+    }
+  },
+  {
+    "id": "story.boss_knot",
+    "pages": [
+      {
+        "layers": [
+          {
+            "art": "still.sock_swamp",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "decor.reeds",
+            "x": 230,
+            "y": 108,
+            "anim": "idle"
+          },
+          {
+            "art": "big.asui",
+            "x": 80,
+            "y": 59
+          },
+          {
+            "art": "prop.return_knot",
+            "x": 150,
+            "y": 108
+          }
+        ],
+        "speaker": "narrator",
+        "text": "芦苇上拴着一根旧绳。阿穗解下那个特别的结：「这是什么结？」麻爷没有回答。",
+        "expression": "normal"
+      }
+    ],
+    "once": "save"
+  },
+  {
+    "id": "story.aunt_news",
+    "pages": [
+      {
+        "layers": [
+          {
+            "art": "still.sock_swamp",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.asui",
+            "x": 80,
+            "y": 59
+          },
+          {
+            "art": "big.laundry_granny",
+            "x": 156,
+            "y": 59
+          }
+        ],
+        "speaker": "npc.laundry_granny",
+        "text": "扎短辫的那个姑娘？见过。她说，找到了就顺着绳子回来。",
+        "expression": "normal"
+      }
+    ]
+  },
+  {
+    "id": "story.aunt_mark",
+    "pages": [
+      {
+        "layers": [
+          {
+            "art": "still.sock_swamp",
+            "x": 0,
+            "y": 0
+          },
+          {
+            "art": "big.ma_ye",
+            "x": 68,
+            "y": 34
+          },
+          {
+            "art": "decor.reeds",
+            "x": 218,
+            "y": 108,
+            "anim": "secret"
+          }
+        ],
+        "speaker": "npc.maye",
+        "text": "这个「禾」……想当年，她写字就把最后一笔拖这么长。",
+        "expression": "normal"
+      }
+    ],
+    "once": "save"
+  }
+]

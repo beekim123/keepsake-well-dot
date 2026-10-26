@@ -1,0 +1,1487 @@
+{
+  "format": "audio-manifest/1",
+  "assets": [
+    {
+      "id": "sfx.ui_click",
+      "file": "sfx_ui_click.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 4410,
+      "duration": 0.1,
+      "loop": false,
+      "hash": "e8ebe23cf73f4ae5e29e55a19ecde6e82529771ea1fa1b62628d2a5b63cd8685",
+      "metrics": {
+        "peak": 0.477081299,
+        "peakDbfs": -6.428152141,
+        "rmsDbfs": -17.523207309,
+        "activeRmsDbfs": -17.460718237,
+        "activeFrames": 4347,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.321289063,
+          "slope": 0.076202393,
+          "slopeMismatch": 3.0518e-05
+        }
+      },
+      "sampleHash": "fbb96f5f3c3dee77d0b50b7bdf9334055a60d7fe348ffc282a709babcd64565f"
+    },
+    {
+      "id": "sfx.card_play_attack",
+      "file": "sfx_card_play_attack.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 12348,
+      "duration": 0.28,
+      "loop": false,
+      "hash": "1fae81c22d020b5a7e904573034819540dfd02abce1104c22a7c015e232589b2",
+      "metrics": {
+        "peak": 0.417053223,
+        "peakDbfs": -7.596170371,
+        "rmsDbfs": -18.557719564,
+        "activeRmsDbfs": -18.444771846,
+        "activeFrames": 12031,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.045135498,
+          "slope": 0.003692627,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "8e31f5f374b06b60d19be6e8a7745dd4a3fb30c78128d8c63c6be0c126209b56"
+    },
+    {
+      "id": "music.title_full",
+      "file": "music_title_full.wav",
+      "sampleRate": 22050,
+      "channels": 1,
+      "frames": 557053,
+      "duration": 25.263174603174605,
+      "loop": true,
+      "hash": "4541e6e37beda955c452f5056e5f83ab12dd32820e39f42eba2a4020132ac19b",
+      "metrics": {
+        "peak": 0.364501953,
+        "peakDbfs": -8.766002805,
+        "rmsDbfs": -20.091432698,
+        "activeRmsDbfs": -20.085409813,
+        "activeFrames": 556281,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 45,
+          "amplitude": 0,
+          "slope": 0,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "d5b94ab1d305430729bd0189bcaf3e33bea81f8bd5c53d14e25d8a4de0327f5e"
+    },
+    {
+      "id": "music.hut",
+      "file": "music_hut.wav",
+      "sampleRate": 22050,
+      "channels": 1,
+      "frames": 661500,
+      "duration": 30,
+      "loop": true,
+      "hash": "79cb831ce30fed8802734b8a206976b3b4ce9352e791a6d5dd36b568535f15b4",
+      "metrics": {
+        "peak": 0.661682129,
+        "peakDbfs": -3.587011897,
+        "rmsDbfs": -20.882873985,
+        "activeRmsDbfs": -20.879241896,
+        "activeFrames": 660947,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 45,
+          "amplitude": 0,
+          "slope": 0,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "2e4fc519378acaeb0969fff4ac6166b96a4c59db5a5d35658e2353f814b3de1d"
+    },
+    {
+      "id": "music.descent",
+      "file": "music_descent.wav",
+      "sampleRate": 22050,
+      "channels": 1,
+      "frames": 756000,
+      "duration": 34.285714285714285,
+      "loop": true,
+      "hash": "d1879169a78ae28d8911f31067ba4af88b3e0120ce435f0f403d5fd41f0abea1",
+      "metrics": {
+        "peak": 0.608734131,
+        "peakDbfs": -4.311446946,
+        "rmsDbfs": -20.988721643,
+        "activeRmsDbfs": -20.986888726,
+        "activeFrames": 755681,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 45,
+          "amplitude": 0,
+          "slope": 0,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "5192db1f43f96fef437a4b3836535dc6dc65e10f2868191b7761056607e156b5"
+    },
+    {
+      "id": "music.battle",
+      "file": "music_battle.wav",
+      "sampleRate": 22050,
+      "channels": 1,
+      "frames": 641455,
+      "duration": 29.09092970521542,
+      "loop": true,
+      "hash": "ba86447b6a4b385bfcd811eafd40b85072d109b4cccef4561044e02935e20729",
+      "metrics": {
+        "peak": 0.515625,
+        "peakDbfs": -5.753320682,
+        "rmsDbfs": -19.561472332,
+        "activeRmsDbfs": -19.557658909,
+        "activeFrames": 640892,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 45,
+          "amplitude": 0,
+          "slope": 0,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "ad82243e8c3fbd1e2fa9ba4b996682bffee2f5930dbd49fcfb90fbf74f841309"
+    },
+    {
+      "id": "music.boss",
+      "file": "music_boss.wav",
+      "sampleRate": 22050,
+      "channels": 1,
+      "frames": 588000,
+      "duration": 26.666666666666668,
+      "loop": true,
+      "hash": "9a578685f5b17d738ee7def684d2a9164e37a282833a6ca29800da80283e99f4",
+      "metrics": {
+        "peak": 0.598999023,
+        "peakDbfs": -4.451477713,
+        "rmsDbfs": -19.357987033,
+        "activeRmsDbfs": -19.355068604,
+        "activeFrames": 587605,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 45,
+          "amplitude": 0,
+          "slope": 0,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "9d2a526a255f00b4a573d6e2e74d027cec79e17c41fce13a6e72cb1fd5ddb8c2"
+    },
+    {
+      "id": "music.return",
+      "file": "music_return.wav",
+      "sampleRate": 22050,
+      "channels": 1,
+      "frames": 588000,
+      "duration": 26.666666666666668,
+      "loop": true,
+      "hash": "5c4485b3a47453ca9145833eeb5e0f30ae0f45cd281e7cb3b31609e9e7dd74db",
+      "metrics": {
+        "peak": 0.453674316,
+        "peakDbfs": -6.86511613,
+        "rmsDbfs": -20.635300969,
+        "activeRmsDbfs": -20.631347698,
+        "activeFrames": 587465,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 45,
+          "amplitude": 0,
+          "slope": 0,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "bc39d8bf23094fbcf5d8189d400aeb2eac1c13f5a7769b361557d7083fe886a1"
+    },
+    {
+      "id": "music.ending",
+      "file": "music_ending.wav",
+      "sampleRate": 22050,
+      "channels": 1,
+      "frames": 793800,
+      "duration": 36,
+      "loop": true,
+      "hash": "7262b2155da4b1480fc97ec56c1fd6e62ec55ff4cef8956e15f24850ea664b2d",
+      "metrics": {
+        "peak": 0.276641846,
+        "peakDbfs": -11.161642531,
+        "rmsDbfs": -21.089881887,
+        "activeRmsDbfs": -21.062462008,
+        "activeFrames": 788804,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 45,
+          "amplitude": 0,
+          "slope": 0,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "9d015e7a9d71bfdea051ee495815176fe01a30e09e945fee6669ba716d2af74c"
+    },
+    {
+      "id": "sfx.ui_hover",
+      "file": "sfx_ui_hover.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 2867,
+      "duration": 0.06501133786848072,
+      "loop": false,
+      "hash": "2c5a1644ad07d7217dfeb00f5b3922dbdb651284ed8af6047ee58fc3bd857c72",
+      "metrics": {
+        "peak": 0.284210205,
+        "peakDbfs": -10.92720664,
+        "rmsDbfs": -20.548866588,
+        "activeRmsDbfs": -19.998926082,
+        "activeFrames": 2526,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.149353027,
+          "slope": 0.020507813,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "fb4f7d622982db69737db5bdb8bc685e6b31d9444e8c319d8dbc63be3909f1be"
+    },
+    {
+      "id": "sfx.ui_cancel",
+      "file": "sfx_ui_cancel.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 7056,
+      "duration": 0.16,
+      "loop": false,
+      "hash": "a713a8bc29fc0e7baf77b54240cfe1922b71bfd179700ede69fcf80805b4ee1a",
+      "metrics": {
+        "peak": 0.377258301,
+        "peakDbfs": -8.467223914,
+        "rmsDbfs": -18.64521404,
+        "activeRmsDbfs": -18.393719413,
+        "activeFrames": 6659,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.154815674,
+          "slope": 0.01864624,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "4c1ac3bfde2c2c7903ff2b8f73a9bdad26aa8ce27996cf2d434d810197936305"
+    },
+    {
+      "id": "sfx.ui_deny",
+      "file": "sfx_ui_deny.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 8379,
+      "duration": 0.19,
+      "loop": false,
+      "hash": "275952eecbd118aca15383ec4dce1c7586cfec581368ad1881e7dd34313d61d6",
+      "metrics": {
+        "peak": 0.324584961,
+        "peakDbfs": -9.773432126,
+        "rmsDbfs": -18.802628456,
+        "activeRmsDbfs": -18.348452451,
+        "activeFrames": 7547,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.102478027,
+          "slope": 0.003051758,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "ee8f3a3c5a192ab2c201f5f859159d3ee1d9c9ad79db4f7c5d1f51c4a0abf7b2"
+    },
+    {
+      "id": "sfx.page_turn",
+      "file": "sfx_page_turn.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 14994,
+      "duration": 0.34,
+      "loop": false,
+      "hash": "9184d192a94d549f9b8033f780e0e9797e40baec6936b4828fc144ab27692961",
+      "metrics": {
+        "peak": 0.607147217,
+        "peakDbfs": -4.33411983,
+        "rmsDbfs": -18.978809143,
+        "activeRmsDbfs": -18.544152324,
+        "activeFrames": 13566,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.013305664,
+          "slope": 0.008514404,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "62302ab44cd4337555d36f937f38cf53ef2068d4780336e893b37b5a562d5109"
+    },
+    {
+      "id": "sfx.card_hover",
+      "file": "sfx_card_hover.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 3308,
+      "duration": 0.07501133786848073,
+      "loop": false,
+      "hash": "ca1cc8a1f77608421ce44ae9ffeeb928822c333677b50316d26bc616e777b5ca",
+      "metrics": {
+        "peak": 0.307556152,
+        "peakDbfs": -10.241511619,
+        "rmsDbfs": -20.495491308,
+        "activeRmsDbfs": -20.012755906,
+        "activeFrames": 2960,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.143005371,
+          "slope": 0.024261475,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "4cbadeefa36fea898fae3520a87b6ddc0dec9bea7120fa944bde38d04c573382"
+    },
+    {
+      "id": "sfx.card_pick",
+      "file": "sfx_card_pick.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 5733,
+      "duration": 0.13,
+      "loop": false,
+      "hash": "766d0eb6245ffbe1033a1025104421f8ecc0bb704bc2acd72a85054a5bbacc8c",
+      "metrics": {
+        "peak": 0.449279785,
+        "peakDbfs": -6.949662431,
+        "rmsDbfs": -18.894614122,
+        "activeRmsDbfs": -18.42971121,
+        "activeFrames": 5151,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.103088379,
+          "slope": 0.008666992,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "52394e0483f9ad32c8b37332ce89369d62902621c520fd020b2ff2b53e9829a3"
+    },
+    {
+      "id": "sfx.card_play_guard",
+      "file": "sfx_card_play_guard.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 12789,
+      "duration": 0.29,
+      "loop": false,
+      "hash": "864006e7025b6a9eec8eb2bab91a1403a3ad93ed7beaa47c1ae0a53f6a42d1fa",
+      "metrics": {
+        "peak": 0.396636963,
+        "peakDbfs": -8.03213632,
+        "rmsDbfs": -18.541898745,
+        "activeRmsDbfs": -18.383164263,
+        "activeFrames": 12330,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.067718506,
+          "slope": 0.004577637,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "b16b4aa958f5caff2321e4201a008a90535230f1ce51284b7be6e4bc902f1101"
+    },
+    {
+      "id": "sfx.card_play_special",
+      "file": "sfx_card_play_special.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 15876,
+      "duration": 0.36,
+      "loop": false,
+      "hash": "58ddac9e630c7833b0939f037d1f076ddc1eee2f360e9cfe9a74f8bfdc391f55",
+      "metrics": {
+        "peak": 0.382324219,
+        "peakDbfs": -8.351363805,
+        "rmsDbfs": -18.577064494,
+        "activeRmsDbfs": -18.396653111,
+        "activeFrames": 15230,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.093841553,
+          "slope": 0.016693115,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "61c7315298835572df69588123764cc0d1949d666b52766682e12b6911e8617c"
+    },
+    {
+      "id": "sfx.draw",
+      "file": "sfx_draw.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 6174,
+      "duration": 0.14,
+      "loop": false,
+      "hash": "52c16c1cd99cc82d9aecc5088f5d6307dad8a5d01320aa63b12c200f6a1ab397",
+      "metrics": {
+        "peak": 0.518432617,
+        "peakDbfs": -5.706153653,
+        "rmsDbfs": -18.893066839,
+        "activeRmsDbfs": -18.479351465,
+        "activeFrames": 5613,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.022796631,
+          "slope": 0.012573242,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "8917456486fcbec2392a22a4846cf9a6dcffbddf7c431a2be5a09a724f5c99b5"
+    },
+    {
+      "id": "sfx.shuffle",
+      "file": "sfx_shuffle.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 19404,
+      "duration": 0.44,
+      "loop": false,
+      "hash": "f1e7284604b7be39a61f786332148ac36043849a1b0d4aeec318a5850295a42f",
+      "metrics": {
+        "peak": 0.568054199,
+        "peakDbfs": -4.912204508,
+        "rmsDbfs": -18.706230813,
+        "activeRmsDbfs": -18.571668009,
+        "activeFrames": 18812,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.029968262,
+          "slope": 0.011169434,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "aec9f27eb384b45263f9f133ea9488e6e366142608faf54cd9065ca0492962da"
+    },
+    {
+      "id": "sfx.discard",
+      "file": "sfx_discard.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 7938,
+      "duration": 0.18,
+      "loop": false,
+      "hash": "50f5069e74e6f3a30c30e313d3cd19e6dbd1a0fe7e7d8db92a7ec4225c3b79c2",
+      "metrics": {
+        "peak": 0.505767822,
+        "peakDbfs": -5.920976092,
+        "rmsDbfs": -18.828252558,
+        "activeRmsDbfs": -18.452456758,
+        "activeFrames": 7280,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.010559082,
+          "slope": 0.008453369,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "ec6f0ddc28142ac7afe587f8fa4300105285e9b8c36317445864c36f3b982b65"
+    },
+    {
+      "id": "sfx.hit_small",
+      "file": "sfx_hit_small.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 8379,
+      "duration": 0.19,
+      "loop": false,
+      "hash": "cd324a8bb934fca4cb9a4f4e46d3c1c141019b4590004dbc0e75f6e8939d04f6",
+      "metrics": {
+        "peak": 0.405151367,
+        "peakDbfs": -7.847653824,
+        "rmsDbfs": -18.796203357,
+        "activeRmsDbfs": -18.410537212,
+        "activeFrames": 7667,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.089660645,
+          "slope": 0.007141113,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "a6b5a0011fc71981377c6d094ddb240ea599a052267d9e22cebcf31867e1b0ec"
+    },
+    {
+      "id": "sfx.hit_big",
+      "file": "sfx_hit_big.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 13671,
+      "duration": 0.31,
+      "loop": false,
+      "hash": "0f04f93b6463a6f420593017b228c9fc7055b112da010c36d46bfa2d29f91936",
+      "metrics": {
+        "peak": 0.542449951,
+        "peakDbfs": -5.312806511,
+        "rmsDbfs": -17.72908589,
+        "activeRmsDbfs": -17.496128175,
+        "activeFrames": 12957,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.157745361,
+          "slope": 0.004455566,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "adf3e801aa97baed0abfe689341b4fdb6c135f81a3eb19b61bf894d55c74d480"
+    },
+    {
+      "id": "sfx.guard_gain",
+      "file": "sfx_guard_gain.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 13671,
+      "duration": 0.31,
+      "loop": false,
+      "hash": "0cd6d957722b17ff533e5efe00aa728ed03b4efe5d803b3b57daf27553775f8f",
+      "metrics": {
+        "peak": 0.361480713,
+        "peakDbfs": -8.838297398,
+        "rmsDbfs": -18.612211338,
+        "activeRmsDbfs": -18.398317096,
+        "activeFrames": 13014,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.07510376,
+          "slope": 0.006530762,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "ded22403c3d7019e708bbb519c8e72d565a235cffdb694c2d94e64791774e9a2"
+    },
+    {
+      "id": "sfx.guard_break",
+      "file": "sfx_guard_break.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 12348,
+      "duration": 0.28,
+      "loop": false,
+      "hash": "790584266bbf8a0f7ead34ce1b327ca3411c4edc44114ae3737160a142f19c36",
+      "metrics": {
+        "peak": 0.34262085,
+        "peakDbfs": -9.303724246,
+        "rmsDbfs": -18.634572847,
+        "activeRmsDbfs": -18.400466052,
+        "activeFrames": 11700,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.118927002,
+          "slope": 0.023590088,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "f5590e91dd42805c09b2f732dff49344ab07be0bcad5fad343e2f293871265ad"
+    },
+    {
+      "id": "sfx.guard_block",
+      "file": "sfx_guard_block.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 10143,
+      "duration": 0.23,
+      "loop": false,
+      "hash": "cd222970ef17cd4e267efae458e2b74a5e831f85232eac4d5e221fb97328ec9a",
+      "metrics": {
+        "peak": 0.616271973,
+        "peakDbfs": -4.204551661,
+        "rmsDbfs": -18.705564018,
+        "activeRmsDbfs": -18.40785892,
+        "activeFrames": 9471,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.125488281,
+          "slope": 0.021270752,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "348bc641b8eed13544656b36f4b440f8a5d57bd5a415322a576d34eb87627f8b"
+    },
+    {
+      "id": "sfx.hurt",
+      "file": "sfx_hurt.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 9702,
+      "duration": 0.22,
+      "loop": false,
+      "hash": "7c03722880ac445b98a0bf0837cc44c2b2101d4166426d30d05719a8a437f064",
+      "metrics": {
+        "peak": 0.37387085,
+        "peakDbfs": -8.545567902,
+        "rmsDbfs": -18.6874537,
+        "activeRmsDbfs": -18.39778672,
+        "activeFrames": 9076,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.167022705,
+          "slope": 0.003326416,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "3b00294c1a8c95231c9581ef24cd9fb692f0a4177731f0b3e1a1a04ecd1c992b"
+    },
+    {
+      "id": "sfx.enemy_wet_sock",
+      "file": "sfx_enemy_wet_sock.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 14994,
+      "duration": 0.34,
+      "loop": false,
+      "hash": "befba4fe5c78bbf406d083fe982a45c89d55688287d56f11fe23c15df15f3507",
+      "metrics": {
+        "peak": 0.437103271,
+        "peakDbfs": -7.188318861,
+        "rmsDbfs": -18.760277054,
+        "activeRmsDbfs": -18.410266264,
+        "activeFrames": 13833,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.040130615,
+          "slope": 0.002746582,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "bcbfbc113f8ed93f996780ec6f8a1ca5bf39d6752e4b916d59d8ec4cf7cbf176"
+    },
+    {
+      "id": "sfx.turn_start",
+      "file": "sfx_turn_start.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 14112,
+      "duration": 0.32,
+      "loop": false,
+      "hash": "ec9a34e8389693f6e92a99701ebc4156b01489bd8b8b7bbdbf936af390dde118",
+      "metrics": {
+        "peak": 0.384368896,
+        "peakDbfs": -8.305035263,
+        "rmsDbfs": -18.597921823,
+        "activeRmsDbfs": -18.406660836,
+        "activeFrames": 13504,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.106811523,
+          "slope": 0.007843018,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "548ad1553f3dba210720c3f8ec5646fe1a07ce6e55ad0a5f4b15fd773c9357a1"
+    },
+    {
+      "id": "sfx.heal",
+      "file": "sfx_heal.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 21168,
+      "duration": 0.48,
+      "loop": false,
+      "hash": "26e6f6164d42468765f9bf4da2467e3936c8b01bc83e6d946b8bd5d3ac1b2bbc",
+      "metrics": {
+        "peak": 0.375,
+        "peakDbfs": -8.519374645,
+        "rmsDbfs": -18.627779977,
+        "activeRmsDbfs": -18.402726507,
+        "activeFrames": 20099,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.144378662,
+          "slope": 0.005767822,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "bfc731d8dea82e7d118f7df3397a7500b1bb3b3b7e33d451cc3f89929c8c0101"
+    },
+    {
+      "id": "sfx.intent_reveal",
+      "file": "sfx_intent_reveal.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 7056,
+      "duration": 0.16,
+      "loop": false,
+      "hash": "6fa2c587b6ea2e78787a7271e7c37bcbbf3211a45e602a84924b2c0e6fe4cad5",
+      "metrics": {
+        "peak": 0.392089844,
+        "peakDbfs": -8.132288141,
+        "rmsDbfs": -18.648690645,
+        "activeRmsDbfs": -18.416068238,
+        "activeFrames": 6688,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.099090576,
+          "slope": 0.009185791,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "03c62afc87ef330077a3a2f4e5c471062f286074a24d7ab4137ca2fc90d8e278"
+    },
+    {
+      "id": "sfx.enemy_poof",
+      "file": "sfx_enemy_poof.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 14553,
+      "duration": 0.33,
+      "loop": false,
+      "hash": "82353da17101b79c2c603d3757ba398d41d18c306f67d52d27e8c26ed42f9f27",
+      "metrics": {
+        "peak": 0.474639893,
+        "peakDbfs": -6.472715259,
+        "rmsDbfs": -18.758076496,
+        "activeRmsDbfs": -18.44666203,
+        "activeFrames": 13546,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.059783936,
+          "slope": 0.00970459,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "894ee850e70aa7c5a211683796266903f9d604185f6a8148cb31104ef0217c03"
+    },
+    {
+      "id": "sfx.end_turn",
+      "file": "sfx_end_turn.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 12348,
+      "duration": 0.28,
+      "loop": false,
+      "hash": "a55c97b21d77301bf7a9ae35c9c597408cec4fd6d3d5f74e8f9be9cd24868031",
+      "metrics": {
+        "peak": 0.392669678,
+        "peakDbfs": -8.11945268,
+        "rmsDbfs": -18.636080156,
+        "activeRmsDbfs": -18.402344585,
+        "activeFrames": 11701,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.132232666,
+          "slope": 0.009399414,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "7fee8e4c1d2c8f41c5775a1beffa744b4ec5785942aaaa18f9f04b4700af6c05"
+    },
+    {
+      "id": "sfx.relic_proc",
+      "file": "sfx_relic_proc.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 11466,
+      "duration": 0.26,
+      "loop": false,
+      "hash": "04e3cce41e071fddd6496a7253bc8098c8273c6258b1968b7b5583807e53907a",
+      "metrics": {
+        "peak": 0.365966797,
+        "peakDbfs": -8.731166302,
+        "rmsDbfs": -18.64125984,
+        "activeRmsDbfs": -18.402639018,
+        "activeFrames": 10853,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.121795654,
+          "slope": 0.032104492,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "a4dfc1ac43add42f4bbb50e2bf9add885bc063d7d1d17f75de3aa7be015daf80"
+    },
+    {
+      "id": "sfx.path_flip",
+      "file": "sfx_path_flip.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 13230,
+      "duration": 0.3,
+      "loop": false,
+      "hash": "85dd2af66b46db76b24b9b62b999be6cc92d4f42c8318dbcaaf7fd2d0fe3c14b",
+      "metrics": {
+        "peak": 0.449859619,
+        "peakDbfs": -6.938459775,
+        "rmsDbfs": -18.728549283,
+        "activeRmsDbfs": -18.514243378,
+        "activeFrames": 12593,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.0128479,
+          "slope": 0.006530762,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "39ab6477b8b479b0fc1ffae1286ade14f705dca8d1f50ba9aa0a6e5e6a4ad114"
+    },
+    {
+      "id": "sfx.rope_creak",
+      "file": "sfx_rope_creak.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 20286,
+      "duration": 0.46,
+      "loop": false,
+      "hash": "0e9f64165de1cecb59c890446aa4a32e92febbffc91412f22809bca7f0811289",
+      "metrics": {
+        "peak": 0.304962158,
+        "peakDbfs": -10.315080951,
+        "rmsDbfs": -18.672847973,
+        "activeRmsDbfs": -18.458481785,
+        "activeFrames": 19309,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.086486816,
+          "slope": 0.005462646,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "8a5a4f37b043f4c027da82ab10b8f116d79cd12af9e39103eadc1e6cdc5b259f"
+    },
+    {
+      "id": "sfx.rope_pull",
+      "file": "sfx_rope_pull.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 31752,
+      "duration": 0.72,
+      "loop": false,
+      "hash": "bb2de5097818b79714581bfa32d6749dc237ec281f3af22d76ec94f5b5876001",
+      "metrics": {
+        "peak": 0.428161621,
+        "peakDbfs": -7.367845279,
+        "rmsDbfs": -18.556968544,
+        "activeRmsDbfs": -18.416720326,
+        "activeFrames": 30743,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.080078125,
+          "slope": 0.004302979,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "c2ba2fedba38138f35c38639be1e5a11cb7bd0c97e27359bdcc4b7e3ddf142ac"
+    },
+    {
+      "id": "sfx.frog",
+      "file": "sfx_frog.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 15876,
+      "duration": 0.36,
+      "loop": false,
+      "hash": "a733bf181c9def3ad359f2337cf9833eabc1631d454b827abea5d2e90c2ee056",
+      "metrics": {
+        "peak": 0.514923096,
+        "peakDbfs": -5.765152569,
+        "rmsDbfs": -18.702631958,
+        "activeRmsDbfs": -18.40487544,
+        "activeFrames": 14824,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.109588623,
+          "slope": 0.002502441,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "5da2b2538c81e01f5a553b79c17ddb895c1d6c5e7a3f4928056db1b25e5230f6"
+    },
+    {
+      "id": "sfx.bubble_pop",
+      "file": "sfx_bubble_pop.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 5292,
+      "duration": 0.12,
+      "loop": false,
+      "hash": "d0743d0cc45d995fc43c64eba1b6765720f8bd9f398d58d7c81203057e924aaf",
+      "metrics": {
+        "peak": 0.373626709,
+        "peakDbfs": -8.551241709,
+        "rmsDbfs": -18.731852676,
+        "activeRmsDbfs": -18.357548762,
+        "activeFrames": 4855,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.184997559,
+          "slope": 0.028198242,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "d791ed60f00f78bb5b71b265a884337252df1fef753933439c120dcc58cf870c"
+    },
+    {
+      "id": "sfx.clothesline",
+      "file": "sfx_clothesline.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 18522,
+      "duration": 0.42,
+      "loop": false,
+      "hash": "6aba1f85325d3f51f64416ce1f303b2c49b83d0c7cc3745b211c9d25b4690ec6",
+      "metrics": {
+        "peak": 0.431854248,
+        "peakDbfs": -7.29325608,
+        "rmsDbfs": -18.699017751,
+        "activeRmsDbfs": -18.414132788,
+        "activeFrames": 17346,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.104370117,
+          "slope": 0.0050354,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "1cb7e18f0d7107a22078fe67ff71cca15c6b915de034a3bd752f0e6eabae18e6"
+    },
+    {
+      "id": "sfx.reed",
+      "file": "sfx_reed.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 17640,
+      "duration": 0.4,
+      "loop": false,
+      "hash": "5235f593fdd41b57700a7625a1836af2bc546746e432cf3cba162c62edf62ce4",
+      "metrics": {
+        "peak": 0.411651611,
+        "peakDbfs": -7.709403606,
+        "rmsDbfs": -18.738395102,
+        "activeRmsDbfs": -18.48885578,
+        "activeFrames": 16655,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.013580322,
+          "slope": 0.011138916,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "6df870e4733ff84ebbc260b3034f80f1169e24cc01f7c27dd7e4d1bdc00534b8"
+    },
+    {
+      "id": "sfx.sock_avalanche",
+      "file": "sfx_sock_avalanche.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 31752,
+      "duration": 0.72,
+      "loop": false,
+      "hash": "a5e425c9e0eed406066227dbc602ca1bfbb768bc915b6075ac3f2d5722c4f217",
+      "metrics": {
+        "peak": 0.478393555,
+        "peakDbfs": -6.404293603,
+        "rmsDbfs": -18.668184247,
+        "activeRmsDbfs": -18.52807719,
+        "activeFrames": 30744,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.005096436,
+          "slope": 0.004577637,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "9b580b23dd8f69a1b17afa433ac2b76f2475b404bceb2912d2adc9fd101bcc72"
+    },
+    {
+      "id": "sfx.yarn_roll",
+      "file": "sfx_yarn_roll.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 23814,
+      "duration": 0.54,
+      "loop": false,
+      "hash": "09e35690cff7102daedb4ec0c8c0c3e253dd3f0c3b3c0f99afc966c364108f9f",
+      "metrics": {
+        "peak": 0.419311523,
+        "peakDbfs": -7.549264045,
+        "rmsDbfs": -18.600128314,
+        "activeRmsDbfs": -18.398563622,
+        "activeFrames": 22734,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.090484619,
+          "slope": 0.011260986,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "77475040b886e9b1fea5dbb5bb0bc2186d6fcc0b89ea130908854f599494b779"
+    },
+    {
+      "id": "sting.victory",
+      "file": "sting_victory.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 66150,
+      "duration": 1.5,
+      "loop": false,
+      "hash": "c5b65faf09cb7b23c3cd11494e67d000bfaf5eae6e3d1483bf28a9405431e22e",
+      "metrics": {
+        "peak": 0.455535889,
+        "peakDbfs": -6.829548043,
+        "rmsDbfs": -18.557115278,
+        "activeRmsDbfs": -18.399683262,
+        "activeFrames": 63795,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.072937012,
+          "slope": 0.0078125,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "b76f80a5b0e6366353742ad52e8ad69f6efaf96f54000250116ed9a63a636a97"
+    },
+    {
+      "id": "sting.defeat",
+      "file": "sting_defeat.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 66150,
+      "duration": 1.5,
+      "loop": false,
+      "hash": "f35f7c2e809fffa3b6613bfdb514454437683efd9e12d1390ae68b557662b978",
+      "metrics": {
+        "peak": 0.394989014,
+        "peakDbfs": -8.068299676,
+        "rmsDbfs": -18.589097557,
+        "activeRmsDbfs": -18.399894065,
+        "activeFrames": 63330,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.173248291,
+          "slope": 0.008880615,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "4abb62d730666b50910093752a70d623e8af47ec33684c22f05fbf8429b43688"
+    },
+    {
+      "id": "sting.reward",
+      "file": "sting_reward.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 35280,
+      "duration": 0.8,
+      "loop": false,
+      "hash": "1073e19945cf5be8a5a24190494945cbe0fac0d4814f210cbb9b831779767d73",
+      "metrics": {
+        "peak": 0.366882324,
+        "peakDbfs": -8.709464227,
+        "rmsDbfs": -18.698925218,
+        "activeRmsDbfs": -18.396390545,
+        "activeFrames": 32906,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.083679199,
+          "slope": 0.010620117,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "a5cf257537aca136ef037d93f14bd2608c23f411d094254186a93384ed1a5aa0"
+    },
+    {
+      "id": "sting.keepsake",
+      "file": "sting_keepsake.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 88200,
+      "duration": 2,
+      "loop": false,
+      "hash": "270f83052e6a09802db5fb6007b93070ce97c1e652e837ed014578a6cdc1ba9a",
+      "metrics": {
+        "peak": 0.408081055,
+        "peakDbfs": -7.785071341,
+        "rmsDbfs": -18.591134986,
+        "activeRmsDbfs": -18.404656511,
+        "activeFrames": 84493,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.116729736,
+          "slope": 0.00680542,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "98e3d2c23628b939b5108449e780193d073fdac118ef89ac0d38442614ad4b34"
+    },
+    {
+      "id": "sting.wish",
+      "file": "sting_wish.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 52920,
+      "duration": 1.2,
+      "loop": false,
+      "hash": "7a44040a98e22e2f760678352adf8b980af0a1161544c7133de9ce2cf0ffeb69",
+      "metrics": {
+        "peak": 0.434814453,
+        "peakDbfs": -7.23392057,
+        "rmsDbfs": -18.597785294,
+        "activeRmsDbfs": -18.395962629,
+        "activeFrames": 50517,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.109771729,
+          "slope": 0.007843018,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "4131b8213363eacf9d7284562fe816d0f2ea7323b7470ea13b7f873c69db973d"
+    },
+    {
+      "id": "sting.stamp",
+      "file": "sting_stamp.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 26460,
+      "duration": 0.6,
+      "loop": false,
+      "hash": "385b5e6e2ebea7f712cbc8f10251d45ec47c585b25558c69c1a1f49020633407",
+      "metrics": {
+        "peak": 0.506866455,
+        "peakDbfs": -5.902128997,
+        "rmsDbfs": -18.816973504,
+        "activeRmsDbfs": -18.400600754,
+        "activeFrames": 24041,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.242706299,
+          "slope": 0.005737305,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "90700175295b133309fb1dff382f1ac48715145da0997ee5091bf17043237e2a"
+    },
+    {
+      "id": "sting.boss_warn",
+      "file": "sting_boss_warn.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 44100,
+      "duration": 1,
+      "loop": false,
+      "hash": "9ef9ad06cbfa4b5a7902234edbae8ec1c7e81d6ea6ca6fb9b6cab7877ae9f0f3",
+      "metrics": {
+        "peak": 0.605987549,
+        "peakDbfs": -4.350725983,
+        "rmsDbfs": -18.807361331,
+        "activeRmsDbfs": -18.616511659,
+        "activeFrames": 42204,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.075897217,
+          "slope": 0.002655029,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "18227438b378fe08dc3af5dc564623cf48d2b8a3861c42bd316cf193e04d63fe"
+    },
+    {
+      "id": "voice.asui",
+      "file": "voice_asui.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 3308,
+      "duration": 0.07501133786848073,
+      "loop": false,
+      "hash": "0198d1851547313030917a187bef315ce8010d20267dbfc2d144128bd37a12b3",
+      "metrics": {
+        "peak": 0.272460938,
+        "peakDbfs": -11.293915067,
+        "rmsDbfs": -20.58365842,
+        "activeRmsDbfs": -20.141811456,
+        "activeFrames": 2988,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.111999512,
+          "slope": 0.019287109,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "a4635587a78d31348b925ab5d1fd802a7de8a9987c4825a39ef5a00e8db36a34"
+    },
+    {
+      "id": "voice.maye",
+      "file": "voice_maye.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 5292,
+      "duration": 0.12,
+      "loop": false,
+      "hash": "2b11cd9c972e2095239eb6d2a44b9ca07960e2d026f58857d89783b591ecfb16",
+      "metrics": {
+        "peak": 0.229949951,
+        "peakDbfs": -12.767333566,
+        "rmsDbfs": -20.48371156,
+        "activeRmsDbfs": -20.183025234,
+        "activeFrames": 4938,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.10635376,
+          "slope": 0.002532959,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "d5a1eee24cc0459889d45ce050ae9780603a835aebc5134ab24ae316d329ade4"
+    },
+    {
+      "id": "voice.mai_aunt",
+      "file": "voice_mai_aunt.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 3528,
+      "duration": 0.08,
+      "loop": false,
+      "hash": "8db6d5ad1f8ee05c5e2a5151ba72049f84003259fd72a11b64b992ca5c24f085",
+      "metrics": {
+        "peak": 0.272125244,
+        "peakDbfs": -11.304623366,
+        "rmsDbfs": -20.560128047,
+        "activeRmsDbfs": -20.167446807,
+        "activeFrames": 3223,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.055725098,
+          "slope": 0.003753662,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "4f42190320925f140e95d0173b819dad736c1ca47dcd7bb5b410281c48d1b141"
+    },
+    {
+      "id": "voice.douding",
+      "file": "voice_douding.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 2646,
+      "duration": 0.06,
+      "loop": false,
+      "hash": "2e02e53b07969ff54d698d13d01577135c31c568edb0b24af013c977eedc2d38",
+      "metrics": {
+        "peak": 0.186645508,
+        "peakDbfs": -14.579649164,
+        "rmsDbfs": -20.659712095,
+        "activeRmsDbfs": -20.16293525,
+        "activeFrames": 2360,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.09197998,
+          "slope": 0.009490967,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "71f8ce6426492742ea75791fd235e5deddd50669afea5ad06bf42ba920bcb096"
+    },
+    {
+      "id": "voice.postman",
+      "file": "voice_postman.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 5733,
+      "duration": 0.13,
+      "loop": false,
+      "hash": "d3b53f88c2dc533cde105c1c72a42a0cab0e3cdbe70214495721b6156d902da2",
+      "metrics": {
+        "peak": 0.225036621,
+        "peakDbfs": -12.954936034,
+        "rmsDbfs": -20.463923434,
+        "activeRmsDbfs": -20.1959927,
+        "activeFrames": 5390,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.05065918,
+          "slope": 0.003814697,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "c768a2d811d2fd7fe2de37239a2e87111b618ee28532cf7790f3df163470feba"
+    },
+    {
+      "id": "voice.mianmian",
+      "file": "voice_mianmian.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 2867,
+      "duration": 0.06501133786848072,
+      "loop": false,
+      "hash": "ea6ecadfec7d4dc49857e4c67d01f3766351cde3f03a9da51ef27728cb5264a6",
+      "metrics": {
+        "peak": 0.180511475,
+        "peakDbfs": -14.86990372,
+        "rmsDbfs": -20.64680421,
+        "activeRmsDbfs": -20.180301047,
+        "activeFrames": 2575,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.092010498,
+          "slope": 0.033355713,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "ebc4490752ec371993fa5a7d590f1606e67df88f5d9f0ae533f61781694a229d"
+    },
+    {
+      "id": "voice.sock_snake",
+      "file": "voice_sock_snake.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 4410,
+      "duration": 0.1,
+      "loop": false,
+      "hash": "36133f4da835bec1eacf262d12da25af0286bd161defe69c403e02cf393c6cdf",
+      "metrics": {
+        "peak": 0.3097229,
+        "peakDbfs": -10.180533649,
+        "rmsDbfs": -20.543192247,
+        "activeRmsDbfs": -20.199017499,
+        "activeFrames": 4074,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.070251465,
+          "slope": 0.002624512,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "58f4bb8f13c915f22e8f719319a7d8b82e54b184f2ee24207a0cce73327083bb"
+    },
+    {
+      "id": "voice.hungry_drawer",
+      "file": "voice_hungry_drawer.wav",
+      "sampleRate": 44100,
+      "channels": 1,
+      "frames": 3969,
+      "duration": 0.09,
+      "loop": false,
+      "hash": "08bf89609b2240e733795a99ce68414aefe3a8e95bbfbfd957e7c6890886cc76",
+      "metrics": {
+        "peak": 0.256530762,
+        "peakDbfs": -11.817210986,
+        "rmsDbfs": -20.591364165,
+        "activeRmsDbfs": -20.191640319,
+        "activeFrames": 3620,
+        "first": 0,
+        "last": 0,
+        "seam": {
+          "windowFrames": 89,
+          "amplitude": 0.095367432,
+          "slope": 0.003601074,
+          "slopeMismatch": 0
+        }
+      },
+      "sampleHash": "236c348c2815656f0eff84bfab19abd6478b30d467634c30951ca0e2bfe66066"
+    }
+  ]
+}
