@@ -132,7 +132,7 @@ func start_battle(run: Dictionary, battle_rules: RefCounted) -> Dictionary:
 		run["rng_states"]["battle"] = battle_rng.snapshot()
 		run["rng_states"]["shuffle"] = shuffle_rng.snapshot()
 		var initial: Dictionary = {}
-		for key: String in ["hp", "max_hp", "deck", "relics", "keepsakes", "spare_rope_available", "spare_rope_used", "next_battle"]:
+		for key: String in ["hp", "max_hp", "deck", "relics", "keepsakes", "spare_rope_available", "spare_rope_used", "next_battle", "bind_bonus"]:
 			initial[key] = run[key].duplicate(true) if run[key] is Array or run[key] is Dictionary else run[key]
 		initial["battle_seed"] = battle_seed
 		initial["shuffle_seed"] = shuffle_seed
@@ -182,8 +182,11 @@ func complete_battle(run: Dictionary, meta: Dictionary, state: Dictionary, battl
 		meta["boss_defeated"] = true
 		meta["knot_found"] = true
 		run["boss_won"] = true
+		if state["battle_flags"].get("peaceful", false): events.append({"type": "peaceful_victory", "text_id": "ui.rope.peaceful_victory"})
 		events.append_array(_end(run, meta, "boss", first))
 		return events
+	run["last_battle_pairs"] = int(state["battle_flags"].get("pairs", 0))
+	run["reward_queue"] = []
 	run["rewards"] = _make_rewards(run)
 	run["phase"] = "reward"
 	events.append({"type": "reward_ready", "choices": run["rewards"].duplicate(true)})
@@ -198,37 +201,58 @@ func _valid_terminal(run: Dictionary, state: Dictionary, status: String) -> bool
 	if status == "defeat": return int(state["player"]["hp"]) == 0
 	if int(state["player"]["hp"]) <= 0 or state.get("enemies", []).is_empty(): return false
 	for enemy: Dictionary in state["enemies"]:
-		if int(enemy.get("hp", 1)) > 0: return false
+		if int(enemy.get("hp", 1)) > 0 and str(enemy.get("departed", "")).is_empty(): return false
 	return true
 
 func reward_choices(run: Dictionary) -> Array:
 	return run.get("rewards", []).duplicate(true) if run.get("phase", "") in ["reward", "replacement"] else []
 
 func _make_rewards(run: Dictionary) -> Array:
-	if is_first_run(run) and int(run["segment"]) == 1:
-		run["first_card_reward_seen"] = true
-		return path_rules.config["first_run"]["first_rewards"].duplicate(true)
 	var result: Array = []
-	var elite: bool = run["current_node"]["type"] == "elite"
-	var count: int = int(balance["reward_elite_relics"] if elite else balance["reward_normal_relics"])
-	var relic_ids: Array = node_rules.relic_offers(run, count)
-	if run["first_trip"] and int(run["segment"]) == 1:
-		var glove: String = config["first_reward_relic_id"]
-		if not glove in run["relics"]:
-			relic_ids.erase(glove)
-			relic_ids.push_front(glove)
-			relic_ids = relic_ids.slice(0, count)
-	for id: String in relic_ids: result.append({"kind": "relic", "id": id})
-	if not elite:
-		var card_ids: Array = node_rules.card_offers(run, int(balance["reward_normal_cards"]), "", [], not run["first_card_reward_seen"])
-		run["first_card_reward_seen"] = true
-		for id: String in card_ids: result.append({"kind": "card", "id": id})
+	if run["current_node"]["type"] == "elite":
+		run["reward_kind"] = "elite"
+		for id: String in node_rules.relic_offers(run, int(balance["reward_elite_relics"])): result.append({"kind": "relic", "id": id})
+		return result
+	run["reward_kind"] = "cards"
+	if int(run.get("last_battle_pairs", 0)) > 0:
+		var thanks: Array = []
+		var count: int = int(balance["reward_normal_relics"])
+		for id: String in run["relics"]: count += int(_definition("relics", id).get("rules", {}).get("thanks_options_bonus", 0))
+		if is_first_run(run) and not run.get("first_thanks_seen", false):
+			for choice: Dictionary in path_rules.config["first_run"].get("first_thanks", []):
+				if not choice["id"] in run["relics"]: thanks.append(choice.duplicate(true))
+			if thanks.size() < count:
+				var exclude: Array = []
+				for choice: Dictionary in thanks: exclude.append(choice["id"])
+				for id: String in node_rules.relic_offers(run, count - thanks.size(), exclude): thanks.append({"kind": "relic", "id": id})
+		else:
+			for id: String in node_rules.relic_offers(run, count): thanks.append({"kind": "relic", "id": id})
+		run["first_thanks_seen"] = true
+		if not thanks.is_empty(): run["reward_queue"].append(thanks)
+	if is_first_run(run) and int(run["segment"]) == 1:
+		result = path_rules.config["first_run"]["first_rewards"].duplicate(true)
+	else:
+		for id: String in node_rules.card_offers(run, int(balance["reward_normal_cards"]), "", [], not run["first_card_reward_seen"]): result.append({"kind": "card", "id": id})
+	run["first_card_reward_seen"] = true
 	return result
+
+func _definition(category: String, id: String) -> Dictionary:
+	for row: Dictionary in node_rules.definitions.get(category, []):
+		if row["id"] == id: return row
+	return {}
+
+func _next_reward(run: Dictionary) -> Array:
+	if not run.get("reward_queue", []).is_empty():
+		run["rewards"] = run["reward_queue"].pop_front()
+		run["reward_kind"] = "thanks"
+		run["phase"] = "reward"
+		return [{"type": "reward_ready", "thanks": true, "choices": run["rewards"].duplicate(true)}]
+	return _advance(run)
 
 func choose_reward(run: Dictionary, index: int, replace_index: int = -1) -> Array:
 	if run.get("phase", "") == "replacement" and run["pending_card"].get("source", "") == "node": return replace_card(run, replace_index)
 	if not run.get("phase", "") in ["reward", "replacement"]: return _invalid("reward")
-	if index == -1 and run["phase"] == "reward": return _advance(run)
+	if index == -1 and run["phase"] == "reward": return _next_reward(run)
 	if index < 0 or index >= run["rewards"].size(): return _invalid("reward")
 	var choice: Dictionary = run["rewards"][index]
 	var events: Array = []
@@ -250,7 +274,7 @@ func choose_reward(run: Dictionary, index: int, replace_index: int = -1) -> Arra
 		run["relics"].append(choice["id"])
 		events.append({"type": "relic_get", "id": choice["id"]})
 	run["pending_card"] = {}
-	events.append_array(_advance(run))
+	events.append_array(_next_reward(run))
 	return events
 
 func cancel_replacement(run: Dictionary) -> Array:
@@ -431,6 +455,7 @@ func _advance(run: Dictionary, meta: Dictionary = {}) -> Array:
 						if id in future["wish_ids"]: later = true
 				if not later: run["wish_missed"][id] = true
 	run["rewards"] = []
+	run["reward_kind"] = ""
 	run["current_node"] = {}
 	run.erase("trade")
 	run.erase("trade_cache")

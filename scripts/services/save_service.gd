@@ -1,7 +1,7 @@
 extends Node
 ## Version 1 transaction snapshots. Never replace unsupported future saves.
 
-const SAVE_VERSION: int = 1
+const SAVE_VERSION: int = 2
 const SAVE_PATH: String = "user://save.json"
 const MAX_BYTES: int = 1024 * 1024
 const BattleRules = preload("res://scripts/core/battle_rules.gd")
@@ -33,6 +33,8 @@ func load_state(path: String = SAVE_PATH) -> Dictionary:
 		if route is String and route != "first_run":
 			_read_only_paths[path] = true
 			return {"ok": false, "state": default_state(), "error": "future_route", "recovered": false, "readonly": true}
+	if parse_error == OK and parser.data is Dictionary and _whole_number(parser.data.get("version"), 1, 1):
+		parser.data = migrate_state(parser.data, ContentCatalog.definitions())
 	if parse_error != OK or not _valid_state(parser.data):
 		return _recover(path, "invalid_save")
 	return {"ok": true, "state": parser.data, "error": "", "recovered": false}
@@ -133,6 +135,14 @@ func _valid_run(run: Variant) -> bool:
 		return false
 	if run.has("route_mode") and (not run["route_mode"] is String or run["route_mode"] != "first_run"):
 		return false
+	if run.has("reward_kind") and (not run["reward_kind"] is String or not run["reward_kind"] in ["", "cards", "thanks", "elite"]): return false
+	if run.has("bind_bonus") and not _whole_number(run["bind_bonus"], 0, 1000000): return false
+	if run.has("reward_queue"):
+		if not run["reward_queue"] is Array: return false
+		for group: Variant in run["reward_queue"]:
+			if not group is Array or group.is_empty() or group.size() > 3: return false
+			for reward: Variant in group:
+				if not reward is Dictionary or reward.get("kind") != "relic" or not _known_id(reward.get("id"), "relic."): return false
 	var short_route: bool = run.get("route_mode", "") == "first_run"
 	var phases: Array = ["departure", "path", "battle_ready", "return", "hub"]
 	if short_route: phases.append_array(["reward", "node", "replacement"])
@@ -214,7 +224,7 @@ func _valid_first_run(run: Dictionary) -> bool:
 	if run["phase"] == "node" and not run["current_node"]["type"] in ["event", "campfire"]: return false
 	if run["phase"] in ["battle_ready", "reward", "replacement"] and not run["current_node"]["type"] in ["battle", "elite"]: return false
 	if run["phase"] in ["reward", "replacement"]:
-		if run["rewards"].size() != 3: return false
+		if run["rewards"].is_empty() or run["rewards"].size() > 3: return false
 		for reward: Variant in run["rewards"]:
 			if not reward is Dictionary or not reward.get("kind") is String or not reward["kind"] in ["card", "relic"] or not _known_id(reward.get("id"), reward["kind"] + "."): return false
 	if run["phase"] == "replacement":
@@ -264,9 +274,18 @@ func _valid_battle(battle: Variant) -> bool:
 		for card: Variant in battle[key]:
 			if not card is Dictionary or not card.get("id") is String or not card.get("uid") is String:
 				return false
+	if not _whole_number(battle["battle_flags"].get("pairs"), 0, 1000000) or not battle["battle_flags"].get("keepsake_uses") is Dictionary: return false
+	for used: Variant in battle["battle_flags"]["keepsake_uses"].values():
+		if not used is bool: return false
+	for key: String in ["shakes_used", "ties_played", "extra_shakes"]:
+		if not _whole_number(battle["turn_flags"].get(key), 0, 1000000): return false
 	for enemy: Variant in battle["enemies"]:
 		if not enemy is Dictionary or not enemy.get("id") is String or not enemy.get("intent") is Dictionary or not enemy.has("hp"):
 			return false
+		if not _whole_number(enemy.get("binds"), 0, 12) or not enemy.get("tie") is String or not enemy.get("departed") is String or not enemy["departed"] in ["", "paired", "scattered"]: return false
+		if not enemy.get("uid") is String or not enemy.get("pair_tag") is String: return false
+		for key: String in ["max_hp", "guard", "cycle_index", "guard_cycles", "weaken"]:
+			if not _whole_number(enemy.get(key), 0, 1000000): return false
 	for key: String in ["hp", "max_hp", "guard"]:
 		if not _whole_number(battle["player"].get(key), 0, 9007199254740991):
 			return false
@@ -311,3 +330,26 @@ func _valid_request(request: Variant, run_key: String = "run_state") -> bool:
 	if not encounter.get("id") is String or not _string_array(encounter.get("enemies")) or not _string_array(initial.get("deck")):
 		return false
 	return _whole_number(initial.get("hp"), 0, 9007199254740991) and _whole_number(initial.get("max_hp"), 1, 9007199254740991)
+
+func migrate_state(value: Dictionary, definitions: Dictionary) -> Dictionary:
+	var migrated: Dictionary = value.duplicate(true)
+	if int(migrated.get("version", 0)) != 1: return migrated
+	if not migrated.get("meta") is Dictionary or not migrated.get("settings") is Dictionary: return migrated
+	var Meta = preload("res://scripts/core/meta_state.gd")
+	var meta_rules: RefCounted = Meta.new(definitions)
+	var meta: Dictionary = migrated["meta"]
+	var defaults: Dictionary = meta_rules.create()
+	for key: String in defaults:
+		if not meta.has(key): meta[key] = defaults[key]
+	var old_run: Variant = migrated.get("run")
+	if old_run is Dictionary:
+		for id: Variant in old_run.get("keepsakes", []):
+			for data: Dictionary in definitions.get("keepsakes", []):
+				if data["id"] == id: meta_rules.grant_return(meta, data, bool(old_run.get("wishes", {}).get(id, false)))
+		meta["last_end_reason"] = "voluntary"
+	migrated["version"] = SAVE_VERSION
+	migrated["run"] = null
+	for key: String in migrated["settings"].keys():
+		if key.contains("tutorial") or key in ["first_run_flow", "first_return_story_seen"]: migrated["settings"].erase(key)
+	migrated["settings"]["rope_tutorial_pending"] = true
+	return migrated

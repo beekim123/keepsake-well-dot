@@ -23,6 +23,6 @@ func _run() -> void:
 			quit(1)
 			return
 	var result: Dictionary = Simulation.new().run(catalog.definitions(), count)
-	result["format"] = "d1-simulation/1"
-	print("D1_SIM_RESULT: " + JSON.stringify(result))
+	result["format"] = "rope-pair-simulation/1"
+	print("ROPE_SIM_RESULT: " + JSON.stringify(result))
 	quit(0 if result.get("completed", false) and result.get("errors", ["missing"]).is_empty() and int(result.get("trips", 0)) == count else 1)

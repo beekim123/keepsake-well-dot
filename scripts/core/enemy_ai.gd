@@ -5,15 +5,16 @@ static func raw_intent(rules: RefCounted, state: Dictionary, slot: int, offset: 
 	var enemy: Dictionary = state["enemies"][slot]
 	if not rules.enemy_alive(state, slot):
 		return {"type": "defeated", "amount": 0}
-	if offset == 0 and enemy.has("intent_override"):
-		return enemy["intent_override"].duplicate(true)
 	var definition: Dictionary = rules.definition("enemies", enemy["id"])
 	var mechanics: Dictionary = definition.get("mechanics", {})
 	var phase_due: bool = bool(enemy.get("phase_triggered", false)) and not bool(enemy.get("phase_done", false)) and int(state["turn"]) + offset >= int(enemy.get("phase_first_response_turn", 999999)) + int(mechanics.get("phase_warning_turns", 2)) - 1
 	if offset == 0 and bool(enemy.get("idle_override", false)):
-		return {"type": "idle", "amount": 0, "phase_attack": phase_due}
+		var original: Dictionary = enemy.get("intent_override", {})
+		return {"type": "idle", "amount": 0, "phase_attack": original.get("phase_attack", phase_due), "phase_owner": original.get("phase_owner", enemy["uid"])}
+	if offset == 0 and enemy.has("intent_override"):
+		return enemy["intent_override"].duplicate(true)
 	if phase_due:
-		return {"type": "attack", "amount": int(mechanics.get("phase_damage", 16)), "times": 1, "phase_attack": true, "name": "大缠绕"}
+		return {"type": "attack", "amount": int(mechanics.get("phase_damage", 16)), "times": 1, "phase_attack": true, "phase_owner": enemy["uid"], "name": "大缠绕"}
 	var intents: Array = enemy.get("tutorial_intents", definition.get("intents", [{"type": "idle", "amount": 0}]))
 	if intents.is_empty():
 		return {"type": "idle", "amount": 0}
@@ -63,7 +64,8 @@ static func execute(rules: RefCounted, state: Dictionary, slot: int, events: Arr
 				enemy["hp"] += actual
 				events.append({"type": "consume", "enemy": slot, "consumed": consumed, "heal": actual})
 	if bool(intent.get("phase_attack", false)):
-		enemy["phase_done"] = true
+		for owner: Dictionary in state["enemies"]:
+			if owner["uid"] == intent.get("phase_owner", enemy["uid"]): owner["phase_done"] = true
 	else:
 		enemy["cycle_index"] += 1
 	enemy["idle_override"] = false

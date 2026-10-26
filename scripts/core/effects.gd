@@ -93,6 +93,13 @@ static func resolve(rules: RefCounted, state: Dictionary, operations: Array, con
 				state["energy"] += amount
 				events.append({"type": "energy", "amount": amount, "energy": state["energy"]})
 			"next_turn_energy": state["next_turn_energy"] += amount
+			"idle_attack":
+				if rules.enemy_alive(state, target) and rules.Enemies.raw_intent(rules, state, target).get("type", "") == "attack": state["enemies"][target]["idle_override"] = true
+			"pair_any_now":
+				if rules.enemy_alive(state, target) and rules.enemy_alive(state, second):
+					state["enemies"][target]["tie_any_pair"] = true
+					rules.check_pairs(state, events)
+					state["enemies"][target]["tie_any_pair"] = false
 			"set_intent_idle":
 				if rules.enemy_alive(state, target): state["enemies"][target]["idle_override"] = true
 			"idle_leftmost":

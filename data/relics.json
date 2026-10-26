@@ -2,27 +2,34 @@
   {
     "id": "relic.lone_glove",
     "name": "缺了一只的手套",
-    "text": "每回合第一张攻击牌打 2 次",
+    "text": "每场第一次凑对时，摸 2 张、回 1 力气",
     "flavor": "另一只在公交车上",
     "tendency": "attack",
     "art": "relic.lone_glove",
-    "trigger": "card_played",
-    "ops": [],
-    "hook": "lone_glove",
-    "params": {
-      "repeats": 2
+    "trigger": "pair_formed",
+    "ops": [
+      {
+        "op": "draw",
+        "amount": 2
+      },
+      {
+        "op": "gain_energy",
+        "amount": 1
+      }
+    ],
+    "when": {
+      "pair_number": 1
     }
   },
   {
     "id": "relic.spyglass",
     "name": "船长的望远镜",
-    "text": "敌人接下来的行动多显示 1 回合",
+    "text": "敌人行动多显示 1 回合",
     "flavor": "船长退休那天弄丢的",
     "tendency": "general",
     "art": "relic.spyglass",
-    "trigger": "battle_start",
+    "trigger": "",
     "ops": [],
-    "hook": "spyglass",
     "params": {
       "lookahead": 1
     }
@@ -30,63 +37,58 @@
   {
     "id": "relic.lost_kite",
     "name": "迷路的风筝",
-    "text": "每打出一张护盾牌，对随机一个敌人造成 2 点伤害",
+    "text": "每次系成功，两头各受 2 点伤害",
     "flavor": "线断在春天",
-    "tendency": "guard",
+    "tendency": "rope",
     "art": "relic.lost_kite",
-    "trigger": "card_played",
+    "trigger": "tie_made",
     "ops": [
       {
-        "op": "damage_random",
+        "op": "damage_both",
         "amount": 2
-      }
-    ],
-    "when": {
-      "card_type": "guard"
-    }
-  },
-  {
-    "id": "relic.open_ink",
-    "name": "没盖的墨水瓶",
-    "text": "每回合开始多抽 1 张牌",
-    "flavor": "盖子在作业本里夹着",
-    "tendency": "draw",
-    "art": "relic.open_ink",
-    "trigger": "turn_start",
-    "ops": [
-      {
-        "op": "draw",
-        "amount": 1
       }
     ]
   },
   {
+    "id": "relic.open_ink",
+    "name": "没盖的墨水瓶",
+    "text": "每回合手牌补到 6 张",
+    "flavor": "盖子在作业本里夹着",
+    "tendency": "draw",
+    "art": "relic.open_ink",
+    "trigger": "",
+    "ops": [],
+    "rules": {
+      "hand_size": 6
+    }
+  },
+  {
     "id": "relic.half_biscuit",
     "name": "半块饼干",
-    "text": "每场战斗胜利后回复 4 点生命",
+    "text": "每凑成一对，回复 3 点生命",
     "flavor": "另一半给了小狗",
     "tendency": "general",
     "art": "relic.half_biscuit",
-    "trigger": "battle_won",
+    "trigger": "pair_formed",
     "ops": [
       {
         "op": "heal",
-        "amount": 4
+        "amount": 3
       }
     ]
   },
   {
     "id": "relic.offkey_harmonica",
     "name": "走调的口琴",
-    "text": "回合结束时，每剩 1 点能量，获得 3 点护盾",
+    "text": "收手时，每剩 1 点力气，给威胁最大的敌人缠 2",
     "flavor": "只会吹一首歌",
-    "tendency": "guard",
+    "tendency": "rope",
     "art": "relic.offkey_harmonica",
     "trigger": "turn_end",
     "ops": [
       {
-        "op": "gain_guard",
-        "amount": 3,
+        "op": "bind_threat",
+        "amount": 2,
         "multiplier": "remaining_energy"
       }
     ]
@@ -94,81 +96,52 @@
   {
     "id": "relic.empty_frame",
     "name": "空相框",
-    "text": "第一回合抽牌后，复制你手里费用最高的 1 张牌（本场有效）",
+    "text": "每场开始最左边的敌人第一回合发呆",
     "flavor": "照片被拿走了",
     "tendency": "draw",
     "art": "relic.empty_frame",
-    "trigger": "turn_start",
-    "ops": [],
-    "hook": "empty_frame",
-    "params": {
-      "copies": 1
-    }
+    "trigger": "battle_start",
+    "ops": [
+      {
+        "op": "idle_leftmost"
+      }
+    ]
   },
   {
     "id": "relic.leaky_balloon",
     "name": "漏气的气球",
-    "text": "回合开始时护盾不再清零，改为减半（向下取整）",
+    "text": "敌人挣脱时，最多挣掉一半的缠（向下取整）",
     "flavor": "生日会结束很久了",
-    "tendency": "guard",
+    "tendency": "rope",
     "art": "relic.leaky_balloon",
-    "trigger": "turn_start",
+    "trigger": "",
     "ops": [],
-    "hook": "leaky_balloon",
-    "params": {
-      "retention": 0.5
+    "rules": {
+      "shake_off_half": true
     }
   },
   {
     "id": "relic.crooked_compass",
     "name": "歪掉的指南针",
-    "text": "每场战斗第一回合多抽 3 张牌",
+    "text": "战斗开始时，自动系住两个同类敌人",
     "flavor": "一直指着某人的家",
     "tendency": "draw",
     "art": "relic.crooked_compass",
-    "trigger": "turn_start",
-    "ops": [],
-    "hook": "crooked_compass",
-    "params": {
-      "draw": 3
-    }
+    "trigger": "battle_start",
+    "ops": [
+      {
+        "op": "tie_matching"
+      }
+    ]
   },
   {
     "id": "relic.bookmark",
     "name": "褪色的书签",
-    "text": "回合结束时可以留下 1 张手牌",
+    "text": "每回合第一次抖一张后，多摸 1 张",
     "flavor": "夹在第 37 页",
     "tendency": "draw",
     "art": "relic.bookmark",
-    "trigger": "turn_end",
-    "ops": [],
-    "hook": "bookmark",
-    "params": {
-      "keep": 1
-    }
-  },
-  {
-    "id": "relic.shedding_brush",
-    "name": "掉毛的毛刷",
-    "text": "攻击有护盾的敌人时，额外造成 3 点伤害",
-    "flavor": "刷过三只猫",
-    "tendency": "attack",
-    "art": "relic.shedding_brush",
-    "trigger": "card_played",
-    "ops": [],
-    "hook": "shedding_brush",
-    "params": {
-      "damage": 3
-    }
-  },
-  {
-    "id": "relic.tangled_earbuds",
-    "name": "打结的耳机",
-    "text": "每回合打出第 3 张牌时，抽 1 张牌",
-    "flavor": "永远解不开",
-    "tendency": "draw",
-    "art": "relic.tangled_earbuds",
-    "trigger": "card_played",
+    "trigger": "shake_card",
     "ops": [
       {
         "op": "draw",
@@ -176,52 +149,72 @@
       }
     ],
     "when": {
-      "card_number": 3
+      "shake_number": 1
+    }
+  },
+  {
+    "id": "relic.shedding_brush",
+    "name": "掉毛的毛刷",
+    "text": "打有缠的敌人时，伤害 +2",
+    "flavor": "刷过三只猫",
+    "tendency": "attack",
+    "art": "relic.shedding_brush",
+    "trigger": "",
+    "ops": [],
+    "rules": {
+      "bound_attack_bonus": 2
+    }
+  },
+  {
+    "id": "relic.tangled_earbuds",
+    "name": "打结的耳机",
+    "text": "每回合第一张系类牌不花力气",
+    "flavor": "永远解不开",
+    "tendency": "draw",
+    "art": "relic.tangled_earbuds",
+    "trigger": "",
+    "ops": [],
+    "rules": {
+      "first_tie_free": true
     }
   },
   {
     "id": "relic.flat_ball",
     "name": "瘪掉的足球",
-    "text": "敌人打破你的护盾时，你对它造成 5 点伤害",
+    "text": "被系着的一端被打散时，另一端受到 6 点伤害",
     "flavor": "踢进了别人家院子",
-    "tendency": "guard",
+    "tendency": "rope",
     "art": "relic.flat_ball",
-    "trigger": "guard_broken",
-    "ops": [
-      {
-        "op": "damage",
-        "amount": 5,
-        "target": "attacker"
-      }
-    ]
+    "trigger": "",
+    "ops": [],
+    "rules": {
+      "scattered_partner_damage": 6
+    }
   },
   {
     "id": "relic.birthday_candle",
     "name": "生日蜡烛",
-    "text": "每场战斗打出的第一张牌，可计数的效果翻倍",
+    "text": "谢礼多 1 个选项",
     "flavor": "许的愿还没实现",
     "tendency": "attack",
     "art": "relic.birthday_candle",
-    "trigger": "card_played",
+    "trigger": "",
     "ops": [],
-    "hook": "birthday_candle",
-    "params": {
-      "multiplier": 2
+    "rules": {
+      "thanks_options_bonus": 1
     }
   },
   {
     "id": "relic.odd_button",
     "name": "落单的纽扣",
-    "text": "每打败一个敌人，本回合获得 1 点能量",
+    "text": "只剩一个敌人时，打类牌伤害 +2",
     "flavor": "从大衣第三颗掉下来的",
     "tendency": "attack",
     "art": "relic.odd_button",
-    "trigger": "enemy_defeated",
-    "ops": [
-      {
-        "op": "gain_energy",
-        "amount": 1
-      }
-    ]
+    "trigger": "",
+    "ops": [],
+    "rules": {
+      "lone_attack_bonus": 2
+    }
   }
 ]

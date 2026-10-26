@@ -6,15 +6,16 @@ ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/../.." && pwd)
 PURE="$ROOT/.local/battle-pure"
 PRIVATE="$ROOT/.local/battle-tests"
 mkdir -p "$PURE" "$PRIVATE/home" "$PRIVATE/cache" "$PRIVATE/config" "$PRIVATE/data"
+export OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 VECLIB_MAXIMUM_THREADS=1
 export XDG_CACHE_HOME="$PRIVATE/cache" XDG_CONFIG_HOME="$PRIVATE/config" XDG_DATA_HOME="$PRIVATE/data"
 case "$("$GODOT_BIN" --version)" in
   4.7.2|4.7.2.stable|4.7.2.stable.*) ;;
   *) printf '%s\n' 'Pure battle tests require Godot 4.7.2; no fallback attempted.' >&2; exit 1 ;;
 esac
-printf 'config_version=5\n[application]\nconfig/name="Keepsake Pure Battle Tests"\n[rendering]\nrenderer/rendering_method="gl_compatibility"\n' > "$PURE/project.godot"
+printf 'config_version=5\n[application]\nconfig/name="Keepsake Pure Battle Tests"\n[rendering]\nrenderer/rendering_method="gl_compatibility"\n[threading]\nworker_pool/max_threads=1\n' > "$PURE/project.godot"
 ln -sfn ../../scripts "$PURE/scripts"
 ln -sfn ../../tests "$PURE/tests"
-if env KEEPSAKE_CONTENT_ROOT="$ROOT/data" XDG_CACHE_HOME="$PRIVATE/cache" XDG_CONFIG_HOME="$PRIVATE/config" XDG_DATA_HOME="$PRIVATE/data" "$GODOT_BIN" --headless --path "$PURE" --script res://tests/battle/battle_runner.gd > "$PRIVATE/pure.log" 2>&1; then
+if env KEEPSAKE_CONTENT_ROOT="$ROOT/data" XDG_CACHE_HOME="$PRIVATE/cache" XDG_CONFIG_HOME="$PRIVATE/config" XDG_DATA_HOME="$PRIVATE/data" nice -n 10 "$GODOT_BIN" --headless --path "$PURE" --script res://tests/rope_pair/rules_runner.gd > "$PRIVATE/pure.log" 2>&1; then
   status=0
 else
   status=$?
@@ -23,4 +24,4 @@ cat "$PRIVATE/pure.log"
 if [ "$status" -ne 0 ] || grep -Eq '^(SCRIPT ERROR:|ERROR:)' "$PRIVATE/pure.log"; then
   exit 1
 fi
-grep -Eq '^D1_BATTLE_TEST_RESULT: .*"failed":0.*"passed":[1-9][0-9]*' "$PRIVATE/pure.log"
+grep -Eq '^ROPE_PAIR_RESULT: .*"failed":0.*"passed":[1-9][0-9]*' "$PRIVATE/pure.log"

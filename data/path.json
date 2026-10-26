@@ -177,7 +177,9 @@
               "type": "battle",
               "id": "enc.t1_b",
               "tier": 1,
-              "hint": "两只毛球虫，各7点生命"
+              "hint": "两只毛球虫",
+              "pair_tutorial": true,
+              "tutorial_id": "tutorial.pair"
             },
             {
               "type": "event",
@@ -215,16 +217,26 @@
       ],
       "first_rewards": [
         {
+          "kind": "card",
+          "id": "card.big_hammer"
+        },
+        {
+          "kind": "card",
+          "id": "card.double_knot"
+        },
+        {
+          "kind": "card",
+          "id": "card.curl_up"
+        }
+      ],
+      "first_thanks": [
+        {
           "kind": "relic",
           "id": "relic.lone_glove"
         },
         {
           "kind": "relic",
           "id": "relic.half_biscuit"
-        },
-        {
-          "kind": "card",
-          "id": "card.big_hammer"
         }
       ]
     }

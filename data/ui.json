@@ -167,7 +167,7 @@
   },
   {
     "id": "ui.end_turn",
-    "text": "结束回合"
+    "text": "收手"
   },
   {
     "id": "ui.skip",
@@ -203,11 +203,11 @@
   },
   {
     "id": "ui.guard",
-    "text": "护盾"
+    "text": "裹紧"
   },
   {
     "id": "ui.energy",
-    "text": "能量"
+    "text": "力气"
   },
   {
     "id": "ui.intent",
@@ -259,7 +259,7 @@
   },
   {
     "id": "ui.energy_count",
-    "text": "能量 {energy}/{max_energy}"
+    "text": "力气 {energy}/{max_energy}"
   },
   {
     "id": "ui.deck_count",
@@ -415,7 +415,7 @@
   },
   {
     "id": "ui.not_enough_energy",
-    "text": "能量不够"
+    "text": "力气不够"
   },
   {
     "id": "ui.illegal_target",
@@ -727,11 +727,11 @@
   },
   {
     "id": "ui.d1.guard",
-    "text": "护盾 {guard}"
+    "text": "裹紧 {guard}"
   },
   {
     "id": "ui.d1.energy",
-    "text": "能量 {energy}"
+    "text": "力气 {energy}"
   },
   {
     "id": "ui.d1.turn",
@@ -759,7 +759,7 @@
   },
   {
     "id": "ui.d1.end_turn",
-    "text": "结束回合 [E]"
+    "text": "收手 [E]"
   },
   {
     "id": "ui.d1.draw_pile",
@@ -899,15 +899,15 @@
   },
   {
     "id": "ui.d1.type_attack",
-    "text": "攻击"
+    "text": "打"
   },
   {
     "id": "ui.d1.type_guard",
-    "text": "护盾"
+    "text": "绳"
   },
   {
     "id": "ui.d1.type_special",
-    "text": "特殊"
+    "text": "杂"
   },
   {
     "id": "ui.d1.intent_attack",
@@ -1039,11 +1039,11 @@
   },
   {
     "id": "ui.d1.node_rest",
-    "text": "休息：回复 {amount} 点生命"
+    "text": "歇一歇：回复 {amount} 点生命"
   },
   {
     "id": "ui.d1.node_dry_rope",
-    "text": "晒晒绳子：最大生命 +{amount}（不回复）"
+    "text": "搓根新绳：本趟所有缠 +{amount}"
   },
   {
     "id": "ui.d1.node_trade_leave",
@@ -1211,7 +1211,7 @@
   },
   {
     "id": "ui.r2.end_turn",
-    "text": "结束回合"
+    "text": "收手"
   },
   {
     "id": "ui.r2.pause",
@@ -1304,5 +1304,105 @@
   {
     "id": "ui.r2.controls_body",
     "text": "鼠标：把攻击牌拖到敌人身上；护盾牌拖到场上。\n也可点击选牌，再点敌人或场地出牌。\n教学战：数字 1–8 选牌，方向键选敌人，回车出牌，E 结束回合。\n空格：跳过台词；Esc：取消选牌或暂停。\n开场：空格 / 回车跳过台词，抓住麻绳。\n原版旅程另支持空格结束回合，D / F 查看牌堆。"
+  },
+  {
+    "id": "ui.rope.tutorial_attack",
+    "text": "把这张拖到袜子身上。"
+  },
+  {
+    "id": "ui.rope.tutorial_bind",
+    "text": "它要扑你，先缠住它——看，数字变小了。"
+  },
+  {
+    "id": "ui.rope.tutorial_persist",
+    "text": "绳子没用完会留着，不过它会挣开。"
+  },
+  {
+    "id": "ui.rope.tutorial_pair",
+    "text": "同样的两只？系在一起，它们都累了就会一起回家。"
+  },
+  {
+    "id": "ui.rope.tutorial_end",
+    "text": "出好牌了，点收手。"
+  },
+  {
+    "id": "ui.rope.tutorial_free",
+    "text": "看它下一步做什么，再决定怎么出牌。"
+  },
+  {
+    "id": "ui.rope.tutorial_victory",
+    "text": "这一段已经学会了。"
+  },
+  {
+    "id": "ui.rope.tutorial_defeat",
+    "text": "重新试试，缠住准备攻击的敌人。"
+  },
+  {
+    "id": "ui.rope.tutorial_incoming",
+    "text": "头上的数字，是这次攻击扣掉缠之后的伤害。"
+  },
+  {
+    "id": "ui.rope.peaceful_victory",
+    "text": "第一千只袜子，终于凑成了一对。"
+  },
+  {
+    "id": "ui.rope.shake",
+    "text": "抖一张"
+  },
+  {
+    "id": "ui.rope.bind",
+    "text": "缠"
+  },
+  {
+    "id": "ui.rope.tie",
+    "text": "系"
+  },
+  {
+    "id": "ui.rope.pair",
+    "text": "凑对"
+  },
+  {
+    "id": "ui.rope.relic",
+    "text": "拾物"
+  },
+  {
+    "id": "ui.rope.thanks",
+    "text": "谢礼：挑一件拾物"
+  },
+  {
+    "id": "ui.rope.keepsake_used",
+    "text": "本场已用"
+  },
+  {
+    "id": "ui.rope.second_target",
+    "text": "再选一个不同的敌人"
+  },
+  {
+    "id": "ui.rope.type_rope",
+    "text": "绳"
+  },
+  {
+    "id": "ui.rope.node_battle",
+    "text": "拦路的"
+  },
+  {
+    "id": "ui.rope.node_elite",
+    "text": "大家伙"
+  },
+  {
+    "id": "ui.rope.node_campfire",
+    "text": "歇脚灯"
+  },
+  {
+    "id": "ui.rope.node_event",
+    "text": "遇见"
+  },
+  {
+    "id": "ui.rope.node_trade",
+    "text": "换换鼠"
+  },
+  {
+    "id": "ui.rope.node_boss",
+    "text": "井底主"
   }
 ]

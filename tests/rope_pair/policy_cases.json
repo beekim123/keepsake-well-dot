@@ -1,0 +1,88 @@
+[
+  {
+    "strategy": "competent",
+    "snapshot": {
+      "encounter": {
+        "enemies": [
+          "boss.sock_snake"
+        ],
+        "id": "boss.sock_snake",
+        "tier": 1
+      },
+      "run": {
+        "battle_seed": 1983133306,
+        "bind_bonus": 0,
+        "deck": [
+          "card.curl_up",
+          "card.knock",
+          "card.knock",
+          "card.bind",
+          "card.bind",
+          "card.bind",
+          "card.tie",
+          "card.tie",
+          "card.rope_lasso",
+          "card.tug",
+          "card.shake_rope",
+          "card.curl_up"
+        ],
+        "hp": 39,
+        "keepsakes": [
+          "keepsake.ring"
+        ],
+        "max_hp": 40,
+        "next_battle": {},
+        "relics": [
+          "relic.tangled_earbuds"
+        ],
+        "shuffle_seed": 2773730487,
+        "spare_rope_available": false,
+        "spare_rope_used": false
+      },
+      "seed": 1983133306
+    }
+  },
+  {
+    "strategy": "no_pairs",
+    "snapshot": {
+      "encounter": {
+        "enemies": [
+          "boss.sock_snake"
+        ],
+        "id": "boss.sock_snake",
+        "tier": 1
+      },
+      "run": {
+        "battle_seed": 1651176071,
+        "bind_bonus": 0,
+        "deck": [
+          "card.curl_up",
+          "card.curl_up",
+          "card.knock",
+          "card.bind",
+          "card.bind",
+          "card.bind",
+          "card.tie",
+          "card.tie",
+          "card.rope_lasso",
+          "card.tug",
+          "card.blanket",
+          "card.shake_rope"
+        ],
+        "hp": 36,
+        "keepsakes": [
+          "keepsake.ring"
+        ],
+        "max_hp": 40,
+        "next_battle": {},
+        "relics": [
+          "relic.open_ink"
+        ],
+        "shuffle_seed": 3729289482,
+        "spare_rope_available": false,
+        "spare_rope_used": false
+      },
+      "seed": 1651176071
+    }
+  }
+]

@@ -26,8 +26,8 @@ func choices(run: Dictionary) -> Array:
 				result.append(choice.duplicate(true))
 		"campfire":
 			var heal: int = int(balance["campfire_heal"])
-			var growth: int = int(balance["campfire_max_hp"])
-			result = [{"id": "rest", "text": str(ui.get("ui.d1.node_rest", "")).replace("{amount}", str(heal)), "ops": [{"op": "heal", "amount": heal}]}, {"id": "dry_rope", "text": str(ui.get("ui.d1.node_dry_rope", "")).replace("{amount}", str(growth)), "ops": [{"op": "max_hp", "amount": growth}]}]
+			var growth: int = int(balance["campfire_bind_bonus"])
+			result = [{"id": "rest", "text": str(ui.get("ui.d1.node_rest", "")).replace("{amount}", str(heal)), "ops": [{"op": "heal", "amount": heal}]}, {"id": "dry_rope", "text": str(ui.get("ui.d1.node_dry_rope", "")).replace("{amount}", str(growth)), "ops": [{"op": "bind_bonus", "amount": growth}]}]
 		"trade":
 			result = [{"id": "leave", "text": ui.get("ui.d1.node_trade_leave", ""), "ops": []}]
 	for choice: Dictionary in result:
@@ -70,8 +70,11 @@ func apply_op(run: Dictionary, op: Dictionary) -> Array:
 			if run["hp"] == 0 and run.get("spare_rope_available", false) and not run.get("spare_rope_used", false):
 				run["hp"] = int(balance["spare_rope_hp"])
 				run["spare_rope_used"] = true
-				run["next_battle"]["start_guard"] = int(run["next_battle"].get("start_guard", 0)) + int(balance["spare_rope_guard"])
+				run["next_battle"]["bind_all_start"] = int(run["next_battle"].get("bind_all_start", 0)) + int(balance["spare_rope_binds"])
 				result.append({"type": "spare_rope"})
+		"bind_bonus":
+			run["bind_bonus"] = int(run.get("bind_bonus", 0)) + amount
+			result.append({"type": "bind_bonus", "amount": amount})
 		"max_hp":
 			run["max_hp"] = int(run["max_hp"]) + amount
 			result.append({"type": "max_hp", "amount": amount})
@@ -98,7 +101,7 @@ func apply_op(run: Dictionary, op: Dictionary) -> Array:
 			if op.has("enemy_id"):
 				if not next.has("extra_enemies"): next["extra_enemies"] = []
 				next["extra_enemies"].append(op["enemy_id"])
-			if op.has("guard"): next["start_guard"] = int(next.get("start_guard", 0)) + int(op["guard"])
+			if op.has("bind_all_start"): next["bind_all_start"] = int(next.get("bind_all_start", 0)) + int(op["bind_all_start"])
 			if op.has("bonus_relics"): next["extra_relic_rewards"] = int(next.get("extra_relic_rewards", 0)) + int(op["bonus_relics"])
 			if op.get("first_attack_immune", false): next["cancel_first_attack"] = true
 			result.append({"type": "next_battle", "modifiers": next.duplicate(true)})

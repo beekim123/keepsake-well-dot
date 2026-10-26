@@ -2,9 +2,13 @@
   {
     "id": "tutorial.wet_sock",
     "encounter_id": "enc.tutorial",
+    "player": {
+      "hp": 40,
+      "energy": 3
+    },
     "enemy": {
       "enemy_id": "enemy.wet_sock",
-      "hp": 20,
+      "hp": 16,
       "intents": [
         {
           "type": "attack",
@@ -19,59 +23,50 @@
         {
           "type": "guard",
           "amount": 4,
-          "name": "拧干自己"
+          "name": "拧干自己",
+          "shake_off": "all"
         }
       ]
-    },
-    "player": {
-      "hp": 40,
-      "energy": 3
     },
     "deck": [
       "card.knock",
       "card.knock",
       "card.knock",
-      "card.knock",
-      "card.brace",
-      "card.brace",
-      "card.brace",
-      "card.brace",
+      "card.bind",
+      "card.bind",
+      "card.bind",
+      "card.tie",
+      "card.tie",
       "card.rope_lasso",
       "card.tug"
     ],
     "turns": [
       {
         "hand": [
-          "card.knock",
           "card.knock"
         ],
         "force_first": true,
-        "end_requires_empty": true,
+        "end_requires_empty": false,
         "prompt": "attack",
-        "after_first_prompt": "attack_again",
-        "empty_prompt": "end_turn"
+        "after_first_prompt": "end"
       },
       {
         "hand": [
-          "card.brace",
-          "card.knock",
-          "card.brace"
+          "card.bind"
         ],
         "force_first": true,
         "end_requires_empty": false,
-        "prompt": "shield",
-        "after_first_prompt": "shield_done"
+        "prompt": "bind",
+        "after_first_prompt": "end"
       },
       {
         "hand": [
-          "card.knock",
-          "card.rope_lasso",
-          "card.tug",
-          "card.brace"
+          "card.bind"
         ],
-        "force_first": false,
+        "force_first": true,
         "end_requires_empty": false,
-        "prompt": "free"
+        "prompt": "persist",
+        "after_first_prompt": "end"
       }
     ],
     "after_script_prompt": "free",
@@ -80,52 +75,178 @@
     "enemy_prompt": "incoming",
     "prompts": {
       "attack": {
-        "text": "把这张牌拖到袜子身上。",
+        "text": "",
+        "text_id": "ui.rope.tutorial_attack",
         "guide": "drag_enemy",
         "speaker": "npc.maye"
       },
-      "attack_again": {
-        "text": "对，往它身上敲！",
+      "bind": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_bind",
         "guide": "drag_enemy",
-        "speaker": "npc.maye",
-        "banter_id": "banter.tutorial_attack"
+        "speaker": "npc.maye"
       },
-      "end_turn": {
-        "text": "没牌了，点这里。",
+      "persist": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_persist",
+        "guide": "drag_enemy",
+        "speaker": "npc.maye"
+      },
+      "pair": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_pair",
+        "guide": "drag_enemy",
+        "speaker": "npc.maye"
+      },
+      "end": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_end",
         "guide": "end_turn",
         "speaker": "npc.maye"
       },
-      "incoming": {
-        "text": "头上那数字，是它要打你多少。",
-        "guide": "enemy",
-        "speaker": "npc.maye"
-      },
-      "shield": {
-        "text": "把「挡」拖到场上。",
-        "guide": "drag_board",
-        "speaker": "npc.maye"
-      },
-      "shield_done": {
-        "text": "先挡着，挡不住的才扣血。",
-        "guide": "none",
-        "speaker": "npc.maye",
-        "banter_id": "banter.tutorial_guard"
-      },
       "free": {
-        "text": "这回，试着自己出牌吧。",
+        "text": "",
+        "text_id": "ui.rope.tutorial_free",
         "guide": "none",
         "speaker": "npc.maye"
       },
       "victory": {
-        "text": "漂亮！",
+        "text": "",
+        "text_id": "ui.rope.tutorial_victory",
         "guide": "none",
         "speaker": "npc.maye"
       },
       "defeat": {
-        "text": "再试一次，我拉着你呢。",
+        "text": "",
+        "text_id": "ui.rope.tutorial_defeat",
         "guide": "none",
+        "speaker": "npc.maye"
+      },
+      "incoming": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_incoming",
+        "guide": "enemy",
         "speaker": "npc.maye"
       }
     }
+  },
+  {
+    "id": "tutorial.pair",
+    "encounter_id": "enc.t1_b",
+    "player": {
+      "hp": 40,
+      "energy": 3
+    },
+    "enemy": {
+      "enemy_id": "enemy.lint_bug",
+      "hp": 9,
+      "intents": [
+        {
+          "type": "attack",
+          "amount": 3,
+          "name": "滚"
+        },
+        {
+          "type": "attack",
+          "amount": 3,
+          "name": "滚"
+        },
+        {
+          "type": "guard",
+          "amount": 4,
+          "name": "滚成团",
+          "shake_off": "half"
+        }
+      ]
+    },
+    "deck": [
+      "card.knock",
+      "card.knock",
+      "card.knock",
+      "card.bind",
+      "card.bind",
+      "card.bind",
+      "card.tie",
+      "card.tie",
+      "card.rope_lasso",
+      "card.tug"
+    ],
+    "turns": [
+      {
+        "hand": [
+          "card.tie",
+          "card.knock",
+          "card.knock"
+        ],
+        "force_first": true,
+        "end_requires_empty": false,
+        "prompt": "pair",
+        "after_first_prompt": "end"
+      }
+    ],
+    "after_script_prompt": "free",
+    "victory_prompt": "victory",
+    "defeat_prompt": "defeat",
+    "enemy_prompt": "incoming",
+    "prompts": {
+      "attack": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_attack",
+        "guide": "drag_enemy",
+        "speaker": "npc.maye"
+      },
+      "bind": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_bind",
+        "guide": "drag_enemy",
+        "speaker": "npc.maye"
+      },
+      "persist": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_persist",
+        "guide": "drag_enemy",
+        "speaker": "npc.maye"
+      },
+      "pair": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_pair",
+        "guide": "drag_enemy",
+        "speaker": "npc.maye"
+      },
+      "end": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_end",
+        "guide": "end_turn",
+        "speaker": "npc.maye"
+      },
+      "free": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_free",
+        "guide": "none",
+        "speaker": "npc.maye"
+      },
+      "victory": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_victory",
+        "guide": "none",
+        "speaker": "npc.maye"
+      },
+      "defeat": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_defeat",
+        "guide": "none",
+        "speaker": "npc.maye"
+      },
+      "incoming": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_incoming",
+        "guide": "enemy",
+        "speaker": "npc.maye"
+      }
+    },
+    "enemies": [
+      "enemy.lint_bug",
+      "enemy.lint_bug"
+    ]
   }
 ]

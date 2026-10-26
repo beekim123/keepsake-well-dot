@@ -68,13 +68,13 @@ static func valid_saved_state(rules: RefCounted, value: Variant) -> bool:
 	var data: Dictionary = rules.definition("tutorial", value["tutorial"]["id"])
 	if not valid(rules, data) or not _same(value["encounter"].get("tutorial_id"), data["id"]):
 		return false
-	if not _same(value["encounter"].get("id"), data["encounter_id"]) or not _same(value["encounter"].get("enemies"), [data["enemy"]["enemy_id"]]):
+	if not _same(value["encounter"].get("id"), data["encounter_id"]) or not _same(value["encounter"].get("enemies"), data.get("enemies", [data["enemy"]["enemy_id"]])):
 		return false
 	if not _integer(value.get("turn"), 1, 1000000) or not _integer(value.get("energy"), 0, int(data["player"]["energy"])):
 		return false
 	if not _integer(value["turn_flags"].get("cards_played"), 0, 1000000):
 		return false
-	if not _integer(value["turn_flags"].get("special_played"), 0, 1000000) or not _integer(value["turn_flags"].get("first_attacker"), -1, 0) or not value["turn_flags"].get("attack_played") is bool:
+	if not _integer(value["turn_flags"].get("special_played"), 0, 1000000) or not _integer(value["turn_flags"].get("first_attacker"), -1, rules.limit("enemy_limit", 4) - 1) or not value["turn_flags"].get("attack_played") is bool:
 		return false
 	if not _integer(value["battle_flags"].get("cards_played"), 0, 1000000) or not value["battle_flags"].get("uses") is Dictionary or not _same(value["battle_flags"].get("victory_pending"), false):
 		return false
@@ -84,7 +84,7 @@ static func valid_saved_state(rules: RefCounted, value: Variant) -> bool:
 	for key: String in ["seed", "next_uid", "next_turn_energy", "next_draw_penalty", "retaliate", "guard_multiplier", "retry_attempt", "resolution_depth"]:
 		if not _integer(value.get(key), 0, 4294967295):
 			return false
-	if value["resolution_depth"] != 0 or value["next_uid"] != data["deck"].size() + 1:
+	if value["resolution_depth"] != 0 or value["next_uid"] != data["deck"].size() + data.get("enemies", [data["enemy"]["enemy_id"]]).size():
 		return false
 	for key: String in ["spare_rope_available", "spare_rope_used"]:
 		if not value.get(key) is bool:
@@ -114,43 +114,39 @@ static func valid_saved_state(rules: RefCounted, value: Variant) -> bool:
 				return false
 			remaining.erase(card["id"])
 			uids.append(card["uid"])
-	if not remaining.is_empty() or not value.get("enemies") is Array or value["enemies"].size() != 1:
+	if not remaining.is_empty() or not value.get("enemies") is Array or value["enemies"].size() != data.get("enemies", [data["enemy"]["enemy_id"]]).size():
 		return false
-	var enemy: Variant = value["enemies"][0]
-	if not enemy is Dictionary or not _same(enemy.get("id"), data["enemy"]["enemy_id"]) or not _same(enemy.get("max_hp"), data["enemy"]["hp"]) or not _integer(enemy.get("hp"), 1, int(data["enemy"]["hp"])):
-		return false
-	if not _same(enemy.get("tutorial_intents"), data["enemy"]["intents"]):
-		return false
-	if not enemy.get("uid") is String or not enemy.get("intent") is Dictionary:
-		return false
-	for key: String in ["guard", "cycle_index", "guard_cycles", "weaken"]:
-		if not _integer(enemy.get(key), 0, 1000000):
-			return false
-	# The presentation may read this cached public action before asking forecast.
-	# It must agree with the script rather than merely being a Dictionary.
-	var intended: Dictionary = data["enemy"]["intents"][int(enemy["cycle_index"]) % data["enemy"]["intents"].size()]
-	var displayed: Dictionary = enemy["intent"]
-	if not _same(displayed.get("type"), intended["type"]) or not _same(displayed.get("name"), intended["name"]) or not _integer(displayed.get("amount"), 0, 999) or displayed["amount"] != intended["amount"]:
-		return false
-	if not _same(displayed.get("enemy"), 0) or not _same(displayed.get("id"), enemy["id"]):
-		return false
-	if intended["type"] == "attack" and (not displayed.get("canceled") is bool or displayed["canceled"] or not _same(displayed.get("times"), 1) or not _same(displayed.get("raw_amount"), intended["amount"])):
-		return false
-	for key: String in ["idle_override", "phase_triggered", "phase_done", "first_attack_pending"]:
-		if not enemy.get(key) is bool or enemy[key]:
-			return false
+	for slot: int in range(value["enemies"].size()):
+		var enemy: Variant = value["enemies"][slot]
+		if not enemy is Dictionary or not _same(enemy.get("id"), data["enemy"]["enemy_id"]) or not _same(enemy.get("max_hp"), data["enemy"]["hp"]): return false
+		if not _integer(enemy.get("hp"), 0, int(data["enemy"]["hp"])) or not _integer(enemy.get("binds"), 0, rules.limit("bind_cap", 12)): return false
+		if not enemy.get("tie") is String or not enemy.get("departed") is String: return false
+		if not _same(enemy.get("tutorial_intents"), data["enemy"]["intents"]): return false
+		if not enemy.get("uid") is String or not enemy.get("intent") is Dictionary: return false
+		for key: String in ["guard", "cycle_index", "guard_cycles", "weaken"]:
+			if not _integer(enemy.get(key), 0, 1000000): return false
+		for key: String in ["idle_override", "phase_triggered", "phase_done", "first_attack_pending"]:
+			if not enemy.get(key) is bool: return false
+	var expected_views: Array = rules._intent_views(value)
+	for slot: int in range(value["enemies"].size()):
+		if rules.enemy_alive(value, slot):
+			var expected: Dictionary = {}
+			for view: Dictionary in expected_views:
+				if int(view["enemy"]) == slot: expected = view
+			if not _same(value["enemies"][slot]["intent"], expected): return false
 	var snapshot: Dictionary = value["start_snapshot"]
 	if not snapshot.get("run") is Dictionary or not snapshot.get("encounter") is Dictionary or not _integer(snapshot.get("seed"), 0, 4294967295):
 		return false
 	if not _same(snapshot["encounter"].get("tutorial_id"), data["id"]) or not _same(snapshot["run"].get("deck"), data["deck"]):
 		return false
-	if not _same(snapshot["encounter"].get("id"), data["encounter_id"]) or not _same(snapshot["encounter"].get("enemies"), [data["enemy"]["enemy_id"]]):
+	if not _same(snapshot["encounter"].get("id"), data["encounter_id"]) or not _same(snapshot["encounter"].get("enemies"), data.get("enemies", [data["enemy"]["enemy_id"]])):
 		return false
 	var plan: Dictionary = plan_for(data, int(value["turn"]))
 	var locked: String = value["tutorial"]["locked_uid"]
 	var must_lock: bool = bool(plan.get("force_first", false)) and int(value["turn_flags"]["cards_played"]) == 0
 	if must_lock:
-		if value["hand"].is_empty() or locked != value["hand"][0]["uid"] or value["hand"][0]["id"] != plan["hand"][0]:
+		var locked_index: int = rules.find_card(value["hand"], locked)
+		if locked_index < 0 or value["hand"][locked_index]["id"] != plan["hand"][0]:
 			return false
 	elif not locked.is_empty():
 		return false
@@ -202,15 +198,20 @@ static func prepare_draw(state: Dictionary, data: Dictionary, fallback: int) -> 
 				state["draw_pile"].remove_at(index)
 				break
 	state["draw_pile"] = ordered + state["draw_pile"]
-	return plan["hand"].size()
+	return ordered.size()
 
 static func after_draw(state: Dictionary, data: Dictionary) -> void:
 	var plan: Dictionary = plan_for(data, int(state["turn"]))
-	state["tutorial"]["locked_uid"] = str(state["hand"][0]["uid"]) if bool(plan.get("force_first", false)) and not state["hand"].is_empty() else ""
+	state["tutorial"]["locked_uid"] = ""
+	if bool(plan.get("force_first", false)):
+		for card: Dictionary in state["hand"]:
+			if card["id"] == plan["hand"][0]:
+				state["tutorial"]["locked_uid"] = card["uid"]
+				break
 
 static func status(state: Dictionary, data: Dictionary) -> Dictionary:
 	if data.is_empty() or not state.has("tutorial"):
-		return {"active": false, "step": "", "prompt_id": "", "text": "", "guide": "none", "allowed_card_uid": "", "can_end_turn": state.get("status", "") == "player", "show_shield": true, "completed": false}
+		return {"active": false, "step": "", "prompt_id": "", "text": "", "guide": "none", "allowed_card_uid": "", "can_end_turn": state.get("status", "") == "player", "show_shield": false, "completed": false}
 	var plan: Dictionary = plan_for(data, int(state["turn"]))
 	var locked: String = str(state["tutorial"].get("locked_uid", ""))
 	var prompt: String = str(plan.get("prompt", data["after_script_prompt"]))
@@ -225,7 +226,7 @@ static func status(state: Dictionary, data: Dictionary) -> Dictionary:
 	var result: Dictionary = data["prompts"].get(prompt, {}).duplicate(true)
 	result.merge({"active": true, "step": "%d:%s" % [int(state["turn"]), prompt], "prompt_id": str(data["id"]) + "." + prompt,
 		"allowed_card_uid": locked, "can_end_turn": state["status"] == "player" and locked.is_empty() and (not bool(plan.get("end_requires_empty", false)) or state["hand"].is_empty()),
-		"show_shield": int(state["turn"]) >= 2, "completed": state["status"] == "victory"}, true)
+		"show_shield": false, "completed": state["status"] == "victory"}, true)
 	return result
 
 static func update_prompt(state: Dictionary, data: Dictionary, events: Array) -> void:

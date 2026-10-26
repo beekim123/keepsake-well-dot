@@ -5,67 +5,75 @@
     "type": "attack",
     "cost": 1,
     "target": "enemy",
-    "starterCount": 4,
+    "starterCount": 3,
     "ops": [
       {
         "op": "damage",
-        "amount": 6
+        "amount": 5
       }
     ],
-    "text": "造成 6 点伤害",
+    "text": "造成 5 点伤害",
     "art": "cardart.knock",
-    "pool": "starter"
+    "pool": "starter",
+    "tendency": "attack"
   },
   {
     "id": "card.brace",
     "name": "挡",
-    "type": "guard",
+    "type": "rope",
     "cost": 1,
-    "target": "self",
-    "starterCount": 4,
+    "target": "enemy",
+    "starterCount": 0,
     "ops": [
       {
-        "op": "gain_guard",
-        "amount": 5
+        "op": "bind",
+        "amount": 4
       }
     ],
-    "text": "获得 5 点护盾",
+    "text": "旧牌：缠 4",
     "art": "cardart.brace",
-    "pool": "starter"
+    "pool": "retired",
+    "tendency": "rope"
   },
   {
     "id": "card.rope_lasso",
     "name": "甩绳",
-    "type": "attack",
+    "type": "rope",
     "cost": 2,
     "target": "all_enemies",
     "starterCount": 1,
     "ops": [
       {
-        "op": "damage_all",
-        "amount": 4
+        "op": "bind_all",
+        "amount": 3
       }
     ],
-    "text": "对所有敌人造成 4 点伤害",
+    "text": "所有敌人缠 3",
     "art": "cardart.rope_lasso",
-    "pool": "starter"
+    "pool": "starter",
+    "tendency": "rope"
   },
   {
     "id": "card.tug",
     "name": "拽一把",
-    "type": "special",
+    "type": "attack",
     "cost": 1,
-    "target": "self",
+    "target": "enemy",
     "starterCount": 1,
     "ops": [
       {
+        "op": "damage",
+        "amount": 3
+      },
+      {
         "op": "draw",
-        "amount": 2
+        "amount": 1
       }
     ],
-    "text": "抽 2 张牌",
+    "text": "造成 3 点伤害，摸 1 张",
     "art": "cardart.tug",
-    "pool": "starter"
+    "pool": "starter",
+    "tendency": "attack"
   },
   {
     "id": "card.double_tap",
@@ -78,12 +86,17 @@
         "op": "damage",
         "amount": 3,
         "times": 2
+      },
+      {
+        "op": "bonus_hit_if_bound",
+        "amount": 3
       }
     ],
-    "text": "造成 3 点伤害 2 次",
+    "text": "造成 3 点伤害 2 次；目标有缠时再打 1 次",
     "art": "cardart.double_tap",
     "pool": "reward",
-    "tendency": "attack"
+    "tendency": "attack",
+    "starterCount": 0
   },
   {
     "id": "card.big_hammer",
@@ -94,13 +107,15 @@
     "ops": [
       {
         "op": "damage",
-        "amount": 14
+        "amount": 13,
+        "link_full": true
       }
     ],
-    "text": "造成 14 点伤害",
+    "text": "造成 13 点伤害；被系着的伙伴受全额连带",
     "art": "cardart.big_hammer",
     "pool": "reward",
-    "tendency": "attack"
+    "tendency": "attack",
+    "starterCount": 0
   },
   {
     "id": "card.dust_off",
@@ -110,14 +125,16 @@
     "target": "enemy",
     "ops": [
       {
-        "op": "damage",
-        "amount": 3
+        "op": "damage_if_wilted",
+        "amount": 2,
+        "wilted_amount": 4
       }
     ],
-    "text": "造成 3 点伤害",
+    "text": "造成 2 点伤害；已经蔫了时改为 4 点",
     "art": "cardart.dust_off",
     "pool": "reward",
-    "tendency": "attack"
+    "tendency": "attack",
+    "starterCount": 0
   },
   {
     "id": "card.wring",
@@ -127,13 +144,15 @@
     "target": "enemy",
     "ops": [
       {
-        "op": "damage_equal_guard"
+        "op": "unbind_damage",
+        "amount": 2
       }
     ],
-    "text": "造成等于你当前护盾的伤害",
+    "text": "解开目标全部的缠，每圈造成 2 点伤害",
     "art": "cardart.wring",
     "pool": "reward",
-    "tendency": "guard"
+    "tendency": "attack",
+    "starterCount": 0
   },
   {
     "id": "card.yank",
@@ -144,89 +163,102 @@
     "ops": [
       {
         "op": "damage",
-        "amount": 5
+        "amount": 4
       },
       {
-        "op": "draw",
-        "amount": 1
+        "op": "swap_intent_with_partner"
       }
     ],
-    "text": "造成 5 点伤害，抽 1 张牌",
+    "text": "造成 4 点伤害；与系着的伙伴交换下一个行动",
     "art": "cardart.yank",
     "pool": "reward",
-    "tendency": "draw"
+    "tendency": "attack",
+    "starterCount": 0
   },
   {
     "id": "card.curl_up",
-    "name": "缩成团",
-    "type": "guard",
+    "name": "绕两圈",
+    "type": "rope",
     "cost": 1,
-    "target": "self",
+    "target": "enemy",
     "ops": [
       {
-        "op": "gain_guard",
+        "op": "bind",
         "amount": 7
       }
     ],
-    "text": "获得 7 点护盾",
+    "text": "缠 7",
     "art": "cardart.curl_up",
     "pool": "reward",
-    "tendency": "guard"
+    "tendency": "rope",
+    "starterCount": 0
   },
   {
     "id": "card.clothesline",
     "name": "晾衣绳",
-    "type": "guard",
+    "type": "rope",
     "cost": 2,
-    "target": "self",
+    "target": "all_enemies",
     "ops": [
       {
-        "op": "gain_guard",
-        "amount": 12
+        "op": "bind_all",
+        "amount": 4
+      },
+      {
+        "op": "tie_leftmost"
       }
     ],
-    "text": "获得 12 点护盾",
+    "text": "所有敌人缠 4，系住最左边两个未被系的敌人",
     "art": "cardart.clothesline",
     "pool": "reward",
-    "tendency": "guard"
+    "tendency": "rope",
+    "starterCount": 0,
+    "fallback_ops": [
+      {
+        "op": "bind_all",
+        "amount": 4
+      }
+    ]
   },
   {
     "id": "card.push_back",
     "name": "顶回去",
-    "type": "guard",
+    "type": "rope",
     "cost": 1,
-    "target": "self",
+    "target": "enemy",
     "ops": [
       {
-        "op": "gain_guard",
-        "amount": 4
+        "op": "bind",
+        "amount": 3
       },
       {
-        "op": "retaliate",
-        "amount": 3
+        "op": "recoil_if_fully_bound",
+        "amount": 4
       }
     ],
-    "text": "获得 4 点护盾；到你下回合开始前，每被攻击一次，反击 3 点伤害",
+    "text": "缠 3；它下次攻击完全被缠挡住时，自受 4 点伤害",
     "art": "cardart.push_back",
     "pool": "reward",
-    "tendency": "guard"
+    "tendency": "rope",
+    "starterCount": 0
   },
   {
     "id": "card.blanket",
     "name": "披毯子",
-    "type": "guard",
+    "type": "rope",
     "cost": 0,
-    "target": "self",
+    "target": "enemy",
     "ops": [
       {
-        "op": "gain_guard",
-        "amount": 3
+        "op": "bind",
+        "amount": 2
       }
     ],
-    "text": "获得 3 点护盾",
+    "text": "缠 2",
     "art": "cardart.blanket",
     "pool": "reward",
-    "tendency": "guard"
+    "tendency": "rope",
+    "starterCount": 0
   },
   {
     "id": "card.pocket",
@@ -238,12 +270,17 @@
       {
         "op": "draw",
         "amount": 1
+      },
+      {
+        "op": "extra_shake",
+        "amount": 1
       }
     ],
-    "text": "抽 1 张牌",
+    "text": "摸 1 张，本回合抖一张次数 +1",
     "art": "cardart.pocket",
     "pool": "reward",
-    "tendency": "draw"
+    "tendency": "draw",
+    "starterCount": 0
   },
   {
     "id": "card.deep_breath",
@@ -253,48 +290,58 @@
     "target": "self",
     "ops": [
       {
-        "op": "next_turn_energy",
-        "amount": 2
+        "op": "next_turn_refill",
+        "amount": 7
       }
     ],
-    "text": "下回合多 2 点能量",
+    "text": "下回合手牌补到 7 张",
     "art": "cardart.deep_breath",
     "pool": "reward",
-    "tendency": "draw"
+    "tendency": "draw",
+    "starterCount": 0
   },
   {
     "id": "card.knot",
     "name": "打个结",
-    "type": "special",
+    "type": "rope",
     "cost": 1,
     "target": "enemy",
     "ops": [
       {
-        "op": "weaken_next_attack",
-        "amount": 5
+        "op": "idle_if_binds",
+        "amount": 3,
+        "threshold": 3
       }
     ],
-    "text": "一个敌人的下一次攻击 -5",
+    "text": "缠至少 3 时下次发呆；否则缠 3",
     "art": "cardart.knot",
     "pool": "reward",
-    "tendency": "guard"
+    "tendency": "rope",
+    "starterCount": 0
   },
   {
     "id": "card.shake_rope",
     "name": "晃绳子",
-    "type": "special",
+    "type": "rope",
     "cost": 1,
-    "target": "enemy",
+    "target": "two_enemies",
     "ops": [
       {
-        "op": "set_intent_idle"
+        "op": "move_binds",
+        "amount": 2
       }
     ],
-    "text": "让一个敌人下次行动时「发呆」；每场战斗限 1 次",
+    "text": "将一端全部的缠挪到另一端，再缠 2；单个敌人缠 2",
     "art": "cardart.shake_rope",
     "pool": "reward",
-    "uses_per_battle": 1,
-    "tendency": "general"
+    "tendency": "rope",
+    "starterCount": 0,
+    "fallback_ops": [
+      {
+        "op": "bind",
+        "amount": 2
+      }
+    ]
   },
   {
     "id": "card.pick_up",
@@ -304,14 +351,14 @@
     "target": "self",
     "ops": [
       {
-        "op": "return_from_discard",
-        "amount": 1
+        "op": "per_pair_draw_energy"
       }
     ],
-    "text": "从弃牌堆选 1 张牌放回手里",
+    "text": "本场每凑成一对，摸 1 张并回 1 力气；还没凑过对时摸 1 张",
     "art": "cardart.pick_up",
     "pool": "reward",
-    "tendency": "draw"
+    "tendency": "draw",
+    "starterCount": 0
   },
   {
     "id": "card.vow",
@@ -321,32 +368,40 @@
     "target": "self",
     "ops": [
       {
-        "op": "double_guard_this_turn"
+        "op": "double_binds_this_turn"
       }
     ],
-    "text": "本回合之后你获得的护盾翻倍",
+    "text": "本回合你施加的缠全部翻倍",
     "art": "cardart.vow",
     "pool": "replica",
     "plus_card_id": "card.vow_plus",
-    "keepsake_id": "keepsake.ring"
+    "keepsake_id": "keepsake.ring",
+    "starterCount": 0,
+    "tendency": "draw"
   },
   {
     "id": "card.whisper",
     "name": "悄悄话",
-    "type": "special",
+    "type": "rope",
     "cost": 0,
     "target": "enemy",
     "ops": [
       {
-        "op": "weaken_next_attack",
-        "amount": 4
+        "op": "bind",
+        "amount": 3
+      },
+      {
+        "op": "reveal_intents",
+        "amount": 2
       }
     ],
-    "text": "一个敌人的下一次攻击 -4",
+    "text": "缠 3，并在本场看见该敌人之后 2 个行动",
     "art": "cardart.whisper",
     "pool": "replica",
     "plus_card_id": "card.whisper_plus",
-    "keepsake_id": "keepsake.mianmian"
+    "keepsake_id": "keepsake.mianmian",
+    "starterCount": 0,
+    "tendency": "rope"
   },
   {
     "id": "card.deliver",
@@ -356,14 +411,17 @@
     "target": "self",
     "ops": [
       {
-        "op": "free_play_other"
+        "op": "free_play_other",
+        "pair_threshold": 0.75
       }
     ],
-    "text": "免费打出你手里的另一张牌",
+    "text": "免费打出另一张牌；若为系类，按 75% 门槛检查一次凑对",
     "art": "cardart.deliver",
     "pool": "replica",
     "plus_card_id": "card.deliver_plus",
-    "keepsake_id": "keepsake.letter"
+    "keepsake_id": "keepsake.letter",
+    "starterCount": 0,
+    "tendency": "draw"
   },
   {
     "id": "card.vow_plus",
@@ -373,36 +431,40 @@
     "target": "self",
     "ops": [
       {
-        "op": "double_guard_this_turn"
+        "op": "double_binds_this_turn"
       }
     ],
-    "text": "本回合之后你获得的护盾翻倍",
+    "text": "本回合你施加的缠全部翻倍",
     "art": "cardart.vow",
     "pool": "replica_plus",
     "replica_of": "card.vow",
-    "keepsake_id": "keepsake.ring"
+    "keepsake_id": "keepsake.ring",
+    "starterCount": 0,
+    "tendency": "draw"
   },
   {
     "id": "card.whisper_plus",
     "name": "悄悄话＋",
-    "type": "special",
+    "type": "rope",
     "cost": 0,
     "target": "enemy",
     "ops": [
       {
-        "op": "weaken_next_attack",
-        "amount": 4
+        "op": "bind",
+        "amount": 5
       },
       {
-        "op": "gain_guard",
-        "amount": 4
+        "op": "reveal_intents",
+        "amount": 2
       }
     ],
-    "text": "一个敌人的下一次攻击 -4，并获得 4 点护盾",
+    "text": "缠 5，并在本场看见该敌人之后 2 个行动",
     "art": "cardart.whisper",
     "pool": "replica_plus",
     "replica_of": "card.whisper",
-    "keepsake_id": "keepsake.mianmian"
+    "keepsake_id": "keepsake.mianmian",
+    "starterCount": 0,
+    "tendency": "rope"
   },
   {
     "id": "card.deliver_plus",
@@ -412,13 +474,109 @@
     "target": "self",
     "ops": [
       {
-        "op": "free_play_other"
+        "op": "free_play_other",
+        "pair_threshold": 0.75
       }
     ],
-    "text": "免费打出你手里的另一张牌",
+    "text": "免费打出另一张牌；若为系类，按 75% 门槛检查一次凑对",
     "art": "cardart.deliver",
     "pool": "replica_plus",
     "replica_of": "card.deliver",
-    "keepsake_id": "keepsake.letter"
+    "keepsake_id": "keepsake.letter",
+    "starterCount": 0,
+    "tendency": "draw"
+  },
+  {
+    "id": "card.bind",
+    "art": "cardart.bind",
+    "pool": "starter",
+    "name": "缠",
+    "type": "rope",
+    "cost": 1,
+    "target": "enemy",
+    "ops": [
+      {
+        "op": "bind",
+        "amount": 4
+      }
+    ],
+    "text": "缠 4",
+    "starterCount": 3,
+    "tendency": "rope"
+  },
+  {
+    "id": "card.tie",
+    "art": "cardart.tie",
+    "pool": "starter",
+    "name": "系",
+    "type": "rope",
+    "cost": 1,
+    "target": "two_enemies",
+    "ops": [
+      {
+        "op": "tie"
+      }
+    ],
+    "text": "把两个敌人系在一起；只有一个敌人时缠它 2",
+    "starterCount": 2,
+    "fallback_ops": [
+      {
+        "op": "bind",
+        "amount": 2
+      }
+    ],
+    "tendency": "rope"
+  },
+  {
+    "id": "card.double_knot",
+    "art": "cardart.double_knot",
+    "pool": "reward",
+    "name": "双头结",
+    "type": "rope",
+    "cost": 1,
+    "target": "two_enemies",
+    "ops": [
+      {
+        "op": "tie"
+      },
+      {
+        "op": "bind_both",
+        "amount": 2
+      }
+    ],
+    "text": "系在一起并各缠 2；只有一个敌人时缠 4",
+    "starterCount": 0,
+    "fallback_ops": [
+      {
+        "op": "bind",
+        "amount": 4
+      }
+    ],
+    "tendency": "rope"
+  },
+  {
+    "id": "card.one_pair",
+    "art": "cardart.one_pair",
+    "pool": "reward",
+    "name": "凑一对",
+    "type": "rope",
+    "cost": 1,
+    "target": "self",
+    "ops": [
+      {
+        "op": "pair_threshold_override",
+        "amount": 2,
+        "threshold": 0.75
+      }
+    ],
+    "text": "本回合同类系对门槛为 75%；没有这样的组合时所有敌人缠 2",
+    "starterCount": 0,
+    "fallback_ops": [
+      {
+        "op": "bind_all",
+        "amount": 2
+      }
+    ],
+    "tendency": "rope"
   }
 ]

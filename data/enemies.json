@@ -2,7 +2,7 @@
   {
     "id": "enemy.wet_sock",
     "name": "湿袜子",
-    "hp": 12,
+    "hp": 16,
     "art": "enemy.wet_sock",
     "kind": "normal",
     "intents": [
@@ -19,14 +19,17 @@
       {
         "type": "guard",
         "amount": 4,
-        "name": "拧干自己"
+        "name": "拧干自己",
+        "shake_off": "all"
       }
-    ]
+    ],
+    "pair_tag": "sock",
+    "pair_threshold": 0.5
   },
   {
     "id": "enemy.lonely_sock",
     "name": "孤袜",
-    "hp": 18,
+    "hp": 22,
     "art": "enemy.lonely_sock",
     "kind": "normal",
     "intents": [
@@ -40,12 +43,18 @@
         "amount": 6,
         "name": "叹气"
       }
-    ]
+    ],
+    "pair_tag": "sock",
+    "pair_threshold": 0.5,
+    "mechanics": {
+      "tied_attack_tag": "sock",
+      "tied_attack_reduction": 2
+    }
   },
   {
     "id": "enemy.lint_bug",
     "name": "毛球虫",
-    "hp": 7,
+    "hp": 9,
     "art": "enemy.lint_bug",
     "kind": "normal",
     "intents": [
@@ -62,14 +71,17 @@
       {
         "type": "guard",
         "amount": 4,
+        "shake_off": "half",
         "name": "滚成团"
       }
-    ]
+    ],
+    "pair_tag": "lint",
+    "pair_threshold": 0.5
   },
   {
     "id": "enemy.stinky_insole",
     "name": "臭鞋垫",
-    "hp": 20,
+    "hp": 26,
     "art": "enemy.stinky_insole",
     "kind": "normal",
     "intents": [
@@ -84,12 +96,14 @@
         "amount": 8,
         "name": "拍"
       }
-    ]
+    ],
+    "pair_tag": "",
+    "pair_threshold": 0.5
   },
   {
     "id": "enemy.clothespin",
     "name": "晾衣夹",
-    "hp": 10,
+    "hp": 13,
     "art": "enemy.clothespin",
     "kind": "normal",
     "intents": [
@@ -106,14 +120,17 @@
       {
         "type": "attack",
         "amount": 8,
+        "ignore_binds": 2,
         "name": "夹紧"
       }
-    ]
+    ],
+    "pair_tag": "clip",
+    "pair_threshold": 0.5
   },
   {
     "id": "enemy.soap_bubble",
     "name": "肥皂泡",
-    "hp": 6,
+    "hp": 8,
     "art": "enemy.soap_bubble",
     "kind": "normal",
     "intents": [
@@ -127,7 +144,9 @@
         "amount": 2,
         "name": "碰"
       }
-    ]
+    ],
+    "pair_tag": "bubble",
+    "pair_threshold": 0.5
   },
   {
     "id": "enemy.sock_kid",
@@ -141,20 +160,23 @@
         "amount": 3,
         "name": "扑"
       }
-    ]
+    ],
+    "pair_tag": "sock",
+    "pair_threshold": 1
   },
   {
     "id": "elite.hungry_drawer",
     "name": "饿抽屉",
-    "hp": 40,
+    "hp": 48,
     "art": "elite.hungry_drawer",
     "kind": "elite",
     "intents": [
       {
         "type": "guard",
         "amount": 6,
-        "name": "嚼",
-        "growth": 2
+        "growth": 2,
+        "eat_binds_to_guard": true,
+        "name": "嚼"
       },
       {
         "type": "attack",
@@ -164,8 +186,8 @@
       {
         "type": "attack",
         "amount": 4,
-        "name": "打嗝",
-        "times": 2
+        "times": 2,
+        "name": "打嗝"
       }
     ],
     "rule_name": "越嚼越硬",
@@ -173,12 +195,14 @@
     "intro": [
       "……（嚼嚼嚼）",
       "它吃了什么亮晶晶的？"
-    ]
+    ],
+    "pair_tag": "",
+    "pair_threshold": 0.5
   },
   {
     "id": "boss.sock_snake",
     "name": "千袜蛇",
-    "hp": 70,
+    "hp": 80,
     "art": "boss.sock_snake",
     "kind": "boss",
     "intents": [
@@ -216,8 +240,12 @@
       "full_board_guard": 3,
       "phase_hp_below": 35,
       "phase_damage": 16,
-      "phase_warning_turns": 2
+      "phase_warning_turns": 2,
+      "peace_pair_tag": "sock",
+      "peace_threshold": 0.3
     },
-    "first_victory_story_id": "story.boss_knot"
+    "first_victory_story_id": "story.boss_knot",
+    "pair_tag": "",
+    "pair_threshold": 0.5
   }
 ]

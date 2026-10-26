@@ -34,7 +34,7 @@
       },
       {
         "id": "friend",
-        "text": "帮它找另一只：下一场战斗多 1 只孤袜，胜利后额外获得 1 件宝物",
+        "text": "帮它找另一只：下一场战斗多 1 只孤袜，胜利后额外获得 1 件拾物",
         "ops": [
           {
             "op": "next_battle",
@@ -58,7 +58,7 @@
     "choices": [
       {
         "id": "shout",
-        "text": "对它喊一声：获得 1 张随机攻击牌",
+        "text": "对它喊一声：获得 1 张随机打类牌",
         "ops": [
           {
             "op": "gain_card",
@@ -100,7 +100,7 @@
     "choices": [
       {
         "id": "reach",
-        "text": "伸手去捞：失去 5 点生命，获得 1 件宝物",
+        "text": "伸手去捞：失去 5 点生命，获得 1 件拾物",
         "ops": [
           {
             "op": "lose_hp",
@@ -128,17 +128,17 @@
     "choices": [
       {
         "id": "help",
-        "text": "帮她收衣服：下一场战斗开始时获得 8 点护盾",
+        "text": "帮她收衣服：下一场开始时所有敌人缠 3",
         "ops": [
           {
             "op": "next_battle",
-            "guard": 8
+            "bind_all_start": 3
           }
         ]
       },
       {
         "id": "ask",
-        "text": "跟她打听：听一段姑姑的消息，获得 1 张随机护盾牌",
+        "text": "跟她打听：听一段姑姑的消息，获得 1 张随机绳牌",
         "ops": [
           {
             "op": "story",
@@ -147,7 +147,7 @@
           {
             "op": "gain_card",
             "amount": 1,
-            "card_type": "guard",
+            "card_type": "rope",
             "random": true
           }
         ]
