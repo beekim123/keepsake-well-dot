@@ -6,6 +6,7 @@ const Art = preload("res://scripts/view/remedy/battle_art.gd")
 const SimpleUI = preload("res://scripts/view/remedy/simple_ui.gd")
 const HealthReadout = preload("res://scenes/remedy/HealthReadout.tscn")
 const RopeLayer = preload("res://scripts/view/remedy/rope_stage_layer.gd")
+const TargetButton = preload("res://scripts/view/remedy/battle_target.gd")
 const UI = preload("res://scripts/view/ui_factory.gd")
 var rules: RefCounted
 var state: Dictionary = {}
@@ -112,6 +113,7 @@ func _build() -> void:
 		if boss_layout: x = 338 if index == 0 else 444 + (index - 1) * 72
 		var width: float = 148 if boss_layout and index == 0 else 82
 		var button: Button = UI.button(self, "", Rect2(x - width / 2, 88, width, 168), _enemy_clicked.bind(index), "Enemy%d" % index)
+		button.set_script(TargetButton)
 		button.disabled = not rules.enemy_alive(state, index)
 		_enemy_centers[index] = Vector2(x, 208)
 		for style_name: String in ["normal", "hover", "pressed", "disabled", "focus"]:
@@ -176,9 +178,13 @@ func _build() -> void:
 		stats.add_theme_constant_override("line_spacing", 0)
 		stats.hide()
 		_enemy_values.append(stats)
-		for next_intent: Dictionary in _forecast.get("next_intents", []):
-			if int(next_intent.get("enemy", -1)) == index:
-				button.tooltip_text += "\n" + t("next_intent", {"text": _intent_text(next_intent)})
+		var future_intents: Array = intent.get("future_intents", [])
+		for future_index: int in range(future_intents.size()):
+			button.tooltip_text += "\n" + rope_text("future_intent", {"step": future_index + 1, "text": _intent_text(future_intents[future_index])})
+		if not future_intents.is_empty() and not button.disabled:
+			var revealed: Label = UI.label(button, rope_text("future_count", {"count": future_intents.size()}), Rect2(width / 2 + 17, intent_y + 3, 32, 18), UI.BLUE)
+			revealed.add_theme_constant_override("outline_size", 2)
+			revealed.add_theme_color_override("font_outline_color", SimpleUI.INK)
 	_inventory()
 	_asui = BattleActor.new()
 	_asui.name = "Hero"
@@ -526,6 +532,8 @@ func _action_text(action: Dictionary) -> String:
 		var nested: Dictionary = choices.get("other_choices", {})
 		if nested.has("second_target"):
 			result += " ↔ " + _target_name(int(nested["second_target"]))
+		if nested.has("other_uid"):
+			result += " · " + _action_text({"type": "play_card", "target_index": other_target, "choices": nested})
 		if nested.has("discard_uid"):
 			result += " · " + _uid_name(str(nested["discard_uid"]), state.get("discard", []))
 		return result
@@ -767,10 +775,10 @@ func _build_decorations() -> void:
 		var hotspots: Dictionary = {
 			"decor.clothesline.small": Rect2(536, 75, 64, 38),
 			"decor.frog.small": Rect2(54, 215, 42, 21),
-			"decor.bubbles.small": Rect2(255, 236, 40, 20),
+			"decor.bubbles.small": Rect2(284, 236, 32, 20),
 			"decor.reeds.small": Rect2(0, 166, 48, 70),
 			"decor.socks.small": Rect2(0, 150, 60, 50),
-			"decor.yarn.small": Rect2(200, 220, 44, 26)
+			"decor.yarn.small": Rect2(264, 212, 40, 22)
 		}
 		var rectangle: Rect2 = hotspots.get(art, Rect2(16 + index * 32, 210, 24, 16))
 		var button: Button = UI.button(self, "", rectangle, _click_decoration.bind(definition, art, index))
@@ -852,7 +860,7 @@ func _intent_amount(intent: Dictionary) -> String:
 		var after: String = "+".join(amounts)
 		var before: String = str(raw) + ("×" + str(hits.size()) if hits.size() > 1 else "")
 		return before + " → " + after if int(intent.get("net_total", raw)) != raw * hits.size() else after
-	return str(intent.get("amount", ""))
+	return str(int(intent["amount"])) if intent.has("amount") else ""
 
 func _selected_actions() -> Array:
 	if selected_keepsake.is_empty(): return _matching_actions(selected)

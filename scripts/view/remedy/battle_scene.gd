@@ -43,6 +43,7 @@ func start_tutorial(options: Dictionary = {}) -> void:
 	_completion_emitted = false
 	busy = true
 	_paused = false
+	if is_instance_valid(_pause_panel): _pause_panel.queue_free()
 	_last_prompt = ""
 	presented_events.clear()
 	rules = Rules.new(ContentCatalog.definitions())
@@ -86,7 +87,7 @@ func _command(action: Dictionary) -> void:
 	_rebuild(events)
 	_view.commands_enabled = false
 	if not instant_presentation and _view.presentation_duration > 0:
-		await get_tree().create_timer(_view.presentation_duration, false).timeout
+		await _wait_presentation(_view.presentation_duration, token)
 	if token != _lifecycle or not is_inside_tree(): return
 	busy = false
 	_view.commands_enabled = true
@@ -99,6 +100,14 @@ func _command(action: Dictionary) -> void:
 		_completion_emitted = true
 		gesture.hide()
 		tutorial_completed.emit({"state": state.duplicate(true), "won": state.get("status") == "victory"})
+
+func _wait_presentation(seconds: float, token: int) -> void:
+	var elapsed: float = 0.0
+	while elapsed < seconds and token == _lifecycle and is_inside_tree():
+		await get_tree().process_frame
+		if token != _lifecycle or not is_inside_tree(): return
+		# Only time in which the shared view can present counts toward completion.
+		if not _paused and _focused: elapsed += get_process_delta_time()
 
 func command_play(hand_index: int, target_index: int = -1, choices: Dictionary = {}) -> void:
 	_command({"type": "play_card", "hand_index": hand_index, "target_index": target_index, "choices": choices})
@@ -127,7 +136,7 @@ func _update_gesture() -> void:
 	if guide == "end_turn":
 		gesture.guide(Vector2(185,244),Vector2(185,244),true)
 		return
-	if guide in ["drag_enemy", "drag_board"]:
+	if guide in ["drag_enemy", "drag_board", "pair_hits"]:
 		var index: int = -1
 		for slot: int in range(state.get("hand", []).size()):
 			if state["hand"][slot]["uid"] == _status.get("allowed_card_uid"): index = slot
@@ -135,7 +144,11 @@ func _update_gesture() -> void:
 			for action: Dictionary in rules.legal_actions(state):
 				if action["type"] == "play_card": index = int(action["hand_index"]); break
 		if index >= 0 and index < _view._hand_buttons.size():
-			var destination: Vector2 = _view._enemy_centers.get(_view._first_target(), Vector2(476,208)) if guide == "drag_enemy" else Vector2(130,208)
+			var target_slot: int = _view._first_target()
+			if guide == "pair_hits":
+				for slot: int in rules.living_slots(state):
+					if target_slot < 0 or int(state["enemies"][slot]["hp"]) > int(state["enemies"][target_slot]["hp"]): target_slot = slot
+			var destination: Vector2 = _view._enemy_centers.get(target_slot, Vector2(476,208)) if guide in ["drag_enemy", "pair_hits"] else Vector2(130,208)
 			gesture.guide(_view._hand_buttons[index].position + Vector2(28,12), destination)
 			return
 	gesture.hide()
@@ -172,6 +185,7 @@ func toggle_pause() -> void:
 
 func _apply_suspend() -> void:
 	if is_instance_valid(_view): _view.process_mode = Node.PROCESS_MODE_DISABLED if _paused or not _focused else Node.PROCESS_MODE_INHERIT
+	if is_instance_valid(bubble): bubble.process_mode = Node.PROCESS_MODE_DISABLED if _paused or not _focused else Node.PROCESS_MODE_INHERIT
 	if is_instance_valid(gesture) and (_paused or not _focused): gesture.hide()
 
 func _notification(what: int) -> void:

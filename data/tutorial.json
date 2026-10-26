@@ -52,12 +52,14 @@
       },
       {
         "hand": [
+          "card.bind",
           "card.bind"
         ],
         "force_first": true,
-        "end_requires_empty": false,
+        "end_requires_empty": true,
         "prompt": "bind",
-        "after_first_prompt": "end"
+        "after_first_prompt": "stack",
+        "empty_prompt": "end"
       },
       {
         "hand": [
@@ -127,6 +129,12 @@
         "text_id": "ui.rope.tutorial_incoming",
         "guide": "enemy",
         "speaker": "npc.maye"
+      },
+      "stack": {
+        "text": "",
+        "text_id": "ui.rope.tutorial_stack",
+        "guide": "drag_enemy",
+        "speaker": "npc.maye"
       }
     }
   },
@@ -181,7 +189,8 @@
         "force_first": true,
         "end_requires_empty": false,
         "prompt": "pair",
-        "after_first_prompt": "end"
+        "after_first_prompt": "pair_hits",
+        "empty_prompt": "end"
       }
     ],
     "after_script_prompt": "free",
@@ -241,6 +250,12 @@
         "text": "",
         "text_id": "ui.rope.tutorial_incoming",
         "guide": "enemy",
+        "speaker": "npc.maye"
+      },
+      "pair_hits": {
+        "text": "",
+        "text_id": "ui.rope.pair_hits",
+        "guide": "pair_hits",
         "speaker": "npc.maye"
       }
     },

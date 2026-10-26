@@ -1560,5 +1560,21 @@
   {
     "id": "ui.rope.keepsake",
     "text": "信物"
+  },
+  {
+    "id": "ui.rope.tutorial_stack",
+    "text": "再缠一张。多出的圈会留到下一回合。"
+  },
+  {
+    "id": "ui.rope.future_intent",
+    "text": "之后第 {step} 次：{text}"
+  },
+  {
+    "id": "ui.rope.future_count",
+    "text": "后{count}次"
+  },
+  {
+    "id": "ui.rope.pair_hits",
+    "text": "再敲两头，蔫了就会一起回家。"
   }
 ]

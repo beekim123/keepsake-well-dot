@@ -94,6 +94,43 @@ func _run() -> void:
 	view.select_keepsake("keepsake.ring")
 	check(sent.size() == 1 and sent[0].get("type") == "use_keepsake" and sent[0].get("target_index") == -1, "all-enemy keepsake fires directly without a spurious target")
 	view.free()
+	state = fixture(1)
+	state["hand"] = [rules.new_card(state, "card.whisper_plus")]
+	rules.play_card(state, 0, 0)
+	view = view_for(state)
+	check(state["enemies"][0].get("lookahead") == 2 and view._enemy_buttons[0].tooltip_text.contains("滚成团"), "playing whisper without spyglass exposes second future intent")
+	view.free()
+	for boss: bool in [false, true]:
+		var viewport: SubViewport = SubViewport.new()
+		viewport.size = Vector2i(640,360)
+		root.add_child(viewport)
+		state = rules.start({"id": "boss.sock_snake" if boss else "enc.tutorial", "enemies": ["boss.sock_snake" if boss else "enemy.wet_sock"]}, {"deck":["card.knock","card.bind","card.tie","card.knock","card.bind"]},147)["state"]
+		view = View.new()
+		view.size = Vector2(640,360)
+		view.configure(rules,state,func(action: Dictionary) -> void: sent.append(action),func(_kind: String) -> void: pass,func() -> void: pass)
+		viewport.add_child(view)
+		await process_frame
+		await process_frame
+		sent.clear()
+		var pointer: InputEventMouseMotion = InputEventMouseMotion.new()
+		pointer.position = Vector2(220 if boss else 260,238)
+		pointer.global_position = pointer.position
+		viewport.push_input(pointer,true)
+		await process_frame
+		var click: InputEventMouseButton = InputEventMouseButton.new()
+		click.button_index = MOUSE_BUTTON_LEFT
+		click.button_mask = MOUSE_BUTTON_MASK_LEFT
+		click.position = pointer.position
+		click.global_position = pointer.position
+		click.pressed = true
+		viewport.push_input(click,true)
+		var release: InputEventMouseButton = click.duplicate()
+		release.pressed = false
+		release.button_mask = 0
+		viewport.push_input(release,true)
+		await process_frame
+		check(sent.size() == 1 and sent[0].get("type") == "end_turn" and view.decoration_counts.is_empty(), ("boss" if boss else "normal") + " end-turn text receives real GUI mouse hit before decoration")
+		viewport.free()
 	# The tutorial must expose and operate both targets, not only enemy slot zero.
 	var tutorial: Dictionary = rules.start_tutorial({}, 147, "tutorial.pair")["state"]
 	var stage: Node = load("res://scenes/remedy/BattleScene.tscn").instantiate()
@@ -106,7 +143,9 @@ func _run() -> void:
 	check(stage.state["enemies"].size() == 2 and not stage.busy, "tutorial preserves two-enemy authority and settles")
 	stage.command_play(0, 0, {"second_target": 1})
 	check(stage.state["enemies"][0]["tie"] == stage.state["enemies"][1]["uid"], "tutorial dispatch applies the chosen second target")
+	check(stage._status.get("guide") == "pair_hits" and stage.gesture.finish == stage._view._enemy_centers[0], "pair lesson asks for knocks after tying")
 	stage.command_play(0, 0)
+	check(stage.gesture.finish == stage._view._enemy_centers[1], "after the first knock the gesture points at the other healthier enemy")
 	stage.command_play(0, 1)
 	check(stage.state["status"] == "victory" and stage.state["battle_flags"]["pairs"] == 1, "pair lesson completes with tie and two real knocks")
 	stage.free()
@@ -131,6 +170,21 @@ func _run() -> void:
 	escape.pressed = true
 	view.handle_key(escape)
 	check(view.selected == -1 and view.first_target == -1 and sent.is_empty(), "escape cancels pending second target")
+	view.free()
+	state = fixture(3)
+	state["hand"] = [rules.new_card(state, "card.deliver"), rules.new_card(state, "card.deliver_plus"), rules.new_card(state, "card.tie")]
+	view = view_for(state)
+	var deep_actions: Array = []
+	for action: Dictionary in view._matching_actions(0):
+		var choice: Dictionary = action.get("choices", {})
+		if choice.get("other_uid") == state["hand"][1]["uid"] and choice.get("other_choices", {}).get("other_uid") == state["hand"][2]["uid"]: deep_actions.append(action)
+	check(deep_actions.size() > 1 and view._action_text(deep_actions[0]).contains("↔") and view._action_text(deep_actions[0]) != view._action_text(deep_actions[1]), "recursive deliver candidates distinguish different final target pairs")
+	sent.clear()
+	view.on_command = func(action: Dictionary) -> void:
+		sent.append(action)
+		rules.apply_action(state, action)
+	view._commit(deep_actions[1])
+	check(sent.size() == 1 and sent[0] == deep_actions[1] and state["enemies"][0]["tie"] == state["enemies"][2]["uid"], "recursive deliver dispatches the specifically selected 1-to-3 pair")
 	view.free()
 	# Route first click reveals the hidden card; selection is a separate action.
 	app = Controller.new()
