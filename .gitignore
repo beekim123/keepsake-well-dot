@@ -1,2 +1,13 @@
 .godot/
 .DS_Store
+
+# Local tools, caches, exports and credentials are not project sources.
+Godot.app/
+Godot_v*/
+godot*.exe
+node_modules/
+.cache/
+.local/
+build/
+.env
+.env.*
