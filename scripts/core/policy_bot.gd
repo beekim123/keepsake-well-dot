@@ -45,6 +45,8 @@ func _makes_tie(action: Dictionary, state: Dictionary, rules: RefCounted) -> boo
 	if action["type"] != "play_card": return false
 	var card: Dictionary = rules.definition("cards", state["hand"][action["hand_index"]]["id"])
 	if rules.is_tie_card(card): return true
+	for op: Dictionary in card.get("ops", []):
+		if op.get("op", "") in ["pair_threshold_override", "pair_any_now"]: return true
 	if action.get("choices", {}).has("other_uid"):
 		var index: int = rules.find_card(state["hand"], action["choices"]["other_uid"])
 		return index >= 0 and _makes_tie({"type": "play_card", "hand_index": index, "choices": action["choices"].get("other_choices", {})}, state, rules)

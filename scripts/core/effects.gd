@@ -108,7 +108,7 @@ static func resolve(rules: RefCounted, state: Dictionary, operations: Array, con
 			"bind_threat":
 				var selected: int = -1
 				var danger: int = -1
-				for intent: Dictionary in rules._intent_views(state):
+				for intent: Dictionary in rules._intent_views(state, false):
 					if int(intent.get("net_total", 0)) > danger:
 						selected = int(intent["enemy"])
 						danger = int(intent.get("net_total", 0))

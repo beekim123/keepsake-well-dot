@@ -1,5 +1,5 @@
 extends Node
-## Version 1 transaction snapshots. Never replace unsupported future saves.
+## Versioned transaction snapshots. Never replace unsupported future saves.
 
 const SAVE_VERSION: int = 2
 const SAVE_PATH: String = "user://save.json"
@@ -333,8 +333,8 @@ func _valid_request(request: Variant, run_key: String = "run_state") -> bool:
 
 func migrate_state(value: Dictionary, definitions: Dictionary) -> Dictionary:
 	var migrated: Dictionary = value.duplicate(true)
-	if int(migrated.get("version", 0)) != 1: return migrated
-	if not migrated.get("meta") is Dictionary or not migrated.get("settings") is Dictionary: return migrated
+	if not _whole_number(migrated.get("version"), 1, 1): return migrated
+	if not _valid_legacy_migration(migrated): return migrated
 	var Meta = preload("res://scripts/core/meta_state.gd")
 	var meta_rules: RefCounted = Meta.new(definitions)
 	var meta: Dictionary = migrated["meta"]
@@ -353,3 +353,15 @@ func migrate_state(value: Dictionary, definitions: Dictionary) -> Dictionary:
 		if key.contains("tutorial") or key in ["first_run_flow", "first_return_story_seen"]: migrated["settings"].erase(key)
 	migrated["settings"]["rope_tutorial_pending"] = true
 	return migrated
+
+func _valid_legacy_migration(value: Dictionary) -> bool:
+	# Validate every container read by grant_return before touching legacy data.
+	# Leave malformed input at version 1 so load_state takes the backup/recovery path.
+	if not _json_safe(value, 0) or not value.get("meta") is Dictionary or not value.get("settings") is Dictionary: return false
+	if not _valid_meta(value["meta"]): return false
+	var old_run: Variant = value.get("run")
+	if old_run == null: return true
+	if not old_run is Dictionary or not _string_array(old_run.get("keepsakes", [])) or not old_run.get("wishes", {}) is Dictionary: return false
+	for id: Variant in old_run.get("wishes", {}):
+		if not id is String or not old_run["wishes"][id] is bool: return false
+	return true

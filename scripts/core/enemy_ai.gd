@@ -3,6 +3,9 @@ extends RefCounted
 ## Fixed cycles plus live swallow/boss phase intent; no hidden global randomness.
 static func raw_intent(rules: RefCounted, state: Dictionary, slot: int, offset: int = 0) -> Dictionary:
 	var enemy: Dictionary = state["enemies"][slot]
+	if offset > 0:
+		var projected: Array = rules.projected_intents(state, offset).get(enemy["uid"], [])
+		return projected[offset - 1].duplicate(true) if projected.size() >= offset else {"type": "unavailable", "amount": 0}
 	if not rules.enemy_alive(state, slot):
 		return {"type": "defeated", "amount": 0}
 	var definition: Dictionary = rules.definition("enemies", enemy["id"])

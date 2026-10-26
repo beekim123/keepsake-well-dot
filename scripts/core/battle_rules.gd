@@ -621,9 +621,10 @@ func forecast(state: Dictionary) -> Dictionary:
 	# defeat, not a claim that interrupted attacks actually execute.
 	return {"damage": damage, "resolved_damage": damage, "predicted_damage": predicted_damage, "hp_loss": hp_loss, "prediction_stops_at_defeat": next["status"] == "defeat", "prediction_basis": "live_intents_before_retaliation", "incoming": incoming, "hp_after": next["player"]["hp"], "guard_after": next["player"]["guard"], "intents": current, "next_intents": next_intents, "warnings": _warnings(state), "events": events}
 
-func _intent_views(state: Dictionary) -> Array:
+func _intent_views(state: Dictionary, include_future: bool = true) -> Array:
 	var result: Array = []
-	var first_attacker: int = -1
+	var lookaheads: Dictionary = {}
+	var furthest: int = 0
 	for slot: int in living_slots(state):
 		var intent: Dictionary = Enemies.raw_intent(self, state, slot)
 		intent["enemy"] = slot
@@ -646,9 +647,38 @@ func _intent_views(state: Dictionary) -> Array:
 			intent["net_total"] = net_total
 		var lookahead: int = maxi(int(state["enemies"][slot].get("lookahead", 0)), int(param("relics", "relic.spyglass", "lookahead", 1)) if has_item(state, "relics", "relic.spyglass") else 0)
 		intent["future_intents"] = []
-		for offset: int in range(1, lookahead + 1): intent["future_intents"].append(Enemies.raw_intent(self, state, slot, offset))
+		lookaheads[slot] = lookahead
+		furthest = maxi(furthest, lookahead)
 		result.append(intent)
+	if include_future and furthest > 0:
+		var projected: Dictionary = projected_intents(state, furthest)
+		for intent: Dictionary in result:
+			var slot: int = int(intent["enemy"])
+			intent["future_intents"] = projected.get(state["enemies"][slot]["uid"], []).slice(0, int(lookaheads[slot]))
 	return result
+
+func projected_intents(state: Dictionary, count: int) -> Dictionary:
+	# Conditional on no further player actions. Use stable UIDs and real turn
+	# execution so one-shot phases, swaps, idle, summoning and consumption agree.
+	var future: Dictionary = {}
+	for slot: int in living_slots(state): future[state["enemies"][slot]["uid"]] = []
+	if state.get("status", "") != "player": return future
+	var projected: Dictionary = state.duplicate(true)
+	for step: int in range(maxi(0, count)):
+		var ignored_events: Array = []
+		Hooks.trigger(self, projected, "turn_end", {}, ignored_events)
+		_enemy_phase(projected, ignored_events)
+		_finalize(projected, ignored_events)
+		if projected["status"] != "player": break
+		_begin_turn(projected, ignored_events)
+		for uid: String in future:
+			var intent: Dictionary = {"type": "defeated", "amount": 0}
+			for slot: int in living_slots(projected):
+				if projected["enemies"][slot]["uid"] == uid:
+					intent = Enemies.raw_intent(self, projected, slot)
+					break
+			future[uid].append(intent)
+	return future
 
 func _warnings(state: Dictionary) -> Array:
 	var result: Array = []
@@ -726,7 +756,7 @@ func check_pairs(state: Dictionary, events: Array, threshold: float = 0.0) -> vo
 			var mechanics: Dictionary = definition("enemies", pair[0]["id"]).get("mechanics", {})
 			if mechanics.has("peace_pair_tag") and pair[1].get("pair_tag", "") == mechanics["peace_pair_tag"] and wilted(pair[0], float(mechanics.get("peace_threshold", 0.3))): peaceful = true
 		var same: bool = not str(a.get("pair_tag", "")).is_empty() and a.get("pair_tag", "") == b.get("pair_tag", "")
-		if not peaceful and not ((same or bool(a.get("tie_any_pair", false))) and wilted(a, override if same else 0.0) and wilted(b, override if same else 0.0)): continue
+		if not peaceful and not ((same or bool(a.get("tie_any_pair", false)) or bool(b.get("tie_any_pair", false))) and wilted(a, override if same else 0.0) and wilted(b, override if same else 0.0)): continue
 		a["departed"] = "paired"
 		b["departed"] = "paired"
 		untie(state, first)
