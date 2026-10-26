@@ -1,0 +1,107 @@
+{
+  "archive": "keepsake-well.zip",
+  "archive_sha256": "3bd8f060c6bd4be25f2a0bc40bea9fa0b410e1a27593469efdc4a2a3d4ed4d18",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "90af92131226861af8b503bf8ada7c425095e70a357d71a9a3b6eac1175e67f5",
+      "bytes": 1488
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "1496f741e523e3050cbd2f0ccb15205c5f82aa5ecef5f910eae5bb1a188d6a82",
+      "bytes": 5194
+    },
+    {
+      "path": "docs/README.md",
+      "sha256": "c562e2e41f382c88fca0a61ded927aa88e3bf12cf2aa276e558508579d8c5b28",
+      "bytes": 3527
+    },
+    {
+      "path": "docs/00-vision.md",
+      "sha256": "592b9d8553c7df86a14574d1b36045f0d7f5b988f789184dea1ce3edb1763b61",
+      "bytes": 6115
+    },
+    {
+      "path": "docs/design/02-rules.md",
+      "sha256": "24cbd9c6df226a1c0c3ff37b9b3806d8ef2d7d616ea85efcb098c6ad00f85977",
+      "bytes": 11727
+    },
+    {
+      "path": "docs/design/04-storytelling.md",
+      "sha256": "a3e17284f94e7bb8d0ffde470107abc469da34f53972f5135c06de422a18490c",
+      "bytes": 12683
+    },
+    {
+      "path": "docs/design/05-ui-flow.md",
+      "sha256": "c8cd48d04a0d92e1108e1c8aa87c7e3361006663c1cd91ba1ebfb82c48bd0138",
+      "bytes": 7705
+    },
+    {
+      "path": "docs/design/01-world-story.md",
+      "sha256": "27c9aaabe44a5673acadb8b2db55dd23fd08e94225591a0e05bfc8c4e8fdfd66",
+      "bytes": 7725
+    },
+    {
+      "path": "docs/design/03-content.md",
+      "sha256": "6274f717bd70c7da0a6a627d52ccd2785685851626576bf4f21bc386fede60e9",
+      "bytes": 10407
+    },
+    {
+      "path": "docs/art/art-pipeline.md",
+      "sha256": "781f9e39c1023851e03576a0de31caf83dea451ba6d7b8df9ff9e043a23c1b95",
+      "bytes": 6118
+    },
+    {
+      "path": "docs/art/art-direction.md",
+      "sha256": "e8353e33c2bebc401c42bb0636ba37e5e066b961723fe400cbc868a18203b208",
+      "bytes": 7062
+    },
+    {
+      "path": "docs/plan/playtest.md",
+      "sha256": "b08cb09a9bccba2222079f5aec236aa6b039d2dddc5efa0a59c0a544b0b2d712",
+      "bytes": 3257
+    },
+    {
+      "path": "docs/plan/progress.md",
+      "sha256": "8ade5edde6f96f404f50c372bb68c97348f046c6f904a3e0d2a4c615d5a0bbbd",
+      "bytes": 324
+    },
+    {
+      "path": "docs/plan/roadmap.md",
+      "sha256": "477a0bc244dacf3aa1ee0e74f6daccbcd5033eea8abfb1013c2aeb71273052cf",
+      "bytes": 3329
+    },
+    {
+      "path": "docs/plan/questions.md",
+      "sha256": "a71ebcfbc02df56687891494438533dca37600680b1fb643ab73e54f033268b3",
+      "bytes": 851
+    },
+    {
+      "path": "docs/plan/backlog.md",
+      "sha256": "a63ff5b873c0fcc31a26aa6e4d77acc36460f4ea48021287d3e186d9a6065f6b",
+      "bytes": 3349
+    },
+    {
+      "path": "docs/audio/audio-direction.md",
+      "sha256": "638a9e38b8e6e566616a35c89ba530b5d221635509bd620cca411443bbd27c90",
+      "bytes": 6295
+    },
+    {
+      "path": "docs/prompts/gpt-kickoff.md",
+      "sha256": "956aa1b8fabe0f21e203e734e0dd4d31f0730969a7abd1bb1b5a2d5e7fdf513d",
+      "bytes": 4972
+    },
+    {
+      "path": "docs/tech/architecture.md",
+      "sha256": "4e9c4ef561f40a0e52f34aba3b283d0690f9d17ec5982ff6681abf9305854747",
+      "bytes": 9068
+    },
+    {
+      "path": "docs/tech/repository-layout.md",
+      "sha256": "3a26e1737b8391d33b75962e54d17ce5429e2e5ee701a1c674ee5d07d5bd385b",
+      "bytes": 7432
+    }
+  ],
+  "omitted": "macOS finder metadata only; original archive retained unchanged"
+}
