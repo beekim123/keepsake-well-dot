@@ -5,6 +5,7 @@ const BattleActor = preload("res://scripts/view/remedy/battle_actor.gd")
 const Art = preload("res://scripts/view/remedy/battle_art.gd")
 const SimpleUI = preload("res://scripts/view/remedy/simple_ui.gd")
 const HealthReadout = preload("res://scenes/remedy/HealthReadout.tscn")
+const RopeLayer = preload("res://scripts/view/remedy/rope_stage_layer.gd")
 const UI = preload("res://scripts/view/ui_factory.gd")
 var rules: RefCounted
 var state: Dictionary = {}
@@ -12,6 +13,12 @@ var on_command: Callable
 var on_pile: Callable
 var on_pause: Callable
 var selected: int = -1
+var selected_keepsake: String = ""
+var first_target: int = -1
+var on_selection: Callable
+var _stage_rope: Control
+var _shake_button: Button
+var _enemy_centers: Dictionary = {}
 var target: int = -1
 var hover_card: int = -1
 var _legal: Array = []
@@ -44,6 +51,8 @@ var decoration_saved: Dictionary = {}
 var presentation_duration: float = 0.0
 var instant_presentation: bool = false
 var first_run_presentation: bool = false
+var commands_enabled: bool = true
+var station_label: String = ""
 var _event_queue: Array = []
 var _event_clock: float = 0.0
 var _highlights: Array = []
@@ -69,12 +78,15 @@ func t(key: String, args: Dictionary = {}) -> String:
 func _build() -> void:
 	theme = SimpleUI.theme()
 	# Preserve the approved far/mid/near model composition at its native size.
-	for layer: String in ["far", "mid", "near"]:
-		UI.texture(self, AssetCatalog, "board.r2_sock_swamp_" + layer, Rect2(0, 0, 640, 360))
+	if state.get("enemies", []).any(func(enemy: Dictionary) -> bool: return str(enemy.get("id", "")).begins_with("boss.")):
+		UI.texture(self, AssetCatalog, "board.sock_lair", Rect2(0, 0, 640, 360))
+	else:
+		for layer: String in ["far", "mid", "near"]:
+			UI.texture(self, AssetCatalog, "board.r2_sock_swamp_" + layer, Rect2(0, 0, 640, 360))
 	var station: Panel = UI.frame(self, "Station", Rect2(240, 3, 160, 28))
 	station.add_theme_stylebox_override("panel", SimpleUI.style("ui.r3_simple_station"))
 	var encounter: Dictionary = ContentCatalog.entry(str(state.get("encounter", {}).get("id", "")))
-	var station_name: Label = UI.label(station, str(encounter.get("name", ContentCatalog.text("ui.r2.battle_station"))), Rect2(10, 5, 140, 18), SimpleUI.PAPER)
+	var station_name: Label = UI.label(station, station_label if not station_label.is_empty() else str(encounter.get("name", ContentCatalog.text("ui.r2.battle_station"))), Rect2(10, 5, 140, 18), SimpleUI.PAPER)
 	station_name.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	station.tooltip_text = t("turn", {"turn": state.get("turn", 1)})
 	var pause: Button = UI.button(self, "", Rect2(606, 5, 28, 28), on_pause, "Pause")
@@ -100,13 +112,14 @@ func _build() -> void:
 		if boss_layout: x = 338 if index == 0 else 444 + (index - 1) * 72
 		var width: float = 148 if boss_layout and index == 0 else 82
 		var button: Button = UI.button(self, "", Rect2(x - width / 2, 88, width, 168), _enemy_clicked.bind(index), "Enemy%d" % index)
-		button.disabled = int(enemy.get("hp", 0)) <= 0
+		button.disabled = not rules.enemy_alive(state, index)
+		_enemy_centers[index] = Vector2(x, 208)
 		for style_name: String in ["normal", "hover", "pressed", "disabled", "focus"]:
 			button.add_theme_stylebox_override(style_name, StyleBoxEmpty.new())
 		button.mouse_entered.connect(_target_hover.bind(index))
 		var definition: Dictionary = ContentCatalog.entry(str(enemy.get("id", "")))
 		var intent: Dictionary = _intent_for(index)
-		button.tooltip_text = str(definition.get("name", enemy.get("name", ""))) + " · " + _intent_text(intent) + " · " + str(intent.get("name", "")) + "\n" + str(definition.get("rule_text", definition.get("text", definition.get("mechanic_text", ""))))
+		button.tooltip_text = str(definition.get("name", enemy.get("name", ""))) + " · " + _intent_text(intent) + "\n" + str(definition.get("rule_text", definition.get("text", definition.get("mechanic_text", "")))).replace("护盾", "裹紧")
 		_enemy_buttons.append(button)
 		var art_id: String = Art.actor(str(definition.get("art", enemy.get("id", ""))))
 		if art_id == "ui.panel.default": art_id = Art.actor(str(enemy.get("id", "")))
@@ -115,23 +128,47 @@ func _build() -> void:
 			button.add_child(sprite)
 			sprite.direction = -1.0
 			sprite.setup(art_id, Vector2(width / 2, 148))
-			sprite.modulate.a = 0.25 if button.disabled else 1.0
+			sprite.visible = not button.disabled
+			sprite.wilted = _wilted(enemy)
 			_actors[index] = sprite
 		var actor_height: float = minf(128, Art.actor_height(art_id))
 		var intent_y: float = maxf(-42, 148 - actor_height - 38)
-		UI.texture(button, AssetCatalog, Art.intent(str(intent.get("type", "idle"))), Rect2(width / 2 - 28, intent_y, 28, 28))
-		var amount: String = str(int(intent.get("amount", 0))) if intent.has("amount") else ""
-		if int(intent.get("times", 1)) > 1: amount += "×" + str(intent["times"])
-		var intent_value: Label = UI.label(button, amount, Rect2(width / 2 + 1, intent_y + 4, 46, 22), UI.PAPER, 18)
+		var intent_kind: String = Art.intent_kind(intent)
+		var intent_art: String = Art.available(["intent.r4_" + intent_kind])
+		if not intent_art.is_empty(): UI.texture(button, AssetCatalog, intent_art, Rect2(width / 2 - 12, intent_y, 24, 24))
+		else:
+			var symbol: Label = UI.label(button, rope_text("intent_" + intent_kind), Rect2(width / 2 - 18, intent_y + 1, 36, 24), UI.WARM, 18)
+			symbol.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+			symbol.add_theme_constant_override("outline_size", 3)
+			symbol.add_theme_color_override("font_outline_color", SimpleUI.INK)
+			symbol.visible = not button.disabled
+		var intent_value: Label = UI.label(button, _intent_amount(intent), Rect2(width / 2 - 43, intent_y + 27, 96, 18), UI.PAPER)
+		intent_value.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		intent_value.add_theme_color_override("font_outline_color", SimpleUI.INK)
 		intent_value.add_theme_constant_override("outline_size", 2)
+		intent_value.visible = not button.disabled
+		var status_text: String = _rope_status(enemy)
+		var status_width: float = 120 if enemies.size() <= 2 else (100 if enemies.size() == 3 else 70)
+		var status_label: Label = UI.label(self, status_text, Rect2(x - status_width / 2, 258, status_width, 18), UI.WARM)
+		status_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		status_label.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		status_label.clip_text = true
+		button.tooltip_text += "\n" + status_text
+		status_label.add_theme_color_override("font_outline_color", SimpleUI.INK)
+		status_label.add_theme_constant_override("outline_size", 2)
+		status_label.visible = not button.disabled
+		if int(enemy.get("binds", 0)) > 0:
+			var badge: Label = UI.label(self, str(enemy["binds"]), Rect2(x + 20, 207, 26, 20), UI.WARM)
+			badge.add_theme_constant_override("outline_size", 3)
+			badge.add_theme_color_override("font_outline_color", SimpleUI.INK)
+
 		var health: Control = HealthReadout.instantiate()
 		health.name = "EnemyHealth%d" % index
 		health.position = Vector2(x - 24, 246)
 		health.bar_width = 48.0
 		health.bar_height = 4.0
 		add_child(health)
-		health.update_values(enemy, {}, true, true)
+		health.update_values(enemy, {}, false, true)
 		health.visible = not button.disabled
 		_enemy_health.append(health)
 		# Full textual projection remains available; the visible one uses HP bars.
@@ -151,25 +188,31 @@ func _build() -> void:
 	_hero_health.name = "PlayerHealth"
 	_hero_health.position = Vector2(94, 246)
 	add_child(_hero_health)
-	_hero_health.update_values(state.get("player", {}), _health_forecast(_forecast), true, true)
-	_damage = UI.label(self, "", Rect2(16, 232, 252, 20), UI.RED)
-	_damage.hide()
-	var energy: TextureRect = UI.texture(self, AssetCatalog, "ui.r3_simple_icon_energy", Rect2(14, 268, 32, 32))
-	energy.modulate = Color.WHITE if int(state.get("energy", 0)) > 0 else Color(0.45, 0.45, 0.5)
-	UI.label(self, "%d/3" % int(state.get("energy", 0)), Rect2(18, 300, 40, 18), SimpleUI.PAPER)
-	var deck: Button = UI.button(self, str(state.get("draw_pile", []).size()), Rect2(8, 326, 58, 28), on_pile.bind("draw_pile"), "DrawPile")
-	deck.icon = AssetCatalog.texture("ui.icon.r2_deck")
-	deck.tooltip_text = t("draw_pile", {"count": state.get("draw_pile", []).size()})
-	var discard: Button = UI.button(self, str(state.get("discard", []).size()), Rect2(574, 326, 58, 28), on_pile.bind("discard"), "DiscardPile")
-	discard.icon = AssetCatalog.texture("ui.icon.r2_deck")
-	discard.tooltip_text = t("discard_pile", {"count": state.get("discard", []).size()})
-	var end: Button = UI.button(self, t("end_turn"), Rect2(552, 264, 80, 28), request_end_turn, "EndTurn")
-	var can_play: bool = false
-	for action: Dictionary in _legal:
-		if action.get("type") == "play_card": can_play = true
-	end.modulate = UI.WARM if not can_play else Color.WHITE
+	_hero_health.update_values(state.get("player", {}), _health_forecast(_forecast), false, true)
+	_hero_health.get_node("Prediction").hide()
+	_damage = UI.label(self, "", Rect2(82, 261, 132, 18), UI.RED)
+	_damage.name = "IncomingDamage"
+	_damage.add_theme_constant_override("outline_size", 2)
+	_damage.add_theme_color_override("font_outline_color", SimpleUI.INK)
+	_stage_rope = RopeLayer.new()
+	_stage_rope.name = "RopeProjection"
+	_stage_rope.state = state
+	_stage_rope.centers = _enemy_centers
+	add_child(_stage_rope)
+	var energy: Label = UI.label(self, str(state.get("energy", 0)), Rect2(182, 208, 18, 16), UI.PAPER)
+	energy.tooltip_text = rope_text("energy")
+	var basket: Button = UI.button(self, "", Rect2(16, 67, 62, 44), _show_basket, "LaundryBasket")
+	_empty_button(basket)
+	basket.tooltip_text = rope_text("basket_counts", {"draw": state.get("draw_pile", []).size(), "discard": state.get("discard", []).size()})
+	var end: Button = UI.button(self, rope_text("end_turn"), Rect2(171, 228, 93, 30), request_end_turn, "EndTurn")
+	_empty_button(end)
+	end.alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	end.disabled = not _legal.any(func(action: Dictionary) -> bool: return action.get("type") == "end_turn")
+	_shake_button = UI.button(self, rope_text("shake"), Rect2(218, 258, 82, 22), request_shake, "ShakeCard")
+	_shake_button.tooltip_text = rope_text("shake_hint")
+
 	for index: int in range(state.get("hand", []).size()): _build_card(index)
-	_last_invalid = UI.paragraph(self, "", Rect2(86, 42, 172, 36), UI.PAPER)
+	_last_invalid = UI.paragraph(self, "", Rect2(310, 36, 280, 32), UI.PAPER)
 	_last_invalid.add_theme_constant_override("line_spacing", 0)
 	_build_decorations()
 	_update_preview()
@@ -181,36 +224,40 @@ func _health_forecast(forecast: Dictionary, projected: Dictionary = {}) -> Dicti
 	return result
 
 func _inventory() -> void:
-	for index: int in range(2):
-		var kind: String = ["relics", "keepsakes"][index]
-		var ids: Array = state.get(kind, [])
-		if ids.is_empty(): continue
-		var lines: Array[String] = []
-		var origin: Vector2 = Vector2(10, 4) if index == 0 else Vector2(490, 4)
-		var button: Button = UI.button(self, "", Rect2(origin, Vector2(mini(4, ids.size()) * 28, 28)), func() -> void: _show_rules("\n\n".join(lines)))
-		for style_name: String in ["normal", "hover", "pressed", "disabled", "focus"]:
-			button.add_theme_stylebox_override(style_name, StyleBoxEmpty.new())
-		for item_index: int in range(ids.size()):
-			var item: Variant = ids[item_index]
-			var id: String = str(item.get("id", "")) if item is Dictionary else str(item)
-			var definition: Dictionary = ContentCatalog.entry(id)
-			var spent: bool = _item_spent(id)
-			var readiness: String = ContentCatalog.text("ui.d2.relic_spent" if spent else "ui.d2.relic_ready") if ContentCatalog.has_entry("ui.d2.relic_ready") else ""
-			lines.append(str(definition.get("name", "")) + " · " + readiness + "\n" + str(definition.get("text", "")) + "\n" + str(definition.get("flavor", "")))
-			var art: String = SimpleUI.item_art(str(definition.get("art", id)))
-			if AssetCatalog.has_asset(art) and art != "ui.panel.default" and item_index < 4:
-				var icon: TextureRect = UI.texture(button, AssetCatalog, art, Rect2(2 + item_index * 28, 2, 24, 24))
-				icon.modulate = Color("8d8b93") if spent else Color.WHITE
-				_item_icons[id] = icon
-		button.tooltip_text = "\n\n".join(lines)
+	var relics: Array = state.get("relics", [])
+	var lines: Array[String] = []
+	for item: Variant in relics:
+		var definition: Dictionary = ContentCatalog.entry(rules.item_id(item))
+		lines.append(str(definition.get("name", "")) + " · " + str(definition.get("text", "")))
+	var count: Button = UI.button(self, rope_text("relic_count", {"count": relics.size()}), Rect2(404, 7, 72, 24), _show_rules.bind("\n\n".join(lines)), "RelicCount")
+	_empty_button(count)
+	count.tooltip_text = "\n\n".join(lines)
+	for index: int in range(relics.size()):
+		var id: String = rules.item_id(relics[index])
+		var definition: Dictionary = ContentCatalog.entry(id)
+		if index >= 5: continue
+		var button: Button = UI.button(self, "", Rect2(480 + index * 24, 7, 24, 24), _show_rules.bind(str(definition.get("text", ""))))
+		_empty_button(button)
+		button.tooltip_text = str(definition.get("name", "")) + "\n" + str(definition.get("text", ""))
+		var art: String = SimpleUI.item_art(str(definition.get("art", id)))
+		if AssetCatalog.has_asset(art):
+			_item_icons[id] = UI.texture(button, AssetCatalog, art, Rect2(0,0,24,24))
+	for index: int in range(state.get("keepsakes", []).size()):
+		var id: String = rules.item_id(state["keepsakes"][index])
+		var definition: Dictionary = ContentCatalog.entry(id)
+		var used: bool = _item_spent(id)
+		var button: Button = UI.button(self, "", Rect2(88 + index * 36, 111, 32, 32), select_keepsake.bind(id), "Keepsake%d" % index)
+		button.disabled = used
+		button.modulate = Color("777780") if used else Color.WHITE
+		button.tooltip_text = str(definition.get("name", "")) + " · " + rope_text("keepsake_used" if used else "keepsake_ready") + "\n" + str(definition.get("text", ""))
+		var owner: String = str(definition.get("owner", "")).replace("npc.", "portrait.").replace("portrait.xinbo", "portrait.xin_bo")
+		var art: String = Art.available([owner, SimpleUI.item_art(str(definition.get("art", id)))])
+		if not art.is_empty(): _item_icons[id] = UI.texture(button, AssetCatalog, art, Rect2(4,4,24,24))
+	if not state.get("keepsakes", []).is_empty():
+		UI.label(self, rope_text("keepsake_count", {"count": state["keepsakes"].size()}), Rect2(88, 145, 116, 16), UI.PAPER)
 
 func _item_spent(id: String) -> bool:
-	match id:
-		"relic.lone_glove": return bool(state.get("turn_flags", {}).get("attack_played", false))
-		"relic.birthday_candle": return int(state.get("battle_flags", {}).get("cards_played", 0)) > 0
-		"keepsake.letter": return int(state.get("turn_flags", {}).get("special_played", 0)) > 0
-		"keepsake.mianmian": return int(state.get("turn_flags", {}).get("first_attacker", -1)) >= 0
-	return false
+	return bool(state.get("battle_flags", {}).get("keepsake_uses", {}).get(id, false))
 
 func _build_card(index: int) -> void:
 	var instance: Dictionary = state["hand"][index]
@@ -229,6 +276,18 @@ func _build_card(index: int) -> void:
 	var frame_id: String = Art.card_frame(card)
 	for style_name: String in ["normal", "hover", "pressed", "disabled"]:
 		button.add_theme_stylebox_override(style_name, SimpleUI.style(frame_id) if not frame_id.is_empty() else StyleBoxEmpty.new())
+	var stripe: ColorRect = ColorRect.new()
+	stripe.color = _card_color(card)
+	stripe.position = Vector2(2,8)
+	stripe.size = Vector2(3,60)
+	stripe.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	button.add_child(stripe)
+	var clip: ColorRect = ColorRect.new()
+	clip.color = Color("cfaf7a")
+	clip.position = Vector2(25,-4)
+	clip.size = Vector2(6,10)
+	clip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	button.add_child(clip)
 	UI.label(button, str(rules.card_cost(state, card)), Rect2(5, 5, 18, 16), UI.INK)
 	var art_id: String = Art.card_art(card)
 	if AssetCatalog.has_asset(art_id): UI.texture(button, AssetCatalog, art_id, Rect2(8, 16, 40, 28))
@@ -246,7 +305,7 @@ func _build_card(index: int) -> void:
 	_hand_buttons.append(button)
 
 func _card_color(card: Dictionary) -> Color:
-	return UI.RED if card.get("type") == "attack" else (UI.BLUE if card.get("type") == "guard" else UI.WARM)
+	return UI.RED if card.get("type") == "attack" else (Color("cfaf7a") if card.get("type") == "rope" else UI.WARM)
 
 func _card_input(event: InputEvent, index: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
@@ -262,11 +321,12 @@ func _card_clicked(index: int) -> void:
 	select_card(index)
 
 func select_card(index: int) -> void:
-	if index < 0 or index >= state.get("hand", []).size() or _chooser != null:
-		return
+	if not commands_enabled or index < 0 or index >= state.get("hand", []).size() or _chooser != null: return
+	if selected != index:
+		first_target = -1
 	selected = index
-	if target < 0 or target >= state.get("enemies", []).size() or int(state["enemies"][target].get("hp", 0)) <= 0:
-		target = _first_target()
+	selected_keepsake = ""
+	if not rules.enemy_alive(state, target): target = _first_target()
 	_cue("sfx.card_pick")
 	_update_preview()
 
@@ -281,20 +341,18 @@ func _card_unhover(index: int) -> void:
 	_update_preview()
 
 func _target_hover(index: int) -> void:
-	if int(state["enemies"][index].get("hp", 0)) > 0:
+	if rules.enemy_alive(state, index):
 		target = index
 		_update_preview()
 
 func _enemy_clicked(index: int) -> void:
+	if not rules.enemy_alive(state, index): return
 	target = index
-	if selected >= 0:
-		confirm_selection()
+	if selected >= 0 or not selected_keepsake.is_empty(): confirm_selection()
 
 func _first_target() -> int:
-	for index: int in range(state.get("enemies", []).size()):
-		if int(state["enemies"][index].get("hp", 0)) > 0:
-			return index
-	return -1
+	var alive: Array = rules.living_slots(state)
+	return int(alive[0]) if not alive.is_empty() else -1
 
 func _intent_for(index: int) -> Dictionary:
 	for intent: Dictionary in _forecast.get("intents", []):
@@ -303,18 +361,10 @@ func _intent_for(index: int) -> Dictionary:
 	return {}
 
 func _intent_text(intent: Dictionary) -> String:
-	var type: String = str(intent.get("type", "idle"))
-	if type not in ["attack", "guard", "summon", "special", "idle", "buff"]:
-		type = "special"
-	var result: String = t("intent_" + type)
-	if intent.has("amount"):
-		result += " " + str(int(intent["amount"]))
-	if int(intent.get("times", 1)) > 1:
-		result += "×" + str(int(intent["times"]))
-	return result
+	return str(intent.get("name", "")) + " " + _intent_amount(intent)
 
 func _enemy_stat(enemy: Dictionary) -> String:
-	return t("hp", {"hp": enemy.get("hp", 0), "max": enemy.get("max_hp", 0)}) + "\n" + t("guard", {"guard": enemy.get("guard", 0)})
+	return t("hp", {"hp": enemy.get("hp", 0), "max": enemy.get("max_hp", 0)}) + "\n" + _rope_status(enemy)
 
 func _matching_actions(index: int, selected_target: int = -999) -> Array:
 	var matches: Array = []
@@ -331,20 +381,29 @@ func _update_preview() -> void:
 		return
 	for index: int in range(_enemy_values.size()):
 		_enemy_values[index].text = _enemy_stat(state["enemies"][index])
-		_enemy_buttons[index].modulate = UI.WARM if index == target and selected >= 0 else Color.WHITE
+		_enemy_buttons[index].modulate = UI.WARM if index in [target, first_target] and (selected >= 0 or not selected_keepsake.is_empty()) else Color.WHITE
 	for index: int in range(_hand_buttons.size()):
 		_hand_buttons[index].position.y = _hand_homes[index].y - (12 if index == selected or index == hover_card else 0)
-	_hero_health.update_values(state.get("player", {}), _health_forecast(_forecast), true, true)
+	_hero_health.update_values(state.get("player", {}), _health_forecast(_forecast), false, true)
 	for enemy_index: int in range(_enemy_health.size()):
-		_enemy_health[enemy_index].update_values(state["enemies"][enemy_index], {}, true, true)
-	_damage.text = t("blocked") if int(_forecast.get("damage", 0)) == 0 else t("damage", {"damage": _forecast.get("damage", 0)})
+		_enemy_health[enemy_index].update_values(state["enemies"][enemy_index], {}, false, true)
+	_damage.text = rope_text("incoming", {"damage": _forecast.get("damage", 0)})
 	_damage.add_theme_color_override("font_color", UI.BLUE if int(_forecast.get("damage", 0)) == 0 else UI.RED)
 	if _large != null:
 		_large.queue_free()
 		_large = null
 	var index: int = hover_card if hover_card >= 0 else selected
 	_update_rope()
+	if _shake_button != null:
+		_shake_button.disabled = not _legal.has({"type": "shake_card", "hand_index": selected})
+	if on_selection.is_valid(): on_selection.call()
 	if index < 0:
+		if not selected_keepsake.is_empty():
+			for action: Dictionary in _selected_actions():
+				if int(action.get("target_index", -1)) != (first_target if first_target >= 0 else target): continue
+				if action.get("choices", {}).has("second_target") and (first_target < 0 or int(action["choices"]["second_target"]) != target): continue
+				_preview_picker_action(action)
+				break
 		return
 	var card: Dictionary = ContentCatalog.entry(str(state["hand"][index]["id"]))
 	_large = UI.frame(self, "CardPreview", Rect2(190, 88, 112, 152))
@@ -371,6 +430,8 @@ func _update_preview() -> void:
 		UI.label(_large, str(summary["text"]), Rect2(50, 126, 44, 16), UI.INK)
 
 	var actions: Array = _matching_actions(index, target if target >= 0 else _first_target())
+	if first_target >= 0:
+		actions = _matching_actions(index, first_target).filter(func(action: Dictionary) -> bool: return int(action.get("choices", {}).get("second_target", -1)) == target)
 	# Ambiguous effect selections are not silently guessed for a preview.
 	if actions.size() == 1:
 		var action: Dictionary = actions[0]
@@ -382,26 +443,38 @@ func _show_projected_health(preview: Dictionary) -> void:
 	# Both direct-card and explicit-picker hover project the same actual result.
 	# This never submits a command or alters the original rules/RNG state.
 	var after: Dictionary = preview.get("forecast_after", {})
-	_damage.text = t("damage_change", {"before": _forecast.get("damage", 0), "after": after.get("damage", 0)})
+	_damage.text = rope_text("incoming_change", {"before": _forecast.get("damage", 0), "after": after.get("damage", 0)})
 	var projected: Dictionary = preview.get("state", {})
-	_hero_health.update_values(state.get("player", {}), _health_forecast(after, projected.get("player", {})), true, true)
+	_hero_health.update_values(state.get("player", {}), _health_forecast(after, projected.get("player", {})), false, true)
 	for enemy_index: int in range(mini(_enemy_values.size(), projected.get("enemies", []).size())):
 		var before: Dictionary = state["enemies"][enemy_index]
 		var next: Dictionary = projected["enemies"][enemy_index]
-		_enemy_health[enemy_index].update_values(before, {"preview_hp": next.get("hp", 0), "preview_guard": next.get("guard", 0)}, true, true)
+		_enemy_health[enemy_index].update_values(before, {"preview_hp": next.get("hp", 0), "preview_guard": next.get("guard", 0)}, false, true)
 		if before.get("hp") != next.get("hp") or before.get("guard") != next.get("guard"):
 			_enemy_values[enemy_index].text = t("enemy_change", {"before_hp": before.get("hp", 0), "after_hp": next.get("hp", 0), "before_guard": before.get("guard", 0), "after_guard": next.get("guard", 0)})
 
 func confirm_selection() -> void:
-	if selected < 0:
+	if selected < 0 and selected_keepsake.is_empty(): return
+	var actions: Array = _selected_actions()
+	var definition: Dictionary = ContentCatalog.entry(selected_keepsake if not selected_keepsake.is_empty() else str(state["hand"][selected]["id"]))
+	var is_pair: bool = definition.get("target", "") == "two_enemies" and rules.living_slots(state).size() > 1
+	if is_pair and first_target < 0:
+		if not rules.enemy_alive(state, target): return
+		first_target = target
+		_last_invalid.text = rope_text("second_target")
+		_update_preview()
 		return
-	var actions: Array = _matching_actions(selected, target)
-	if actions.is_empty():
+	var filtered: Array = []
+	for action: Dictionary in actions:
+		if is_pair:
+			if int(action.get("target_index", -1)) == first_target and int(action.get("choices", {}).get("second_target", -1)) == target: filtered.append(action)
+		elif int(action.get("target_index", -1)) in [-1, target]: filtered.append(action)
+	if filtered.is_empty():
 		_invalid()
-	elif actions.size() == 1:
-		_commit(actions[0])
+	elif filtered.size() == 1:
+		_commit(filtered[0])
 	else:
-		show_action_picker(actions, t("pick_discard") if actions[0].get("choices", {}).has("discard_uid") else t("pick_free"))
+		show_action_picker(filtered, t("pick_discard") if filtered[0].get("choices", {}).has("discard_uid") else t("pick_free"))
 
 func request_end_turn() -> void:
 	var actions: Array = []
@@ -441,6 +514,8 @@ func _action_text(action: Dictionary) -> String:
 		var keep: int = int(action.get("keep_index", -1))
 		return t("keep_none") if keep < 0 else str(ContentCatalog.entry(str(state["hand"][keep]["id"])).get("name", ""))
 	var choices: Dictionary = action.get("choices", {})
+	if choices.has("second_target"):
+		return _target_name(int(action.get("target_index", -1))) + " ↔ " + _target_name(int(choices["second_target"]))
 	if choices.has("discard_uid"):
 		return _uid_name(str(choices["discard_uid"]), state.get("discard", []))
 	if choices.has("other_uid"):
@@ -449,6 +524,8 @@ func _action_text(action: Dictionary) -> String:
 		var target_name: String = t("no_target") if other_target < 0 else str(ContentCatalog.entry(str(state["enemies"][other_target]["id"])).get("name", ""))
 		var result: String = t("choice_target", {"card": card_name, "target": target_name})
 		var nested: Dictionary = choices.get("other_choices", {})
+		if nested.has("second_target"):
+			result += " ↔ " + _target_name(int(nested["second_target"]))
 		if nested.has("discard_uid"):
 			result += " · " + _uid_name(str(nested["discard_uid"]), state.get("discard", []))
 		return result
@@ -461,18 +538,21 @@ func _uid_name(uid: String, pile: Array) -> String:
 	return ""
 
 func cancel_selection() -> void:
-	if selected >= 0 or _chooser != null: _cue("sfx.ui_cancel")
+	if selected >= 0 or not selected_keepsake.is_empty() or _chooser != null: _cue("sfx.ui_cancel")
 	if _chooser != null:
 		_chooser.queue_free()
 		_chooser = null
 	selected = -1
+	selected_keepsake = ""
+	first_target = -1
+	if _last_invalid != null: _last_invalid.text = ""
 	hover_card = -1
 	_pressed_card = -1
 	_dragging = false
 	_update_preview()
 
 func _commit(action: Dictionary) -> void:
-	if Engine.get_process_frames() < _input_ready_frame:
+	if not commands_enabled or Engine.get_process_frames() < _input_ready_frame:
 		return
 	# Only commands supplied by legal_actions may leave this view.
 	if not _legal.has(action):
@@ -507,7 +587,7 @@ func handle_key(event: InputEventKey) -> void:
 	if not event.pressed or event.echo or Engine.get_process_frames() < _input_ready_frame:
 		return
 	if event.keycode == KEY_ESCAPE:
-		if selected >= 0 or _chooser != null:
+		if selected >= 0 or not selected_keepsake.is_empty() or _chooser != null:
 			cancel_selection()
 		else:
 			on_pause.call()
@@ -519,7 +599,7 @@ func handle_key(event: InputEventKey) -> void:
 	elif event.keycode in [KEY_LEFT, KEY_RIGHT]:
 		var alive: Array[int] = []
 		for index: int in range(state.get("enemies", []).size()):
-			if int(state["enemies"][index].get("hp", 0)) > 0:
+			if rules.enemy_alive(state, index):
 				alive.append(index)
 		if not alive.is_empty():
 			target = alive[posmod(alive.find(target) + (1 if event.keycode == KEY_RIGHT else -1), alive.size())]
@@ -528,12 +608,17 @@ func handle_key(event: InputEventKey) -> void:
 		confirm_selection()
 	elif event.keycode == KEY_E:
 		request_end_turn()
+	elif event.keycode == KEY_S:
+		request_shake()
 	elif event.keycode == KEY_D:
 		on_pile.call("draw_pile")
 	elif event.keycode == KEY_F:
 		on_pile.call("discard")
 
 func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT and event.pressed:
+		cancel_selection()
+		return
 	if not visible or _chooser != null:
 		return
 	if event is InputEventMouseMotion and _pressed_card >= 0:
@@ -552,7 +637,7 @@ func _input(event: InputEvent) -> void:
 					cancel_selection()
 				else:
 					var card: Dictionary = ContentCatalog.entry(str(state["hand"][selected]["id"]))
-					if str(card.get("target", "none")) == "enemy":
+					if str(card.get("target", "none")) in ["enemy", "two_enemies"]:
 						var hit: bool = false
 						for index: int in range(_enemy_buttons.size()):
 							if _enemy_buttons[index].get_rect().has_point(mouse):
@@ -568,9 +653,13 @@ func _input(event: InputEvent) -> void:
 			_dragging = false
 
 func _preview_picker_action(action: Dictionary) -> void:
-	if action.get("type") != "play_card":
-		return
-	var preview: Dictionary = rules.preview(state, int(action["hand_index"]), int(action.get("target_index", -1)), action.get("choices", {}))
+	var preview: Dictionary = {}
+	if action.get("type") == "play_card":
+		preview = rules.preview(state, int(action["hand_index"]), int(action.get("target_index", -1)), action.get("choices", {}))
+	elif action.get("type") == "use_keepsake":
+		var copy: Dictionary = state.duplicate(true)
+		var events: Array = rules.apply_action(copy, action)
+		preview = {"valid": events.is_empty() or events[0].get("type") != "invalid_action", "state": copy, "forecast_after": rules.forecast(copy)}
 	if preview.get("valid", false):
 		_show_projected_health(preview)
 
@@ -579,10 +668,12 @@ func present_events(events: Array) -> void:
 	_event_clock = 0.0
 	var visible_events: Array = []
 	for event: Dictionary in events:
-		if event.get("type", "") in ["card_played", "enemy_action", "damage", "guard", "heal", "relic_proc", "keepsake_proc", "enemy_defeated", "draw", "shuffle", "turn_end", "victory", "defeat", "boss_warning", "spare_rope"]:
+		if event.get("type", "") in ["card_played", "enemy_action", "damage", "guard", "heal", "relic_proc", "keepsake_proc", "enemy_defeated", "draw", "shuffle", "turn_end", "victory", "defeat", "boss_warning", "spare_rope", "bind", "tie_made", "pair_formed", "enemy_shake_off", "shake_card"]:
 			visible_events.append(event.duplicate(true))
 	var interval: float = minf(0.12, 1.1 / maxf(1.0, float(visible_events.size() - 1)))
 	presentation_duration = 0.0 if visible_events.is_empty() else interval * float(visible_events.size() - 1) + 0.35
+	if events.any(func(event: Dictionary) -> bool: return event.get("type") == "pair_formed"):
+		presentation_duration += 0.65
 	for index: int in range(visible_events.size()):
 		if index == 0 or instant_presentation:
 			_present_event(visible_events[index])
@@ -592,6 +683,13 @@ func present_events(events: Array) -> void:
 func _present_event(event: Dictionary) -> void:
 	var kind: String = str(event.get("type", ""))
 	_event_audio(event)
+	if kind == "pair_formed":
+		_present_pair(event)
+	if kind == "keepsake_proc" and not str(event.get("line", "")).is_empty():
+		_last_invalid.text = str(event["line"])
+	if kind in ["bind", "enemy_shake_off"]:
+		var slot: int = int(event.get("target", event.get("enemy", -1)))
+		if _actors.has(slot): _actors[slot].pose("hit", 0.28)
 	if kind == "card_played" and _asui != null:
 		_asui.pose("attack" if ContentCatalog.entry(str(event.get("id", ""))).get("type") == "attack" else "cast", 0.35)
 	if kind == "enemy_action":
@@ -707,14 +805,14 @@ func _update_rope(mouse: Vector2 = Vector2(-1, -1)) -> void:
 	if selected < 0 or selected >= _hand_buttons.size() or not AssetCatalog.has_asset("fx.r2_rope_strip"):
 		return
 	var card: Dictionary = ContentCatalog.entry(str(state["hand"][selected]["id"]))
-	if str(card.get("target", "none")) != "enemy" and not _dragging:
+	if str(card.get("target", "none")) not in ["enemy", "two_enemies"] and not _dragging:
 		return
 	var destination: Vector2 = mouse if _dragging and mouse.x >= 0 else Vector2(-1, -1)
 	if destination.x < 0 and target >= 0 and target < _enemy_buttons.size():
 		destination = _enemy_buttons[target].position + Vector2(_enemy_buttons[target].size.x / 2, 110)
 	if destination.x < 0:
 		return
-	var origin: Vector2 = _hand_buttons[selected].position + Vector2(28, 6)
+	var origin: Vector2 = _enemy_centers[first_target] if first_target >= 0 else _hand_buttons[selected].position + Vector2(28, 6)
 	var count: int = maxi(1, int(origin.distance_to(destination) / 6))
 	for index: int in range(count + 1):
 		if index >= _rope_tiles.size():
@@ -725,3 +823,88 @@ func _update_rope(mouse: Vector2 = Vector2(-1, -1)) -> void:
 		var position: Vector2 = origin.lerp(destination, float(index) / float(count))
 		_rope_tiles[index].position = Vector2(Vector2i(position)) - Vector2(2, 2)
 		_rope_tiles[index].show()
+
+func rope_text(key: String, values: Dictionary = {}) -> String:
+	return ContentCatalog.format_text("ui.rope." + key, values)
+
+func _empty_button(button: Button) -> void:
+	for key: String in ["normal", "hover", "pressed", "disabled", "focus"]: button.add_theme_stylebox_override(key, StyleBoxEmpty.new())
+
+func _wilted(enemy: Dictionary) -> bool:
+	return int(enemy.get("hp", 0)) <= int(ceil(int(enemy.get("max_hp", 1)) * float(enemy.get("pair_threshold", 0.5))))
+
+func _rope_status(enemy: Dictionary) -> String:
+	var parts: Array[String] = []
+	if int(enemy.get("guard", 0)) > 0: parts.append(rope_text("wrapped", {"count": enemy["guard"]}))
+	if _wilted(enemy): parts.append(rope_text("wilted"))
+	if not str(enemy.get("tie", "")).is_empty():
+		for other: Dictionary in state.get("enemies", []):
+			if str(other.get("uid", "")) == str(enemy["tie"]) and str(other.get("pair_tag", "")) == str(enemy.get("pair_tag", "")):
+				parts.append(rope_text("pair_ready" if _wilted(enemy) and _wilted(other) else "same_kind"))
+	return " · ".join(parts)
+
+func _intent_amount(intent: Dictionary) -> String:
+	if str(intent.get("type", "")) == "attack":
+		var raw: int = int(intent.get("raw_amount", intent.get("amount", 0)))
+		var hits: Array = intent.get("hit_amounts", [intent.get("amount", 0)])
+		var amounts: Array[String] = []
+		for hit: int in hits: amounts.append(str(hit))
+		var after: String = "+".join(amounts)
+		var before: String = str(raw) + ("×" + str(hits.size()) if hits.size() > 1 else "")
+		return before + " → " + after if int(intent.get("net_total", raw)) != raw * hits.size() else after
+	return str(intent.get("amount", ""))
+
+func _selected_actions() -> Array:
+	if selected_keepsake.is_empty(): return _matching_actions(selected)
+	return _legal.filter(func(action: Dictionary) -> bool: return action.get("type") == "use_keepsake" and action.get("id") == selected_keepsake)
+
+func select_keepsake(id: String) -> void:
+	cancel_selection()
+	selected_keepsake = id
+	target = _first_target()
+	var actions: Array = _selected_actions()
+	if actions.is_empty(): return
+	if ContentCatalog.entry(id).get("target", "self") not in ["enemy", "two_enemies"]: _commit(actions[0])
+	else:
+		_last_invalid.text = rope_text("first_target")
+		_update_preview()
+
+func request_shake() -> void:
+	var action: Dictionary = {"type": "shake_card", "hand_index": selected}
+	if _legal.has(action): _commit(action)
+	else: _invalid()
+
+func _show_basket() -> void:
+	if _chooser != null: _chooser.queue_free()
+	_chooser = UI.frame(self, "BasketPiles", Rect2(130, 83, 380, 182))
+	_chooser.z_index = 4
+	UI.label(_chooser, rope_text("basket"), Rect2(24, 20, 330, 20), UI.INK)
+	UI.button(_chooser, t("draw_pile", {"count": state.get("draw_pile", []).size()}), Rect2(24,60,156,36), func() -> void: cancel_selection(); on_pile.call("draw_pile"))
+	UI.button(_chooser, t("discard_pile", {"count": state.get("discard", []).size()}), Rect2(198,60,156,36), func() -> void: cancel_selection(); on_pile.call("discard"))
+	UI.button(_chooser, t("close"), Rect2(128,124,124,28), cancel_selection)
+
+func _target_name(slot: int) -> String:
+	return str(ContentCatalog.entry(str(state["enemies"][slot]["id"])).get("name", "")) + " " + str(slot + 1) if slot >= 0 and slot < state.get("enemies", []).size() else t("no_target")
+
+func _present_pair(event: Dictionary) -> void:
+	var slots: Array = event.get("enemies", [])
+	var middle: Vector2 = Vector2.ZERO
+	for slot: int in slots:
+		middle += _enemy_centers.get(slot, Vector2(460,208))
+		if not _actors.has(slot): continue
+		var actor: Node2D = _actors[slot]
+		actor.show()
+		actor.set_process(false)
+		var home: Vector2 = actor.position
+		var hop: Tween = actor.create_tween()
+		hop.tween_property(actor, "position", home + Vector2(0,-17), 0.16)
+		hop.tween_property(actor, "position", home, 0.16)
+		hop.tween_property(actor, "position", home + Vector2(28,-28), 0.3)
+		hop.parallel().tween_property(actor,"modulate:a",0.0,0.3)
+	middle /= maxi(1, slots.size())
+	var label: Label = UI.label(self, "♡  ♡", Rect2(middle - Vector2(32,60), Vector2(80,24)), Color("f3bdc8"), 24)
+	label.name = "PairHearts"
+	var notice: Label = UI.label(self, rope_text("peace" if bool(event.get("peaceful", false)) else "pair_departure"), Rect2(250, 70, 360, 26), UI.WARM)
+	notice.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	notice.add_theme_constant_override("outline_size", 3)
+	notice.add_theme_color_override("font_outline_color", SimpleUI.INK)

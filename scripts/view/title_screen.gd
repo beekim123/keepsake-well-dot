@@ -6,6 +6,7 @@ const TownScene = preload("res://scenes/remedy/TownScene.tscn")
 const UI = preload("res://scripts/view/ui_factory.gd")
 const BattleView = preload("res://scripts/view/battle_view.gd")
 const StoryView = preload("res://scripts/view/story_view.gd")
+const BattleArt = preload("res://scripts/view/remedy/battle_art.gd")
 const Actor = preload("res://scripts/view/pixel_actor.gd")
 const Banter = preload("res://scripts/story/banter_director.gd")
 const Story = preload("res://scripts/story/story_player.gd")
@@ -136,6 +137,7 @@ func _start_debug() -> void:
 		helper.apply_arguments(self, OS.get_cmdline_user_args())
 
 func t(key: String, values: Dictionary = {}) -> String:
+	if key in ["relics", "keepsakes"]: return ContentCatalog.format_text("ui.rope." + ("relic" if key == "relics" else "keepsake"), values)
 	return ContentCatalog.format_text("ui.d1." + key, values)
 
 func _build_theme() -> void:
@@ -268,6 +270,9 @@ func _show_title() -> void:
 	_remedy_scene = title
 
 func _start_opening() -> void:
+	if bool(settings.get("rope_tutorial_pending", false)):
+		_start_rope_refresher()
+		return
 	# Start never replaces an existing expedition, including pre-remedy saves.
 	if not run.is_empty() and run.get("phase") != "hub":
 		_resume_r2_or_legacy()
@@ -299,6 +304,9 @@ func _show_opening() -> void:
 	_remedy_scene = opening
 
 func _resume_r2_or_legacy() -> void:
+	if bool(settings.get("rope_tutorial_pending", false)):
+		_start_rope_refresher()
+		return
 	# Campaign snapshots are authoritative. The former optional R2 preview must
 	# never hide, replace or rewind a saved seven-station expedition.
 	if not run.is_empty() and run.get("phase") != "hub":
@@ -629,15 +637,13 @@ func _show_path() -> void:
 	var depth_count: int = run.get("path", []).size()
 	var heading: Button = _button(_content, t("segment", {"segment": segment}).replace("/ 7", "/ " + str(depth_count)), Rect2(16, 12, 192, 28), func() -> void: pass, "MapHeading")
 	heading.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	# These controls enumerate the real route (four OR seven), independent of
-	# the number of decorative landings painted in the model scene behind them.
 	var row_step: float = 230.0 / float(maxi(1, depth_count - 1))
 	for index: int in range(depth_count):
 		var visited: bool = run.get("history", []).any(func(record: Dictionary) -> bool: return int(record.get("segment", 0)) == index + 1)
 		var slot: Button = _button(_content, ("已" if visited else "") + str(index + 1), Rect2(300, 52 + index * row_step, 40, 24), func() -> void: pass, "Depth%d" % index)
 		slot.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		if index + 1 == segment: slot.add_theme_stylebox_override("normal", SimpleUI.style("ui.r3_simple_button_hover"))
-	var hero_position: Vector2 = Vector2(266, 40 + maxi(0, segment - 1) * row_step)
+	var hero_position: Vector2 = Vector2(266, 36 + maxi(0, segment - 1) * row_step)
 	var hero: TextureRect = UI.texture(_content, AssetCatalog, "char.r3_simple_asui", Rect2(hero_position, Vector2(32, 40)))
 	hero.name = "MapAsui"
 	hero.size = Vector2(32, 40)
@@ -648,64 +654,68 @@ func _show_path() -> void:
 	for index: int in range(choices.size()):
 		var choice: Dictionary = choices[index]
 		var column_x: float = 24 + index * 396
-		_map_choice_art(choice, column_x, index)
-		var card: Button = _button(_content, "", Rect2(column_x, 142, 196, 116), _choose_path.bind(index), "Path%d" % index)
+		var card: Button = _button(_content, "", Rect2(column_x, 58, 196, 230), _path_card_clicked.bind(index), "Path%d" % index)
+		card.set_meta("revealed", false)
+		card.set_meta("flipping", false)
 		for state_name: String in ["normal", "hover", "pressed"]:
-			var panel_skin: StyleBoxTexture = SimpleUI.style("ui.r3_simple_panel")
-			if state_name == "hover": panel_skin.modulate_color = Color(1.08, 1.08, 1.08)
-			card.add_theme_stylebox_override(state_name, panel_skin)
-		var definition: Dictionary = ContentCatalog.entry(str(choice.get("id", "")))
-		var type_name: String = _node_type_text(str(choice.get("type", "")))
-		var heading_text: String = str(definition.get("name", type_name))
-		var preview_text: String = str(choice.get("hint", ""))
-		if preview_text == heading_text: preview_text = str(definition.get("description", "")).split("。")[0]
-		UI.label(card, heading_text, Rect2(26, 20, 144, 20), UI.INK)
-		UI.paragraph(card, preview_text, Rect2(26, 48, 144, 48), UI.INK)
-		var marker_row: int = 0
-		for kind: String in ["star_ids", "heart_ids"]:
-			var names: Array[String] = []
-			for id: String in choice.get(kind, []):
-				var item: Dictionary = ContentCatalog.entry(id)
-				names.append(str(item.get("owner_name" if kind == "star_ids" else "name", "")))
-			if not names.is_empty():
-				var marker: Button = _button(card, ("失物：" if kind == "star_ids" else "心愿：") + " / ".join(names), Rect2(0, 120 + marker_row * 24, 196, 24), func() -> void: pass, "RouteMarker%d" % marker_row)
-				marker.mouse_filter = Control.MOUSE_FILTER_IGNORE
-				marker_row += 1
-		card.tooltip_text = type_name + "\n" + _node_preview(choice) + "\n" + str(choice.get("hint", ""))
-		var resting: Vector2 = card.position
-		card.mouse_entered.connect(func() -> void: card.position = resting - Vector2(0, 3))
-		card.mouse_exited.connect(func() -> void: card.position = resting)
+			card.add_theme_stylebox_override(state_name, SimpleUI.style("ui.r3_simple_panel"))
+		var back: Control = Control.new()
+		back.name = "Back"
+		back.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		card.add_child(back)
+		var back_art: TextureRect = TextureRect.new()
+		back_art.texture = AssetCatalog.frames("path.back", "idle").get_frame_texture("idle", 0)
+		back_art.position = Vector2(50, 26)
+		back_art.size = Vector2(96,128)
+		back_art.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		back.add_child(back_art)
+		var back_label: Label = UI.label(back, rope_text("path_back"), Rect2(24,174,148,24), UI.INK)
+		back_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		var face: Control = Control.new()
+		face.name = "Face"
+		face.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		card.add_child(face)
+		var art: String = _path_thumbnail(choice)
+		if not art.is_empty():
+			var thumb: TextureRect = UI.texture(face, AssetCatalog, art, Rect2(34,18,128,84))
+			thumb.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			thumb.size = Vector2(128,84)
+			thumb.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		var title: Label = UI.label(face, _node_type_text(str(choice.get("type", "event"))), Rect2(20,111,156,24), UI.INK,18)
+		title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		UI.paragraph(face, rope_text("path_hint_" + str(choice.get("type", "event"))), Rect2(24,145,148,38), UI.INK)
+		if _path_has_pair(choice): UI.label(face, rope_text("pair_chance"), Rect2(20,191,164,20), UI.INK)
+		face.hide()
+		card.tooltip_text = rope_text("path_back")
+		var markers: Array[String] = []
+		for id: String in choice.get("star_ids", []): markers.append(str(ContentCatalog.entry(id).get("owner_name", "")))
+		for id: String in choice.get("heart_ids", []): markers.append(str(ContentCatalog.entry(id).get("name", "")))
+		if not markers.is_empty():
+			var marker: Label = UI.label(_content, " / ".join(markers), Rect2(column_x,290,196,22), UI.PAPER)
+			marker.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	_run_bar(_content, 326)
-	if not run_rules.is_first_run(run):
-		_button(_content, t("home"), Rect2(480, 320, 144, 30), _end_run.bind("voluntary"))
+	if not run_rules.is_first_run(run): _button(_content, t("home"), Rect2(480, 320, 144, 30), _end_run.bind("voluntary"))
 
-func _map_choice_art(choice: Dictionary, column_x: float, choice_index: int) -> void:
-	var scene_art: String = "board.r3_simple_soap_tub" if choice.get("id") == "event.soap_tub" else ("board.r3_simple_campfire" if choice.get("type") == "campfire" else "")
-	if not scene_art.is_empty() and AssetCatalog.has_asset(scene_art):
-		var thumbnail: TextureRect = UI.texture(_content, AssetCatalog, scene_art, Rect2(column_x, 44, 196, 110))
-		thumbnail.name = "MapThumb%d" % choice_index
-		thumbnail.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		# UI.texture sets its target size before expand mode. A large source can
-		# leave a cached intrinsic size, so contract it explicitly afterwards.
-		thumbnail.size = Vector2(196, 110)
-		thumbnail.set_meta("allocated_rect", Rect2(column_x, 44, 196, 110))
-		return
-	var actors: Dictionary = {"enemy.wet_sock": "enemy.r3_simple_wet_sock", "enemy.lint_bug": "enemy.r3_simple_lint_bug", "elite.hungry_drawer": "elite.r3_simple_hungry_drawer"}
-	var enemy_ids: Array = ContentCatalog.entry(str(choice.get("id", ""))).get("enemies", [])
-	var side: float = 64.0 if enemy_ids.size() <= 2 else 40.0
-	var total: float = enemy_ids.size() * side + maxi(0, enemy_ids.size() - 1) * 4
-	for index: int in range(enemy_ids.size()):
-		var art: String = str(actors.get(str(enemy_ids[index]), ""))
-		if not art.is_empty() and AssetCatalog.has_asset(art):
-			var rectangle: Rect2 = Rect2(column_x + (196 - total) / 2.0 + index * (side + 4), 132 - side, side, side)
-			var actor: TextureRect = UI.texture(_content, AssetCatalog, art, rectangle)
-			actor.name = "MapThumbEnemy%d_%d" % [choice_index, index]
-			actor.size = rectangle.size
-			actor.set_meta("allocated_rect", rectangle)
+func _path_thumbnail(choice: Dictionary) -> String:
+	var kind: String = str(choice.get("type", "event"))
+	return BattleArt.available(["path.r4_" + kind, {"battle": "enemy.r3_simple_lint_bug", "elite": "elite.r3_simple_hungry_drawer", "boss": "boss.r3_simple_sock_snake", "event": "event.mailbox", "campfire": "board.r3_simple_campfire", "trade": "event.trade"}.get(kind, "event.mailbox")])
+
+func _path_has_pair(choice: Dictionary) -> bool:
+	var tags: Array[String] = []
+	for id: String in ContentCatalog.entry(str(choice.get("id", ""))).get("enemies", []):
+		var tag: String = str(ContentCatalog.entry(id).get("pair_tag", ""))
+		if not tag.is_empty() and tags.has(tag): return true
+		tags.append(tag)
+	return false
+
+func _path_card_clicked(index: int) -> void:
+	var card: Button = _content.get_node_or_null("Path%d" % index)
+	if card == null or bool(card.get_meta("flipping", false)): return
+	if bool(card.get_meta("revealed", false)): _choose_path(index)
+	else: _flip_path(card)
 
 func _node_type_text(type_name: String) -> String:
-	var key: String = {"battle": "battle", "elite": "elite", "boss": "boss", "event": "event", "campfire": "camp", "trade": "trade"}.get(type_name, "event")
-	return t(key)
+	return rope_text("node_" + type_name)
 
 func _node_preview(node: Dictionary) -> String:
 	var definition: Dictionary = ContentCatalog.entry(str(node.get("id", "")))
@@ -781,11 +791,7 @@ func _battle_command(action: Dictionary) -> void:
 	if not legal.has(action):
 		return
 	_banter_pending.clear()
-	if action.get("type") == "play_card":
-		_last_events = battle_rules.play_card(battle, int(action["hand_index"]), int(action.get("target_index", -1)), action.get("choices", {}))
-
-	else:
-		_last_events = battle_rules.end_turn(battle, int(action.get("keep_index", -1)))
+	_last_events = battle_rules.apply_action(battle, action)
 
 	_idle_time = 0.0
 	var events: Array = _last_events.duplicate(true)
@@ -826,25 +832,25 @@ func _show_rewards() -> void:
 	_begin_screen("reward")
 	_cue("sting.reward")
 	_banter_event("reward_open", {})
-	var heading: Button = _button(_content, t("reward"), Rect2(252, 24, 136, 30), func() -> void: pass, "RewardHeading")
+	var heading: Button = _button(_content, rope_text("thanks") if run.get("reward_kind", "") == "thanks" else t("reward"), Rect2(204, 24, 232, 30), func() -> void: pass, "RewardHeading")
 	heading.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	var offers: Array = run_rules.reward_choices(run)
 	for index: int in range(offers.size()):
-		_item_card(_content, str(offers[index]["id"]), Rect2(24 + index * 200, 78, 192, 236), _choose_reward.bind(index))
+		_item_card(_content, str(offers[index]["id"]), Rect2((640 - offers.size() * 200) / 2.0 + 4 + index * 200, 78, 192, 236), _choose_reward.bind(index))
 	_button(_content, t("skip"), Rect2(504, 322, 112, 28), _choose_reward.bind(-1))
 	call_deferred("_simple_page_ink", _content)
 
 func _item_card(parent: Node, id: String, rect: Rect2, callback: Callable) -> void:
 	var definition: Dictionary = ContentCatalog.entry(id)
 	var card: Button = _button(parent, "", rect, callback)
-	var model_art: String = SimpleUI.card_art(str(definition.get("art", ""))) if _uses_simple_ui() else ""
+	var model_art: String = BattleArt.card_art(definition) if _uses_simple_ui() and definition.has("cost") else ""
 	if not model_art.is_empty() and definition.has("cost") and AssetCatalog.has_asset("ui.r3_v2_card"):
 		for state_name: String in ["normal", "hover", "pressed"]:
 			var paper: StyleBoxTexture = SimpleUI.style("ui.r3_v2_card")
 			if state_name == "hover": paper.modulate_color = Color(1.04, 1.04, 1.04)
 			card.add_theme_stylebox_override(state_name, paper)
 		UI.label(card, str(int(definition["cost"])), Rect2(16, 12, 40, 34), UI.INK, 24)
-		UI.label(card, t("type_" + str(definition.get("type", "special"))), Rect2(rect.size.x - 76, 18, 60, 20), UI.INK)
+		UI.label(card, rope_text("type_rope") if definition.get("type") == "rope" else t("type_" + str(definition.get("type", "special"))), Rect2(rect.size.x - 76, 18, 60, 20), UI.INK)
 		UI.texture(card, AssetCatalog, model_art, Rect2((rect.size.x - 112) / 2.0, 48, 112, 78))
 		UI.label(card, str(definition.get("name", "")), Rect2(18, 138, rect.size.x - 36, 24), UI.INK, 16)
 		UI.paragraph(card, str(definition.get("text", "")), Rect2(18, 168, rect.size.x - 36, 60), UI.INK)
@@ -870,7 +876,7 @@ func _item_card(parent: Node, id: String, rect: Rect2, callback: Callable) -> vo
 		UI.texture(card, AssetCatalog, art, Rect2(rect.size.x - 40, 12, 24, 24) if not definition.has("cost") else Rect2(rect.size.x - 52, 10, 40, 28))
 	UI.paragraph(card, str(definition.get("name", "")), Rect2(26, 22, rect.size.x - 52, 24 if not model_art.is_empty() else 38) if _uses_simple_ui() else Rect2(12, 12, rect.size.x - 64, 38), UI.WARM)
 	if definition.has("cost"):
-		UI.label(card, t("view_card", {"cost": definition["cost"], "type": t("type_" + str(definition.get("type", "special")))}), Rect2(26, 112 if not model_art.is_empty() else 50, rect.size.x - 52, 18) if _uses_simple_ui() else Rect2(12, 44, rect.size.x - 24, 18), UI.BLUE)
+		UI.label(card, t("view_card", {"cost": definition["cost"], "type": rope_text("type_rope") if definition.get("type") == "rope" else t("type_" + str(definition.get("type", "special")))}), Rect2(26, 112 if not model_art.is_empty() else 50, rect.size.x - 52, 18) if _uses_simple_ui() else Rect2(12, 44, rect.size.x - 24, 18), UI.BLUE)
 	UI.paragraph(card, str(definition.get("text", "")), Rect2(26, 140 if not model_art.is_empty() else 76, rect.size.x - 52, 68) if _uses_simple_ui() else Rect2(12, 70, rect.size.x - 24, 74))
 	if not str(definition.get("flavor", "")).is_empty():
 		UI.paragraph(card, str(definition.get("flavor", "")), Rect2(26, 156, rect.size.x - 52, 50) if _uses_simple_ui() else Rect2(12, 148, rect.size.x - 24, 46), UI.MUTED)
@@ -958,7 +964,7 @@ func _show_simple_campfire() -> void:
 	var choices: Array = run_rules.node_choices(run)
 	for index: int in range(choices.size()):
 		var choice: Dictionary = choices[index]
-		var option: Button = _button(_content, str(choice.get("text", "")), Rect2(38 + index * 306, 278, 258, 66), _choose_node.bind(str(choice["id"])), "CampfireChoice%d" % index)
+		var option: Button = _button(_content, str(choice.get("text", "")), Rect2(20 + index * (600.0 / max(1, choices.size())), 278, 584.0 / max(1, choices.size()), 66), _choose_node.bind(str(choice["id"])), "CampfireChoice%d" % index)
 		for state_name: String in ["normal", "hover", "pressed"]:
 			var skin: StyleBoxTexture = SimpleUI.style("ui.r3_simple_panel")
 			if state_name == "hover": skin.modulate_color = Color(1.08, 1.08, 1.08)
@@ -1106,10 +1112,11 @@ func _modal(heading: String) -> Panel:
 	_modal_shield.mouse_filter = Control.MOUSE_FILTER_STOP
 	add_child(_modal_shield)
 	_overlay = UI.frame(self, "Modal", Rect2(66, 28, 508, 304))
-	if _uses_simple_ui() or screen in ["opening", "r2_battle"]:
-		_overlay.theme = SimpleUI.theme() if _uses_simple_ui() else GeneratedUI.theme()
-		call_deferred("_r2_overlay_ink", _overlay)
-	UI.label(_overlay, heading, Rect2(28 if _uses_simple_ui() else 18, 24 if _uses_simple_ui() else 16, 452, 24), UI.WARM)
+	# The tiny historical wood texture stretches its interior marks into blocks.
+	# Battle overlays use the same quiet, admitted panel as the other screens.
+	_overlay.theme = SimpleUI.theme()
+	call_deferred("_simple_page_ink", _overlay)
+	UI.label(_overlay, heading, Rect2(28, 24, 452, 24), UI.INK)
 	_ready_frame = Engine.get_process_frames() + 1
 	return _overlay
 
@@ -1244,7 +1251,7 @@ func _checkpoint() -> bool:
 	settings["banter_run_once"] = _banter.run_once.duplicate(true)
 	settings["banter_seed"] = int(run.get("seed", -1))
 	var data: Dictionary = _save_extra.duplicate(true)
-	data.merge({"version": 1, "meta": snapshot["meta"], "run": snapshot["run"], "settings": settings.duplicate(true)}, true)
+	data.merge({"version": SaveService.SAVE_VERSION, "meta": snapshot["meta"], "run": snapshot["run"], "settings": settings.duplicate(true)}, true)
 	var result: Error = SaveService.save_state(data, _save_path)
 	if result != OK:
 		_notice = t("save_failed")
@@ -1428,13 +1435,10 @@ func _banter_event(event: String, extra: Dictionary = {}) -> void:
 	var message: Dictionary = _banter.consider(event, context, _clock)
 	if message.is_empty(): return
 	_hide_bubble()
-	var rectangle: Rect2 = Rect2(8 if screen == "stamp" else 16, 40, 128, 70) if screen in ["battle", "stamp"] else Rect2(220, 8, 290, 34)
+	var rectangle: Rect2 = Rect2(86, 39, 206, 66) if screen == "battle" else (Rect2(8, 40, 128, 70) if screen == "stamp" else Rect2(220, 8, 290, 34))
 	_bubble = UI.frame(self, "BanterBubble", rectangle)
 	_bubble.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	if _uses_simple_ui():
-		_bubble.add_theme_stylebox_override("panel", SimpleUI.style("ui.r3_simple_dialogue"))
-	elif AssetCatalog.has_asset("ui.panel.bubble"):
-		_bubble.add_theme_stylebox_override("panel", AssetCatalog.nine_slice("ui.panel.bubble"))
+	_bubble.add_theme_stylebox_override("panel", SimpleUI.style("ui.r3_simple_dialogue"))
 	_bubble_label = UI.paragraph(_bubble, str(message["text"]), Rect2(20, 8, rectangle.size.x - 40, rectangle.size.y - 14) if _uses_simple_ui() else Rect2(8, 8, rectangle.size.x - 16, rectangle.size.y - 12), UI.INK)
 	_bubble_label.visible_characters = -1 if presentation_fast else 0
 	_bubble_message = message
@@ -1483,6 +1487,7 @@ func _banter_events(events: Array) -> void:
 
 func _show_enemy_intro() -> void:
 	if presentation_fast or run.get("current_node", {}).get("type") not in ["elite", "boss"]: return
+	_hide_bubble()
 	var boss: bool = run.get("current_node", {}).get("type") == "boss"
 	var id: String = "boss.sock_snake" if boss else "elite.hungry_drawer"
 	var seen: Dictionary = settings.get("intro_enemies", {})
@@ -1492,11 +1497,11 @@ func _show_enemy_intro() -> void:
 	var panel: Panel = _modal(ContentCatalog.text("ui.d2.boss_intro" if boss else "ui.d2.elite_intro"))
 	var actor: AnimatedSprite2D = Actor.new()
 	panel.add_child(actor)
-	actor.setup("big.sock_snake" if boss else "big.hungry_drawer", Vector2(110, 202))
+	actor.setup(BattleArt.actor(id), Vector2(110, 202))
 	UI.paragraph(panel, ContentCatalog.text("ui.d2.boss_line" if boss else "ui.d2.elite_line"), Rect2(210, 62, 270, 62), UI.WARM)
 	UI.paragraph(panel, ContentCatalog.text("ui.d2.boss_reply" if boss else "ui.d2.elite_reply"), Rect2(210, 130, 270, 36))
 	var definition: Dictionary = ContentCatalog.entry(id)
-	UI.paragraph(panel, str(definition.get("rule_text", definition.get("mechanic_text", ""))), Rect2(20, 208, 468, 42), UI.BLUE)
+	UI.paragraph(panel, str(definition.get("rule_text", definition.get("mechanic_text", ""))).replace("护盾", "裹紧"), Rect2(28, 208, 452, 42), UI.BLUE)
 	_button(panel, t("skip"), Rect2(346, 260, 144, 30), _close_overlay)
 	_intro_panel = panel
 	_intro_remaining = seconds
@@ -1536,16 +1541,57 @@ func _show_stamp(card_id: String) -> void:
 	_button(page, t("next"), Rect2(216, 244, 124, 30), _route_phase)
 
 func _flip_path(card: Button) -> void:
-	if not AssetCatalog.has_asset("path.back"): return
-	var faces: Array = card.get_children()
-	for face: Node in faces:
-		if face is CanvasItem: face.hide()
-	card.disabled = true
-	var flip: AnimatedSprite2D = Actor.new()
-	card.add_child(flip)
-	flip.setup("path.back", Vector2(38, 0) + AssetCatalog.anchor("path.back"), "flip")
-	flip.animation_finished.connect(func() -> void:
-		for face: Node in faces:
-			if is_instance_valid(face) and face is CanvasItem: face.show()
-		card.disabled = false
-		flip.queue_free(), CONNECT_ONE_SHOT)
+	card.set_meta("flipping", true)
+	_cue("sfx.path_flip")
+	if not presentation_fast:
+		var back: Control = card.get_node("Back")
+		back.hide()
+		var flip: AnimatedSprite2D = Actor.new()
+		card.add_child(flip)
+		flip.setup("path.back", Vector2(50,26), "flip")
+		await flip.animation_finished
+		if not is_instance_valid(card): return
+		flip.queue_free()
+	card.get_node("Back").hide()
+	card.get_node("Face").show()
+	card.set_meta("revealed", true)
+	card.set_meta("flipping", false)
+	var index: int = int(str(card.name).trim_prefix("Path"))
+	var choices: Array = run_rules.path_choices(run)
+	if index < choices.size(): card.tooltip_text = _node_preview(choices[index])
+
+func rope_text(key: String, values: Dictionary = {}) -> String:
+	return ContentCatalog.format_text("ui.rope." + key, values)
+
+func _start_rope_refresher() -> void:
+	if _save_readonly or _tutorial_readonly: return
+	_begin_screen("r2_battle")
+	var stage: Node = load("res://scenes/remedy/BattleScene.tscn").instantiate()
+	var lesson: String = str(settings.get("rope_refresher_lesson", "tutorial.wet_sock"))
+	var resume: Dictionary = settings.get("rope_refresher_state", {})
+	stage.config = {"seed": 147 if _debug_seed < 0 else _debug_seed, "tutorial_id": lesson, "instant_presentation": presentation_fast}
+	if battle_rules.is_tutorial_state_valid(resume): stage.config["resume_state"] = resume.duplicate(true)
+	var serial: int = _transition_serial
+	stage.checkpoint.connect(func(snapshot: Dictionary) -> void:
+		if serial != _transition_serial: return
+		settings["rope_refresher_state"] = snapshot.duplicate(true)
+		settings["rope_refresher_lesson"] = lesson
+		_checkpoint())
+	stage.tutorial_completed.connect(func(result: Dictionary) -> void:
+		if serial != _transition_serial: return
+		settings.erase("rope_refresher_state")
+		if not bool(result.get("won", false)):
+			_checkpoint()
+			_start_rope_refresher()
+		elif lesson == "tutorial.wet_sock":
+			settings["rope_refresher_lesson"] = "tutorial.pair"
+			_checkpoint()
+			_start_rope_refresher()
+		else:
+			settings.erase("rope_refresher_lesson")
+			settings.erase("rope_tutorial_pending")
+			_checkpoint()
+			_show_hut())
+	stage.exit_requested.connect(_show_title)
+	_content.add_child(stage)
+	_remedy_scene = stage

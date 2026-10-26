@@ -9,6 +9,7 @@ var _motion: Tween
 var _elapsed: float = 0.0
 var _pose_until: float = 0.0
 var direction: float = 1.0
+var wilted: bool = false
 
 func setup(id: String, ground: Vector2) -> void:
 	asset_id = id
@@ -58,4 +59,5 @@ func _process(delta: float) -> void:
 		_pose_until = 0.0
 		pose("idle")
 	if animation == "idle":
-		scale.y = 1.0 + 0.015 * sin(_elapsed * 2.8 + base_position.x)
+		scale.y = (0.84 if wilted else 1.0) + 0.015 * sin(_elapsed * 2.8 + base_position.x)
+		_sprite.modulate = Color("aaa2aa") if wilted else Color.WHITE

@@ -1404,5 +1404,161 @@
   {
     "id": "ui.rope.node_boss",
     "text": "井底主"
+  },
+  {
+    "id": "ui.rope.end_turn",
+    "text": "收手 E"
+  },
+  {
+    "id": "ui.rope.energy",
+    "text": "力气 · 每回合三朵火苗"
+  },
+  {
+    "id": "ui.rope.basket",
+    "text": "洗衣篮"
+  },
+  {
+    "id": "ui.rope.basket_counts",
+    "text": "抽牌堆 {draw} 张 · 弃牌堆 {discard} 张"
+  },
+  {
+    "id": "ui.rope.shake_hint",
+    "text": "选一张手牌，再抖一张（S）"
+  },
+  {
+    "id": "ui.rope.keepsake_ready",
+    "text": "点击使用 · 每场一次"
+  },
+  {
+    "id": "ui.rope.first_target",
+    "text": "先选一个敌人"
+  },
+  {
+    "id": "ui.rope.wrapped",
+    "text": "裹紧 {count}"
+  },
+  {
+    "id": "ui.rope.wilted",
+    "text": "蔫了"
+  },
+  {
+    "id": "ui.rope.pair_ready",
+    "text": "可凑对"
+  },
+  {
+    "id": "ui.rope.same_kind",
+    "text": "同类"
+  },
+  {
+    "id": "ui.rope.pair_departure",
+    "text": "凑成一对，一起回家"
+  },
+  {
+    "id": "ui.rope.peace",
+    "text": "井底安静了 · 和平凑对"
+  },
+  {
+    "id": "ui.rope.path_back",
+    "text": "翻开路牌"
+  },
+  {
+    "id": "ui.rope.path_hint_battle",
+    "text": "看看谁拦在路上"
+  },
+  {
+    "id": "ui.rope.path_hint_elite",
+    "text": "绳结要多绕几圈"
+  },
+  {
+    "id": "ui.rope.path_hint_boss",
+    "text": "井底传来窸窣声"
+  },
+  {
+    "id": "ui.rope.path_hint_event",
+    "text": "路上有人等着"
+  },
+  {
+    "id": "ui.rope.path_hint_campfire",
+    "text": "在灯边歇一会儿"
+  },
+  {
+    "id": "ui.rope.path_hint_trade",
+    "text": "带点东西来换换"
+  },
+  {
+    "id": "ui.rope.pair_chance",
+    "text": "有同类 · 可以凑对"
+  },
+  {
+    "id": "ui.rope.draw_kind",
+    "text": "抽牌堆"
+  },
+  {
+    "id": "ui.rope.discard_kind",
+    "text": "弃牌堆"
+  },
+  {
+    "id": "ui.rope.intent_pounce",
+    "text": "扑"
+  },
+  {
+    "id": "ui.rope.intent_pinch",
+    "text": "夹"
+  },
+  {
+    "id": "ui.rope.intent_stink",
+    "text": "熏"
+  },
+  {
+    "id": "ui.rope.intent_chew",
+    "text": "嚼"
+  },
+  {
+    "id": "ui.rope.intent_swallow",
+    "text": "吞"
+  },
+  {
+    "id": "ui.rope.intent_bubble",
+    "text": "罩"
+  },
+  {
+    "id": "ui.rope.intent_summon",
+    "text": "唤"
+  },
+  {
+    "id": "ui.rope.intent_escape",
+    "text": "挣"
+  },
+  {
+    "id": "ui.rope.intent_idle",
+    "text": "呆"
+  },
+  {
+    "id": "ui.rope.incoming",
+    "text": "将受到 {damage} 点伤害"
+  },
+  {
+    "id": "ui.rope.incoming_change",
+    "text": "将受到 {before} → {after} 点"
+  },
+  {
+    "id": "ui.rope.relic_count",
+    "text": "拾物 {count}"
+  },
+  {
+    "id": "ui.rope.keepsake_count",
+    "text": "信物 {count}"
+  },
+  {
+    "id": "ui.rope.station_pair",
+    "text": "毛球虫 · 凑对"
+  },
+  {
+    "id": "ui.rope.station_bind",
+    "text": "湿袜子 · 缠"
+  },
+  {
+    "id": "ui.rope.keepsake",
+    "text": "信物"
   }
 ]

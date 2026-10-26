@@ -16,19 +16,44 @@ static func actor(id: String) -> String:
 
 static func card_art(card: Dictionary) -> String:
 	var source: String = str(card.get("art", ""))
+	var rope_aliases: Dictionary = {
+		"cardart.bind": ["cardart.r4_bind", "cardart.r3_v2_rope_lasso"],
+		"cardart.tie": ["cardart.r4_tie", "cardart.r3_v2_clothesline"],
+		"cardart.double_knot": ["cardart.r4_double_knot", "cardart.r3_v2_knot"],
+		"cardart.one_pair": ["cardart.r4_one_pair", "cardart.r3_v2_vow"]
+	}
+	if rope_aliases.has(source): return available(rope_aliases[source])
 	var approved: String = source.replace("cardart.", "cardart.r3_v2_")
 	# Rejected icons and old code art never silently return for pending cards.
 	return approved if AssetCatalog.has_asset(approved) else ""
 
-static func card_frame(_card: Dictionary) -> String:
-	return "ui.r3_v2_card" if AssetCatalog.has_asset("ui.r3_v2_card") else ""
+static func card_frame(card: Dictionary) -> String:
+	return available(["ui.r4_card_" + str(card.get("type", "special")), "ui.r4_card", "ui.r3_v2_card"])
+
+static func available(candidates: Array) -> String:
+	for candidate: String in candidates:
+		if AssetCatalog.has_asset(candidate): return candidate
+	return ""
 
 static func intent(kind: String) -> String:
+	var new_icon: String = available(["intent.r4_" + {"attack": "pounce", "guard": "bubble", "guard_all": "bubble", "consume_binds": "chew", "shake_off": "escape"}.get(kind, kind)])
+	if not new_icon.is_empty(): return new_icon
 	match kind:
 		"attack": return "ui.r3_simple_icon_attack"
 		"guard", "guard_all": return "ui.r3_simple_icon_guard"
 		"idle": return "intent.r2_idle"
 		_: return "intent.r2_special"
+
+static func intent_kind(intent_value: Dictionary) -> String:
+	if bool(intent_value.get("eat_binds_to_guard", false)): return "chew"
+	if intent_value.get("type") == "consume_minion" or str(intent_value.get("name", "")).contains("吞"): return "swallow"
+	if intent_value.get("type") == "summon": return "summon"
+	if intent_value.has("shake_off"): return "escape"
+	if intent_value.get("type") in ["guard", "guard_all"]: return "bubble"
+	if intent_value.get("type") == "idle": return "idle"
+	if str(intent_value.get("name", "")).contains("夹"): return "pinch"
+	if str(intent_value.get("name", "")).contains("熏"): return "stink"
+	return "pounce"
 
 static func effect(card: Dictionary, current_guard: int = 0) -> Dictionary:
 	var ops: Array = card.get("ops", [])
@@ -38,10 +63,14 @@ static func effect(card: Dictionary, current_guard: int = 0) -> Dictionary:
 	var value: String = str(int(op.get("amount", 0))) if op.has("amount") else ""
 	var icon: String = "intent.r2_special"
 	match operation:
+		"bind", "bind_all", "bind_both", "tie", "pair_threshold_override":
+			icon = "fx.r2_rope_strip"
+			if operation == "tie": value = "↔"
+			if operation == "pair_threshold_override": value = str(roundi(float(op.get("threshold", 0.75)) * 100)) + "%"
 		"damage", "damage_all", "damage_equal_guard":
 			icon = intent("attack")
 			if operation == "damage_equal_guard": value = str(current_guard)
-			if int(op.get("times", 1)) > 1: value += "×" + str(op["times"])
+			if int(op.get("times", 1)) > 1: value += "×" + str(int(op["times"]))
 			elif operation == "damage_all": value += "全"
 		"gain_guard": icon = intent("guard")
 		"draw", "return_from_discard": icon = "ui.icon.r2_deck"
