@@ -11,6 +11,8 @@ const ACTORS: Dictionary = {
 	"enemy.sock_kid": "enemy.r3_simple_sock_kid", "boss.sock_snake": "boss.r3_simple_sock_snake"
 }
 static func actor(id: String) -> String:
+	var r4: String = {"enemy.lint_bug":"enemy.r4_lint_bug", "enemy.soap_bubble":"enemy.r4_soap_bubble", "enemy.stinky_insole":"enemy.r4_stinky_insole", "boss.sock_snake":"boss.r4_sock_snake"}.get(id, "")
+	if not r4.is_empty() and AssetCatalog.has_asset(r4): return r4
 	var candidate: String = str(ACTORS.get(id, id))
 	return candidate if AssetCatalog.has_asset(candidate) else id
 
@@ -103,3 +105,35 @@ static func actor_height(id: String) -> float:
 	if pixels == null or pixels.is_empty(): return float(AssetCatalog.frame_size(id).y)
 	var occupied: Rect2i = pixels.get_used_rect()
 	return maxf(1.0, AssetCatalog.anchor(id).y - occupied.position.y)
+
+static func portrait(source: String) -> String:
+	# Memory/young identities remain exact; never recolor a current-age substitute.
+	if source == "big.douding.memory": return available(["big.r4_douding.memory", source])
+	if not source.begins_with("big.") or source.ends_with(".memory"): return source
+	return available(["big.r4_" + source.trim_prefix("big."), source])
+
+static func portrait_frame(source: String) -> Texture2D:
+	var id: String = portrait(source)
+	if not AssetCatalog.has_asset(id): return null
+	var frame: AtlasTexture = AtlasTexture.new()
+	frame.atlas = AssetCatalog.texture(id)
+	frame.region = Rect2(Vector2.ZERO, Vector2(AssetCatalog.frame_size(id)))
+	return frame
+
+static func enemy_actor(source: String, enemy: Dictionary) -> String:
+	if str(enemy.get("id", "")) == "boss.sock_snake" and bool(enemy.get("phase_triggered", false)):
+		var phase: String = available(["boss.r4_sock_snake_phase2"])
+		if not phase.is_empty(): return phase
+	return actor(source)
+
+static func boss_board() -> String:
+	return available(["board.r4_sock_lair", "board.sock_lair"])
+
+static func path_back() -> String:
+	return available(["path.r4_back", "path.back"])
+
+static func path_flip() -> String:
+	return available(["path.r4_flip", "path.back"])
+
+static func path_thumbnail(kind: String) -> String:
+	return available(["path.r4_" + kind + "_thumb", "path.r4_" + kind, {"battle":"enemy.r3_simple_lint_bug", "elite":"elite.r3_simple_hungry_drawer", "boss":"boss.r3_simple_sock_snake", "event":"event.mailbox", "campfire":"board.r3_simple_campfire", "trade":"event.trade"}.get(kind,"event.mailbox")])

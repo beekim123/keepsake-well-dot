@@ -640,16 +640,16 @@ func _show_path() -> void:
 	var row_step: float = 230.0 / float(maxi(1, depth_count - 1))
 	for index: int in range(depth_count):
 		var visited: bool = run.get("history", []).any(func(record: Dictionary) -> bool: return int(record.get("segment", 0)) == index + 1)
-		var slot: Button = _button(_content, ("已" if visited else "") + str(index + 1), Rect2(300, 52 + index * row_step, 40, 24), func() -> void: pass, "Depth%d" % index)
+		var slot: Button = _button(_content, ("已" if visited else "") + str(index + 1), Rect2(300, roundf(52 + index * row_step), 40, 24), func() -> void: pass, "Depth%d" % index)
 		slot.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		if index + 1 == segment: slot.add_theme_stylebox_override("normal", SimpleUI.style("ui.r3_simple_button_hover"))
-	var hero_position: Vector2 = Vector2(266, 36 + maxi(0, segment - 1) * row_step)
+	var hero_position: Vector2 = Vector2(266, roundf(44 + maxi(0, segment - 1) * row_step))
 	var hero: TextureRect = UI.texture(_content, AssetCatalog, "char.r3_simple_asui", Rect2(hero_position, Vector2(32, 40)))
 	hero.name = "MapAsui"
 	hero.size = Vector2(32, 40)
 	if not presentation_fast and segment > 1:
-		hero.position.y -= row_step
-		hero.create_tween().tween_property(hero, "position", hero_position, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		hero.position.y = roundf(hero.position.y - row_step)
+		hero.create_tween().tween_method(func(value: float) -> void: hero.position.y = roundf(value), hero.position.y, hero_position.y, 0.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	var choices: Array = run_rules.path_choices(run)
 	for index: int in range(choices.size()):
 		var choice: Dictionary = choices[index]
@@ -664,7 +664,7 @@ func _show_path() -> void:
 		back.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		card.add_child(back)
 		var back_art: TextureRect = TextureRect.new()
-		back_art.texture = AssetCatalog.frames("path.back", "idle").get_frame_texture("idle", 0)
+		back_art.texture = AssetCatalog.frames(BattleArt.path_back(), "idle").get_frame_texture("idle", 0)
 		back_art.position = Vector2(50, 26)
 		back_art.size = Vector2(96,128)
 		back_art.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -677,13 +677,13 @@ func _show_path() -> void:
 		card.add_child(face)
 		var art: String = _path_thumbnail(choice)
 		if not art.is_empty():
-			var thumb: TextureRect = UI.texture(face, AssetCatalog, art, Rect2(34,18,128,84))
+			var thumb: TextureRect = UI.texture(face, AssetCatalog, art, Rect2(34,18,128,96))
 			thumb.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-			thumb.size = Vector2(128,84)
+			thumb.size = Vector2(128,96)
 			thumb.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		var title: Label = UI.label(face, _node_type_text(str(choice.get("type", "event"))), Rect2(20,111,156,24), UI.INK,18)
+		var title: Label = UI.label(face, _node_type_text(str(choice.get("type", "event"))), Rect2(20,120,156,24), UI.INK,18)
 		title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		UI.paragraph(face, rope_text("path_hint_" + str(choice.get("type", "event"))), Rect2(24,145,148,38), UI.INK)
+		UI.paragraph(face, rope_text("path_hint_" + str(choice.get("type", "event"))), Rect2(24,151,148,38), UI.INK)
 		if _path_has_pair(choice): UI.label(face, rope_text("pair_chance"), Rect2(20,191,164,20), UI.INK)
 		face.hide()
 		card.tooltip_text = rope_text("path_back")
@@ -698,7 +698,7 @@ func _show_path() -> void:
 
 func _path_thumbnail(choice: Dictionary) -> String:
 	var kind: String = str(choice.get("type", "event"))
-	return BattleArt.available(["path.r4_" + kind, {"battle": "enemy.r3_simple_lint_bug", "elite": "elite.r3_simple_hungry_drawer", "boss": "boss.r3_simple_sock_snake", "event": "event.mailbox", "campfire": "board.r3_simple_campfire", "trade": "event.trade"}.get(kind, "event.mailbox")])
+	return BattleArt.path_thumbnail(kind)
 
 func _path_has_pair(choice: Dictionary) -> bool:
 	var tags: Array[String] = []
@@ -769,7 +769,7 @@ func _show_battle() -> void:
 	board.name = "BattleBoard"
 	board.size = Vector2(640, 360)
 	_content.add_child(board)
-	var board_id: String = "board.sock_lair" if run.get("current_node", {}).get("type") == "boss" else "board.sock_swamp"
+	var board_id: String = BattleArt.boss_board() if run.get("current_node", {}).get("type") == "boss" else "board.sock_swamp"
 	if AssetCatalog.has_asset(board_id):
 		UI.texture(board, AssetCatalog, board_id, Rect2(0, 0, 640, 360))
 	_battle_view = BattleView.new()
@@ -1453,7 +1453,7 @@ func _banter_event(event: String, extra: Dictionary = {}) -> void:
 	_bubble = UI.frame(self, "BanterBubble", rectangle)
 	_bubble.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	_bubble.add_theme_stylebox_override("panel", SimpleUI.style("ui.r3_simple_dialogue"))
-	_bubble_label = UI.paragraph(_bubble, str(message["text"]), Rect2(20, 8, rectangle.size.x - 40, rectangle.size.y - 14) if _uses_simple_ui() else Rect2(8, 8, rectangle.size.x - 16, rectangle.size.y - 12), UI.INK)
+	_bubble_label = UI.paragraph(_bubble, str(message["text"]), Rect2(20, 10, rectangle.size.x - 40, rectangle.size.y - 18) if screen == "battle" else (Rect2(20, 8, rectangle.size.x - 40, rectangle.size.y - 14) if _uses_simple_ui() else Rect2(8, 8, rectangle.size.x - 16, rectangle.size.y - 12)), UI.INK)
 	_bubble_label.visible_characters = -1 if presentation_fast else 0
 	_bubble_message = message
 	_banter_frame = Engine.get_process_frames()
@@ -1509,9 +1509,14 @@ func _show_enemy_intro() -> void:
 	seen[id] = true
 	settings["intro_enemies"] = seen
 	var panel: Panel = _modal(ContentCatalog.text("ui.d2.boss_intro" if boss else "ui.d2.elite_intro"))
-	var actor: AnimatedSprite2D = Actor.new()
-	panel.add_child(actor)
-	actor.setup(BattleArt.actor(id), Vector2(110, 202))
+	var portrait_id: String = BattleArt.portrait("big.sock_snake" if boss else "big.hungry_drawer")
+	if portrait_id.begins_with("big.r4_"):
+		var portrait_view: TextureRect = UI.texture(panel, AssetCatalog, portrait_id, Rect2(62,86,96,96))
+		portrait_view.texture = BattleArt.portrait_frame("big.sock_snake" if boss else "big.hungry_drawer")
+	else:
+		var actor: AnimatedSprite2D = Actor.new()
+		panel.add_child(actor)
+		actor.setup(BattleArt.actor(id), Vector2(110,202))
 	UI.paragraph(panel, ContentCatalog.text("ui.d2.boss_line" if boss else "ui.d2.elite_line"), Rect2(210, 62, 270, 62), UI.WARM)
 	UI.paragraph(panel, ContentCatalog.text("ui.d2.boss_reply" if boss else "ui.d2.elite_reply"), Rect2(210, 130, 270, 36))
 	var definition: Dictionary = ContentCatalog.entry(id)
@@ -1562,7 +1567,7 @@ func _flip_path(card: Button) -> void:
 		back.hide()
 		var flip: AnimatedSprite2D = Actor.new()
 		card.add_child(flip)
-		flip.setup("path.back", Vector2(50,26), "flip")
+		flip.setup(BattleArt.path_flip(), Vector2(50,26), "flip")
 		await flip.animation_finished
 		if not is_instance_valid(card): return
 		flip.queue_free()

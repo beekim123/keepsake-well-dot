@@ -2,6 +2,7 @@ extends Control
 ## Model-only town scene with live text. Sequencing/grants stay entirely in
 ## StoryPlayer/RunRules; absent identities never borrow an unrelated portrait.
 signal advance_requested
+const Art = preload("res://scripts/view/remedy/battle_art.gd")
 const UI = preload("res://scripts/view/ui_factory.gd")
 const SimpleUI = preload("res://scripts/view/remedy/simple_ui.gd")
 var page: Dictionary = {}
@@ -31,17 +32,34 @@ func _ready() -> void:
 	add_child(picture)
 	UI.texture(picture, AssetCatalog, "board.r3_simple_town", Rect2(0, 0, 640, 360))
 	_speaker = str(page.get("speaker", "narrator"))
-	# Old layer metadata is used only to decide which *identity* is present.
-	# It is never rendered and no young/ghost/unknown person is substituted.
+	# Presence and identity come from the unchanged story layers. Old strips are
+	# framed rather than squashed; young/memory identities never borrow new adults.
 	var identities: Array[String] = []
+	var portraits: Array[String] = []
 	for layer: Dictionary in page.get("layers", []):
-		identities.append(str(layer.get("art", "")))
-	if identities.has("big.asui") or identities.has("char.asui") or _speaker == "char.asui":
-		_model_actor(picture, "StoryAsui", "char.r3_simple_asui", Vector2(220, 322))
-	if identities.has("big.ma_ye") or identities.has("char.ma_ye") or _speaker == "npc.maye":
-		_model_actor(picture, "StoryMaye", "char.r3_simple_ma_ye", Vector2(566, 190))
-	if page.get("tone", "") != "memory" and (identities.has("big.mai_aunt") or _speaker == "npc.mai_aunt"):
-		_model_actor(picture, "StoryAunt", "char.r3_simple_mai_aunt", Vector2(382, 312))
+		var source: String = str(layer.get("art", ""))
+		identities.append(source)
+		if source.begins_with("big.") and source not in portraits:
+			portraits.append(source)
+	if not portraits.is_empty():
+		for index: int in range(portraits.size()):
+			var source: String = portraits[index]
+			var texture: Texture2D = Art.portrait_frame(source)
+			if texture == null: continue
+			var portrait_view: TextureRect = TextureRect.new()
+			portrait_view.name = "StoryPortrait_" + source.replace(".", "_")
+			portrait_view.texture = texture
+			portrait_view.position = Vector2(272 + (index - (portraits.size()-1)*0.5)*144, 194).round()
+			portrait_view.size = Vector2(96,96)
+			portrait_view.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+			portrait_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			portrait_view.set_meta("semantic_art_id", source)
+			picture.add_child(portrait_view)
+	else:
+		if identities.has("char.asui") or _speaker == "char.asui":
+			_model_actor(picture, "StoryAsui", "char.r3_simple_asui", Vector2(220,322))
+		if identities.has("char.ma_ye") or _speaker == "npc.maye":
+			_model_actor(picture, "StoryMaye", "char.r3_simple_ma_ye", Vector2(566,190))
 	_model_keepsakes(picture, identities)
 	var panel: Panel = UI.frame(self, "StoryText", Rect2(116, 54, 408, 114))
 	panel.add_theme_stylebox_override("panel", SimpleUI.style("ui.r3_simple_panel"))
@@ -73,7 +91,7 @@ func _model_keepsakes(parent: Node, identities: Array[String]) -> void:
 		var art_id: String = SimpleUI.item_art(semantic_id)
 		if art_id.is_empty(): continue
 		var x: float = 320.0 - 24.0 + (index - (objects.size() - 1) * 0.5) * 52.0
-		var icon: TextureRect = UI.texture(parent, AssetCatalog, art_id, Rect2(x, 270, 48, 48))
+		var icon: TextureRect = UI.texture(parent, AssetCatalog, art_id, Rect2(x, 304, 48, 48))
 		icon.name = "StoryKeepsake_" + semantic_id.trim_prefix("keepsake.")
 		icon.set_meta("semantic_art_id", semantic_id)
 

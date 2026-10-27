@@ -6503,6 +6503,570 @@
         }
       },
       "hash": "4a59ce8610cd64c2d6c358f870b2d4b44fd87ba973b48d6fe23e188fcfb5837c"
+    },
+    {
+      "id": "big.r4_asui",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "ab05155d8c5bec25894a95031beda237f9adc269f5e1e99a996cbec3c6dac672",
+      "file": "big/r4_asui.png"
+    },
+    {
+      "id": "big.r4_ma_ye",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "53c39df681709daef9161538ac4e66119ed381c68fa5114a59ed1578dadc6106",
+      "file": "big/r4_ma_ye.png"
+    },
+    {
+      "id": "big.r4_mai_aunt",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "cb44ac7191054d7616b8bd0056d01ee7b642c2150ab68e7bb1a1f4304b3f8691",
+      "file": "big/r4_mai_aunt.png"
+    },
+    {
+      "id": "big.r4_mai_uncle",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "e0be36e11e1a12dc29f2988a53f3a689977996cb8e602601e683339659bc3c95",
+      "file": "big/r4_mai_uncle.png"
+    },
+    {
+      "id": "boss.r4_sock_snake",
+      "file": "boss/r4_sock_snake.png",
+      "size": [
+        160,
+        120
+      ],
+      "frames": 1,
+      "anchor": [
+        80,
+        118
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "cee80331b66251ae19b1abdc2ffc3fe72f827688fd46548ddb03e23dd982e1f6"
+    },
+    {
+      "id": "boss.r4_sock_snake_phase2",
+      "file": "boss/r4_sock_snake_phase2.png",
+      "size": [
+        160,
+        120
+      ],
+      "frames": 1,
+      "anchor": [
+        80,
+        118
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "60d79f095be76e058b7ca9e32183d9e897674c1bd3cf28536b59d958d298c5fe"
+    },
+    {
+      "id": "board.r4_sock_lair",
+      "file": "board/r4_sock_lair.png",
+      "size": [
+        640,
+        360
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "5969c8c937a177b1f59c6bed6610997eeb69881157e5dec81947decbf2578bcb"
+    },
+    {
+      "id": "enemy.r4_lint_bug",
+      "file": "enemy/r4_lint_bug.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 1,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "8e097efee02e273fa3ff0567536823698a513a47d6c8374517957f60caa62671"
+    },
+    {
+      "id": "enemy.r4_soap_bubble",
+      "file": "enemy/r4_soap_bubble.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 1,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "86c421f21c9e310a0fb28232afba995642939593110fbf0a1ba0afbff63c0cb5"
+    },
+    {
+      "id": "enemy.r4_stinky_insole",
+      "file": "enemy/r4_stinky_insole.png",
+      "size": [
+        48,
+        48
+      ],
+      "frames": 1,
+      "anchor": [
+        24,
+        46
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "81ac3dadfe5a1e1e3815f4de329778286fe295797fab636eba74f7fd7930e115"
+    },
+    {
+      "id": "big.r4_douding",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "ebc5c972141fff5a931b502bab9d619f64f0407f5dfa70896e83200491ff11c0",
+      "file": "big/r4_douding.png"
+    },
+    {
+      "id": "big.r4_xin_bo",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "14f90f0a95138de72c046d1c9770905a4dec54bf1de01be2b667721f4f9f65a1",
+      "file": "big/r4_xin_bo.png"
+    },
+    {
+      "id": "big.r4_laundry_granny",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "4aa6a70ab25e39b21c3a171bcaa0339d45f0c7187a20886fc704118957c8737f",
+      "file": "big/r4_laundry_granny.png"
+    },
+    {
+      "id": "big.r4_hungry_drawer",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "59e628cfc6d1ad4f505502eb56ecf7c1804ce94bab0fed86eaa06b60099ae94b",
+      "file": "big/r4_hungry_drawer.png"
+    },
+    {
+      "id": "big.r4_sock_snake",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "1bee4784d3312f491dbd29e549c6cef13b137531a55ba888abf3f9bc28d9d881",
+      "file": "big/r4_sock_snake.png"
+    },
+    {
+      "id": "big.r4_douding.memory",
+      "size": [
+        96,
+        96
+      ],
+      "frames": 1,
+      "anchor": [
+        48,
+        94
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "3293974b37ed07873baa3237a3f7d6764a47863240122c7a764772f30c0b336d",
+      "file": "big/r4_douding_memory.png"
+    },
+    {
+      "id": "path.r4_back",
+      "file": "path/r4_back.png",
+      "size": [
+        96,
+        128
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "7595175c1af28985f838cf61f329496d6ddc71d9081db4f8e68fdb62513b9969"
+    },
+    {
+      "id": "path.r4_flip",
+      "file": "path/r4_flip.png",
+      "size": [
+        96,
+        128
+      ],
+      "frames": 6,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        },
+        "flip": {
+          "fps": 15,
+          "loop": false,
+          "frames": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      },
+      "hash": "b7d519a58aecd32d4e62d57c261917a7bddef4262c28785359d08eddf4441968"
+    },
+    {
+      "id": "path.r4_battle_thumb",
+      "file": "path/r4_battle_thumb.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "15724592589d199307b462218d25e806c310a757861bb3b8a90b313a068398dc"
+    },
+    {
+      "id": "path.r4_elite_thumb",
+      "file": "path/r4_elite_thumb.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "661b587ec707ef7beca1f9907ce9febb6fe485cf270f33d906e834514404aa35"
+    },
+    {
+      "id": "path.r4_campfire_thumb",
+      "file": "path/r4_campfire_thumb.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "98a8edac25c212dc16ce24e5708ef10c2587ee8316abc4ef0a75ad0d7c75934e"
+    },
+    {
+      "id": "path.r4_event_thumb",
+      "file": "path/r4_event_thumb.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "a7958aaf6524c7466aa1e2a01d8c9212af90d7c7f5688df29afa5bf29f014054"
+    },
+    {
+      "id": "path.r4_trade_thumb",
+      "file": "path/r4_trade_thumb.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "68867e3fc1b45c0255f44f1a00c5a6283bb837e3e13136461a072c62fc240dc8"
+    },
+    {
+      "id": "path.r4_boss_thumb",
+      "file": "path/r4_boss_thumb.png",
+      "size": [
+        64,
+        48
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {
+        "idle": {
+          "fps": 1,
+          "loop": true,
+          "frames": [
+            0
+          ]
+        }
+      },
+      "hash": "fbfbc451232887e03daec05407001cc3db9baeebf08445cb9df4fe958a1eda11"
     }
   ]
 }

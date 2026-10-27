@@ -80,7 +80,7 @@ func _build() -> void:
 	theme = SimpleUI.theme()
 	# Preserve the approved far/mid/near model composition at its native size.
 	if state.get("enemies", []).any(func(enemy: Dictionary) -> bool: return str(enemy.get("id", "")).begins_with("boss.")):
-		UI.texture(self, AssetCatalog, "board.sock_lair", Rect2(0, 0, 640, 360))
+		UI.texture(self, AssetCatalog, Art.boss_board(), Rect2(0, 0, 640, 360))
 	else:
 		for layer: String in ["far", "mid", "near"]:
 			UI.texture(self, AssetCatalog, "board.r2_sock_swamp_" + layer, Rect2(0, 0, 640, 360))
@@ -123,8 +123,8 @@ func _build() -> void:
 		var intent: Dictionary = _intent_for(index)
 		button.tooltip_text = str(definition.get("name", enemy.get("name", ""))) + " · " + _intent_text(intent) + "\n" + str(definition.get("rule_text", definition.get("text", definition.get("mechanic_text", "")))).replace("护盾", "裹紧")
 		_enemy_buttons.append(button)
-		var art_id: String = Art.actor(str(definition.get("art", enemy.get("id", ""))))
-		if art_id == "ui.panel.default": art_id = Art.actor(str(enemy.get("id", "")))
+		var art_id: String = Art.enemy_actor(str(definition.get("art", enemy.get("id", ""))), enemy)
+		if art_id == "ui.panel.default": art_id = Art.enemy_actor(str(enemy.get("id", "")), enemy)
 		if AssetCatalog.has_asset(art_id):
 			var sprite: Node2D = BattleActor.new()
 			button.add_child(sprite)
