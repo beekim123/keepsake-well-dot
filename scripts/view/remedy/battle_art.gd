@@ -1,5 +1,5 @@
 extends RefCounted
-## Presentation-only semantic aliases. New IDs are admitted model textures;
+## Presentation-only semantic aliases. New IDs are admitted art textures with recorded sources;
 ## untouched rewards/other enemies retain their honest historical source IDs.
 const ACTORS: Dictionary = {
 	"char.asui": "char.r3_simple_asui", "char.r2_asui": "char.r3_simple_asui",
@@ -34,6 +34,16 @@ static func available(candidates: Array) -> String:
 	for candidate: String in candidates:
 		if AssetCatalog.has_asset(candidate): return candidate
 	return ""
+
+# Presentation-only P0 semantics; absent artwork retains the explicit old drawing.
+static func stage(kind: String) -> String:
+	var aliases: Dictionary = {
+		"bind_low": "fx.r4_bind_low", "bind_mid": "fx.r4_bind_mid", "bind_high": "fx.r4_bind_high",
+		"tie_strip": "fx.r4_tie_strip", "tie_knot": "fx.r4_tie_knot", "pair": "fx.r4_pair",
+		"pair_ready": "ui.r4_pair_ready", "lantern": "ui.r4_lantern", "lantern_flame": "ui.r4_lantern_flame",
+		"basket": "ui.r4_basket", "end_turn": "ui.r4_end_turn", "keepsake_button": "ui.r4_keepsake_button"
+	}
+	return available([str(aliases.get(kind, ""))])
 
 static func intent(kind: String) -> String:
 	var new_icon: String = available(["intent.r4_" + {"attack": "pounce", "guard": "bubble", "guard_all": "bubble", "consume_binds": "chew", "shake_off": "escape"}.get(kind, kind)])

@@ -137,7 +137,7 @@ func _build() -> void:
 		var intent_y: float = maxf(-42, 148 - actor_height - 38)
 		var intent_kind: String = Art.intent_kind(intent)
 		var intent_art: String = Art.available(["intent.r4_" + intent_kind])
-		if not intent_art.is_empty(): UI.texture(button, AssetCatalog, intent_art, Rect2(width / 2 - 12, intent_y, 24, 24))
+		if not intent_art.is_empty(): UI.texture(button, AssetCatalog, intent_art, Rect2(roundf(width / 2) - 16, roundf(intent_y) - 4, 32, 32))
 		else:
 			var symbol: Label = UI.label(button, rope_text("intent_" + intent_kind), Rect2(width / 2 - 18, intent_y + 1, 36, 24), UI.WARM, 18)
 			symbol.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
@@ -163,6 +163,10 @@ func _build() -> void:
 			var badge: Label = UI.label(self, str(enemy["binds"]), Rect2(x + 20, 207, 26, 20), UI.WARM)
 			badge.add_theme_constant_override("outline_size", 3)
 			badge.add_theme_color_override("font_outline_color", SimpleUI.INK)
+
+		var ready_art: String = Art.stage("pair_ready")
+		if not ready_art.is_empty() and _pair_ready(enemy) and not button.disabled:
+			UI.texture(self, AssetCatalog, ready_art, Rect2(roundf(x)-40,220,24,24)).name = "PairReady%d" % index
 
 		var health: Control = HealthReadout.instantiate()
 		health.name = "EnemyHealth%d" % index
@@ -259,6 +263,20 @@ func _inventory() -> void:
 		var owner: String = str(definition.get("owner", "")).replace("npc.", "portrait.").replace("portrait.xinbo", "portrait.xin_bo")
 		var art: String = Art.available([owner, SimpleUI.item_art(str(definition.get("art", id)))])
 		if not art.is_empty(): _item_icons[id] = UI.texture(button, AssetCatalog, art, Rect2(4,4,24,24))
+		var frame_art: String = Art.stage("keepsake_button")
+		if not frame_art.is_empty():
+			_empty_button(button)
+			button.modulate = Color.WHITE
+			if _item_icons.has(id): _item_icons[id].modulate = Color("777780") if used else Color.WHITE
+			var frame_texture: AtlasTexture = AtlasTexture.new()
+			frame_texture.atlas = AssetCatalog.texture(frame_art)
+			frame_texture.region = Rect2(32 if used else 0, 0, 32, 32)
+			var frame_view: TextureRect = TextureRect.new()
+			frame_view.name = "KeepsakeR4Frame"
+			frame_view.texture = frame_texture
+			frame_view.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			frame_view.size = Vector2(32,32)
+			button.add_child(frame_view)
 	if not state.get("keepsakes", []).is_empty():
 		UI.label(self, rope_text("keepsake_count", {"count": state["keepsakes"].size()}), Rect2(88, 145, 116, 16), UI.PAPER)
 
@@ -843,6 +861,13 @@ func _empty_button(button: Button) -> void:
 func _wilted(enemy: Dictionary) -> bool:
 	return int(enemy.get("hp", 0)) <= int(ceil(int(enemy.get("max_hp", 1)) * float(enemy.get("pair_threshold", 0.5))))
 
+func _pair_ready(enemy: Dictionary) -> bool:
+	if str(enemy.get("tie", "")).is_empty() or not _wilted(enemy): return false
+	for other: Dictionary in state.get("enemies", []):
+		if str(other.get("uid", "")) == str(enemy["tie"]) and str(other.get("pair_tag", "")) == str(enemy.get("pair_tag", "")):
+			return _wilted(other)
+	return false
+
 func _rope_status(enemy: Dictionary) -> String:
 	var parts: Array[String] = []
 	if int(enemy.get("guard", 0)) > 0: parts.append(rope_text("wrapped", {"count": enemy["guard"]}))
@@ -917,8 +942,21 @@ func _present_pair(event: Dictionary) -> void:
 		hop.tween_property(actor, "position", home + Vector2(28,-28), 0.3)
 		hop.parallel().tween_property(actor,"modulate:a",0.0,0.3)
 	middle /= maxi(1, slots.size())
-	var label: Label = UI.label(self, "♡  ♡", Rect2(middle - Vector2(32,60), Vector2(80,24)), Color("f3bdc8"), 24)
-	label.name = "PairHearts"
+	var pair_art: String = Art.stage("pair")
+	if not pair_art.is_empty():
+		var departure: AnimatedSprite2D = AnimatedSprite2D.new()
+		departure.name = "PairDepartureR4"
+		departure.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+		departure.sprite_frames = AssetCatalog.frames(pair_art)
+		departure.position = (middle - Vector2(0,46)).round()
+		departure.scale = Vector2(2,2)
+		departure.z_index = 2
+		departure.animation_finished.connect(departure.queue_free)
+		add_child(departure)
+		departure.play("idle")
+	else:
+		var label: Label = UI.label(self, "♡  ♡", Rect2(middle - Vector2(32,60), Vector2(80,24)), Color("f3bdc8"), 24)
+		label.name = "PairHearts"
 	var notice: Label = UI.label(self, rope_text("peace" if bool(event.get("peaceful", false)) else "pair_departure"), Rect2(250, 70, 360, 26), UI.WARM)
 	notice.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	notice.add_theme_constant_override("outline_size", 3)
