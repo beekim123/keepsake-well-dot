@@ -202,7 +202,7 @@
   {
     "id": "boss.sock_snake",
     "name": "千袜蛇",
-    "hp": 80,
+    "hp": 104,
     "art": "boss.sock_snake",
     "kind": "boss",
     "intents": [

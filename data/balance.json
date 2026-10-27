@@ -1,7 +1,7 @@
 [
   {
     "id": "balance.default",
-    "max_hp": 40,
+    "max_hp": 48,
     "energy_per_turn": 3,
     "hand_limit": 7,
     "starter_deck_size": 10,
@@ -11,7 +11,7 @@
     "retry_enemy_hp_step": 0.2,
     "retry_enemy_hp_cap": 0.4,
     "spare_rope_hp": 1,
-    "campfire_heal": 10,
+    "campfire_heal": 14,
     "max_commissions": 2,
     "reward_normal_relics": 2,
     "reward_normal_cards": 3,
