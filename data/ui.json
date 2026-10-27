@@ -295,7 +295,7 @@
   },
   {
     "id": "ui.campfire_dry",
-    "text": "晒晒绳子：本趟最大生命 +{amount}（不回复）"
+    "text": "搓根新绳：本趟所有缠 +{amount}"
   },
   {
     "id": "ui.trade",
