@@ -844,16 +844,30 @@ func _item_card(parent: Node, id: String, rect: Rect2, callback: Callable) -> vo
 	var definition: Dictionary = ContentCatalog.entry(id)
 	var card: Button = _button(parent, "", rect, callback)
 	var model_art: String = BattleArt.card_art(definition) if _uses_simple_ui() and definition.has("cost") else ""
-	if not model_art.is_empty() and definition.has("cost") and AssetCatalog.has_asset("ui.r3_v2_card"):
-		for state_name: String in ["normal", "hover", "pressed"]:
-			var paper: StyleBoxTexture = SimpleUI.style("ui.r3_v2_card")
-			if state_name == "hover": paper.modulate_color = Color(1.04, 1.04, 1.04)
-			card.add_theme_stylebox_override(state_name, paper)
-		UI.label(card, str(int(definition["cost"])), Rect2(16, 12, 40, 34), UI.INK, 24)
-		UI.label(card, rope_text("type_rope") if definition.get("type") == "rope" else t("type_" + str(definition.get("type", "special"))), Rect2(rect.size.x - 76, 18, 60, 20), UI.INK)
-		UI.texture(card, AssetCatalog, model_art, Rect2((rect.size.x - 112) / 2.0, 48, 112, 78))
-		UI.label(card, str(definition.get("name", "")), Rect2(18, 138, rect.size.x - 36, 24), UI.INK, 16)
-		UI.paragraph(card, str(definition.get("text", "")), Rect2(18, 168, rect.size.x - 36, 60), UI.INK)
+	var card_frame: String = BattleArt.card_frame(definition) if definition.has("cost") else ""
+	if not model_art.is_empty() and definition.has("cost") and not card_frame.is_empty():
+		var r4_frame: bool = card_frame.begins_with("ui.r4_card")
+		if r4_frame:
+			# The paper/clip is displayed at exactly 3×, not stretched to the offer hitbox.
+			for state_name: String in ["normal", "hover", "pressed"]:
+				card.add_theme_stylebox_override(state_name, StyleBoxEmpty.new())
+			var paper_size: Vector2 = Vector2(168,228)
+			var paper_pos: Vector2 = ((rect.size-paper_size)/2.0).round()
+			UI.texture(card, AssetCatalog, card_frame, Rect2(paper_pos,paper_size))
+		else:
+			for state_name: String in ["normal", "hover", "pressed"]:
+				var paper: StyleBoxTexture = SimpleUI.style(card_frame)
+				if state_name == "hover": paper.modulate_color = Color(1.04, 1.04, 1.04)
+				card.add_theme_stylebox_override(state_name, paper)
+		var content_x: float = roundf((rect.size.x - 120) / 2.0) if r4_frame else 18.0
+		UI.label(card, str(int(definition["cost"])), Rect2(content_x if r4_frame else 16, 30 if r4_frame else 12, 32, 28), UI.INK, 18 if r4_frame else 24)
+		UI.label(card, rope_text("type_rope") if definition.get("type") == "rope" else t("type_" + str(definition.get("type", "special"))), Rect2(content_x + 92 if r4_frame else rect.size.x - 76, 32 if r4_frame else 18, 28 if r4_frame else 60, 20), UI.INK)
+		# Keep the new 40×28 illustrations at an exact integer scale.
+		var art_size: Vector2 = Vector2(80, 56) if r4_frame else Vector2(112, 78)
+		UI.texture(card, AssetCatalog, model_art, Rect2(Vector2(roundf((rect.size.x - art_size.x) / 2.0), 56 if r4_frame else 48), art_size))
+		var name_label: Label = UI.label(card, str(definition.get("name", "")), Rect2(content_x, 116 if r4_frame else 138, 120 if r4_frame else rect.size.x - 36, 24), UI.INK, 16)
+		if r4_frame: name_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		UI.paragraph(card, str(definition.get("text", "")), Rect2(content_x, 144 if r4_frame else 168, 120 if r4_frame else rect.size.x - 36, 72 if r4_frame else 60), UI.INK)
 		card.tooltip_text = str(definition.get("text", ""))
 		return
 	if _uses_simple_ui():

@@ -5911,6 +5911,126 @@
       ],
       "animations": {},
       "hash": "74d60844fd76bb44e40d45f784d40d4316b2a0a1d2f25faed5633cb9d34c9dac"
+    },
+    {
+      "id": "cardart.r4_bind",
+      "file": "cardart/r4_bind.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "75543a02dec2a8e389f09fb7d633023d5fb8d0ec39bf8e789e8868c8fd72d926"
+    },
+    {
+      "id": "cardart.r4_tie",
+      "file": "cardart/r4_tie.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "bece937abb42428666d98a5d723caa50edf93b5a56e57436ed34e39cb3468c80"
+    },
+    {
+      "id": "cardart.r4_double_knot",
+      "file": "cardart/r4_double_knot.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "c109229bf4f6d5368b1b06b9da86612941bed7dbe1405a96ccc5e539b755482e"
+    },
+    {
+      "id": "cardart.r4_one_pair",
+      "file": "cardart/r4_one_pair.png",
+      "size": [
+        40,
+        28
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "32a9cac255a5e75b051cb3768400c0f306e89a1ff37d13b4a4b50b848243849b"
+    },
+    {
+      "id": "ui.r4_card",
+      "file": "ui/r4_card.png",
+      "size": [
+        56,
+        76
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "9ef3ce2d36ae8c3e9a0283fcd4e664186bffcd720d5c65250370494c35ff0454"
+    },
+    {
+      "id": "ui.r4_card_rope",
+      "file": "ui/r4_card_rope.png",
+      "size": [
+        56,
+        76
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "9ef3ce2d36ae8c3e9a0283fcd4e664186bffcd720d5c65250370494c35ff0454"
+    },
+    {
+      "id": "ui.r4_card_attack",
+      "file": "ui/r4_card_attack.png",
+      "size": [
+        56,
+        76
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "e70782772e91bfe981a895bd0a5234d611c0877ac7705447c6fab397365d2c50"
+    },
+    {
+      "id": "ui.r4_card_special",
+      "file": "ui/r4_card_special.png",
+      "size": [
+        56,
+        76
+      ],
+      "frames": 1,
+      "anchor": [
+        0,
+        0
+      ],
+      "animations": {},
+      "hash": "37dd9f018d33aa8d0f0ed7e13259bbaf950cd2d395bba4150b4f661f18a5ff33"
     }
   ]
 }

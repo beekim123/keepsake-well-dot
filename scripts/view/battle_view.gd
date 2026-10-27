@@ -282,18 +282,20 @@ func _build_card(index: int) -> void:
 	var frame_id: String = Art.card_frame(card)
 	for style_name: String in ["normal", "hover", "pressed", "disabled"]:
 		button.add_theme_stylebox_override(style_name, SimpleUI.style(frame_id) if not frame_id.is_empty() else StyleBoxEmpty.new())
-	var stripe: ColorRect = ColorRect.new()
-	stripe.color = _card_color(card)
-	stripe.position = Vector2(2,8)
-	stripe.size = Vector2(3,60)
-	stripe.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	button.add_child(stripe)
-	var clip: ColorRect = ColorRect.new()
-	clip.color = Color("cfaf7a")
-	clip.position = Vector2(25,-4)
-	clip.size = Vector2(6,10)
-	clip.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	button.add_child(clip)
+	# The admitted r4 frame already includes its clip and category stripe.
+	if not frame_id.begins_with("ui.r4_card"):
+		var stripe: ColorRect = ColorRect.new()
+		stripe.color = _card_color(card)
+		stripe.position = Vector2(2,8)
+		stripe.size = Vector2(3,60)
+		stripe.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		button.add_child(stripe)
+		var clip: ColorRect = ColorRect.new()
+		clip.color = Color("cfaf7a")
+		clip.position = Vector2(25,-4)
+		clip.size = Vector2(6,10)
+		clip.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		button.add_child(clip)
 	UI.label(button, str(rules.card_cost(state, card)), Rect2(5, 5, 18, 16), UI.INK)
 	var art_id: String = Art.card_art(card)
 	if AssetCatalog.has_asset(art_id): UI.texture(button, AssetCatalog, art_id, Rect2(8, 16, 40, 28))
