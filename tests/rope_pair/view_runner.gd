@@ -100,6 +100,23 @@ func _run() -> void:
 	view = view_for(state)
 	check(state["enemies"][0].get("lookahead") == 2 and view._enemy_buttons[0].tooltip_text.contains("滚成团"), "playing whisper without spyglass exposes second future intent")
 	view.free()
+	state = rules.start({"id":"elite.hungry_drawer","enemies":["elite.hungry_drawer"]}, {"deck":["card.whisper_plus","card.bind","card.knock","card.tie","card.knock"]},147)["state"]
+	state["hand"] = [rules.new_card(state,"card.whisper_plus")]
+	view = view_for(state)
+	view.on_command = func(action: Dictionary) -> void: rules.apply_action(state,action)
+	view.select_card(0)
+	view._enemy_clicked(0)
+	view.free()
+	view = view_for(state)
+	check(state["relics"].is_empty() and view._enemy_buttons[0].tooltip_text.contains("打嗝 4×2"), "actual whisper on elite reveals both future attack hits without spyglass")
+	view.free()
+	rules.end_turn(state)
+	rules.end_turn(state)
+	state["hand"] = [rules.new_card(state,"card.whisper_plus")]
+	rules.play_card(state,0,0)
+	view = view_for(state)
+	check(view._intent_amount(view._intent_for(0)) == "4×2 → 0+3", "current multi-hit intent preserves individually reduced hit amounts")
+	view.free()
 	for boss: bool in [false, true]:
 		var viewport: SubViewport = SubViewport.new()
 		viewport.size = Vector2i(640,360)
@@ -178,7 +195,19 @@ func _run() -> void:
 	for action: Dictionary in view._matching_actions(0):
 		var choice: Dictionary = action.get("choices", {})
 		if choice.get("other_uid") == state["hand"][1]["uid"] and choice.get("other_choices", {}).get("other_uid") == state["hand"][2]["uid"]: deep_actions.append(action)
-	check(deep_actions.size() > 1 and view._action_text(deep_actions[0]).contains("↔") and view._action_text(deep_actions[0]) != view._action_text(deep_actions[1]), "recursive deliver candidates distinguish different final target pairs")
+	var labels_to_pairs: Dictionary = {}
+	var unordered_pairs: Dictionary = {}
+	var distinct_pairs_readable: bool = true
+	for action: Dictionary in deep_actions:
+		var inner: Dictionary = action["choices"]["other_choices"]
+		var pair_first: int = int(inner["other_target_index"])
+		var pair_second: int = int(inner["other_choices"]["second_target"])
+		var pair_key: String = "%d:%d" % [mini(pair_first,pair_second),maxi(pair_first,pair_second)]
+		var label: String = view._action_text(action)
+		if labels_to_pairs.has(label) and labels_to_pairs[label] != pair_key: distinct_pairs_readable = false
+		labels_to_pairs[label] = pair_key
+		unordered_pairs[pair_key] = true
+	check(deep_actions.size() == 6 and unordered_pairs.size() == 3 and distinct_pairs_readable, "all distinct unordered pairs of same-name enemies have distinct recursive deliver labels")
 	sent.clear()
 	view.on_command = func(action: Dictionary) -> void:
 		sent.append(action)

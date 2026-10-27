@@ -4,7 +4,7 @@ extends RefCounted
 const Bot = preload("res://scripts/core/policy_bot.gd")
 
 func apply_arguments(app: Control, args: PackedStringArray) -> void:
-	if not OS.is_debug_build():
+	if not OS.is_debug_build() or app._save_path != "user://d2-debug.json":
 		return
 	var jump: String = ""
 	var gifts: Array[String] = []
@@ -19,6 +19,9 @@ func apply_arguments(app: Control, args: PackedStringArray) -> void:
 				app.run_rules.meta_rules.grant_return(app.meta, app.get_node("/root/ContentCatalog").entry(id), true)
 	if jump.is_empty() and gifts.is_empty():
 		return
+	# Explicit fixture flags start the standard seven-station expedition even
+	# when the isolated save contains an unfinished four-station first run.
+	app.settings["first_run_flow"] = false
 	app.selected_commissions = app.run_rules.available_commissions(app.meta).slice(0, 1)
 	app._start_run()
 	if app.run.get("phase") == "departure":

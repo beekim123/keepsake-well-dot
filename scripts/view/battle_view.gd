@@ -527,7 +527,7 @@ func _action_text(action: Dictionary) -> String:
 	if choices.has("other_uid"):
 		var card_name: String = _uid_name(str(choices["other_uid"]), state.get("hand", []))
 		var other_target: int = int(choices.get("other_target_index", -1))
-		var target_name: String = t("no_target") if other_target < 0 else str(ContentCatalog.entry(str(state["enemies"][other_target]["id"])).get("name", ""))
+		var target_name: String = _target_name(other_target)
 		var result: String = t("choice_target", {"card": card_name, "target": target_name})
 		var nested: Dictionary = choices.get("other_choices", {})
 		if nested.has("second_target"):
@@ -854,7 +854,12 @@ func _rope_status(enemy: Dictionary) -> String:
 func _intent_amount(intent: Dictionary) -> String:
 	if str(intent.get("type", "")) == "attack":
 		var raw: int = int(intent.get("raw_amount", intent.get("amount", 0)))
-		var hits: Array = intent.get("hit_amounts", [intent.get("amount", 0)])
+		# Revealed future intents are raw: preserve their hit count without
+		# pretending that today's remaining binds have already reduced them.
+		if not intent.has("hit_amounts"):
+			var times: int = int(intent.get("times", 1))
+			return str(raw) + ("×" + str(times) if times > 1 else "")
+		var hits: Array = intent["hit_amounts"]
 		var amounts: Array[String] = []
 		for hit: int in hits: amounts.append(str(hit))
 		var after: String = "+".join(amounts)
