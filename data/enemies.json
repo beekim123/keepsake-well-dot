@@ -2,7 +2,7 @@
   {
     "id": "enemy.wet_sock",
     "name": "湿袜子",
-    "hp": 16,
+    "hp": 20,
     "art": "enemy.wet_sock",
     "kind": "normal",
     "intents": [
@@ -29,7 +29,7 @@
   {
     "id": "enemy.lonely_sock",
     "name": "孤袜",
-    "hp": 22,
+    "hp": 26,
     "art": "enemy.lonely_sock",
     "kind": "normal",
     "intents": [
@@ -54,7 +54,7 @@
   {
     "id": "enemy.lint_bug",
     "name": "毛球虫",
-    "hp": 9,
+    "hp": 11,
     "art": "enemy.lint_bug",
     "kind": "normal",
     "intents": [
@@ -81,7 +81,7 @@
   {
     "id": "enemy.stinky_insole",
     "name": "臭鞋垫",
-    "hp": 26,
+    "hp": 30,
     "art": "enemy.stinky_insole",
     "kind": "normal",
     "intents": [
@@ -103,7 +103,7 @@
   {
     "id": "enemy.clothespin",
     "name": "晾衣夹",
-    "hp": 13,
+    "hp": 16,
     "art": "enemy.clothespin",
     "kind": "normal",
     "intents": [
@@ -130,7 +130,7 @@
   {
     "id": "enemy.soap_bubble",
     "name": "肥皂泡",
-    "hp": 8,
+    "hp": 10,
     "art": "enemy.soap_bubble",
     "kind": "normal",
     "intents": [
@@ -167,7 +167,7 @@
   {
     "id": "elite.hungry_drawer",
     "name": "饿抽屉",
-    "hp": 48,
+    "hp": 44,
     "art": "elite.hungry_drawer",
     "kind": "elite",
     "intents": [
