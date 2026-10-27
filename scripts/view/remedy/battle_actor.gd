@@ -1,6 +1,6 @@
 extends Node2D
-## Authentic source frames plus whole-sprite presentation transforms. A still
-## stays a still: no duplicate frames or invented model-authored poses.
+## Authentic source frames. Admitted r4 motion sheets play their actual poses;
+## historical stills retain their existing presentation fallback.
 var asset_id: String = ""
 var base_position: Vector2 = Vector2.ZERO
 var animation: String = "idle"
@@ -10,6 +10,7 @@ var _elapsed: float = 0.0
 var _pose_until: float = 0.0
 var direction: float = 1.0
 var wilted: bool = false
+var _last_wilted: bool = false
 
 func setup(id: String, ground: Vector2) -> void:
 	asset_id = id
@@ -37,6 +38,14 @@ func pose(value: String, seconds: float = 0.0) -> bool:
 	position = base_position
 	scale = Vector2.ONE
 	_sprite.modulate = Color.WHITE
+	if _uses_motion_frames():
+		if value == "idle": position = base_position + Vector2(0, 3 if wilted else 0)
+		# Pose motion is in the sheet: no second squash/slide over the real frames.
+		# Defeat is only a fade; this seven-frame sheet contains no death pose.
+		if value == "defeat":
+			_motion = create_tween()
+			_motion.tween_property(_sprite, "modulate:a", 0.0, 0.2)
+		return true
 	if value == "idle": return true
 	_motion = create_tween()
 	match value:
@@ -53,11 +62,20 @@ func pose(value: String, seconds: float = 0.0) -> bool:
 			_motion.parallel().tween_property(_sprite, "modulate:a", 0.0, 0.2)
 	return true
 
+func _uses_motion_frames() -> bool:
+	return asset_id.contains(".r4_") and asset_id.ends_with("_motion") and _sprite is AnimatedSprite2D
+
 func _process(delta: float) -> void:
 	_elapsed += delta
 	if _pose_until > 0 and _elapsed >= _pose_until:
 		_pose_until = 0.0
 		pose("idle")
-	if animation == "idle":
+	if animation == "idle" and _uses_motion_frames():
+		scale = Vector2.ONE
+		if wilted != _last_wilted:
+			_last_wilted = wilted
+			position = base_position + Vector2(0, 3 if wilted else 0)
+		_sprite.modulate = Color("aaa2aa") if wilted else Color.WHITE
+	elif animation == "idle":
 		scale.y = (0.84 if wilted else 1.0) + 0.015 * sin(_elapsed * 2.8 + base_position.x)
 		_sprite.modulate = Color("aaa2aa") if wilted else Color.WHITE

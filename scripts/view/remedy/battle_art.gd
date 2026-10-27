@@ -11,6 +11,8 @@ const ACTORS: Dictionary = {
 	"enemy.sock_kid": "enemy.r3_simple_sock_kid", "boss.sock_snake": "boss.r3_simple_sock_snake"
 }
 static func actor(id: String) -> String:
+	var motion: String = {"enemy.wet_sock":"enemy.r4_wet_sock_motion", "enemy.r2_wet_sock":"enemy.r4_wet_sock_motion", "enemy.lonely_sock":"enemy.r4_lonely_sock_motion", "enemy.lint_bug":"enemy.r4_lint_bug_motion", "enemy.stinky_insole":"enemy.r4_stinky_insole_motion", "enemy.clothespin":"enemy.r4_clothespin_motion", "enemy.soap_bubble":"enemy.r4_soap_bubble_motion", "enemy.sock_kid":"enemy.r4_sock_kid_motion", "elite.hungry_drawer":"elite.r4_hungry_drawer_motion", "boss.sock_snake":"boss.r4_sock_snake_motion"}.get(id, "")
+	if not motion.is_empty() and AssetCatalog.has_asset(motion): return motion
 	var r4: String = {"enemy.lint_bug":"enemy.r4_lint_bug", "enemy.soap_bubble":"enemy.r4_soap_bubble", "enemy.stinky_insole":"enemy.r4_stinky_insole", "boss.sock_snake":"boss.r4_sock_snake"}.get(id, "")
 	if not r4.is_empty() and AssetCatalog.has_asset(r4): return r4
 	var candidate: String = str(ACTORS.get(id, id))
